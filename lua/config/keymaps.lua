@@ -14,10 +14,10 @@ map("n", "<C-k>", "<C-w>k", { desc = "Go to Upper Window", remap = true })
 map("n", "<C-l>", "<C-w>l", { desc = "Go to Right Window", remap = true })
 
 -- Resize window using <ctrl> arrow keys
-map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
-map("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
-map("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
-map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
+map("n", "=", [[<cmd>vertical resize +5<cr>]]) -- make the window biger vertically
+map("n", "-", [[<cmd>vertical resize -5<cr>]]) -- make the window smaller vertically
+map("n", "+", [[<cmd>horizontal resize +2<cr>]]) -- make the window bigger horizontally by pressing shift and =
+map("n", "_", [[<cmd>horizontal resize -2<cr>]]) -- make the window smaller horizontally by pressing shift and -
 
 -- Move Lines
 map("n", "<A-k>", "<cmd>m .-2<cr>==", { desc = "Move Up" })
@@ -181,3 +181,22 @@ map("n", "<leader><tab><tab>", "<cmd>tabnew<cr>", { desc = "New Tab" })
 map("n", "<leader><tab>]", "<cmd>tabnext<cr>", { desc = "Next Tab" })
 map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
 map("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
+
+--- better alternate tab
+map('n', '<Tab>', '<C-^>', { noremap = true, silent = true })
+
+-- Lspsaga mappings
+map("n", "<leader>gd", "<cmd>lua vim.lsp.buf.definition()<cr>", { desc = "lsp goto definition" })
+map("n", "<leader>pd", "<cmd>lspsaga peek_definition<cr>", { desc = "peek definition" })
+map("n", "<leader>gr", "<cmd>lua vim.lsp.buf.references()<cr>", { desc = "lsp goto reference" })
+map("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", { desc = "LSP Hover" })
+map("n", "<leader>vws", "<cmd>lua vim.lsp.buf.workspace_symbol()<CR>", { desc = "LSP Workspace Symbol" })
+map("n", "<leader>d", "<cmd>lua vim.diagnostic.open_float()<CR>", { desc = "Peek Diagnostics" })
+map("n", "<leader>vd", "<cmd>lua vim.diagnostic.setloclist()<CR>", { desc = "LSP Show Diagnostics" })
+map("n", "[d", "<cmd>lua vim.diagnostic.goto_next()<CR>", { desc = "Next Diagnostic" })
+map("n", "]d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", { desc = "Previous Diagnostic" })
+map("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", { desc = "LSP Code Action" })
+map("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", { desc = "LSP Rename" })
+map("n", "<leader>xb", "<cmd>lua vim.diagnostic.open_float({scope='buffer'})<CR>", { desc = "Buffer Diagnostics" })
+map("n", "<leader>xa", "<cmd>lua vim.diagnostic.setqflist()<CR>", { desc = "All Diagnostics" })
+map("n", "<leader>xl", "<cmd>lua vim.diagnostic.open_float({scope='line'})<CR>", { desc = "Line Diagnostics" })
