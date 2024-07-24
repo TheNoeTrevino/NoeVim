@@ -185,6 +185,29 @@ map("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 --- better alternate tab
 map('n', '<Tab>', '<C-^>', { noremap = true, silent = true })
 
+-- Spectre Mappings
+vim.keymap.set('n', '<leader>srw', function()
+  require('spectre').open({
+    search_text = vim.fn.expand("<cword>"),
+    path = vim.fn.expand("%:p")
+  })
+end, { desc = "Search Word in File" })
+
+vim.keymap.set('n', '<leader>srf', function()
+  require('spectre').open_file_search({
+    path = vim.fn.expand("%:p")
+  })
+end, { desc = "Search in File" })
+
+vim.keymap.set('v', '<leader>sr', function()
+  vim.cmd('normal! "vy')
+  local search_text = vim.fn.getreg('v')
+  require('spectre').open({
+    search_text = search_text,
+    path = vim.fn.expand("%:p")
+  })
+end, { desc = "Run Spectre with Visual Selection in file" })
+
 -- Lspsaga mappings
 map("n", "<leader>gd", "<cmd>lua vim.lsp.buf.definition()<cr>", { desc = "lsp goto definition" })
 map("n", "<leader>pd", "<cmd>lspsaga peek_definition<cr>", { desc = "peek definition" })
@@ -197,6 +220,6 @@ map("n", "[d", "<cmd>lua vim.diagnostic.goto_next()<CR>", { desc = "Next Diagnos
 map("n", "]d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", { desc = "Previous Diagnostic" })
 map("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", { desc = "LSP Code Action" })
 map("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", { desc = "LSP Rename" })
-map("n", "<leader>xb", "<cmd>lua vim.diagnostic.open_float({scope='buffer'})<CR>", { desc = "Buffer Diagnostics" })
+map("n", "<leader>xb", "<cmd>lua vim.diagnostic.open_float({scope='buffer'})<CR>", { desc = "Buffer Diagaostics" })
 map("n", "<leader>xa", "<cmd>lua vim.diagnostic.setqflist()<CR>", { desc = "All Diagnostics" })
 map("n", "<leader>xl", "<cmd>lua vim.diagnostic.open_float({scope='line'})<CR>", { desc = "Line Diagnostics" })
