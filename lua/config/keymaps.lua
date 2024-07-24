@@ -210,7 +210,7 @@ end, { desc = "Run Spectre with Visual Selection in file" })
 
 -- Lspsaga mappings
 map("n", "<leader>gd", "<cmd>lua vim.lsp.buf.definition()<cr>", { desc = "lsp goto definition" })
-map("n", "<leader>pd", "<cmd>lspsaga peek_definition<cr>", { desc = "peek definition" })
+map("n", "<leader>pd", "<cmd>Lspsaga peek_definition<cr>", { desc = "peek definition" })
 map("n", "<leader>gr", "<cmd>lua vim.lsp.buf.references()<cr>", { desc = "lsp goto reference" })
 map("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", { desc = "LSP Hover" })
 map("n", "<leader>vws", "<cmd>lua vim.lsp.buf.workspace_symbol()<CR>", { desc = "LSP Workspace Symbol" })
