@@ -23,7 +23,7 @@ return {
 
     vim.keymap.set("n", "<leader>/", function()
       -- You can pass additional configuration to telescope to change theme, layout, etc.
-      require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
+      builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
         winblend = 10,
         previewer = false,
         layout_config = { width = 0.7 },
@@ -78,6 +78,22 @@ return {
             ["<C-S-d>"] = actions.delete_buffer,
             ["<C-s>"] = actions.cycle_previewers_next,
             ["<C-a>"] = actions.cycle_previewers_prev,
+            ["<C-d>"] = function(bufnr)
+              require("telescope.state").get_status(bufnr).picker.layout_config.scroll_speed = nil
+              return require("telescope.actions").preview_scrolling_down(bufnr)
+            end,
+            ["<C-u>"] = function(bufnr)
+              require("telescope.state").get_status(bufnr).picker.layout_config.scroll_speed = nil
+              return require("telescope.actions").preview_scrolling_up(bufnr)
+            end,
+            ["<C-e>"] = function(bufnr)
+              require("telescope.state").get_status(bufnr).picker.layout_config.scroll_speed = 1
+              return require("telescope.actions").preview_scrolling_down(bufnr)
+            end,
+            ["<C-y>"] = function(bufnr)
+              require("telescope.state").get_status(bufnr).picker.layout_config.scroll_speed = 1
+              return require("telescope.actions").preview_scrolling_up(bufnr)
+            end,
           },
         },
       },
