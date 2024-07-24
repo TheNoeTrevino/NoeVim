@@ -150,16 +150,16 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 })
 
 -- Custom Colors
-vim.api.nvim_set_hl(0, "Comment", { italic = false, fg = "#425d37" })
-vim.api.nvim_set_hl(0, "Keyword", { italic = false, fg = "#c586c0" })
-vim.api.nvim_set_hl(0, "Number", { fg = "#b5cea8", italic = false })
-vim.api.nvim_set_hl(0, "Boolean", { fg = "#569CD6", italic = false })
-vim.api.nvim_set_hl(0, "String", { fg = "#CE9178", italic = false })
--- vim.api.nvim_set_hl(0, "Identifier", { fg = "#2cf651" }) -- does not work
-vim.api.nvim_set_hl(0, "Field", { fg = "#2cc1e5" }) -- Fields of tables
-vim.api.nvim_set_hl(0, "Function", { fg = "#dcdcaa" }) -- Functions
-vim.api.nvim_set_hl(0, "Method", { fg = "#dcdcaa" })
-
+-- vim.api.nvim_set_hl(0, "Comment", { italic = false, fg = "#425d37" })
+-- vim.api.nvim_set_hl(0, "Keyword", { italic = false, fg = "#c586c0" })
+-- vim.api.nvim_set_hl(0, "Number", { fg = "#b5cea8", italic = false })
+-- vim.api.nvim_set_hl(0, "Boolean", { fg = "#569CD6", italic = false })
+-- vim.api.nvim_set_hl(0, "String", { fg = "#CE9178", italic = false })
+-- -- vim.api.nvim_set_hl(0, "Identifier", { fg = "#2cf651" }) -- does not work
+-- vim.api.nvim_set_hl(0, "Field", { fg = "#2cc1e5" }) -- Fields of tables
+-- vim.api.nvim_set_hl(0, "Function", { fg = "#dcdcaa" }) -- Functions
+-- vim.api.nvim_set_hl(0, "Method", { fg = "#dcdcaa" })
+--
 -- Disable undercurl for diagnostics
 vim.api.nvim_set_hl(0, "DiagnosticUnderlineError", { undercurl = false, sp = "#FF0000" })
 vim.api.nvim_set_hl(0, "DiagnosticUnderlineWarn", { undercurl = false, sp = "#FFA500" })
