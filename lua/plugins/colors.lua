@@ -41,7 +41,7 @@ return {
   --       },
   --     })
   --     -- Apply the colorscheme
-  --     -- vim.cmd.colorscheme("kanagawa-dragon")
+  --     vim.cmd.colorscheme("kanagawa-dragon")
   --     --
   --     -- Apply custom highlights to ensure they override the defaults
   --     vim.api.nvim_set_hl(0, "Comment", { italic = false, fg = "#425d37" })
@@ -56,13 +56,6 @@ return {
   --
   --     -- -- visual mode
   --     vim.api.nvim_set_hl(0, "Visual", { bg = "#2a2a2a" })
-  --
-  --     -- VsCode Settings
-  --     vim.api.nvim_set_hl(0, "Normal", { bg = "#1F1F1F", fg = "#FFFFFF" })
-  --
-  --     vim.api.nvim_set_hl(0, "Operator", { fg = "#92D1B2" }) -- + - *
-  --
-  --     vim.api.nvim_set_hl(0, "Special", { fg = "#c678dd" })
   --   end,
   -- },
   {

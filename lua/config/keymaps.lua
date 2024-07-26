@@ -206,7 +206,7 @@ vim.keymap.set('v', '<leader>sr', function()
     search_text = search_text,
     path = vim.fn.expand("%:p")
   })
-end, { desc = "Run Spectre with Visual Selection in file" })
+end, { desc = "Search Visual Selection in File" })
 
 -- Paste without putting into clipboard
 vim.keymap.set("x", "<leader>p", [["_dP]])
@@ -226,3 +226,20 @@ map("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", { desc = "LSP Rename
 map("n", "<leader>xb", "<cmd>lua vim.diagnostic.open_float({scope='buffer'})<CR>", { desc = "Buffer Diagaostics" })
 map("n", "<leader>xa", "<cmd>lua vim.diagnostic.setqflist()<CR>", { desc = "All Diagnostics" })
 map("n", "<leader>xl", "<cmd>lua vim.diagnostic.open_float({scope='line'})<CR>", { desc = "Line Diagnostics" })
+
+
+local function open_peek_definition_full_window()
+  local line = vim.fn.line(".")
+  local col = vim.fn.col(".")
+  vim.cmd("quit")
+  vim.api.nvim_win_set_cursor(0, {line, col - 1})
+end
+
+vim.keymap.set("n", "<leader>opd", function ()
+  local line = vim.fn.line(".")
+  local column = vim.fn.col(".")
+  local file = vim.fn.expand("%")
+  vim.cmd("vsplit" .. vim.fn.fnameescape(file))
+
+  -- add commands here later. we want this: :vsplit | b <buffer-number-like:echo bufnr> in a keymap 
+  end, { desc = "Open peek in window"})

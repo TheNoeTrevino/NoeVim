@@ -159,7 +159,13 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 -- vim.api.nvim_set_hl(0, "Field", { fg = "#2cc1e5" }) -- Fields of tables
 -- vim.api.nvim_set_hl(0, "Function", { fg = "#dcdcaa" }) -- Functions
 -- vim.api.nvim_set_hl(0, "Method", { fg = "#dcdcaa" })
---
+
+-- Change the font color to more nuted for diagnostics
+vim.api.nvim_set_hl(0, "DiagnosticError", { fg = "#CC6666" }) -- Muted red
+vim.api.nvim_set_hl(0, "DiagnosticWarn", { fg = "#CCCC66" }) -- Muted yellow
+vim.api.nvim_set_hl(0, "DiagnosticInfo", { fg = "#66CC66" }) -- Muted green
+vim.api.nvim_set_hl(0, "DiagnosticHint", { fg = "#6666CC" }) -- Muted blue
+
 -- Disable undercurl for diagnostics
 vim.api.nvim_set_hl(0, "DiagnosticUnderlineError", { undercurl = false, sp = "#FF0000" })
 vim.api.nvim_set_hl(0, "DiagnosticUnderlineWarn", { undercurl = false, sp = "#FFA500" })
