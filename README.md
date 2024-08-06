@@ -11,3 +11,5 @@ Undotree - Undo branches and diff similar to git
 
 Vim Multi Cursor - VSCode-like multi cursor functionality
 
+Indent Blankline - Indention lines to make the text context more clear. Highlights the scope with treesitter integration
+
