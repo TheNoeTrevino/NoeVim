@@ -167,16 +167,10 @@ vim.api.nvim_set_hl(0, "DiagnosticInfo", { fg = "#66CC66" }) -- Muted green
 vim.api.nvim_set_hl(0, "DiagnosticHint", { fg = "#6666CC" }) -- Muted blue
 
 -- Disable undercurl for diagnostics
-vim.api.nvim_set_hl(0, "DiagnosticUnderlineError", { undercurl = false, sp = "#FF0000" })
-vim.api.nvim_set_hl(0, "DiagnosticUnderlineWarn", { undercurl = false, sp = "#FFA500" })
-vim.api.nvim_set_hl(0, "DiagnosticUnderlineInfo", { undercurl = false, sp = "#00FF00" })
-vim.api.nvim_set_hl(0, "DiagnosticUnderlineHint", { undercurl = false, sp = "#0000FF" })
-
--- Enable underline for diagnostics
-vim.api.nvim_set_hl(0, "DiagnosticUnderlineError", { underline = true, sp = "#FF0000" })
-vim.api.nvim_set_hl(0, "DiagnosticUnderlineWarn", { underline = true, sp = "#FFA500" })
-vim.api.nvim_set_hl(0, "DiagnosticUnderlineInfo", { underline = true, sp = "#00FF00" })
-vim.api.nvim_set_hl(0, "DiagnosticUnderlineHint", { underline = true, sp = "#0000FF" })
+vim.api.nvim_set_hl(0, "DiagnosticUnderlineError", { undercurl = false,  underline = true, sp = "#FF0000" })
+vim.api.nvim_set_hl(0, "DiagnosticUnderlineWarn", { undercurl = false, underline = true, sp = "#FFA500" })
+vim.api.nvim_set_hl(0, "DiagnosticUnderlineInfo", { undercurl = false, underline = true, sp = "#00FF00" })
+vim.api.nvim_set_hl(0, "DiagnosticUnderlineHint", { undercurl = false, underline = true, sp = "#0000FF" })
 
 vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#c9c5c9" })
 

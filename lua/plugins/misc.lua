@@ -1,6 +1,6 @@
 return {
-  { "rose-pine/neovim", name = "rose-pine" },
-  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+  { "rose-pine/neovim" },
+  { "catppuccin/nvim"},
   { "rebelot/kanagawa.nvim" },
   { "ChristianChiarulli/nvcode-color-schemes.vim" },
   { "nanotee/zoxide.vim" },
@@ -8,6 +8,8 @@ return {
   { "debugloop/telescope-undo.nvim" },
   { "nvim-telescope/telescope-live-grep-args.nvim" },
   { "tpope/vim-repeat" },
+  { "mbbill/undotree" },
+  { "ThePrimeagen/vim-be-good" },
   {
     "vhyrro/luarocks.nvim",
     priority = 1001, -- this plugin needs to run before anything else
@@ -50,17 +52,12 @@ return {
       require("unimpaired").setup()
     end,
   },
-  { --removing the highlighing of words and letting illuminate do it. Reconsider for sure
-    "neovim/nvim-lspconfig",
-    opts = {
-      document_highlight = {
-        enabled = true,
-      },
-    },
-  }, -- {
-  --   "kevinhwang91/nvim-ufo",
-  --   dependencies = {
-  --     "kevinhwang91/promise-async",
+  -- { --removing the highlighing of words and letting illuminate do it. Reconsider for sure
+  --   "neovim/nvim-lspconfig",
+  --   opts = {
+  --     document_highlight = {
+  --       enabled = true,
+  --     },
   --   },
   -- },
 }
