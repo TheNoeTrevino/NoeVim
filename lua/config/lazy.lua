@@ -16,13 +16,6 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   spec = {
-    { "LazyVim/LazyVim", import = "lazyvim.plugins" },
-<<<<<<< Updated upstream
-    { import = "lazyvim.plugins.extras.lang.java" },
-    { import = "lazyvim.plugins.extras.lang.angular" }, -- This includes typescript so DONT ADD IT
-=======
-    -- { import = "lazyvim.plugins.extras.formatting.prettier" },
->>>>>>> Stashed changes
     { import = "plugins" },
   },
 })
