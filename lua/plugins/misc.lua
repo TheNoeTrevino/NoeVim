@@ -6,11 +6,7 @@ return {
   { "nanotee/zoxide.vim" },
   { "nvim-telescope/telescope-ui-select.nvim" },
   { "debugloop/telescope-undo.nvim" },
-  { "mg979/vim-visual-multi" },
-  { "tpope/vim-rails" },
   { "nvim-telescope/telescope-live-grep-args.nvim" },
-  { "nvim-treesitter/nvim-treesitter-textobjects" },
-  { "brenoprata10/nvim-highlight-colors" },
   { "tpope/vim-repeat" },
   {
     "vhyrro/luarocks.nvim",
@@ -41,15 +37,6 @@ return {
     end,
   },
   {
-    "windwp/nvim-ts-autotag",
-    dependencies = "nvim-treesitter/nvim-treesitter",
-    config = function()
-      require("nvim-ts-autotag").setup({})
-    end,
-    lazy = true,
-    event = "VeryLazy",
-  },
-  {
     "kylechui/nvim-surround",
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
     event = "VeryLazy",
@@ -63,4 +50,17 @@ return {
       require("unimpaired").setup()
     end,
   },
+  { --removing the highlighing of words and letting illuminate do it. Reconsider for sure
+    "neovim/nvim-lspconfig",
+    opts = {
+      document_highlight = {
+        enabled = true,
+      },
+    },
+  }, -- {
+  --   "kevinhwang91/nvim-ufo",
+  --   dependencies = {
+  --     "kevinhwang91/promise-async",
+  --   },
+  -- },
 }

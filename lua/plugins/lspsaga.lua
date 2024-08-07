@@ -2,6 +2,7 @@ return {
   "nvimdev/lspsaga.nvim",
   config = function()
     require("lspsaga").setup({
+
       border_style = "round",
       saga_winblend = 0,
       move_in_saga = { prev = "<C-p>", next = "<C-n>" },
@@ -19,6 +20,8 @@ return {
         quit = "<Esc>",
       },
       hover = {
+        border_style = "round",
+        border = "single",
         max_width = 0.9,
         max_height = 0.8,
         open_link = "<leader>ol",

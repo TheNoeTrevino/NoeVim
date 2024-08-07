@@ -7,18 +7,6 @@ map({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr =
 map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
 map({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
 
--- Move to window using the <ctrl> hjkl keys
-map("n", "<C-h>", "<C-w>h", { desc = "Go to Left Window", remap = true })
-map("n", "<C-j>", "<C-w>j", { desc = "Go to Lower Window", remap = true })
-map("n", "<C-k>", "<C-w>k", { desc = "Go to Upper Window", remap = true })
-map("n", "<C-l>", "<C-w>l", { desc = "Go to Right Window", remap = true })
-
--- Resize window using <ctrl> arrow keys
-map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
-map("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
-map("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
-map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
-
 -- Move Lines
 map("n", "<A-k>", "<cmd>m .-2<cr>==", { desc = "Move Up" })
 map("n", "<A-j>", "<cmd>m .+1<cr>==", { desc = "Move Down" })
@@ -26,16 +14,6 @@ map("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move Up" })
 map("i", "<A-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move Down" })
 map("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move Up" })
 map("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move Down" })
-
--- buffers
-map("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
-map("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
-map("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
-map("n", "]b", "<cmd>bnext<cr>", { desc = "Next Buffer" })
-map("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
-map("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
-map("n", "<leader>bd", LazyVim.ui.bufremove, { desc = "Delete Buffer" })
-map("n", "<leader>bD", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window" })
 
 -- Clear search with <esc>
 map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and Clear hlsearch" })
@@ -50,12 +28,12 @@ map(
 )
 
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
-map("n", "n", "'Nn'[v:searchforward].'zv'", { expr = true, desc = "Next Search Result" })
-map("x", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next Search Result" })
-map("o", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next Search Result" })
-map("n", "N", "'nN'[v:searchforward].'zv'", { expr = true, desc = "Prev Search Result" })
-map("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result" })
-map("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result" })
+-- map("n", "n", "'nn'[v:searchforward].'zv'", { expr = true, desc = "next search result" })
+-- map("x", "n", "'nn'[v:searchforward]", { expr = true, desc = "next search result" })
+-- map("o", "n", "'nn'[v:searchforward]", { expr = true, desc = "next search result" })
+-- map("n", "n", "'nn'[v:searchforward].'zv'", { expr = true, desc = "prev search result" })
+-- map("x", "n", "'nn'[v:searchforward]", { expr = true, desc = "prev search result" })
+-- map("o", "n", "'nn'[v:searchforward]", { expr = true, desc = "prev search result" })
 
 -- Add undo break-points
 map("i", ",", ",<c-g>u")
@@ -65,16 +43,9 @@ map("i", ";", ";<c-g>u")
 -- save file
 map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
 
---keywordprg
-map("n", "<leader>K", "<cmd>norm! K<cr>", { desc = "Keywordprg" })
-
 -- better indenting
 map("v", "<", "<gv")
 map("v", ">", ">gv")
-
--- commenting
-map("n", "gco", "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Below" })
-map("n", "gcO", "O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Above" })
 
 -- lazy
 map("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
@@ -110,7 +81,6 @@ map("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
 map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 
 -- stylua: ignore start
-
 -- toggle options
 LazyVim.toggle.map("<leader>uf", LazyVim.toggle.format())
 LazyVim.toggle.map("<leader>uF", LazyVim.toggle.format(true))
@@ -144,18 +114,15 @@ map("n", "<leader>gL", function()
   LazyVim.lazygit({ args = { "log" } })
 end, { desc = "Lazygit Log (cwd)" })
 
--- quit
-map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit All" })
-
 -- LazyVim Changelog
 map("n", "<leader>L", function() LazyVim.news.changelog() end, { desc = "LazyVim Changelog" })
 
--- floating terminal
-local lazyterm = function() LazyVim.terminal(nil, { cwd = LazyVim.root() }) end
-map("n", "<leader>ft", lazyterm, { desc = "Terminal (Root Dir)" })
-map("n", "<leader>fT", function() LazyVim.terminal() end, { desc = "Terminal (cwd)" })
-map("n", "<c-/>", lazyterm, { desc = "Terminal (Root Dir)" })
-map("n", "<c-_>", lazyterm, { desc = "which_key_ignore" })
+-- -- floating terminal
+-- local lazyterm = function() LazyVim.terminal(nil, { cwd = LazyVim.root() }) end
+-- map("n", "<leader>ft", lazyterm, { desc = "Terminal (Root Dir)" })
+-- map("n", "<leader>fT", function() LazyVim.terminal() end, { desc = "Terminal (cwd)" })
+-- map("n", "<c-/>", lazyterm, { desc = "Terminal (Root Dir)" })
+-- map("n", "<c-_>", lazyterm, { desc = "which_key_ignore" })
 
 -- Terminal Mappings
 map("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
@@ -168,19 +135,22 @@ map("t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" })
 
 -- Windows
 map("n", "<leader>w", "<c-w>", { desc = "Windows", remap = true })
-map("n", "<leader>-", "<C-W>s", { desc = "Split Window Below", remap = true })
+map("n", "<leader>h", "<C-W>s", { desc = "Split Window Below", remap = true })
 map("n", "<leader>|", "<C-W>v", { desc = "Split Window Right", remap = true })
 map("n", "<c-w>d", "<C-W>c", { desc = "Delete Window", remap = true })
 LazyVim.toggle.map("<c-w>m", LazyVim.toggle.maximize)
 
--- tabs
-map("n", "<leader><tab>l", "<cmd>tablast<cr>", { desc = "Last Tab" })
-map("n", "<leader><tab>o", "<cmd>tabonly<cr>", { desc = "Close Other Tabs" })
-map("n", "<leader><tab>f", "<cmd>tabfirst<cr>", { desc = "First Tab" })
-map("n", "<leader><tab><tab>", "<cmd>tabnew<cr>", { desc = "New Tab" })
-map("n", "<leader><tab>]", "<cmd>tabnext<cr>", { desc = "Next Tab" })
-map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
-map("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
+-- Move to window using the <ctrl> hjkl keys
+map("n", "<C-h>", "<C-w>h", { desc = "Go to Left Window", remap = true })
+map("n", "<C-j>", "<C-w>j", { desc = "Go to Lower Window", remap = true })
+map("n", "<C-k>", "<C-w>k", { desc = "Go to Upper Window", remap = true })
+map("n", "<C-l>", "<C-w>l", { desc = "Go to Right Window", remap = true })
+
+-- Resize window using <ctrl> arrow keys
+map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
+map("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
+map("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
+map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
 
 -- Better alternate tab
 map('n', '<Tab>', '<C-^>', { noremap = true, silent = true })
@@ -189,17 +159,29 @@ map('n', '<Tab>', '<C-^>', { noremap = true, silent = true })
 vim.keymap.set("x", "<leader>p", [["_dP]])
 
 -- Lspsaga mappings
-map("n", "<leader>gd", "<cmd>lua vim.lsp.buf.definition()<cr>", { desc = "lsp goto definition" })
-map("n", "<leader>pd", "<cmd>Lspsaga peek_definition<cr>", { desc = "peek definition" })
-map("n", "<leader>gr", "<cmd>lua vim.lsp.buf.references()<cr>", { desc = "lsp goto reference" })
-map("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", { desc = "LSP Hover" })
-map("n", "<leader>vws", "<cmd>lua vim.lsp.buf.workspace_symbol()<CR>", { desc = "LSP Workspace Symbol" })
-map("n", "<leader>d", "<cmd>lua vim.diagnostic.open_float()<CR>", { desc = "Peek Diagnostics" })
-map("n", "<leader>vd", "<cmd>lua vim.diagnostic.setloclist()<CR>", { desc = "LSP Show Diagnostics" })
-map("n", "[d", "<cmd>lua vim.diagnostic.goto_next()<CR>", { desc = "Next Diagnostic" })
-map("n", "]d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", { desc = "Previous Diagnostic" })
-map("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", { desc = "LSP Code Action" })
-map("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", { desc = "LSP Rename" })
-map("n", "<leader>xb", "<cmd>lua vim.diagnostic.open_float({scope='buffer'})<CR>", { desc = "Buffer Diagaostics" })
-map("n", "<leader>xa", "<cmd>lua vim.diagnostic.setqflist()<CR>", { desc = "All Diagnostics" })
-map("n", "<leader>xl", "<cmd>lua vim.diagnostic.open_float({scope='line'})<CR>", { desc = "Line Diagnostics" })
+map("n", "<leader>gd", "<cmd>Lspsaga goto_definition<CR>", { desc = "Go to Definition" })
+map("n", "<leader>gr", "<cmd>Lspsaga finder<CR>", { desc = "Get References" })
+map("n", "<leader>pd", "<cmd>Lspsaga peek_definition<CR>", { desc = "Peek Definition" })
+map('n', '<leader>k', '<cmd>Lspsaga hover_doc<CR>', { desc = "LSP Hover" })
+map("n", "[d", "<cmd>Lspsaga diagnostic_jump_next<CR>", { desc = "Next Diagnostic" })
+map("n", "]d", "<cmd>Lspsaga diagnostic_jump_prev<CR>", { desc = "Previous Diagnostic" })
+map("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", { desc = "LSP Code Action" })
+map("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", { desc = "LSP Rename" })
+map("n", "<leader>da", "<cmd>Lspsaga show_workspace_diagnostics<CR>", { desc = "All Diagnostics" })
+map("n", "<leader>db", "<cmd>Lspsaga show_buf_diagnostics<CR>", { desc = "Buffer Diagaostics" })
+map("n", "<leader>dl", "<cmd>Lspsaga show_line_diagnostics<CR>", { desc = "Line Diagnostics" })
+map("n", "<leader>dc", "<cmd>Lspsaga show_cursor_diagnostics<CR>", { desc = "Cursor Diagnostics" })
+map("n", "<leader>ft", "<cmd>Lspsaga term_toggle<CR>", { desc = "Floating Terminal" })
+-- map -- check the ufo docs on how to configure K
+--     local winid = require('ufo').peekFoldedLinesUnderCursor()
+--     if not winid then
+--         -- Attempt to use lspsaga for hover
+--         local saga_hover_available = pcall(require, 'lspsaga.hover.render_hover_doc')
+--         if saga_hover_available then
+--             require('lspsaga.hover').render_hover_doc()
+--         else
+--             -- Fallback to built-in LSP hover
+--             vim.lsp.buf.hover()
+--         end
+--     end
+-- end, { desc = "LSP Hover" })

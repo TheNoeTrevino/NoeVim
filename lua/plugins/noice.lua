@@ -1,46 +1,67 @@
 return {
   "folke/noice.nvim",
   event = "VeryLazy",
-  config = function()
-    require("noice").setup({
-      messages = {
-        enabled = false, -- enables the Noice messages UI
-        view = "notify", -- default view for messages
-        view_error = "notify", -- view for errors
-        view_warn = "notify", -- view for warnings
-        view_history = "messages", -- view for :messages
-        view_search = "virtualtext", -- view for search count messages. Set to `false` to disable
+  opts = {
+    messages = {
+      enabled = false, -- enables the Noice messages UI
+      view = "notify", -- default view for messages
+      view_error = "notify", -- view for errors
+      view_warn = "notify", -- view for warnings
+      view_history = "messages", -- view for :messages
+      view_search = "virtualtext", -- view for search count messages. Set to `false` to disable
+    },
+    popupmenu = {
+      enabled = false, -- enables the Noice popupmenu UI
+    },
+    notify = {
+      enabled = false,
+      view = "notify",
+    },
+    lsp = {
+      override = {
+        ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+        ["vim.lsp.util.stylize_markdown"] = true,
+        ["cmp.entry.get_documentation"] = true,
       },
-      popupmenu = {
-        enabled = false, -- enables the Noice popupmenu UI
+    },
+    routes = {
+      {
+        filter = {
+          event = "msg_show",
+          any = {
+            { find = "%d+L, %d+B" },
+            { find = "; after #%d+" },
+            { find = "; before #%d+" },
+          },
+        },
+        view = "mini",
       },
-      notify = {
-        enabled = false,
-        view = "notify",
-      },
-      routes = {},
-    })
-
-    -- Key mappings for Noice
-    vim.api.nvim_set_keymap("n", "<leader>dn", ":NoiceDismiss<CR>", { noremap = true, silent = true })
-    vim.api.nvim_set_keymap("n", "<leader>dnd", ":lua ToggleNoice()<CR>", { noremap = true, silent = true })
-
-    -- Toggle function for Noice
-    local noice_enabled = true
-    _G.ToggleNoice = function()
-      if noice_enabled then
-        vim.cmd("NoiceDisable")
-        noice_enabled = false
-        print("Noice Disabled")
-      else
-        vim.cmd("NoiceEnable")
-        noice_enabled = true
-        print("Noice Enabled")
-      end
-    end
-  end,
-  dependencies = {
-    "MunifTanjim/nui.nvim",
-    "rcarriga/nvim-notify",
+    },
+    presets = {
+      bottom_search = true,
+      command_palette = true,
+      long_message_to_split = true,
+    },
   },
+  -- stylua: ignore
+  keys = {
+    { "<leader>sn", "", desc = "+noice"},
+    { "<S-Enter>", function() require("noice").redirect(vim.fn.getcmdline()) end, mode = "c", desc = "Redirect Cmdline" },
+    { "<leader>snl", function() require("noice").cmd("last") end, desc = "Noice Last Message" },
+    { "<leader>snh", function() require("noice").cmd("history") end, desc = "Noice History" },
+    { "<leader>sna", function() require("noice").cmd("all") end, desc = "Noice All" },
+    { "<leader>snd", function() require("noice").cmd("dismiss") end, desc = "Dismiss All" },
+    { "<leader>snt", function() require("noice").cmd("pick") end, desc = "Noice Picker (Telescope/FzfLua)" },
+    { "<c-f>", function() if not require("noice.lsp").scroll(4) then return "<c-f>" end end, silent = true, expr = true, desc = "Scroll Forward", mode = {"i", "n", "s"} },
+    { "<c-b>", function() if not require("noice.lsp").scroll(-4) then return "<c-b>" end end, silent = true, expr = true, desc = "Scroll Backward", mode = {"i", "n", "s"}},
+  },
+  config = function(_, opts)
+    -- HACK: noice shows messages from before it was enabled,
+    -- but this is not ideal when Lazy is installing plugins,
+    -- so clear the messages in this case.
+    if vim.o.filetype == "lazy" then
+      vim.cmd([[messages clear]])
+    end
+    require("noice").setup(opts)
+  end,
 }

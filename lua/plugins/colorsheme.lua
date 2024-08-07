@@ -91,6 +91,7 @@ return {
         dim_inactive = false,
         transparent_mode = true,
       })
+      vim.cmd("hi Underlined guifg=#ff0000 gui=underline")
       vim.cmd([[colorscheme gruvbox]])
       vim.cmd("hi Normal guibg=black")
     end,

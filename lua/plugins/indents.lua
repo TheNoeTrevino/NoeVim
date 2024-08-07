@@ -1,39 +1,39 @@
-return {
-  {
-    "lukas-reineke/indent-blankline.nvim",
-    config = function()
-      local exclude_ft = { "help", "git", "snippets", "text", "gitconfig", "alpha", "dashboard" }
+return { --using lazyvim as manager
+  "lukas-reineke/indent-blankline.nvim",
+  event = "LazyFile",
+  opts = function()
+    LazyVim.toggle.map("<leader>ug", {
+      name = "Indention Guides",
+      get = function()
+        return require("ibl.config").get_config(0).enabled
+      end,
+      set = function(state)
+        require("ibl").setup_buffer(0, { enabled = state })
+      end,
+    })
 
-      require("ibl").setup {
-        indent = {
-          char = "▏",
+    return {
+      indent = {
+        char = "▏",
+        tab_char = "│",
+      },
+      scope = { show_start = false, show_end = false },
+      exclude = {
+        filetypes = {
+          "help",
+          "alpha",
+          "dashboard",
+          "neo-tree",
+          "Trouble",
+          "trouble",
+          "lazy",
+          "mason",
+          "notify",
+          "toggleterm",
+          "lazyterm",
         },
-        scope = {
-          show_start = false,
-          show_end = false,
-        },
-        exclude = {
-          filetypes = exclude_ft,
-          buftypes = { "terminal" },
-        },
-      }
-
-      local gid = vim.api.nvim_create_augroup("indent_blankline", { clear = true })
-      vim.api.nvim_create_autocmd("InsertEnter", {
-        pattern = "*",
-        group = gid,
-        command = "IBLDisable",
-      })
-
-      vim.api.nvim_create_autocmd("InsertLeave", {
-        pattern = "*",
-        group = gid,
-        callback = function()
-          if not vim.tbl_contains(exclude_ft, vim.bo.filetype) then
-            vim.cmd([[IBLEnable]])
-          end
-        end,
-      })
-    end
-  }
+      },
+    }
+  end,
+  main = "ibl",
 }

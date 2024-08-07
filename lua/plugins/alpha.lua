@@ -32,7 +32,7 @@ return {
 
     -- Custom buttons
     dashboard.section.buttons.val = {
-      dashboard.button("r", "  Reload Last Session", ":SessionRestore<CR>"),
+      dashboard.button("r", "  Reload Last Session", ":lua require('persistence').load()<CR>"),
       dashboard.button("f", "󰥨  Find file", ":Telescope find_files<CR>"),
       dashboard.button("g", "󰩉  Live grep", ":Telescope live_grep<CR>"),
       dashboard.button("h", "󰋖  Help tags", ":Telescope help_tags<CR>"),

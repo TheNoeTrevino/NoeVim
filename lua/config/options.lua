@@ -28,8 +28,8 @@ vim.g.lazygit_config = true
 
 -- Options for the LazyVim statuscolumn
 vim.g.lazyvim_statuscolumn = {
-  folds_open = false, -- show fold sign when fold is open
-  folds_githl = false, -- highlight fold sign with git sign color
+  folds_open = true, -- show fold sign when fold is open
+  folds_githl = true, -- highlight fold sign with git sign color
 }
 
 -- Optionally setup the terminal to use
@@ -130,3 +130,9 @@ vim.opt.listchars = {
 -- Fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
 vim.g.root_spec = { "cwd" }
+
+local function set_black_background()
+  vim.cmd("hi Normal guibg=black")
+end
+
+vim.api.nvim_create_user_command("BlackBackground", set_black_background, {})
