@@ -39,15 +39,15 @@ return {
     local wk = require("which-key")
     wk.add({
       { "<leader>sn", "<Plug>(neorg.telescope.find_norg_files)", desc = "Search Notes", mode = "n" },
-      { "<localleader>if", "<Plug>(neorg.telescope.insert_file_link)", desc = "[F]ile link", mode = "n" },
-      { "<localleader>s", "<cmd>:Neorg toggle-concealer<CR>", desc = "[S]how Formatting", mode = "n" },
-      { "<localleader>h", "<cmd>:Neorg toggle-concealer<CR>", desc = "[H]ide Formatting", mode = "n" },
-      { "<leader>n", group = "[N]otes & [Notifs]   " },
-      { "<localleader>l", group = "[L]ists  " },
-      { "<localleader>c", group = "[C]ode Block  " },
-      { "<localleader>i", group = "[I]nsert  " },
-      { "<localleader>n", group = "[N]ew Note  " },
-      { "<localleader>t", group = "[T]odo Marks  " },
+      { "<localleader>if", "<Plug>(neorg.telescope.insert_file_link)", desc = "File link", mode = "n" },
+      { "<localleader>s", "<cmd>:Neorg toggle-concealer<CR>", desc = "Show Formatting", mode = "n" },
+      { "<localleader>h", "<cmd>:Neorg toggle-concealer<CR>", desc = "Hide Formatting", mode = "n" },
+      { "<leader>n", group = "Notes & Notifs   " },
+      { "<localleader>l", group = "Lists  " },
+      { "<localleader>c", group = "Code Block  " },
+      { "<localleader>i", group = "Insert  " },
+      { "<localleader>n", group = "New Note  " },
+      { "<localleader>t", group = "Todo Marks  " },
     })
   end,
 }
