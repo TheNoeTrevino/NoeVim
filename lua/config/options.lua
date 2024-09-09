@@ -1,3 +1,32 @@
 -- Options are automatically loaded before lazy.nvim startup
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 -- Add any additional options here
+--
+vim.cmd([[
+
+   augroup ilikecursorline
+      autocmd VimEnter * :highlight CursorLine guibg=#1c1b1b
+   augroup END
+
+]])
+
+vim.opt.fillchars = {
+  foldopen = "",
+  foldclose = "",
+  fold = " ",
+  foldsep = " ",
+  diff = "╱",
+  eob = " ",
+}
+
+vim.opt.listchars = {
+  tab = "> ",
+  trail = " ",
+  nbsp = "+",
+}
+vim.opt.foldlevel = 99
+vim.opt.foldcolumn = "1"
+vim.g.lazyvim_statuscolumn = {
+  folds_open = true, -- show fold sign when fold is open
+  folds_githl = true, -- highlight fold sign with git sign color
+}
