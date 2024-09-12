@@ -10,6 +10,10 @@ return {
   { "knubie/vim-kitty-navigator", event = "VeryLazy" },
   { "stevearc/oil.nvim", event = "VeryLazy", opts = {} },
   { "kiyoon/telescope-insert-path.nvim", event = "VeryLazy" },
+  { "catppuccin/nvim", name = "catppuccin", event = "VeryLazy" },
+  { "rebelot/kanagawa.nvim" },
+  { "rose-pine/neovim", name = "rosepine" },
+  { "ellisonleao/gruvbox.nvim" },
   {
     "kylechui/nvim-surround",
     event = "VeryLazy",
