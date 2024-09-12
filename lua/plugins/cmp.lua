@@ -5,7 +5,30 @@ return {
     local cmp = require("cmp")
     -- Setup for `/` command-line
     cmp.setup.cmdline("/", {
-      mapping = cmp.mapping.preset.cmdline(),
+      mapping = {
+        ["<Tab>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.confirm({ select = false })
+          else
+            fallback()
+          end
+        end, { "i", "c" }),
+        ["<Down>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_next_item()
+          else
+            fallback()
+          end
+        end, { "i", "c" }),
+
+        ["<Up>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_prev_item()
+          else
+            fallback()
+          end
+        end, { "i", "c" }),
+      },
       sources = {
         { name = "buffer" },
       },
@@ -13,7 +36,31 @@ return {
 
     -- Setup for `:` command-line
     cmp.setup.cmdline(":", {
-      mapping = cmp.mapping.preset.cmdline(),
+      -- Make mappings the same as the other completion mappings
+      mapping = {
+        ["<Tab>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.confirm({ select = false })
+          else
+            fallback()
+          end
+        end, { "i", "c" }),
+        ["<Down>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_next_item()
+          else
+            fallback()
+          end
+        end, { "i", "c" }),
+
+        ["<Up>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_prev_item()
+          else
+            fallback()
+          end
+        end, { "i", "c" }),
+      },
       sources = cmp.config.sources({
         { name = "path" },
       }, {
