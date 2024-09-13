@@ -1,6 +1,7 @@
 return {
   {
     "mfussenegger/nvim-dap",
+    event = "VeryLazy",
     recommended = true,
     keys = {
 

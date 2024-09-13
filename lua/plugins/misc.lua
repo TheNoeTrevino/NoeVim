@@ -11,8 +11,10 @@ return {
   { "stevearc/oil.nvim", event = "VeryLazy", opts = {} },
   { "kiyoon/telescope-insert-path.nvim", event = "VeryLazy" },
   { "catppuccin/nvim", name = "catppuccin", event = "VeryLazy" },
-  { "rebelot/kanagawa.nvim" },
-  { "rose-pine/neovim", name = "rosepine" },
+  { "tokyonight.nvim", event = "VeryLazy" },
+  { "trouble.nvim", event = "VeryLazy" },
+  { "rebelot/kanagawa.nvim", event = "VeryLazy" },
+  { "rose-pine/neovim", name = "rosepine", event = "VeryLazy" },
   { "ellisonleao/gruvbox.nvim" },
   {
     "kylechui/nvim-surround",
@@ -21,19 +23,4 @@ return {
       require("nvim-surround").setup({})
     end,
   },
-  -- {
-  --   "windwp/nvim-autopairs",
-  --   event = "VeryLazy",
-  --   config = true,
-  --   toggle_autopairs = function()
-  --     local autopairs = require("nvim-autopairs")
-  --     if autopairs.state.disabled then
-  --       autopairs.enable()
-  --       print("nvim-autopairs enabled")
-  --     else
-  --       autopairs.disable()
-  --       print("nvim-autopairs disabled")
-  --     end
-  --   end,
-  -- },
 }
