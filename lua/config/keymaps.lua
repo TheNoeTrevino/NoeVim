@@ -242,3 +242,12 @@ map('n', "`", "'", { noremap = true, silent = true })
 
 -- vscode terminal 
 map("n", "<leader>t", "<cmd>ToggleTerm<CR>", { desc = "Floating Terminal" })
+
+-- Jump between references
+map('n', '<C-n>', function()
+  require('nvim-treesitter.refactor.navigation').goto_next_usage()
+end, { noremap = true, silent = true, desc = "Go to next reference" })
+
+map('n', '<C-p>', function()
+  require('nvim-treesitter.refactor.navigation').goto_previous_usage()
+end, { noremap = true, silent = true, desc = "Go to previous reference" })

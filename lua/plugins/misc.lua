@@ -1,5 +1,4 @@
 return {
-  { "nvim-telescope/telescope-ui-select.nvim", event = "VeryLazy" },
   { "debugloop/telescope-undo.nvim", event = "VeryLazy" },
   { "nvim-telescope/telescope-live-grep-args.nvim", event = "VeryLazy" },
   { "tpope/vim-repeat", event = "VeryLazy" },
@@ -15,7 +14,7 @@ return {
   { "trouble.nvim", event = "VeryLazy" },
   { "rebelot/kanagawa.nvim", event = "VeryLazy" },
   { "rose-pine/neovim", name = "rosepine", event = "VeryLazy" },
-  { "ellisonleao/gruvbox.nvim" },
+  { "nvim-treesitter/nvim-treesitter-refactor" },
   {
     "kylechui/nvim-surround",
     event = "VeryLazy",
