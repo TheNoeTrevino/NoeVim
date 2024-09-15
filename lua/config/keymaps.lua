@@ -171,10 +171,10 @@ map('n', '<C-l>', ':KittyNavigateUp<CR>', { noremap = true, silent = true})
 map('n', '<C-;>', ':KittyNavigateRight<CR>', { noremap = true, silent = true})
 
 -- Resize window using <ctrl> nav keys
-map("n", "<C-S-l>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
-map("n", "<C-S-k>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
-map("n", "<C-S-j>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
-map("n", "<C-S-;>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
+map("n", "<C-M-l>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
+map("n", "<C-M-k>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
+map("n", "<C-M-j>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
+map("n", "<C-M-;>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
 
 -- Resize window using <ctrl> arrow keys
 map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
