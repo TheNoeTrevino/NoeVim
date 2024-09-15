@@ -3,6 +3,21 @@ return {
   event = "VeryLazy",
   config = function()
     require("lspsaga").setup({
+      finder = {
+        max_height = 0.8,
+        right_width = 0.5,
+        left_width = 0.5,
+        keys = {
+          vsplit = "v",
+          split = "i",
+          shuttle = "w", --
+          toggle_or_open = "<CR>", --toggle expand or open
+          tabe = "t",
+          tabnew = "r",
+          quit = { "q", "<ESC>" },
+          -- close = "<ESC>",
+        },
+      },
       symbol_in_winbar = {
         enable = false, -- Disable the breadcrumbs
       },

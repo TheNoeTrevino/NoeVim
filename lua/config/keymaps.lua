@@ -67,9 +67,6 @@ map("v", "<", "<gv")
 map("v", ">", ">gv")
 
 -- lazy
-map("n", "<leader>l", "<cmd>Lspsaga peek_definition<cr>", { desc = "Peek Definition" })
-
-map("n", "L", "<cmd>Lspsaga peek_definition<cr>", { desc = "Peek Definition" })
 
 -- new file
 map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
@@ -189,7 +186,7 @@ map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window W
 map('n', '<Tab>', '<C-^>', { noremap = true, silent = true })
 
 -- Paste without putting into clipboard
-vim.keymap.set("x", "<leader>p", [["_dP]])
+map("x", "<leader>p", [["_dP]])
 
 -- Toggle autopairs
 map("n", "<leader>ua", "<cmd>ToggleAutopairs<CR>", { desc = "Go to Definition" })
@@ -197,10 +194,7 @@ map("n", "<leader>ua", "<cmd>ToggleAutopairs<CR>", { desc = "Go to Definition" }
 map("n", "<leader>uz", "<cmd>Lspsaga code_action<CR>", { desc = "LSP Code Action" })
 
 -- Lspsaga mappings
-map("n", "<leader>gd", "<cmd>Lspsaga goto_definition<CR>", { desc = "Go to Definition" })
-map("n", "<leader>gr", "<cmd>Lspsaga finder<CR>", { desc = "Get References" })
 map("n", "<leader>pd", "<cmd>Lspsaga peek_definition<CR>", { desc = "Peek Definition" })
-map('n', '<leader>k', '<cmd>Lspsaga hover_doc<CR>', { desc = "LSP Hover" })
 map("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", { desc = "LSP Code Action" })
 map("n", "<leader>lca", "<cmd>Lspsaga code_action<CR>", { desc = "LSP Code Action" })
 map("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", { desc = "LSP Rename" })
@@ -212,11 +206,16 @@ map("n", "<leader>dl", "<cmd>Lspsaga show_line_diagnostics<CR>", { desc = "Line 
 map("n", "<leader>dc", "<cmd>Lspsaga show_cursor_diagnostics<CR>", { desc = "Cursor Diagnostics" })
 map("n", "<leader>ft", "<cmd>Lspsaga term_toggle<CR>", { desc = "Floating Terminal" })
 
+-- Definition mappings
+map("n", "<leader>h", "<cmd>Lspsaga finder tyd+ref+imp<CR>", { desc = "Get References" })
+map("n", "<leader>j", "<cmd>Lspsaga goto_definition<CR>", { desc = "Go to Definition" })
+map('n', '<leader>k', '<cmd>Lspsaga hover_doc<CR>', { desc = "LSP Hover" })
+map("n", "<leader>l", "<cmd>Lspsaga peek_definition<cr>", { desc = "Peek Definition" })
 map('n', 'dm', [[:lua DeleteMark()<CR>]], { desc = "[D]elete [M]ark [ ]"})
 
 function DeleteMark()
-    local mark = vim.fn.nr2char(vim.fn.getchar())
-    vim.cmd('delmarks ' .. mark)
+  local mark = vim.fn.nr2char(vim.fn.getchar())
+  vim.cmd('delmarks ' .. mark)
 end
 
 LazyVim.toggle.map("<leader>ug", {
@@ -242,12 +241,3 @@ map('n', "`", "'", { noremap = true, silent = true })
 
 -- vscode terminal 
 map("n", "<leader>t", "<cmd>ToggleTerm<CR>", { desc = "Floating Terminal" })
-
--- Jump between references
-map('n', '<C-n>', function()
-  require('nvim-treesitter.refactor.navigation').goto_next_usage()
-end, { noremap = true, silent = true, desc = "Go to next reference" })
-
-map('n', '<C-p>', function()
-  require('nvim-treesitter.refactor.navigation').goto_previous_usage()
-end, { noremap = true, silent = true, desc = "Go to previous reference" })
