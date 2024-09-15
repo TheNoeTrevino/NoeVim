@@ -2,14 +2,6 @@
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 -- Add any additional options here
 --
-vim.cmd([[
-
-   augroup ilikecursorline
-      autocmd VimEnter * :highlight CursorLine guibg=#1c1b1b
-   augroup END
-
-]])
-
 vim.opt.fillchars = {
   foldopen = "",
   foldclose = "",
