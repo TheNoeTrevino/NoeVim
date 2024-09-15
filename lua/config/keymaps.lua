@@ -204,7 +204,6 @@ map("n", "<leader>da", "<cmd>Lspsaga show_workspace_diagnostics<CR>", { desc = "
 map("n", "<leader>db", "<cmd>Lspsaga show_buf_diagnostics<CR>", { desc = "Buffer Diagaostics" })
 map("n", "<leader>dl", "<cmd>Lspsaga show_line_diagnostics<CR>", { desc = "Line Diagnostics" })
 map("n", "<leader>dc", "<cmd>Lspsaga show_cursor_diagnostics<CR>", { desc = "Cursor Diagnostics" })
-map("n", "<leader>ft", "<cmd>Lspsaga term_toggle<CR>", { desc = "Floating Terminal" })
 
 -- Definition mappings
 map("n", "<leader>h", "<cmd>Lspsaga finder tyd+ref+imp<CR>", { desc = "Get References" })
