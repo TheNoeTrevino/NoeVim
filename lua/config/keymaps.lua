@@ -184,6 +184,7 @@ map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window W
 
 -- Better alternate tab
 map('n', '<Tab>', '<C-^>', { noremap = true, silent = true })
+map('n', 'L', '<C-^>', { noremap = true, silent = true })
 
 -- Paste without putting into clipboard
 map("x", "<leader>p", [["_dP]])
@@ -206,10 +207,10 @@ map("n", "<leader>dl", "<cmd>Lspsaga show_line_diagnostics<CR>", { desc = "Line 
 map("n", "<leader>dc", "<cmd>Lspsaga show_cursor_diagnostics<CR>", { desc = "Cursor Diagnostics" })
 
 -- Definition mappings
-map("n", "<leader>h", "<cmd>Lspsaga finder tyd+ref+imp<CR>", { desc = "Get References" })
+map("n", "<leader>h", "<cmd>Lspsaga finder tyd+ref+imp+def<CR>", { desc = "Get References" })
 map("n", "<leader>j", "<cmd>Lspsaga goto_definition<CR>", { desc = "Go to Definition" })
-map('n', '<leader>k', '<cmd>Lspsaga hover_doc<CR>', { desc = "LSP Hover" })
-map("n", "<leader>l", "<cmd>Lspsaga peek_definition<cr>", { desc = "Peek Definition" })
+map("n", "<leader>k", "<cmd>Lspsaga peek_definition<cr>", { desc = "Peek Definition" })
+-- map('n', '<leader>l', '<cmd>Lspsaga hover_doc<CR>', { desc = "LSP Hover" })
 map('n', 'dm', [[:lua DeleteMark()<CR>]], { desc = "[D]elete [M]ark [ ]"})
 
 function DeleteMark()
@@ -235,7 +236,7 @@ map("n", "N", "Nzzzv", {desc = "Prev find and center"})
 map("n", "J", "mzJ`z")
 
 -- Easier registers
-map('n', "=", "`", { noremap = true, silent = true })
+map('n', "'", "`", { noremap = true, silent = true })
 
 -- vscode terminal 
 map("n", "<leader>t", "<cmd>ToggleTerm<CR>", { desc = "Floating Terminal" })
