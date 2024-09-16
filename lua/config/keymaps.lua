@@ -234,9 +234,8 @@ map("n", "N", "Nzzzv", {desc = "Prev find and center"})
 -- Keep cursor in place
 map("n", "J", "mzJ`z")
 
--- Swap apos and backtick since backtick is impossible to hit
-map('n', "'", "`", { noremap = true, silent = true })
-map('n', "`", "'", { noremap = true, silent = true })
+-- Easier registers
+map('n', "=", "`", { noremap = true, silent = true })
 
 -- vscode terminal 
 map("n", "<leader>t", "<cmd>ToggleTerm<CR>", { desc = "Floating Terminal" })
