@@ -1,19 +1,5 @@
 local map = LazyVim.safe_keymap_set
 
--- Harpoon menu mappings
-local harpoon = require("harpoon")
-harpoon:extend({
-  UI_CREATE = function(cx)
-    vim.keymap.set("n", "v", function()
-      harpoon.ui:select_menu_item({ vsplit = true })
-    end, { buffer = cx.bufnr })
-
-    vim.keymap.set("n", "s", function()
-      harpoon.ui:select_menu_item({ split = true })
-    end, { buffer = cx.bufnr })
-  end,
-})
-
 -- better up/down
 map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
 map({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
@@ -136,12 +122,6 @@ end, { desc = "Lazygit Log (cwd)" })
 -- LazyVim Changelog
 map("n", "<leader>L", function() LazyVim.news.changelog() end, { desc = "LazyVim Changelog" })
 
--- -- floating terminal
--- local lazyterm = function() LazyVim.terminal(nil, { cwd = LazyVim.root() }) end
--- map("n", "<leader>ft", lazyterm, { desc = "Terminal (Root Dir)" })
--- map("n", "<leader>fT", function() LazyVim.terminal() end, { desc = "Terminal (cwd)" })
--- map("n", "<c-/>", lazyterm, { desc = "Terminal (Root Dir)" })
--- map("n", "<c-_>", lazyterm, { desc = "which_key_ignore" })
 
 -- Terminal Mappings
 map("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
@@ -170,11 +150,18 @@ map('n', '<C-k>', ':KittyNavigateDown<CR>', { noremap = true, silent = true})
 map('n', '<C-l>', ':KittyNavigateUp<CR>', { noremap = true, silent = true})
 map('n', '<C-;>', ':KittyNavigateRight<CR>', { noremap = true, silent = true})
 
--- Resize window using <ctrl> nav keys
+-- for some reason these do not work in the other. Super weird
+-- Resize window using <ctrl> nav keys (for arch)
 map("n", "<C-M-l>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
 map("n", "<C-M-k>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
 map("n", "<C-M-j>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
 map("n", "<C-M-;>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
+
+-- Resize window using <ctrl><shift> nav keys (for mac)
+map("n", "<C-S-l>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
+map("n", "<C-S-k>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
+map("n", "<C-S-j>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
+map("n", "<C-S-;>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
 
 -- Resize window using <ctrl> arrow keys
 map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
@@ -239,4 +226,4 @@ map("n", "J", "mzJ`z")
 map('n', "'", "`", { noremap = true, silent = true })
 
 -- vscode terminal 
-map("n", "<leader>t", "<cmd>ToggleTerm<CR>", { desc = "Floating Terminal" })
+map("n", "<localleader>t", "<cmd>ToggleTerm<CR>", { desc = "Floating Terminal" })
