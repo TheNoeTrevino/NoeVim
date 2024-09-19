@@ -93,6 +93,24 @@ return {
       local line = action_state.get_current_line()
       LazyVim.pick("find_files", { hidden = true, default_text = line })()
     end
+    local function flash(prompt_bufnr)
+      require("flash").jump({
+        pattern = "^",
+        label = { after = { 0, 0 } },
+        search = {
+          mode = "search",
+          exclude = {
+            function(win)
+              return vim.bo[vim.api.nvim_win_get_buf(win)].filetype ~= "TelescopeResults"
+            end,
+          },
+        },
+        action = function(match)
+          local picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
+          picker:set_selection(match.pos[1] - 1)
+        end,
+      })
+    end
 
     local path_actions = require("telescope_insert_path")
     return {
@@ -148,10 +166,12 @@ return {
             ["<C-d>"] = actions.preview_scrolling_down,
             ["<C-u>"] = actions.preview_scrolling_up,
             ["<C-r>"] = path_actions.insert_reltobufpath_a_normal,
+            ["<localleader>"] = flash,
           },
           n = {
             ["q"] = actions.close,
             ["<leader>r"] = path_actions.insert_reltobufpath_a_normal,
+            ["s"] = flash,
           },
         },
       },
