@@ -197,7 +197,8 @@ map("n", "<leader>dc", "<cmd>Lspsaga show_cursor_diagnostics<CR>", { desc = "Cur
 map("n", "<leader>h", "<cmd>Lspsaga finder tyd+ref+imp+def<CR>", { desc = "Get References" })
 map("n", "<leader>j", "<cmd>Lspsaga goto_definition<CR>", { desc = "Go to Definition" })
 map("n", "<leader>k", "<cmd>Lspsaga peek_definition<cr>", { desc = "Peek Definition" })
--- map('n', '<leader>l', '<cmd>Lspsaga hover_doc<CR>', { desc = "LSP Hover" })
+map('n', '<leader>l', '<cmd>Lspsaga hover_doc<CR>', { desc = "LSP Hover" })
+
 map('n', 'dm', [[:lua DeleteMark()<CR>]], { desc = "[D]elete [M]ark [ ]"})
 
 function DeleteMark()
@@ -214,6 +215,10 @@ LazyVim.toggle.map("<leader>ug", {
     require("ibl").setup_buffer(0, { enabled = state })
   end,
 })
+
+-- Portal 
+map("n", "<leader>o", "<cmd>Portal jumplist backward<cr>")
+map("n", "<leader>i", "<cmd>Portal changelist backward<cr>")
 
 -- Center when finding
 map("n", "n", "nzzzv", {desc = "Next find and center"})
