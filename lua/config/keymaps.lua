@@ -30,7 +30,6 @@ map("i", "<C-BS>", "<C-w>")
 -- Clear search with <esc>
 map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and Clear hlsearch" })
 
-map("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 -- Clear search, diff update and redraw
 -- taken from runtime/lua/_editor.lua
 map(
@@ -59,6 +58,10 @@ map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
 
 map("n", "<leader>xl", "<cmd>lopen<cr>", { desc = "Location List" })
 map("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Quickfix List" })
+
+--Dial
+map("n", "+", "<C-A>", { desc = "Quickfix List" })
+map("n", "-", "<C-X>", { desc = "Quickfix List" })
 
 map("n", "[q", vim.cmd.cprev, { desc = "Previous Quickfix" })
 map("n", "]q", vim.cmd.cnext, { desc = "Next Quickfix" })
@@ -216,9 +219,12 @@ LazyVim.toggle.map("<leader>ug", {
   end,
 })
 
--- Portal 
+-- Portal  
 map("n", "<leader>o", "<cmd>Portal jumplist backward<cr>")
 map("n", "<leader>i", "<cmd>Portal changelist backward<cr>")
+
+-- Aerial
+map("n", "<leader>an", "<cmd>AerialNavToggle<cr>", {desc = "Aerial Navigation"})
 
 -- Center when finding
 map("n", "n", "nzzzv", {desc = "Next find and center"})
