@@ -3,6 +3,16 @@ return {
   event = "VeryLazy",
   config = function()
     require("lspsaga").setup({
+      definition = {
+        keys = {
+          edit = "<C-c>o",
+          vsplit = "v",
+          split = "s",
+          tabe = "<C-c>t",
+          quit = { "q", "<ESC>" },
+          close = "<C-c>k",
+        },
+      },
       finder = {
         max_height = 0.8,
         right_width = 0.5,
@@ -19,9 +29,8 @@ return {
         },
       },
       symbol_in_winbar = {
-        enable = false, -- Disable the breadcrumbs
+        enable = true, -- Disable the breadcrumbs
       },
-
       border_style = "round",
       saga_winblend = 0,
       move_in_saga = { prev = "<C-p>", next = "<C-n>" },

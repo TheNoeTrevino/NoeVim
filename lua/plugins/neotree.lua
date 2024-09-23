@@ -3,6 +3,7 @@ return {
   event = "VeryLazy",
   cmd = "Neotree",
   opts = {
+    popup_border_style = "rounded",
     sources = { "filesystem", "buffers", "git_status" },
     open_files_do_not_replace_types = { "terminal", "Trouble", "trouble", "qf", "Outline" },
     filesystem = {
@@ -11,6 +12,7 @@ return {
       use_libuv_file_watcher = true,
     },
     window = {
+      position = "float",
       mappings = {
         ["s"] = "open_split",
         ["v"] = "open_vsplit",

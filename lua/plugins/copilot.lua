@@ -21,6 +21,13 @@ return {
         footer = nil, -- footer of chat window
         zindex = 1, -- determines if window is on top or below other floating windows
       },
+      -- default mappings
+      mappings = {
+        close = {
+          normal = "<ESC>",
+          insert = "<C-c>",
+        },
+      },
       selection = function(source)
         local select = require("CopilotChat.select")
         return select.visual(source) or select.buffer(source)
