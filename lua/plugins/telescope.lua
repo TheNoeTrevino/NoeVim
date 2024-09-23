@@ -2,15 +2,9 @@ return {
   "nvim-telescope/telescope.nvim",
 
   keys = {
-    {
-      "<leader>sb",
-      "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>",
-      desc = "Switch Buffer",
-    },
-    { "<leader>/", false }, -- Remove or replace this with a valid mapping
-    { "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
-    { "<leader><space>", LazyVim.pick("files"), desc = "Find Files (Root Dir)" },
-    -- find
+    { "<leader>/", false },
+    { "<leader>:", false },
+    { "<leader><space>", false },
     { "<leader>fb", false },
     { "<leader>ff", false },
     { "<leader>fF", false },
@@ -23,7 +17,6 @@ return {
     { "<leader>gs", "<cmd>Telescope git_status<CR>", desc = "Status" },
     -- search
     { '<leader>s"', "<cmd>Telescope registers<cr>", desc = "Registers" },
-    { "<leader>sa", "<cmd>Telescope autocommands<cr>", desc = "Auto Commands" },
     { "<leader>/", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Grep Current Buffer" },
     { "<leader>sc", "<cmd>Telescope command_history<cr>", desc = "Command History" },
     { "<leader>sC", "<cmd>Telescope commands<cr>", desc = "Commands" },
@@ -41,12 +34,18 @@ return {
     { "<leader>so", "<cmd>Telescope oldfiles<cr>", desc = '[S]earch Recent Files ("." for repeat)' },
     { "<leader>sR", "<cmd>Telescope resume<cr>", desc = "Resume" },
     { "<leader>sq", "<cmd>Telescope quickfix<cr>", desc = "Quickfix List" },
-    { "<leader>ss", "<cmd>:split<cr>", desc = "Horizontal Split" },
+    { "<leader>sa", "<cmd>Telescope builtin<cr>", desc = "Horizontal Split" },
+    { "<leader>ss", "<cmd>Telescope lsp_document_symbols<cr>", desc = "Horizontal Split" },
     { "<leader>sw", LazyVim.pick("grep_string", { word_match = "-w" }), desc = "Word (Root Dir)" },
     { "<leader>sW", LazyVim.pick("grep_string", { root = false, word_match = "-w" }), desc = "Word (cwd)" },
-    { "<leader>sw", LazyVim.pick("grep_string"), mode = "v", desc = "Selection (Root Dir)" },
-    { "<leader>sW", LazyVim.pick("grep_string", { root = false }), mode = "v", desc = "Selection (cwd)" },
     { "<leader>uC", LazyVim.pick("colorscheme", { enable_preview = true }), desc = "Colorscheme with Preview" },
+    { "<leader>sf", "<cmd>Telescope find_files<cr>", desc = "[S]earch [F]iles" },
+    { "<leader>su", "<cmd>Telescope undo<cr>", desc = "[T]oggle [U]ndotree" },
+    {
+      "<leader><leader>",
+      "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>",
+      desc = "Switch Buffer",
+    },
     {
       "<leader>ss",
       function()
@@ -65,17 +64,6 @@ return {
       end,
       desc = "Goto Symbol (Workspace)",
     },
-    { "<leader>sh", "<cmd>Telescope help_tags<cr>", desc = "[S]earch [H]elp" }, -- Duplicate removed
-    { "<leader>sk", "<cmd>Telescope keymaps<cr>", desc = "[S]earch [K]eymaps" }, -- Duplicate removed
-    { "<leader>sf", "<cmd>Telescope find_files<cr>", desc = "[S]earch [F]iles" },
-    { "<leader>ss", "<cmd>Telescope builtin<cr>", desc = "[S]earch [S]elect Telescope" }, -- Duplicate removed
-    { "<leader>sw", "<cmd>Telescope grep_string<cr>", desc = "[S]earch current [W]ord" }, -- Ensure uniqueness
-    { "<leader>sg", "<cmd>Telescope live_grep<cr>", desc = "[S]earch by [G]rep" }, -- Ensure uniqueness
-    { "<leader>sd", "<cmd>Telescope diagnostics<cr>", desc = "[S]earch [D]iagnostics" }, -- Ensure uniqueness
-    { "<leader>su", "<cmd>Telescope undo<cr>", desc = "[T]oggle [U]ndotree" },
-    { "<leader>sr", "<cmd>Telescope resume<cr>", desc = "[S]earch [R]esume" },
-    { "<leader>so", "<cmd>Telescope oldfiles<cr>", desc = '[S]earch Recent Files ("." for repeat)' }, -- Ensure uniqueness
-    { "<leader><leader>", "<cmd>Telescope buffers<cr>", desc = "[ ] Find existing buffers" },
   },
   opts = function()
     local actions = require("telescope.actions")
