@@ -126,7 +126,7 @@ return {
           -- Footer content with added space
           return {
             "",
-            "⚡ Neovim loaded " .. stats.loaded .. "/" .. stats.count .. " plugins in " .. ms .. "ms",
+            "⚡ Noevim loaded " .. stats.loaded .. "/" .. stats.count .. " plugins in " .. ms .. "ms",
           },
             -- Apply Gruvbox white color to dashboard highlights
             vim.cmd([[
