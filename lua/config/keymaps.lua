@@ -153,24 +153,11 @@ map('n', '<C-k>', ':KittyNavigateDown<CR>', { noremap = true, silent = true})
 map('n', '<C-l>', ':KittyNavigateUp<CR>', { noremap = true, silent = true})
 map('n', '<C-;>', ':KittyNavigateRight<CR>', { noremap = true, silent = true})
 
--- for some reason these do not work in the other. Super weird
--- Resize window using <ctrl> nav keys (for arch)
-map("n", "<C-M-l>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
-map("n", "<C-M-k>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
-map("n", "<C-M-j>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
-map("n", "<C-M-;>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
-
--- Resize window using <ctrl><shift> nav keys (for mac)
-map("n", "<C-S-l>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
-map("n", "<C-S-k>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
-map("n", "<C-S-j>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
-map("n", "<C-S-;>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
-
--- Resize window using <ctrl> arrow keys
-map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
-map("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
-map("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
-map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
+-- Resize with arrows
+map("n", "<Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
+map("n", "<Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
+map("n", "<Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
+map("n", "<Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
 
 -- Better alternate tab
 map('n', '<Tab>', '<C-^>', { noremap = true, silent = true })
@@ -236,5 +223,8 @@ map("n", "J", "mzJ`z")
 -- Easier registers
 map('n', "'", "`", { noremap = true, silent = true })
 
--- vscode terminal 
+-- VsCode terminal 
 map("n", "<localleader>t", "<cmd>ToggleTerm<CR>", { desc = "Floating Terminal" })
+
+-- Toggle Transparency
+map("n", "<leader>0", "<cmd>TransparentToggle<CR>", { desc = "Floating Terminal" })

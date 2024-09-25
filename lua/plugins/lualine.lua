@@ -21,7 +21,7 @@ return {
     -- Set custom options for lualine
     opts.options = vim.tbl_extend("force", opts.options or {}, {
       icons_enabled = true, -- Enable/disable icons in the statusline
-      theme = "gruvbox_dark", -- Theme for the statusline (you can change it to any available theme)
+      theme = "auto", -- Theme for the statusline (you can change it to any available theme)
       component_separators = { left = "", right = "" }, -- Separators for components
       section_separators = { left = "", right = "" }, -- Separators for sections
       disabled_filetypes = {}, -- Filetypes to disable lualine for
@@ -92,7 +92,7 @@ return {
           },
         },
       }, -- Show filename in inactive windows
-      lualine_x = { "location" }, -- Show location in inactive windows
+      lualine_x = {}, -- Show location in inactive windows
       lualine_y = {},
 
       lualine_z = {},

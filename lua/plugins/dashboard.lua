@@ -39,6 +39,14 @@ return {
           },
           {
             action = function()
+              vim.cmd(" Leet")
+            end,
+            desc = " Leetcode",
+            icon = " ",
+            key = "p",
+          },
+          {
+            action = function()
               vim.api.nvim_feedkeys(
                 vim.api.nvim_replace_termcodes("<Plug>(neorg.telescope.switch_workspace)", true, true, true),
                 "n",
@@ -66,14 +74,6 @@ return {
           },
           {
             action = function()
-              vim.cmd("Telescope help_tags")
-            end,
-            desc = " Help Tags",
-            icon = "󰋖 ",
-            key = "?",
-          },
-          {
-            action = function()
               vim.cmd("checkhealth")
             end,
             desc = " Check Health",
@@ -96,10 +96,10 @@ return {
           },
           {
             action = function()
-              vim.cmd("vsplit | terminal")
+              vim.cmd("Telescope colorscheme")
             end,
-            desc = " Open Terminal",
-            icon = " ",
+            desc = " Colorscheme",
+            icon = " ",
             key = "t",
           },
           {
@@ -126,7 +126,7 @@ return {
           -- Footer content with added space
           return {
             "",
-            "⚡ Noevim loaded " .. stats.loaded .. "/" .. stats.count .. " plugins in " .. ms .. "ms",
+            "⚡ NoeVim loaded " .. stats.loaded .. "/" .. stats.count .. " plugins in " .. ms .. "ms",
           },
             -- Apply Gruvbox white color to dashboard highlights
             vim.cmd([[

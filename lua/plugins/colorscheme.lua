@@ -1,35 +1,35 @@
 return {
-  "ellisonleao/gruvbox.nvim",
-  lazy = false,
-  priority = 1000,
-  name = "gruvbox",
-  config = function()
-    -- Disable italics in gruvbox
-    vim.g.gruvbox_italic = 0
-    require("gruvbox").setup({
-      terminal_colors = false, -- add neovim terminal colors
-      undercurl = false,
-      underline = true,
-      bold = true,
-      italic = {
-        strings = false,
-        emphasis = false,
-        comments = false,
-        operators = false,
-        folds = false,
-      },
-      strikethrough = true,
-      invert_selection = false,
-      invert_signs = false,
-      invert_tabline = false,
-      contrast = "hard", -- can be "hard", "soft" or empty string
-      overrides = {
-        CursorLine = { bg = "#000000" },
-      },
-      dim_inactive = false,
-      transparent_mode = true,
-    })
-    vim.cmd("hi Underlined guifg=#ff0000 gui=underline")
-    vim.cmd([[colorscheme gruvbox]])
-  end,
+  -- Extra Colors
+  { "zenbones-theme/zenbones.nvim", dependencies = "rktjmp/lush.nvim", event = "VeryLazy" },
+  { "rose-pine/neovim", name = "rosepine", event = "VeryLazy" },
+  { "catppuccin/nvim", name = "catppuccin", event = "VeryLazy" },
+  { "rebelot/kanagawa.nvim", event = "VeryLazy" },
+  { "tokyonight.nvim", event = "VeryLazy" },
+  { "Mofiqul/vscode.nvim", event = "VeryLazy" },
+  { "bluz71/vim-moonfly-colors", event = "VeryLazy" },
+  { "bluz71/vim-nightfly-colors", event = "VeryLazy" },
+  { "morhetz/gruvbox", event = "VeryLazy" },
+  { "sainnhe/gruvbox-material", event = "VeryLazy" },
+  { "xiyaowong/transparent.nvim", cmd = "TransparentToggle" },
+  { "projekt0n/github-nvim-theme", event = "VeryLazy" },
+  { "scottmckendry/cyberdream.nvim", event = "VeryLazy" },
+  { "tiagovla/tokyodark.nvim", event = "VeryLazy" },
+  { "sainnhe/edge", event = "VeryLazy" },
+  { "EdenEast/nightfox.nvim", event = "VeryLazy" },
+  { "marko-cerovac/material.nvim", event = "VeryLazy" },
+  { "sainnhe/sonokai", event = "VeryLazy" },
+  { "Shatur/neovim-ayu", event = "VeryLazy" },
+  {
+    "rose-pine/neovim",
+    lazy = true,
+    config = function()
+      require("rose-pine").setup({
+        styles = {
+          bold = true,
+          italic = false,
+          transparency = false,
+        },
+      })
+    end,
+  },
 }

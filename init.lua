@@ -31,4 +31,32 @@ if vim.g.vscode then
   ]])
 else
   require("config.lazy")
+  require("colorizer").setup()
+
+  -- Colorscheme options to be loaded after all plugins
+  vim.cmd([[
+    colorscheme retrobox
+    highlight TelescopePromptPrefix guifg=#ff79c6 guibg=NONE
+    highlight TelescopePromptNormal guifg=#f8f8f2 guibg=NONE
+    highlight TelescopePromptBorder guifg=#6272a4 guibg=NONE
+    highlight TelescopePromptTitle guifg=#ffb86c guibg=NONE
+    highlight TelescopeResultsBorder guifg=#6272a4 guibg=NONE
+    highlight TelescopePreviewBorder guifg=#6272a4 guibg=NONE
+    highlight TelescopeSelection guifg=#f8f8f2 guibg=NONE gui=bold
+    highlight TelescopeNormal guifg=#f8f8f2 guibg=NONE
+    highlight TelescopeResultsTitle guifg=#ffb86c guibg=NONE
+    highlight TelescopePreviewTitle guifg=#ffb86c guibg=NONE
+    highlight GitSignsAdd guifg=#008c00 guibg=NONE
+    highlight GitSignsChange guifg=#e08300 guibg=NONE
+    highlight GitSignsDelete guifg=#ff0000 guibg=NONE
+    highlight GitSignsCurrentLineBlame guifg=#888888 guibg=NONE gui=italic
+    highlight NeoTreeFloatBorder guifg=#6272a4 guibg=NONE
+    highlight NeoTreeFloatTitle guifg=#ffb86c guibg=NONE
+    highlight NormalFloat guibg=NONE
+    highlight FloatBorder guifg=#6272a4 guibg=NONE
+    highlight ColorColumn ctermbg=0 guibg=#090909
+    highlight CursorLineNr guifg=#fcb205 guibg=NONE
+    ]])
+  vim.opt.cursorline = true
+  vim.opt.cursorlineopt = "number"
 end

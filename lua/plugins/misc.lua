@@ -1,9 +1,5 @@
 return {
-  -- Extra Colors
-  { "rose-pine/neovim", name = "rosepine", event = "VeryLazy" },
-  { "catppuccin/nvim", name = "catppuccin", event = "VeryLazy" },
-  { "rebelot/kanagawa.nvim", event = "VeryLazy" },
-  { "tokyonight.nvim", event = "VeryLazy" },
+
   -- Util
   { "debugloop/telescope-undo.nvim", event = "VeryLazy" },
   { "tpope/vim-repeat", event = "VeryLazy" },
@@ -14,7 +10,8 @@ return {
   { "knubie/vim-kitty-navigator", event = "VeryLazy" },
   { "stevearc/oil.nvim", event = "VeryLazy", opts = {} },
   { "kiyoon/telescope-insert-path.nvim", event = "VeryLazy" },
-  { "nvim-treesitter/nvim-treesitter-refactor" },
+  { "nvim-treesitter/nvim-treesitter-refactor", event = "VeryLazy" },
+  { "norcalli/nvim-colorizer.lua", event = "VeryLazy" },
   {
     "kylechui/nvim-surround",
     event = "VeryLazy",

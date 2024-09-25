@@ -1,7 +1,7 @@
 -- Options are automatically loaded before lazy.nvim startup
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 -- Add any additional options here
---
+
 vim.opt.fillchars = {
   foldopen = "",
   foldclose = "",
@@ -10,6 +10,8 @@ vim.opt.fillchars = {
   diff = "╱",
   eob = " ",
 }
+
+vim.g.moonflyItalics = false
 
 vim.opt.listchars = {
   tab = "> ",
@@ -22,3 +24,15 @@ vim.g.lazyvim_statuscolumn = {
   folds_open = true, -- show fold sign when fold is open
   folds_githl = true, -- highlight fold sign with git sign color
 }
+
+local custom_highlight = vim.api.nvim_create_augroup("CustomHighlight", {})
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+  pattern = "moonfly",
+  callback = function()
+    vim.api.nvim_set_hl(0, "Boolean", { fg = "#849e5d", bold = false })
+  end,
+  group = custom_highlight,
+})
+
+-- vim.opt.colorcolumn = "80,100,120"

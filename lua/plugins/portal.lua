@@ -1,5 +1,6 @@
 return {
   "cbochs/portal.nvim",
+  event = "VeryLazy",
   config = function()
     require("portal").setup({
       ---@type string[]
@@ -11,7 +12,7 @@ return {
         height = 6,
         col = 2,
         focusable = false,
-        border = "single",
+        border = "rounded",
         noautocmd = true,
       },
     })

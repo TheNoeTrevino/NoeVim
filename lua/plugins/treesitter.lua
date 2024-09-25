@@ -14,6 +14,15 @@ return {
         },
       },
     },
+    incremental_selection = {
+      enable = true,
+      keymaps = {
+        init_selection = "<Leader>ys", -- set to `false` to disable one of the mappings
+        node_incremental = "<leader>",
+        node_decremental = "<bs>",
+        scope_incremental = false,
+      },
+    },
   },
   config = function(_, opts)
     require("nvim-treesitter.configs").setup(opts)
