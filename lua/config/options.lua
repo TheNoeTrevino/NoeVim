@@ -35,4 +35,5 @@ vim.api.nvim_create_autocmd("ColorScheme", {
   group = custom_highlight,
 })
 
+vim.opt.shortmess:append("I")
 -- vim.opt.colorcolumn = "80,100,120"
