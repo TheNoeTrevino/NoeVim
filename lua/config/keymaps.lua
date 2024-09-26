@@ -220,6 +220,10 @@ map('n', "'", "`", { noremap = true, silent = true })
 
 -- VsCode terminal 
 map("n", "<localleader>t", "<cmd>ToggleTerm<CR>", { desc = "Floating Terminal" })
+map('x', '<localleader>sl', '<cmd>ToggleTermSendVisualLines<CR>', { noremap = true, silent = true })
 
 -- Toggle Transparency
 map("n", "<leader>0", "<cmd>TransparentToggle<CR>", { desc = "Floating Terminal" })
+
+-- Markdown Todolists
+map("n", "<leader>td", ":lua require('toggle-checkbox').toggle()<CR>")

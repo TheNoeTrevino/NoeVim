@@ -9,6 +9,7 @@ return {
   { "stevearc/oil.nvim", event = "VeryLazy", opts = {} },
   { "kiyoon/telescope-insert-path.nvim", event = "VeryLazy" },
   { "nvim-treesitter/nvim-treesitter-refactor", event = "VeryLazy" },
+  { "opdavies/toggle-checkbox.nvim", event = "VeryLazy" },
   { "norcalli/nvim-colorizer.lua", event = "VeryLazy" },
   {
     "kylechui/nvim-surround",

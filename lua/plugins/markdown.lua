@@ -31,12 +31,12 @@ return {
       end,
     })
     vim.cmd([[
-      highlight RenderMarkdownH1Bg guibg=#9c3303 guifg=#fbf1c7 ctermbg=94 ctermfg=230
-      highlight RenderMarkdownH2Bg guibg=#6d670d guifg=#ebdbb2 ctermbg=100 ctermfg=223
-      highlight RenderMarkdownH3Bg guibg=#b57614 guifg=#282828 ctermbg=136 ctermfg=235
-      highlight RenderMarkdownH4Bg guibg=#065966 guifg=#ebdbb2 ctermbg=23 ctermfg=223
-      highlight RenderMarkdownH5Bg guibg=#7c365f guifg=#fbf1c7 ctermbg=96 ctermfg=230
-      highlight RenderMarkdownH6Bg guibg=#3a6e50 guifg=#282828 ctermbg=65 ctermfg=235
+      highlight RenderMarkdownH1Bg guibg=#502824 guifg=#ffead6 ctermbg=94 ctermfg=230  " Red
+      highlight RenderMarkdownH3Bg guibg=#5a3d33 guifg=#e6d9be ctermbg=136 ctermfg=235 " Orange
+      highlight RenderMarkdownH2Bg guibg=#37352f guifg=#e8e1c5 ctermbg=100 ctermfg=223 " Yellow
+      highlight RenderMarkdownH4Bg guibg=#223b40 guifg=#d5e2e8 ctermbg=23 ctermfg=223  " Blue
+      highlight RenderMarkdownH6Bg guibg=#22312d guifg=#d6eae1 ctermbg=65 ctermfg=235  " Green
+      highlight RenderMarkdownH5Bg guibg=#362930 guifg=#f0d2e0 ctermbg=96 ctermfg=230  " Violet
     ]])
   end,
 }
