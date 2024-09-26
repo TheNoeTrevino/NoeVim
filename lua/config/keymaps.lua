@@ -136,7 +136,9 @@ map("t", "<C-/>", "<cmd>close<cr>", { desc = "Hide Terminal" })
 map("t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" })
 
 -- Windows
-LazyVim.toggle.map("<leader>m", LazyVim.toggle.maximize)
+LazyVim.toggle.map("<leader>mm", LazyVim.toggle.maximize)
+
+map("n", "<leader>mp", "<cmd>MarkdownPreviewToggle<cr>", { desc = "which_key_ignore" })
 
 -- Move to window using the <ctrl> hjkl keys
 -- map("n", "<C-j>", "<C-w>h", { desc = "Go to Left Window", remap = true })

@@ -1,5 +1,4 @@
 return {
-
   -- Util
   { "debugloop/telescope-undo.nvim", event = "VeryLazy" },
   { "tpope/vim-repeat", event = "VeryLazy" },
