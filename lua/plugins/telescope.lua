@@ -32,7 +32,7 @@ return {
     { "<leader>sM", "<cmd>Telescope man_pages<cr>", desc = "Man Pages" },
     { "<leader>sm", "<cmd>Telescope marks<cr>", desc = "Jump to Mark" },
     { "<leader>so", "<cmd>Telescope oldfiles<cr>", desc = '[S]earch Recent Files ("." for repeat)' },
-    { "<leader>sR", "<cmd>Telescope resume<cr>", desc = "Resume" },
+    { "<leader>sr", "<cmd>Telescope resume<cr>", desc = "Resume" },
     { "<leader>sq", "<cmd>Telescope quickfix<cr>", desc = "Quickfix List" },
     { "<leader>sa", "<cmd>Telescope builtin<cr>", desc = "Horizontal Split" },
     { "<leader>ss", "<cmd>Telescope lsp_document_symbols<cr>", desc = "Horizontal Split" },

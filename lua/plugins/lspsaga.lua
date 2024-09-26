@@ -13,6 +13,21 @@ return {
           close = "<C-c>k",
         },
       },
+      outline = {
+        win_position = "left",
+        win_width = 40,
+        auto_preview = true,
+        detail = true,
+        auto_close = true,
+        close_after_jump = false,
+        layout = "float",
+        max_height = 0.7,
+        keys = {
+          jump = "<CR>",
+          quit = { "q", "<ESC>" },
+          close = "<ESC>",
+        },
+      },
       finder = {
         max_height = 0.8,
         right_width = 0.5,
@@ -66,6 +81,10 @@ return {
       },
       lightbulb = {
         enable = false, -- Disable the lightbulb
+        virtual_text = false,
+      },
+      ui = {
+        code_action = "󱚠",
       },
       rename = {
         in_select = true,

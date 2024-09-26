@@ -1,16 +1,16 @@
 local map = LazyVim.safe_keymap_set
 
--- better up/down
-map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
-map({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
-map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
-map({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
+-- WEIRD MAPPINGS -- edit/remove this block to use hjkl for navigation
 
--- Remap jkl; for navigation
+-- better up/down
+map({ "n", "x" }, "k", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
+map({ "n", "x" }, "l", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
+
+-- Remap j; for navigation
 map({ "n", "x" }, "j", "h", { desc = "Right", silent = true })
-map({ "n", "x" }, "k", "j", { desc = "Down", silent = true })
-map({ "n", "x" }, "l", "k", { desc = "Up", silent = true })
 map({ "n", "x" }, ";", "l", { desc = "Left", silent = true })
+
+-- WEIRD MAPPINGS --
 
 -- Move Lines
 map("n", "<A-l>", "<cmd>m .-2<cr>==", { desc = "Move Up" })
@@ -140,12 +140,6 @@ LazyVim.toggle.map("<leader>mm", LazyVim.toggle.maximize)
 
 map("n", "<leader>mp", "<cmd>MarkdownPreviewToggle<cr>", { desc = "which_key_ignore" })
 
--- Move to window using the <ctrl> hjkl keys
--- map("n", "<C-j>", "<C-w>h", { desc = "Go to Left Window", remap = true })
--- map("n", "<C-k>", "<C-w>j", { desc = "Go to Lower Window", remap = true })
--- map("n", "<C-l>", "<C-w>k", { desc = "Go to Upper Window", remap = true })
--- map("n", "<C-;>", "<C-w>l", { desc = "Go to Right Window", remap = true })
-
 -- Disable the default mappings from vim-kitty-navigator
 vim.g.kitty_navigator_no_mappings = 1
 
@@ -179,6 +173,7 @@ map("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", { desc = "LSP Code Action
 map("n", "<leader>lca", "<cmd>Lspsaga code_action<CR>", { desc = "LSP Code Action" })
 map("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", { desc = "LSP Rename" })
 map("n", "<leader>dn", "<cmd>Lspsaga diagnostic_jump_next<CR>", { desc = "Next Diagnostic" })
+map('n', '<leader>t', '<cmd>Lspsaga outline<cr>', { desc = "LSP Hover" })
 map("n", "<leader>dN", "<cmd>Lspsaga diagnostic_jump_prev<CR>", { desc = "Previous Diagnostic" })
 map("n", "<leader>da", "<cmd>Lspsaga show_workspace_diagnostics<CR>", { desc = "All Diagnostics" })
 map("n", "<leader>db", "<cmd>Lspsaga show_buf_diagnostics<CR>", { desc = "Buffer Diagaostics" })
@@ -186,10 +181,12 @@ map("n", "<leader>dl", "<cmd>Lspsaga show_line_diagnostics<CR>", { desc = "Line 
 map("n", "<leader>dc", "<cmd>Lspsaga show_cursor_diagnostics<CR>", { desc = "Cursor Diagnostics" })
 
 -- Definition mappings
-map("n", "<leader>h", "<cmd>Lspsaga finder tyd+ref+imp+def<CR>", { desc = "Get References" })
+map("n", "<leader>h", "<cmd>Lspsaga finder tyd+ref+def<CR>", { desc = "Get References" })
 map("n", "<leader>j", "<cmd>Lspsaga goto_definition<CR>", { desc = "Go to Definition" })
 map("n", "<leader>k", "<cmd>Lspsaga peek_definition<cr>", { desc = "Peek Definition" })
-map('n', '<leader>l', '<cmd>Lspsaga hover_doc<CR>', { desc = "LSP Hover" })
+map("n", "<leader>k", "<C-^>", { noremap = true, silent = true })
+map("n", "<leader>l", "<C-^>", { noremap = true, silent = true })
+
 
 map('n', 'dm', [[:lua DeleteMark()<CR>]], { desc = "[D]elete [M]ark [ ]"})
 
@@ -211,9 +208,6 @@ LazyVim.toggle.map("<leader>ug", {
 -- Portal  
 map("n", "<leader>o", "<cmd>Portal jumplist backward<cr>")
 map("n", "<leader>i", "<cmd>Portal changelist backward<cr>")
-
--- Aerial
-map("n", "<leader>an", "<cmd>AerialNavToggle<cr>", {desc = "Aerial Navigation"})
 
 -- Center when finding
 map("n", "n", "nzzzv", {desc = "Next find and center"})
