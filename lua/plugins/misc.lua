@@ -4,7 +4,6 @@ return {
   { "tpope/vim-repeat", event = "VeryLazy" },
   { "mbbill/undotree", event = "VeryLazy" },
   { "ThePrimeagen/vim-be-good", event = "VeryLazy" },
-  { "nvim-neorg/neorg-telescope", event = "VeryLazy" },
   { "tummetott/unimpaired.nvim", event = "VeryLazy" },
   { "knubie/vim-kitty-navigator", event = "VeryLazy" },
   { "stevearc/oil.nvim", event = "VeryLazy", opts = {} },

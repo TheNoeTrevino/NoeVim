@@ -45,18 +45,6 @@ return {
             icon = " ",
             key = "p",
           },
-          {
-            action = function()
-              vim.api.nvim_feedkeys(
-                vim.api.nvim_replace_termcodes("<Plug>(neorg.telescope.switch_workspace)", true, true, true),
-                "n",
-                true
-              )
-            end,
-            desc = " Neorg",
-            icon = " ",
-            key = "n",
-          },
           { action = "lua LazyVim.pick()()", desc = " Find File", icon = "󰥨 ", key = "f" },
           {
             action = 'lua LazyVim.pick("oldfiles")()',

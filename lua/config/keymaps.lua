@@ -184,7 +184,6 @@ map("n", "<leader>dc", "<cmd>Lspsaga show_cursor_diagnostics<CR>", { desc = "Cur
 map("n", "<leader>h", "<cmd>Lspsaga finder tyd+ref+def<CR>", { desc = "Get References" })
 map("n", "<leader>j", "<cmd>Lspsaga goto_definition<CR>", { desc = "Go to Definition" })
 map("n", "<leader>k", "<cmd>Lspsaga peek_definition<cr>", { desc = "Peek Definition" })
-map("n", "<leader>k", "<C-^>", { noremap = true, silent = true })
 map("n", "<leader>l", "<C-^>", { noremap = true, silent = true })
 
 
