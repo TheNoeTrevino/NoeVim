@@ -35,5 +35,14 @@ vim.api.nvim_create_autocmd("ColorScheme", {
   group = custom_highlight,
 })
 
-vim.opt.shortmess:append("I")
+vim.g.gruvbox_material_enable_italic = false
+
+vim.g.gruvbox_material_disable_italic_comment = 1
+vim.g.gruvbox_contrast_dark = "hard"
+vim.g.gruvbox_material_background = "hard"
+
+-- vim.opt.shortmess:append("I")
+--
 -- vim.opt.colorcolumn = "80,100,120"
+
+-- Setting the colorscheme

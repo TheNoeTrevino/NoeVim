@@ -10,7 +10,18 @@ return {
   { "kiyoon/telescope-insert-path.nvim", event = "VeryLazy" },
   { "nvim-treesitter/nvim-treesitter-refactor", event = "VeryLazy" },
   { "opdavies/toggle-checkbox.nvim", event = "VeryLazy" },
-  { "norcalli/nvim-colorizer.lua", event = "VeryLazy" },
+  { "NvChad/nvim-colorizer.lua", event = "VeryLazy" },
+  {
+    "chentoast/marks.nvim",
+    event = "VeryLazy",
+    config = function()
+      require("marks").setup({
+        mappings = {
+          preview = "mp",
+        },
+      })
+    end,
+  },
   {
     "kylechui/nvim-surround",
     event = "VeryLazy",

@@ -30,8 +30,8 @@ return {
       },
       finder = {
         max_height = 0.8,
-        right_width = 0.5,
-        left_width = 0.5,
+        right_width = 0.6,
+        left_widith = 0.3,
         keys = {
           vsplit = "v",
           split = "i",

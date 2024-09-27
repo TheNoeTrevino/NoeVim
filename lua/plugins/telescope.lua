@@ -12,9 +12,11 @@ return {
     { "<leader>fr", false },
     { "<leader>fR", false },
     { "<leader>ss", false },
+    { "<leader>gc", false },
+    { "<leader>gs", false },
     -- git
-    { "<leader>gc", "<cmd>Telescope git_commits<CR>", desc = "Commits" },
-    { "<leader>gs", "<cmd>Telescope git_status<CR>", desc = "Status" },
+    { "<leader>gsc", "<cmd>Telescope git_commits<CR>", desc = "Search Commits" },
+    { "<leader>gss", "<cmd>Telescope git_status<CR>", desc = "Search Status" },
     -- search
     { '<leader>s"', "<cmd>Telescope registers<cr>", desc = "Registers" },
     { "<leader>/", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Grep Current Buffer" },
@@ -24,7 +26,7 @@ return {
     { "<leader>sD", "<cmd>Telescope diagnostics<cr>", desc = "Workspace Diagnostics" },
     { "<leader>sg", LazyVim.pick("live_grep"), desc = "Grep (Root Dir)" },
     { "<leader>sG", LazyVim.pick("live_grep", { root = false }), desc = "Grep (cwd)" },
-    { "<leader>sh", "<cmd>Telescope help_tags<cr>", desc = "[S]earch [H]elp" },
+    { "<leader>sh", "<cmd>Telescope help_tags<cr>", desc = "Search Help" },
     { "<leader>sH", "<cmd>Telescope highlights<cr>", desc = "Search Highlight Groups" },
     { "<leader>sj", "<cmd>Telescope jumplist<cr>", desc = "Jumplist" },
     { "<leader>sk", "<cmd>Telescope keymaps<cr>", desc = "[S]earch [K]eymaps" },
@@ -38,12 +40,12 @@ return {
     { "<leader>sw", LazyVim.pick("grep_string", { word_match = "-w" }), desc = "Word (Root Dir)" },
     { "<leader>sW", LazyVim.pick("grep_string", { root = false, word_match = "-w" }), desc = "Word (cwd)" },
     { "<leader>uC", LazyVim.pick("colorscheme", { enable_preview = true }), desc = "Colorscheme with Preview" },
-    { "<leader>sf", "<cmd>Telescope find_files<cr>", desc = "[S]earch [F]iles" },
-    { "<leader>su", "<cmd>Telescope undo<cr>", desc = "[T]oggle [U]ndotree" },
+    { "<leader>sf", "<cmd>Telescope find_files<cr>", desc = "Search Files" },
+    { "<leader>su", "<cmd>Telescope undo<cr>", desc = "Search Undo" },
     {
       "<leader><leader>",
       "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>",
-      desc = "Switch Buffer",
+      desc = "Search Buffers",
     },
     {
       "<leader>ss",

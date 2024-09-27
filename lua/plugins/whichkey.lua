@@ -7,19 +7,25 @@ return {
     spec = {
       {
         mode = { "n", "v" },
-        { "<leader>a", "", desc = "+AI", mode = { "n", "v" } },
-        { "<leader><tab>", group = "Tabs" },
-        { "<leader>x", group = "Debug", icon = { icon = " ", color = "cyan" } },
-        { "<leader>r", group = "Reame", icon = { icon = "󱦹 ", color = "cyan" } },
-        { "<leader>p", group = "Peek Definition", icon = { icon = "󰈈 ", color = "cyan" } },
+        { "<leader>a", "", group = "A.I.", icon = { icon = " " } },
+        { "<Tab>", group = "Tabs" },
+        { "<leader>x", group = "Debug", icon = { icon = " " } },
+        { "<leader>r", group = "Reame", icon = { icon = "󱦹 " } },
         { "<leader>c", group = "Code" },
         { "<leader>f", group = "Find" },
-        { "<leader>g", group = "Git" },
-        { "<leader>gh", group = "Hunks" },
+        { "<leader>n", group = "Notification", icon = { icon = "󰵙 " } },
+        { "<leader>m", group = "Markdown", icon = { icon = "󱦹 " } },
+        { "<leader>y", group = "Selection", icon = { icon = "󰒉 " } },
+        { "<leader>g", group = "Git", icon = { icon = " " } },
+        { "<leader>gs", group = "Stage/Search", icon = { icon = " " } },
+        { "<leader>gsu", group = "Unstage", icon = { icon = " " } },
+        { "<leader>gp", group = "Preview", icon = { icon = " " } },
+        { "<leader>gr", group = "Reset", icon = { icon = " " } },
+        { "<leader>gb", group = "Blame", icon = { icon = " " } },
         { "<leader>q", group = "Quit/session" },
-        { "<leader>s", group = "Search", icon = { icon = " ", color = "green" } },
-        { "<leader>u", group = "Ui", icon = { icon = "󰙵 ", color = "cyan" } },
-        { "<leader>d", group = "Diagnostics/Quickfix", icon = { icon = "󱖫 ", color = "green" } },
+        { "<leader>s", group = "Search", icon = { icon = " " } },
+        { "<leader>u", group = "Ui", icon = { icon = "󰙵 " } },
+        { "<leader>d", group = "Diagnostics", icon = { icon = "󰓙 " } },
         { "[", group = "Prev" },
         { "]", group = "Next" },
         { "g", group = "Goto" },
@@ -41,9 +47,31 @@ return {
           end,
         },
         -- better descriptions
+        -- valid colors are: `azure`, `blue`, `cyan`, `green`, `grey`, `orange`, `purple`, `red`, `yellow`
         { "gx", desc = "Open with system app" },
+        { "<leader>L", desc = "Lazy", icon = { icon = "󰒲 ", color = "purple" } },
+        { "<leader>e", desc = "NeoTree", icon = { icon = " ", color = "yellow" } },
+        { "<leader>o", desc = "Jumplist", icon = { icon = " ", color = "yellow" } },
+        { "<leader>i", desc = "Changelist", icon = { icon = " ", color = "yellow" } },
+        { "<leader>k", desc = "Peek Definition", icon = { icon = "󰈈 ", color = "yellow" } },
+        { "<leader>l", desc = "Outline", icon = { icon = "󰧊 ", color = "yellow" } },
+        { "<leader>0", desc = "Transparency", icon = { icon = " ", color = "purple" } },
+        { "<leader>h", desc = "References", icon = { icon = " ", color = "yellow" } },
+        { "<leader>j", desc = "Jump to Definition", icon = { icon = "󰑮 ", color = "yellow" } },
+        { "<leader>?", desc = "Buffer Keymaps", icon = { icon = " ", color = "yellow" } },
+        { "<leader><leader>", desc = "Search Buffers", icon = { icon = " ", color = "yellow" } },
+        { "<leader>/", desc = "Grep Buffer", icon = { icon = "󰮗 ", color = "yellow" } },
       },
     },
+  },
+
+  ---@type wk.Win.opts
+  window = {
+    border = "rounded", -- or "double", "single", etc.
+    position = "bottom", -- can be "bottom", "top"
+    margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
+    padding = { 2, 2, 2, 2 }, -- extra window padding [top, right, bottom, left]
+    winblend = 10, -- transparency between 0-100
   },
   keys = {
     {

@@ -1,5 +1,11 @@
 local map = LazyVim.safe_keymap_set
-
+vim.keymap.del("n", "<leader>E")
+vim.keymap.del("n", "<leader>`")
+vim.keymap.del("n", "<leader>|")
+vim.keymap.del("n", "<leader>-")
+vim.keymap.del("n", "<leader>L")
+vim.keymap.del("n", "<leader>K")
+vim.keymap.del("n", "<leader>,")
 -- WEIRD MAPPINGS -- edit/remove this block to use hjkl for navigation
 
 -- better up/down
@@ -89,7 +95,7 @@ map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 
 -- stylua: ignore start
 -- toggle options
-map("n", "<leader>ut", "<cmd>UndotreeToggle<cr>", { desc = "Go to Left Window" })
+map("n", "<leader>ut", "<cmd>UndotreeToggle<cr>", { desc = "Undotree" })
 LazyVim.toggle.map("<leader>uf", LazyVim.toggle.format())
 LazyVim.toggle.map("<leader>uF", LazyVim.toggle.format(true))
 LazyVim.toggle.map("<leader>us", LazyVim.toggle("spell", { name = "Spelling" }))
@@ -122,10 +128,6 @@ map("n", "<leader>gL", function()
   LazyVim.lazygit({ args = { "log" } })
 end, { desc = "Lazygit Log (cwd)" })
 
--- LazyVim Changelog
-map("n", "<leader>L", function() LazyVim.news.changelog() end, { desc = "LazyVim Changelog" })
-
-
 -- Terminal Mappings
 map("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
 map("t", "<C-j>", "<cmd>wincmd h<cr>", { desc = "Go to Left Window" })
@@ -152,10 +154,10 @@ map('n', '<C-;>', ':KittyNavigateRight<CR>', { noremap = true, silent = true})
 -- Resize with arrows
 map("n", "<Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
 map("n", "<Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
-map("n", "<Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
 map("n", "<Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
 
--- Better alternate tab
+
+-- Better alternate buffer
 map('n', '<Tab>', '<C-^>', { noremap = true, silent = true })
 map('n', 'L', '<C-^>', { noremap = true, silent = true })
 
@@ -168,7 +170,6 @@ map("n", "<leader>ua", "<cmd>ToggleAutopairs<CR>", { desc = "Go to Definition" }
 map("n", "<leader>uz", "<cmd>Lspsaga code_action<CR>", { desc = "LSP Code Action" })
 
 -- Lspsaga mappings
-map("n", "<leader>pd", "<cmd>Lspsaga peek_definition<CR>", { desc = "Peek Definition" })
 map("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", { desc = "LSP Code Action" })
 map("n", "<leader>lca", "<cmd>Lspsaga code_action<CR>", { desc = "LSP Code Action" })
 map("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", { desc = "LSP Rename" })
@@ -182,9 +183,9 @@ map("n", "<leader>dc", "<cmd>Lspsaga show_cursor_diagnostics<CR>", { desc = "Cur
 
 -- Definition mappings
 map("n", "<leader>h", "<cmd>Lspsaga finder tyd+ref+def<CR>", { desc = "Get References" })
-map("n", "<leader>j", "<cmd>Lspsaga goto_definition<CR>", { desc = "Go to Definition" })
+map("n", "<leader>j", "<cmd>Lspsaga goto_definition<CR>", { desc = "Jump to Definition" })
 map("n", "<leader>k", "<cmd>Lspsaga peek_definition<cr>", { desc = "Peek Definition" })
-map("n", "<leader>l", "<C-^>", { noremap = true, silent = true })
+-- map("n", "<leader>l", "<C-^>", { noremap = true, silent = true })
 
 
 map('n', 'dm', [[:lua DeleteMark()<CR>]], { desc = "[D]elete [M]ark [ ]"})
@@ -205,8 +206,8 @@ LazyVim.toggle.map("<leader>ug", {
 })
 
 -- Portal  
-map("n", "<leader>o", "<cmd>Portal jumplist backward<cr>")
-map("n", "<leader>i", "<cmd>Portal changelist backward<cr>")
+map("n", "<leader>o", "<cmd>Portal jumplist backward<cr>",{ desc = "Jumplist" })
+map("n", "<leader>i", "<cmd>Portal changelist backward<cr>",{ desc = "Changelist" })
 
 -- Center when finding
 map("n", "n", "nzzzv", {desc = "Next find and center"})
@@ -215,15 +216,15 @@ map("n", "N", "Nzzzv", {desc = "Prev find and center"})
 -- Keep cursor in place
 map("n", "J", "mzJ`z")
 
--- Easier registers
-map('n', "'", "`", { noremap = true, silent = true })
+-- Easier marks
+map('n', "'", "<cmd>WhichKey `<cr>", { noremap = true, silent = true })
 
 -- VsCode terminal 
-map("n", "<localleader>t", "<cmd>ToggleTerm<CR>", { desc = "Floating Terminal" })
-map('x', '<localleader>sl', '<cmd>ToggleTermSendVisualLines<CR>', { noremap = true, silent = true })
+map("n", "<localleader>t", "<cmd>ToggleTerm<CR>", { desc = "Terminal" })
+map('x', '<localleader>sl', '<cmd>ToggleTermSendVisualLines<CR>', { desc = "Send Visual Lines" })
 
 -- Toggle Transparency
-map("n", "<leader>0", "<cmd>TransparentToggle<CR>", { desc = "Floating Terminal" })
+map("n", "<leader>0", "<cmd>TransparentToggle<CR>", { desc = "Transparency" })
 
 -- Markdown Todolists
-map("n", "<leader>td", ":lua require('toggle-checkbox').toggle()<CR>")
+map("n", "<leader>mt", ":lua require('toggle-checkbox').toggle()<CR>", { desc = "Toggle Checkbox" })
