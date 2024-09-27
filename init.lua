@@ -24,12 +24,6 @@ if vim.g.vscode then
   vim.api.nvim_set_keymap("n", "<Leader>gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", { noremap = true, silent = true })
   vim.api.nvim_set_keymap("n", "<Leader>gr", "<Cmd>lua vim.lsp.buf.references()<CR>", { noremap = true, silent = true })
   vim.opt.clipboard = "unnamedplus"
-  vim.cmd([[
-    augroup YankHighlight
-      autocmd!
-      autocmd TextYankPost * silent! lua vim.highlight.on_yank { higroup='IncSearch', timeout=200 }
-    augroup END
-  ]])
 else
   require("config.lazy")
   require("colorizer").setup({
