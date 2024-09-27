@@ -188,7 +188,7 @@ map("x", "<leader>p", [["_dP]])
 map("n", "<leader>ua", "<cmd>ToggleAutopairs<CR>", { desc = "Go to Definition" })
 
 map("n", "<leader>uz", "<cmd>Lspsaga code_action<CR>", { desc = "LSP Code Action" })
-map("n", "<Leader>sp", "a<C-X>s", { desc = "Spelling" })
+map("n", "<Leader>sp", "<cmd>WhichKey z=<CR>", { desc = "Spelling Suggestion" })
 
 -- Lspsaga mappings
 map("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", { desc = "LSP Code Action" })

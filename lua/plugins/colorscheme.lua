@@ -10,7 +10,7 @@ return {
   { "bluz71/vim-nightfly-colors", event = "VeryLazy" },
   { "morhetz/gruvbox", event = "VeryLazy" },
   { "sainnhe/gruvbox-material", event = "VeryLazy" },
-  { "xiyaowong/transparent.nvim", cmd = "TransparentToggle" },
+  { "xiyaowong/transparent.nvim" },
   { "projekt0n/github-nvim-theme", event = "VeryLazy" },
   { "scottmckendry/cyberdream.nvim", event = "VeryLazy" },
   { "tiagovla/tokyodark.nvim", event = "VeryLazy" },
