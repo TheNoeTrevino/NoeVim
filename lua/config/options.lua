@@ -42,7 +42,5 @@ vim.g.gruvbox_contrast_dark = "hard"
 vim.g.gruvbox_material_background = "hard"
 
 -- vim.opt.shortmess:append("I")
---
--- vim.opt.colorcolumn = "80,100,120"
 
--- Setting the colorscheme
+-- vim.opt.colorcolumn = "80,100,120"

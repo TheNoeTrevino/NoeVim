@@ -1,13 +1,20 @@
-local map = LazyVim.safe_keymap_set
-vim.keymap.del("n", "<leader>E")
+-- Remove LazyVim Mappings
 vim.keymap.del("n", "<leader>`")
 vim.keymap.del("n", "<leader>|")
 vim.keymap.del("n", "<leader>-")
 vim.keymap.del("n", "<leader>L")
+vim.keymap.del("n", "<leader>l")
 vim.keymap.del("n", "<leader>K")
-vim.keymap.del("n", "<leader>,")
--- WEIRD MAPPINGS -- edit/remove this block to use hjkl for navigation
+vim.keymap.del("n", "<leader><Tab>[")
+vim.keymap.del("n", "<leader><Tab>]")
+vim.keymap.del("n", "<leader><Tab>d")
+vim.keymap.del("n", "<leader><Tab>l")
+vim.keymap.del("n", "<leader><Tab>o")
+vim.keymap.del("n", "<leader><Tab>f")
+vim.keymap.del("n", "<leader><Tab><tab>")
 
+local map = LazyVim.safe_keymap_set
+-- WEIRD MAPPINGS -- edit/remove this block to use hjkl for navigation
 -- better up/down
 map({ "n", "x" }, "k", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
 map({ "n", "x" }, "l", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
@@ -15,8 +22,6 @@ map({ "n", "x" }, "l", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, 
 -- Remap j; for navigation
 map({ "n", "x" }, "j", "h", { desc = "Right", silent = true })
 map({ "n", "x" }, ";", "l", { desc = "Left", silent = true })
-
--- WEIRD MAPPINGS --
 
 -- Move Lines
 map("n", "<A-l>", "<cmd>m .-2<cr>==", { desc = "Move Up" })
@@ -56,8 +61,6 @@ map({ "n" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
 -- better indenting
 map("v", "<", "<gv")
 map("v", ">", ">gv")
-
--- lazy
 
 -- new file
 map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
@@ -137,6 +140,16 @@ map("t", "<C-;>", "<cmd>wincmd l<cr>", { desc = "Go to Right Window" })
 map("t", "<C-/>", "<cmd>close<cr>", { desc = "Hide Terminal" })
 map("t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" })
 
+-- Tabs
+map("n", "<tab>p", "<cmd>tabprevious<cr>", { desc = "Tab Previous" })
+map("n", "<tab>n", "<cmd>tabnext<cr>", { desc = "Tab Next" })
+map("n", "<tab>r", ":Tabby rename_tab ", { desc = "Tab Rename" })
+map("n", "<tab>l", "<cmd>tablast<cr>", { desc = "Last Tab" })
+map("n", "<tab>o", "<cmd>tabonly<cr>", { desc = "Close Other Tabs" })
+map("n", "<tab>f", "<cmd>tabfirst<cr>", { desc = "First Tab" })
+map("n", "<tab><tab>", "<cmd>tabnew<cr>", { desc = "New Tab" })
+map("n", "<tab>c", "<cmd>tabclose<cr>", { desc = "Close Tab" })
+
 -- Windows
 LazyVim.toggle.map("<leader>mm", LazyVim.toggle.maximize)
 
@@ -158,7 +171,6 @@ map("n", "<Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Wid
 
 
 -- Better alternate buffer
-map('n', '<Tab>', '<C-^>', { noremap = true, silent = true })
 map('n', 'L', '<C-^>', { noremap = true, silent = true })
 
 -- Paste without putting into clipboard
@@ -168,13 +180,12 @@ map("x", "<leader>p", [["_dP]])
 map("n", "<leader>ua", "<cmd>ToggleAutopairs<CR>", { desc = "Go to Definition" })
 
 map("n", "<leader>uz", "<cmd>Lspsaga code_action<CR>", { desc = "LSP Code Action" })
+map("n", "<Leader>sp", "a<C-X>s", { desc = "Spelling" })
 
 -- Lspsaga mappings
 map("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", { desc = "LSP Code Action" })
-map("n", "<leader>lca", "<cmd>Lspsaga code_action<CR>", { desc = "LSP Code Action" })
 map("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", { desc = "LSP Rename" })
 map("n", "<leader>dn", "<cmd>Lspsaga diagnostic_jump_next<CR>", { desc = "Next Diagnostic" })
-map('n', '<leader>t', '<cmd>Lspsaga outline<cr>', { desc = "LSP Hover" })
 map("n", "<leader>dN", "<cmd>Lspsaga diagnostic_jump_prev<CR>", { desc = "Previous Diagnostic" })
 map("n", "<leader>da", "<cmd>Lspsaga show_workspace_diagnostics<CR>", { desc = "All Diagnostics" })
 map("n", "<leader>db", "<cmd>Lspsaga show_buf_diagnostics<CR>", { desc = "Buffer Diagaostics" })
@@ -185,7 +196,7 @@ map("n", "<leader>dc", "<cmd>Lspsaga show_cursor_diagnostics<CR>", { desc = "Cur
 map("n", "<leader>h", "<cmd>Lspsaga finder tyd+ref+def<CR>", { desc = "Get References" })
 map("n", "<leader>j", "<cmd>Lspsaga goto_definition<CR>", { desc = "Jump to Definition" })
 map("n", "<leader>k", "<cmd>Lspsaga peek_definition<cr>", { desc = "Peek Definition" })
--- map("n", "<leader>l", "<C-^>", { noremap = true, silent = true })
+map('n', '<leader>l', '<cmd>Lspsaga outline<cr>', { desc = "Outline" })
 
 
 map('n', 'dm', [[:lua DeleteMark()<CR>]], { desc = "[D]elete [M]ark [ ]"})

@@ -32,10 +32,11 @@ if vim.g.vscode then
   ]])
 else
   require("config.lazy")
-  require("colorizer").setup()
-
+  require("colorizer").setup({
+    user_default_options = { mode = "virtualtext" },
+  })
   -- Colorscheme
-  vim.cmd("colorscheme gruvbox-material")
+  vim.cmd("colorscheme gruvbox")
   vim.api.nvim_set_hl(0, "Visual", { bg = "#454545", fg = nil })
   vim.api.nvim_set_hl(0, "TelescopePromptPrefix", { fg = "#ff79c6", bg = nil })
   vim.api.nvim_set_hl(0, "TelescopePromptNormal", { fg = "#f8f8f2", bg = nil })
@@ -47,7 +48,7 @@ else
   vim.api.nvim_set_hl(0, "TelescopeNormal", { fg = "#f8f8f2", bg = nil })
   vim.api.nvim_set_hl(0, "TelescopeResultsTitle", { fg = "#ffb86c", bg = nil })
   vim.api.nvim_set_hl(0, "TelescopePreviewTitle", { fg = "#ffb86c", bg = nil })
-  vim.api.nvim_set_hl(0, "GitSignsAdd", { fg = "#008c00", bg = nil })
+  vim.api.nvim_set_hl(0, "GitSignsAdd", { fg = "#04b004", bg = nil })
   vim.api.nvim_set_hl(0, "GitSignsChange", { fg = "#e08300", bg = nil })
   vim.api.nvim_set_hl(0, "GitSignsDelete", { fg = "#ff0000", bg = nil })
   vim.api.nvim_set_hl(0, "GitSignsCurrentLineBlame", { fg = "#888888", bg = nil, italic = true })

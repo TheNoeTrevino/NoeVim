@@ -3,7 +3,8 @@ return {
   event = "VeryLazy",
   opts_extend = { "spec" },
   opts = {
-    defaults = {},
+    delay = 20,
+    preset = "modern",
     spec = {
       {
         mode = { "n", "v" },
@@ -16,12 +17,13 @@ return {
         { "<leader>n", group = "Notification", icon = { icon = "󰵙 " } },
         { "<leader>m", group = "Markdown", icon = { icon = "󱦹 " } },
         { "<leader>y", group = "Selection", icon = { icon = "󰒉 " } },
-        { "<leader>g", group = "Git", icon = { icon = " " } },
-        { "<leader>gs", group = "Stage/Search", icon = { icon = " " } },
+        { "<leader>g", group = "Git", icon = { icon = "󰊤 " } },
+        { "<leader>gs", group = "Stage/Search", icon = { icon = "󰊤 " } },
         { "<leader>gsu", group = "Unstage", icon = { icon = " " } },
         { "<leader>gp", group = "Preview", icon = { icon = " " } },
         { "<leader>gr", group = "Reset", icon = { icon = " " } },
         { "<leader>gb", group = "Blame", icon = { icon = " " } },
+        { "<leader>gd", group = "Diff", icon = { icon = " " } },
         { "<leader>q", group = "Quit/session" },
         { "<leader>s", group = "Search", icon = { icon = " " } },
         { "<leader>u", group = "Ui", icon = { icon = "󰙵 " } },
@@ -49,29 +51,32 @@ return {
         -- better descriptions
         -- valid colors are: `azure`, `blue`, `cyan`, `green`, `grey`, `orange`, `purple`, `red`, `yellow`
         { "gx", desc = "Open with system app" },
-        { "<leader>L", desc = "Lazy", icon = { icon = "󰒲 ", color = "purple" } },
-        { "<leader>e", desc = "NeoTree", icon = { icon = " ", color = "yellow" } },
-        { "<leader>o", desc = "Jumplist", icon = { icon = " ", color = "yellow" } },
-        { "<leader>i", desc = "Changelist", icon = { icon = " ", color = "yellow" } },
-        { "<leader>k", desc = "Peek Definition", icon = { icon = "󰈈 ", color = "yellow" } },
-        { "<leader>l", desc = "Outline", icon = { icon = "󰧊 ", color = "yellow" } },
-        { "<leader>0", desc = "Transparency", icon = { icon = " ", color = "purple" } },
-        { "<leader>h", desc = "References", icon = { icon = " ", color = "yellow" } },
-        { "<leader>j", desc = "Jump to Definition", icon = { icon = "󰑮 ", color = "yellow" } },
-        { "<leader>?", desc = "Buffer Keymaps", icon = { icon = " ", color = "yellow" } },
+        { "<leader>L", desc = " Lazy", icon = { icon = "󰒲 ", color = "purple" } },
+        { "<leader>e", desc = " NeoTree", icon = { icon = " ", color = "yellow" } },
+        { "<leader>o", desc = " Jumplist", icon = { icon = " ", color = "yellow" } },
+        { "<leader>i", desc = " Changelist", icon = { icon = " ", color = "yellow" } },
+        { "<leader>k", desc = " Peek Definition", icon = { icon = "󰈈 ", color = "yellow" } },
+        { "<leader>l", desc = " Outline", icon = { icon = "󰧊 ", color = "yellow" } },
+        { "<leader>0", desc = " Transparency", icon = { icon = " ", color = "purple" } },
+        { "<leader>h", desc = " References", icon = { icon = " ", color = "yellow" } },
+        { "<leader>j", desc = " Jump to Definition", icon = { icon = "󰑮 ", color = "yellow" } },
+        { "<leader>?", desc = " Buffer Keymaps", icon = { icon = "  ", color = "yellow" } },
         { "<leader><leader>", desc = "Search Buffers", icon = { icon = " ", color = "yellow" } },
-        { "<leader>/", desc = "Grep Buffer", icon = { icon = "󰮗 ", color = "yellow" } },
+        { "<leader>/", desc = " Grep Buffer", icon = { icon = "󰮗 ", color = "yellow" } },
+        { "<leader>gg", desc = " LazyGit", icon = { icon = "󰋣 ", color = "purple" } },
+        { "<leader>gl", desc = " LazyGit Log", icon = { icon = "󰋣 ", color = "purple" } },
+        { "<leader>gf", desc = " LazyGit File History", icon = { icon = "󰋣 ", color = "purple" } },
+
+        { "<leader>aa", desc = "Toggle ", icon = { icon = " ", color = "yellow" } },
+        { "<leader>ad", desc = "Diagnostic Help", icon = { icon = " ", color = "yellow" } },
+        { "<leader>aq", desc = "Prompt Actions", icon = { icon = " ", color = "yellow" } },
+        { "<leader>ap", desc = "Quick Chat", icon = { icon = " ", color = "yellow" } },
+        { "<leader>ax", desc = "Clear", icon = { icon = " ", color = "yellow" } },
+
+        { "<leader>gG", hidden = true },
+        { "<leader>gL", hidden = true },
       },
     },
-  },
-
-  ---@type wk.Win.opts
-  window = {
-    border = "rounded", -- or "double", "single", etc.
-    position = "bottom", -- can be "bottom", "top"
-    margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
-    padding = { 2, 2, 2, 2 }, -- extra window padding [top, right, bottom, left]
-    winblend = 10, -- transparency between 0-100
   },
   keys = {
     {
