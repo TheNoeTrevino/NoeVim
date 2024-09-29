@@ -28,11 +28,12 @@ return {
         { "<leader>s", group = "Search", icon = { icon = " " } },
         { "<leader>u", group = "Ui", icon = { icon = "󰙵 " } },
         { "<leader>d", group = "Diagnostics", icon = { icon = "󰓙 " } },
+        { "<leader>mf", group = "Folds", icon = { icon = " " } },
         { "[", group = "Prev" },
         { "]", group = "Next" },
         { "g", group = "Goto" },
         { "gs", group = "Surround" },
-        { "z", group = "fold" },
+        { "z", group = "Fold/Spelling" },
         {
           "<leader>b",
           group = "Buffer",
