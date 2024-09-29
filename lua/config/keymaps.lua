@@ -176,7 +176,7 @@ map('n', '<C-;>', ':KittyNavigateRight<CR>', { noremap = true, silent = true})
 map("n", "<Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
 map("n", "<Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
 map("n", "<Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
-
+map("n", "<Left>", "<cmd>vertical resize -2<cr>", { desc = "Increase Window Width" })
 
 -- Better alternate buffer
 map('n', 'L', '<C-^>', { noremap = true, silent = true })
@@ -187,12 +187,8 @@ map("x", "<leader>p", [["_dP]])
 -- Toggle autopairs
 map("n", "<leader>ua", "<cmd>ToggleAutopairs<CR>", { desc = "Go to Definition" })
 
-map("n", "<leader>uz", "<cmd>Lspsaga code_action<CR>", { desc = "LSP Code Action" })
-map("n", "<Leader>sp", "<cmd>WhichKey z=<CR>", { desc = "Spelling Suggestion" })
-
 -- Lspsaga mappings
 map("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", { desc = "LSP Code Action" })
-map("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", { desc = "LSP Rename" })
 map("n", "<leader>dn", "<cmd>Lspsaga diagnostic_jump_next<CR>", { desc = "Next Diagnostic" })
 map("n", "<leader>dN", "<cmd>Lspsaga diagnostic_jump_prev<CR>", { desc = "Previous Diagnostic" })
 map("n", "<leader>da", "<cmd>Lspsaga show_workspace_diagnostics<CR>", { desc = "All Diagnostics" })
@@ -207,7 +203,7 @@ map("n", "<leader>k", "<cmd>Lspsaga peek_definition<cr>", { desc = "Peek Definit
 map('n', '<leader>l', '<cmd>Lspsaga outline<cr>', { desc = "Outline" })
 
 
-map('n', 'dm', [[:lua DeleteMark()<CR>]], { desc = "[D]elete [M]ark [ ]"})
+map('n', 'dm', [[:lua DeleteMark()<CR>]], { desc = "Delete Mark x"})
 
 function DeleteMark()
   local mark = vim.fn.nr2char(vim.fn.getchar())
@@ -224,9 +220,15 @@ LazyVim.toggle.map("<leader>ug", {
   end,
 })
 
--- Portal  
-map("n", "<leader>o", "<cmd>Portal jumplist backward<cr>",{ desc = "Jumplist" })
-map("n", "<leader>i", "<cmd>Portal changelist backward<cr>",{ desc = "Changelist" })
+-- Jump and change list
+map("n", "<leader>o", "<cmd>Portal jumplist backward<cr>",{ desc = "Jumplist Backward" })
+map("n", "<leader>i", "<cmd>Portal jumplist forward<cr>",{ desc = "Jumplist Forward" })
+
+map("n", "<leader>;", "<cmd>Portal changelist backward<cr>",{ desc = "Changelist Backward" })
+map("n", "<leader>'", "<cmd>Portal changelist forward<cr>",{ desc = "Changelist Forward" })
+
+-- HACK: Terminal maps <C-i> to tab, so i mapped = to <c-i> in kitty, then this here
+map("n", "=", "<C-i>",{ desc = "Changelist Forwards" })
 
 -- Center when finding
 map("n", "n", "nzzzv", {desc = "Next find and center"})
@@ -245,12 +247,12 @@ map('x', '<localleader>sl', '<cmd>ToggleTermSendVisualLines<CR>', { desc = "Send
 -- Toggle Transparency
 map("n", "<leader>0", "<cmd>TransparentToggle<CR>", { desc = "Transparency" })
 
--- Markdown Todolists
-map("n", "<leader>mt", ":lua require('toggle-checkbox').toggle()<CR>", { desc = "Toggle Checkbox" })
+-------------------------------------------------------------------------------
+--                           Markdown section
+-------------------------------------------------------------------------------
 
--------------------------------------------------------------------------------
---                           Folding section
--------------------------------------------------------------------------------
+map("n", "<leader>mt", ":lua require('toggle-checkbox').toggle()<CR>", { desc = "Toggle Checkbox" })
+map("n", "<Leader>sp", "<cmd>WhichKey z=<CR>", { desc = "Spelling Suggestion" })
 
 -- Use <CR> to fold when in normal mode
 -- To see help about folds use `:help fold`
@@ -361,5 +363,5 @@ vim.keymap.set("n", "<leader>mf;", function()
 end, { desc = "Fold all headings level 4 or above" })
 
 -------------------------------------------------------------------------------
---                          End Folding section
+--                          End Markdown section
 -------------------------------------------------------------------------------

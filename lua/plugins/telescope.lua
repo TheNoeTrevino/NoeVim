@@ -149,7 +149,7 @@ return {
         mappings = {
           i = {
             ["<C-t>"] = open_with_trouble,
-            -- ["<C-i>"] = find_files_no_ignore,
+            ["<C-i>"] = find_files_no_ignore,
             ["<C-h>"] = find_files_with_hidden,
             ["<C-n>"] = actions.cycle_history_next,
             ["<C-p>"] = actions.cycle_history_prev,
@@ -159,11 +159,13 @@ return {
             ["<localleader>"] = flash,
           },
           n = {
+            ["v"] = actions.file_vsplit,
+            ["s"] = actions.file_split,
             ["l"] = actions.move_selection_previous,
             ["k"] = actions.move_selection_next,
             ["q"] = actions.close,
             ["<leader>r"] = path_actions.insert_reltobufpath_a_normal,
-            ["s"] = flash,
+            ["S"] = flash,
           },
         },
       },

@@ -19,25 +19,25 @@ return {
     })
     local keymap = {
       ["<C-u>"] = function()
-        neoscroll.ctrl_u({ duration = 115 })
+        neoscroll.ctrl_u({ duration = 130 })
       end,
       ["<C-d>"] = function()
-        neoscroll.ctrl_d({ duration = 115 })
+        neoscroll.ctrl_d({ duration = 130 })
       end,
       ["<C-y>"] = function()
-        neoscroll.scroll(-0.1, { move_cursor = true, duration = 115 })
+        neoscroll.scroll(-0.1, { move_cursor = true, duration = 130 })
       end,
       ["<C-e>"] = function()
-        neoscroll.scroll(0.1, { move_cursor = true, duration = 115 })
+        neoscroll.scroll(0.1, { move_cursor = true, duration = 130 })
       end,
       ["zt"] = function()
-        neoscroll.zt({ half_win_duration = 100 })
+        neoscroll.zt({ half_win_duration = 130 })
       end,
       ["zz"] = function()
-        neoscroll.zz({ half_win_duration = 100 })
+        neoscroll.zz({ half_win_duration = 130 })
       end,
       ["zb"] = function()
-        neoscroll.zb({ half_win_duration = 100 })
+        neoscroll.zb({ half_win_duration = 130 })
       end,
     }
     local modes = { "n", "v", "x" }
