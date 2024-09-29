@@ -92,5 +92,4 @@ return {
       })
     end,
   },
-  { "kdheepak/lazygit.nvim", event = "VeryLazy" },
 }

@@ -29,6 +29,7 @@ else
   require("colorizer").setup({
     user_default_options = { mode = "virtualtext" },
   })
+
   -- Colorscheme
   vim.cmd("colorscheme gruvbox")
   vim.api.nvim_set_hl(0, "Visual", { bg = "#454545", fg = nil })

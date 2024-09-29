@@ -12,7 +12,7 @@ return {
         sidebar = "global", -- Set to "global" to bind to the root of the Git repository globally
         current = "global",
       },
-      follow_current_file = { enabled = false },
+      follow_current_file = { enabled = true },
       use_libuv_file_watcher = true,
     },
     window = {
@@ -47,6 +47,12 @@ return {
   keys = function()
     return {
       { "<leader>e", "<cmd>Neotree reveal toggle<cr>", desc = "Explorer NeoTree (Root Dir)", remap = true },
+      {
+        "<leader>ne",
+        "<cmd>Neotree reveal toggle dir=~/notes/<cr>",
+        desc = "Notes explorer",
+        remap = true,
+      },
       {
         "<leader>ge",
         function()

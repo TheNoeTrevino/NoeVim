@@ -11,6 +11,7 @@ return {
   { "nvim-treesitter/nvim-treesitter-refactor", event = "VeryLazy" },
   { "opdavies/toggle-checkbox.nvim", event = "VeryLazy" },
   { "NvChad/nvim-colorizer.lua", event = "VeryLazy" },
+  { "bullets-vim/bullets.vim", event = "VeryLazy" },
   {
     "chentoast/marks.nvim",
     event = "VeryLazy",

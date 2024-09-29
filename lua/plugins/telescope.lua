@@ -43,6 +43,13 @@ return {
     { "<leader>sf", "<cmd>Telescope find_files<cr>", desc = "Search Files" },
     { "<leader>su", "<cmd>Telescope undo<cr>", desc = "Search Undo" },
     {
+      "<leader>sn",
+      function()
+        require("telescope.builtin").find_files({ cwd = "~/notes/" })
+      end,
+      desc = "Search Notes",
+    },
+    {
       "<leader><leader>",
       "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr><esc>",
       desc = "Search Buffers",
@@ -56,15 +63,6 @@ return {
       end,
       desc = "Goto Symbol",
     },
-    -- {
-    --   "<leader>sS",
-    --   function()
-    --     require("telescope.builtin").lsp_dynamic_workspace_symbols({
-    --       symbols = LazyVim.config.get_kind_filter(),
-    --     })
-    --   end,
-    --   desc = "Goto Symbol (Workspace)",
-    -- },
   },
   opts = function()
     local actions = require("telescope.actions")
@@ -151,7 +149,7 @@ return {
         mappings = {
           i = {
             ["<C-t>"] = open_with_trouble,
-            ["<C-i>"] = find_files_no_ignore,
+            -- ["<C-i>"] = find_files_no_ignore,
             ["<C-h>"] = find_files_with_hidden,
             ["<C-n>"] = actions.cycle_history_next,
             ["<C-p>"] = actions.cycle_history_prev,

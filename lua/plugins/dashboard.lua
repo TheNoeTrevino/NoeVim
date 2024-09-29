@@ -37,26 +37,20 @@ return {
             icon = " ",
             key = "r",
           },
-          {
-            action = function()
-              vim.cmd(" Leet")
-            end,
-            desc = " Leetcode",
-            icon = " ",
-            key = "p",
-          },
           { action = "lua LazyVim.pick()()", desc = " Find File", icon = "󰥨 ", key = "f" },
           {
-            action = 'lua LazyVim.pick("oldfiles")()',
-            desc = " Recent Files",
+            action = function()
+              require("telescope.builtin").find_files({ cwd = "~/notes/" })
+            end,
+            desc = " Search Notes",
             icon = " ",
-            key = "o",
+            key = "n",
           },
           {
             action = function()
               vim.cmd("Telescope live_grep")
             end,
-            desc = " Live Grep",
+            desc = " Grep",
             icon = "󰩉 ",
             key = "g",
           },
@@ -97,6 +91,14 @@ return {
             desc = " Lazy",
             icon = "󰒲 ",
             key = "l",
+          },
+          {
+            action = function()
+              vim.cmd(" Leet")
+            end,
+            desc = " Leetcode",
+            icon = " ",
+            key = "p",
           },
           {
             action = function()
