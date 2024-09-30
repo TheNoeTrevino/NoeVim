@@ -13,6 +13,7 @@ return {
         { "<leader>x", group = "Debug", icon = { icon = " " } },
         { "<leader>r", group = "Reame", icon = { icon = "󱦹 " } },
         { "<leader>c", group = "Code" },
+        { "<leader>dt", group = "Trouble" },
         { "<leader>f", group = "Find" },
         { "<leader>n", group = "Notification", icon = { icon = "󰵙 ", color = "yellow" }, hidden = true },
         { "<leader>m", group = "Markdown", icon = { icon = "󱦹 " } },
