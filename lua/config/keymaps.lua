@@ -251,7 +251,6 @@ map("n", "<leader>0", "<cmd>TransparentToggle<CR>", { desc = "Transparency" })
 --                           Markdown section
 -------------------------------------------------------------------------------
 
-map("n", "<leader>mt", ":lua require('toggle-checkbox').toggle()<CR>", { desc = "Toggle Checkbox" })
 map("n", "<Leader>sp", "<cmd>WhichKey z=<CR>", { desc = "Spelling Suggestion" })
 
 -- Use <CR> to fold when in normal mode

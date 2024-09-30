@@ -77,10 +77,10 @@ return {
   },
   {
     "hrsh7th/nvim-cmp",
-    dependencies = { "f3fora/cmp-spell" },
+    dependencies = { "jakewvincent/mkdnflow.nvim" },
     ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
-      table.insert(opts.sources, { name = "spell" })
+      table.insert(opts.sources, { name = "mkdnflow" })
     end,
   },
 }

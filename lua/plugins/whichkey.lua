@@ -79,6 +79,7 @@ return {
         { "<leader>gG", hidden = true },
         { "<leader>gL", hidden = true },
         { "<leader>w", hidden = true },
+        { "<leader>S", hidden = true },
       },
     },
   },

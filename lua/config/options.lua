@@ -13,11 +13,14 @@ vim.opt.fillchars = {
 
 vim.g.moonflyItalics = false
 
+vim.opt.textwidth = 80
+
 vim.opt.listchars = {
   tab = "> ",
   trail = " ",
   nbsp = "+",
 }
+
 vim.opt.foldlevel = 99
 vim.opt.foldcolumn = "1"
 vim.g.lazyvim_statuscolumn = {
@@ -40,7 +43,6 @@ vim.g.gruvbox_material_enable_italic = false
 vim.g.gruvbox_material_disable_italic_comment = 1
 vim.g.gruvbox_contrast_dark = "hard"
 vim.g.gruvbox_material_background = "hard"
-
 -- vim.opt.shortmess:append("I")
 
 -- vim.opt.colorcolumn = "80,100,120"
