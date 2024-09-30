@@ -1,14 +1,14 @@
 # NoeVim
 
+_Get it?_
+
+## Installation
+
 ```
 git clone https://github.com/TheNoeTrevino/NoeVim.git ~/.config/nvim
 ```
 
-_Get it?_
-
 ---
-
-##### This is a fork of LazyVim, so why use this instead?
 
 ## Extremely Fast!!
 
@@ -31,6 +31,9 @@ No search and replace plugins. Put your big boy pants on and use the out of the 
 
 Use the jumplist, marks, or flash to jump through the file. Use the mouse less!
 
+Incredible markdown support. I use this for my daily journals, school notes,
+etc. It does everything that I need
+
 ## Keymappings
 
 Mappings are strictly mnemonic. This makes them easy to learn overtime, and even easier to remember. The only exception will be `<leader>` with right hand homerow mappings.
@@ -43,7 +46,7 @@ If you think this mapping is ridiculous, I get it! It is the second block in the
 
 ### Colorschemes
 
-This plugin has everysingle colorscheme I could think of. All lazily loaded. Keeping that ridiculously fast start time,
+This plugin has every single colorscheme I could think of. All lazily loaded. Keeping that ridiculously fast start time,
 but providing _**you**_ with options :)
 
 ### Demo
