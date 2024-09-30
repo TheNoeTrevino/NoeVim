@@ -29,3 +29,29 @@ vim.api.nvim_create_autocmd("FileType", {
     })
   end,
 })
+
+local function setup_highlight_for_gruvbox()
+  if vim.g.colors_name == "gruvbox" then
+    vim.api.nvim_set_hl(0, "String", { fg = "#89B482" })
+    -- vim.api.nvim_set_hl(0, "Identifier", { fg = "#89B482" })
+  end
+end
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+  pattern = "gruvbox",
+  callback = function()
+    setup_highlight_for_gruvbox()
+  end,
+})
+
+setup_highlight_for_gruvbox()
+
+local custom_highlight = vim.api.nvim_create_augroup("CustomHighlight", {})
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+  pattern = "moonfly",
+  callback = function()
+    vim.api.nvim_set_hl(0, "Boolean", { fg = "#849e5d", bold = false })
+  end,
+  group = custom_highlight,
+})

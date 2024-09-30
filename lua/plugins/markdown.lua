@@ -1,6 +1,7 @@
 return {
   {
     "MeanderingProgrammer/render-markdown.nvim",
+    event = "VeryLazy",
     opts = {
       checkbox = {
         enabled = true,
@@ -60,6 +61,7 @@ return {
   },
   {
     "jakewvincent/mkdnflow.nvim",
+    event = "VeryLazy",
     config = function()
       require("mkdnflow").setup({
         foldtext = {

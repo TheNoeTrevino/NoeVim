@@ -28,16 +28,6 @@ vim.g.lazyvim_statuscolumn = {
   folds_githl = true, -- highlight fold sign with git sign color
 }
 
-local custom_highlight = vim.api.nvim_create_augroup("CustomHighlight", {})
-
-vim.api.nvim_create_autocmd("ColorScheme", {
-  pattern = "moonfly",
-  callback = function()
-    vim.api.nvim_set_hl(0, "Boolean", { fg = "#849e5d", bold = false })
-  end,
-  group = custom_highlight,
-})
-
 vim.g.gruvbox_material_enable_italic = false
 
 vim.g.gruvbox_material_disable_italic_comment = 1

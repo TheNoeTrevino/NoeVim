@@ -32,6 +32,7 @@ else
 
   -- Colorscheme
   vim.cmd("colorscheme gruvbox")
+
   vim.api.nvim_set_hl(0, "Visual", { bg = "#454545", fg = nil })
   vim.api.nvim_set_hl(0, "TelescopePromptPrefix", { fg = "#ff79c6", bg = nil })
   vim.api.nvim_set_hl(0, "NoiceCmdlineIcon", { fg = "#ff79c6", bg = nil })
@@ -67,20 +68,22 @@ else
 
   vim.api.nvim_set_hl(0, "CmpItemKindSnippet", { fg = "#fc58d6" })
 
+  vim.api.nvim_set_hl(0, "CmpItemKindKeyword", { fg = "#D3859B" })
+
+  vim.api.nvim_set_hl(0, "CmpItemKindField", { fg = "#44aaf2" })
+  vim.api.nvim_set_hl(0, "CmpItemKindProperty", { fg = "#44aaf2" })
+
   vim.api.nvim_set_hl(0, "CmpItemKindEnumMember", { fg = "#5bf5ea" })
   vim.api.nvim_set_hl(0, "CmpItemKindReference", { fg = "#5bf5ea" })
   vim.api.nvim_set_hl(0, "CmpItemKindInterface", { fg = "#5bf5ea" })
-  vim.api.nvim_set_hl(0, "CmpItemKindProperty", { fg = "#5bf5ea" })
   vim.api.nvim_set_hl(0, "CmpItemKindOperator", { fg = "#5bf5ea" })
   vim.api.nvim_set_hl(0, "CmpItemKindConstant", { fg = "#5bf5ea" })
   vim.api.nvim_set_hl(0, "CmpItemMenuDefault", { fg = "#5bf5ea" })
-  vim.api.nvim_set_hl(0, "CmpItemKindKeyword", { fg = "#5bf5ea" })
   vim.api.nvim_set_hl(0, "CmpItemKindDefault", { fg = "#5bf5ea" })
   vim.api.nvim_set_hl(0, "CmpItemKindStruct", { fg = "#5bf5ea" })
   vim.api.nvim_set_hl(0, "CmpItemKindModule", { fg = "#5bf5ea" })
   vim.api.nvim_set_hl(0, "CmpItemKindFolder", { fg = "#5bf5ea" })
   vim.api.nvim_set_hl(0, "CmpItemKindValue", { fg = "#5bf5ea" })
-  vim.api.nvim_set_hl(0, "CmpItemKindField", { fg = "#5bf5ea" })
   vim.api.nvim_set_hl(0, "CmpItemKindEvent", { fg = "#5bf5ea" })
   vim.api.nvim_set_hl(0, "CmpItemKindColor", { fg = "#5bf5ea" })
   vim.api.nvim_set_hl(0, "CmpItemKindClass", { fg = "#5bf5ea" })
@@ -88,6 +91,12 @@ else
   vim.api.nvim_set_hl(0, "CmpItemKindText", { fg = "#5bf5ea" })
   vim.api.nvim_set_hl(0, "CmpItemKindFile", { fg = "#5bf5ea" })
   vim.api.nvim_set_hl(0, "CmpItemKindEnum", { fg = "#5bf5ea" })
+
+  -- vscode string color
+  -- vim.api.nvim_set_hl(0, "String", { fg = "#CE9178" })
+
+  -- material gruvbox string color
+  -- vim.api.nvim_set_hl(0, "String", { fg = "#89B482" })
 
   vim.opt.cursorline = true
   vim.opt.cursorlineopt = "number"
