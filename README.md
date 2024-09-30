@@ -1,5 +1,9 @@
 # NoeVim
 
+```
+git clone https://github.com/TheNoeTrevino/NoeVim.git ~/.config/nvim
+```
+
 _Get it?_
 
 ---
