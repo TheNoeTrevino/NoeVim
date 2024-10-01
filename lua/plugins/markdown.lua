@@ -136,4 +136,5 @@ return {
       })
     end,
   },
+  { "bullets-vim/bullets.vim", event = "VeryLazy" },
 }
