@@ -32,7 +32,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 local function setup_highlight_for_gruvbox()
   if vim.g.colors_name == "gruvbox" then
-    vim.api.nvim_set_hl(0, "String", { fg = "#89B482" })
+    vim.api.nvim_set_hl(0, "String", { fg = "#89b55b" })
     -- vim.api.nvim_set_hl(0, "Identifier", { fg = "#89B482" })
   end
 end

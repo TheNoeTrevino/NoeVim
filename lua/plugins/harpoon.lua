@@ -11,6 +11,11 @@ return {
     },
   },
   keys = function()
+    local toggle_opts = {
+      border = "rounded",
+      title_pos = "center",
+      ui_width_ratio = 0.33,
+    }
     local harpoon = require("harpoon")
     local keys = {
       {
@@ -24,7 +29,7 @@ return {
       {
         "h",
         function()
-          harpoon.ui:toggle_quick_menu(harpoon:list())
+          harpoon.ui:toggle_quick_menu(harpoon:list(), toggle_opts)
         end,
         desc = "Harpoon Quick Menu",
       },
