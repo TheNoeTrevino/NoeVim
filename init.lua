@@ -92,6 +92,21 @@ else
   vim.api.nvim_set_hl(0, "CmpItemKindFile", { fg = "#5bf5ea" })
   vim.api.nvim_set_hl(0, "CmpItemKindEnum", { fg = "#5bf5ea" })
 
+  -- Current changes (green)
+  vim.api.nvim_set_hl(0, "GitConflictCurrentLabel", { bg = "#337367", fg = nil })
+  vim.api.nvim_set_hl(0, "GitConflictCurrent", { bg = "#264033", fg = nil })
+
+  -- Incoming changes (baby blue)
+  vim.api.nvim_set_hl(0, "GitConflictIncomingLabel", { bg = "#326290", fg = nil })
+  vim.api.nvim_set_hl(0, "GitConflictIncoming", { bg = "#283B4D", fg = nil })
+
+  -- Ancestor label (purple/blue)
+  vim.api.nvim_set_hl(0, "GitConflictAncestorLabel", { bg = "#393939", fg = nil })
+  vim.api.nvim_set_hl(0, "GitConflictAncestor", { bg = "#545252", fg = nil })
+
+  -- Neo-tree conflict (can match incoming or ancestor)
+  vim.api.nvim_set_hl(0, "NeoTreeGitConflict", { bg = "#326290", fg = nil })
+
   -- vscode string color
   -- vim.api.nvim_set_hl(0, "String", { fg = "#CE9178" })
 

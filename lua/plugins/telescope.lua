@@ -114,6 +114,7 @@ return {
           "^env/.*",
           "%.env",
           "node_modules",
+          "node_modules/",
           "%.git",
           "%.png",
           "%.jpg",

@@ -136,6 +136,4 @@ return {
       })
     end,
   },
-
-  vim.api.nvim_set_hl(0, "CmpItemMenuDefault", { fg = "#91F2EB" }),
 }

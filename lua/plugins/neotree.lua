@@ -7,12 +7,12 @@ return {
     sources = { "filesystem", "buffers", "git_status" },
     open_files_do_not_replace_types = { "terminal", "Trouble", "trouble", "qf", "Outline" },
     filesystem = {
-      bind_to_cwd = true, -- Change this to false to prevent binding to current working directory
-      cwd_target = { -- Set the target for the working directory
-        sidebar = "global", -- Set to "global" to bind to the root of the Git repository globally
+      bind_to_cwd = false,
+      cwd_target = {
+        sidebar = "global",
         current = "global",
       },
-      follow_current_file = { enabled = true },
+      follow_current_file = { enabled = false },
       use_libuv_file_watcher = true,
     },
     window = {
