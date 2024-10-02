@@ -6,7 +6,7 @@ return {
     return {
       auto_insert_mode = true,
       show_help = true,
-      question_header = "  Noe",
+      question_header = "  Noe ",
       answer_header = "  Copilot ",
       window = {
         layout = "float", -- 'vertical', 'horizontal', 'float', 'replace'

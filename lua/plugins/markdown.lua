@@ -97,7 +97,7 @@ return {
         },
 
         mappings = {
-          MkdnEnter = false,
+          MkdnEnter = { { "n", "v" }, "<CR>" },
           MkdnTab = false,
           MkdnSTab = false,
           MkdnNextLink = { "n", "<C-n>" },

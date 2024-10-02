@@ -31,7 +31,7 @@ else
   })
 
   -- Colorscheme
-  vim.cmd("colorscheme gruvbox")
+  vim.cmd("colorscheme kanagawa-wave")
 
   vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#302e2e", bg = "NONE", bold = true }) -- Customize as needed
   vim.api.nvim_set_hl(0, "Visual", { bg = "#454545", fg = nil })

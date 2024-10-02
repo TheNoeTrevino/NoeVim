@@ -256,7 +256,6 @@ map("n", "<leader>0", "<cmd>TransparentToggle<CR>", { desc = "Transparency" })
 --                           Markdown section
 -------------------------------------------------------------------------------
 
-map("n", "<Leader>sp", "<cmd>WhichKey z=<CR>", { desc = "Spelling Suggestion" })
 
 -- Use <CR> to fold when in normal mode
 -- To see help about folds use `:help fold`
