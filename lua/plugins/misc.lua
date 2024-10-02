@@ -12,7 +12,17 @@ return {
   { "opdavies/toggle-checkbox.nvim", event = "VeryLazy" },
   { "NvChad/nvim-colorizer.lua", event = "VeryLazy" },
   { "gcmt/vessel.nvim", event = "VeryLazy" },
-
+  {
+    "AckslD/nvim-neoclip.lua",
+    event = "VeryLazy",
+    dependencies = {
+      { "kkharji/sqlite.lua", module = "sqlite" },
+      { "nvim-telescope/telescope.nvim" },
+    },
+    config = function()
+      require("neoclip").setup()
+    end,
+  },
   {
     "chentoast/marks.nvim",
     event = "VeryLazy",
