@@ -35,6 +35,10 @@ return {
       },
     })
   end,
-  vim.keymap.set("n", "<leader>m", "<cmd>Marks<CR>", { desc = "Transparency" }),
-  vim.keymap.set("n", "<leader>n", "<cmd>Jumps<CR>", { desc = "Transparency" }),
+  vim.keymap.set("n", "<leader>m", "<cmd>Marks<CR>", { desc = "Marks" }),
+  vim.keymap.set("n", "<leader>n", function()
+    require("vessel").view_jumps({}, function(jump, context)
+      return vim.startswith(jump.bufpath, vim.fn.getcwd() .. "/")
+    end)
+  end),
 }

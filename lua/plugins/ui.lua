@@ -3,7 +3,6 @@ return {
   { "zenbones-theme/zenbones.nvim", dependencies = "rktjmp/lush.nvim", event = "VeryLazy" },
   { "rose-pine/neovim", name = "rosepine", event = "VeryLazy" },
   { "catppuccin/nvim", name = "catppuccin", event = "VeryLazy" },
-  { "rebelot/kanagawa.nvim", event = "VeryLazy" },
   { "tokyonight.nvim", event = "VeryLazy" },
   { "Mofiqul/vscode.nvim", event = "VeryLazy" },
   { "bluz71/vim-moonfly-colors", event = "VeryLazy" },
@@ -19,6 +18,110 @@ return {
   { "marko-cerovac/material.nvim", event = "VeryLazy" },
   { "sainnhe/sonokai", event = "VeryLazy" },
   { "Shatur/neovim-ayu", event = "VeryLazy" },
+  { "ChristianChiarulli/nvcode-color-schemes.vim", event = "VeryLazy" },
+  { "comfysage/evergarden", event = "VeryLazy" },
+  { "uloco/bluloco.nvim", event = "VeryLazy" },
+  { "nyoom-engineering/oxocarbon.nvim", event = "VeryLazy" },
+  { "nvimdev/zephyr-nvim", event = "VeryLazy" },
+  {
+    "sontungexpt/witch",
+    priority = 1000,
+    lazy = true,
+    config = function(_, opts)
+      require("witch").setup({
+        theme = {
+          enabled = true,
+          on_highlight = function(style, colors, highlight)
+            if style == "dark" then
+              colors.bg = "#181616"
+            end
+          end,
+        },
+        dim_inactive = {
+          enabled = true,
+          level = 0.90,
+        },
+      })
+    end,
+  },
+  {
+    "ray-x/aurora",
+    event = "VeryLazy",
+    init = function()
+      vim.g.aurora_italic = 0
+      vim.g.aurora_bold = 1
+    end,
+  },
+  {
+    "rebelot/kanagawa.nvim",
+    event = "VeryLazy",
+    config = function()
+      require("kanagawa").setup({
+        compile = false, -- enable compiling the colorscheme
+        undercurl = false, -- enable undercurls
+        commentStyle = { italic = false },
+        functionStyle = {},
+        keywordStyle = { italic = true },
+        statementStyle = { bold = false },
+        typeStyle = {},
+        transparent = false, -- do not set background color
+        dimInactive = false, -- dim inactive window `:h hl-NormalNC`
+        terminalColors = true, -- define vim.g.terminal_color_{0,17}
+        colors = { -- add/modify theme and palette colors
+          palette = {},
+          theme = {
+            wave = {
+              ui = {
+                bg = "#181616",
+              },
+            },
+            lotus = {},
+            dragon = {},
+            all = {
+              ui = {
+                bg_gutter = "none",
+              },
+            },
+          },
+        },
+        theme = "wave", -- Load "wave" theme when 'background' option is not set
+        background = { -- map the value of 'background' option to a theme
+          dark = "dragon", -- try "dragon" !
+          light = "lotus",
+        },
+      })
+      if vim.g.colors_name == "kanagawa-wave" then
+        vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#ff5f87", bg = "NONE", bold = true }) -- Customize as needed
+      end
+    end,
+  },
+  {
+    "0xstepit/flow.nvim",
+    event = "VeryLazy",
+    opts = {},
+    config = function()
+      require("flow").setup({
+        dark_theme = true, -- Set the theme with dark background.
+        high_contrast = false, -- Make the dark background darker or the light background lighter.
+        transparent = false, -- Set transparent background.
+        fluo_color = "pink", -- Color used as fluo. Available values are pink, yellow, orange, or green.
+        mode = "bright", -- Mode of the colors. Available values are: dark, bright, desaturate, or base.
+        aggressive_spell = false, -- Use colors for spell check.
+      })
+    end,
+  },
+  {
+    "https://gitlab.com/bartekjaszczak/distinct-nvim",
+
+    event = "VeryLazy",
+    config = function()
+      require("distinct").setup({
+        doc_comments_different_color = true, -- Use different colour for documentation comments
+      })
+    end,
+  },
+  { "jim-at-jibba/ariake.nvim", event = "VeryLazy" },
+
   {
     "rose-pine/neovim",
     lazy = true,

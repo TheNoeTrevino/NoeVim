@@ -33,15 +33,7 @@ return {
       lualine_a = { "mode" },
       lualine_b = { "branch" }, --"branch"
       lualine_c = {
-        "filename", -- Add if recording macro
-        {
-          function()
-            return vim.fn.reg_recording() ~= "" and "Recording @" .. vim.fn.reg_recording() or ""
-          end,
-          cond = function()
-            return vim.fn.reg_recording() ~= ""
-          end,
-        },
+        { require("NeoComposer.ui").status_recording },
       },
       lualine_x = {}, -- File encoding, format, and type
       lualine_y = {
@@ -69,7 +61,7 @@ return {
 
     -- Define inactive sections
     opts.inactive_sections = vim.tbl_extend("force", opts.inactive_sections or {}, {
-      lualine_a = {},
+      lualine_a = { "mode" },
       lualine_b = {},
       lualine_c = {
         {
@@ -93,9 +85,15 @@ return {
         },
       }, -- Show filename in inactive windows
       lualine_x = {}, -- Show location in inactive windows
-      lualine_y = {},
-
-      lualine_z = {},
+      lualine_y = {
+        -- { "progress", separator = " ", padding = { left = 1, right = 0 } },
+        { "location", padding = { left = 0, right = 1 } },
+      },
+      lualine_z = {
+        function()
+          return " " .. os.date("%R")
+        end,
+      },
     })
   end,
   dependencies = {
