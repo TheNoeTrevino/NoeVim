@@ -61,7 +61,7 @@ return {
         undercurl = false, -- enable undercurls
         commentStyle = { italic = false },
         functionStyle = {},
-        keywordStyle = { italic = true },
+        keywordStyle = { italic = false },
         statementStyle = { bold = false },
         typeStyle = {},
         transparent = false, -- do not set background color
@@ -176,6 +176,16 @@ return {
     dependencies = "anuvyklack/middleclass",
     config = function()
       require("windows").setup()
+    end,
+  },
+  {
+    "miversen33/sunglasses.nvim",
+    -- config = true,
+    -- cmd = "SunglassesEnableToggle",
+    config = function()
+      require("sunglasses").setup({
+        filter_percent = 0.05,
+      })
     end,
   },
 }

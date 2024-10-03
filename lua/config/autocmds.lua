@@ -17,7 +17,6 @@ vim.api.nvim_create_autocmd("FileType", { pattern = "markdown", command = "set a
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "markdown",
   callback = function()
-    vim.keymap.set("n", "<CR>", "<cmd>Lspsaga goto_definition<CR>")
     require("nvim-surround").buffer_setup({
       surrounds = {
         ["*"] = {

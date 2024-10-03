@@ -61,9 +61,9 @@ return {
     opts = {
       notify = false,
       keymaps = {
-        play_macro = "Q",
-        yank_macro = "yq",
-        stop_macro = "cq",
+        play_macro = false,
+        yank_macro = false,
+        stop_macro = false,
         toggle_record = "q",
         cycle_next = false,
         cycle_prev = false,

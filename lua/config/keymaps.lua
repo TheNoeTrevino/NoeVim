@@ -252,6 +252,9 @@ map('x', '<localleader>sl', '<cmd>ToggleTermSendVisualLines<CR>', { desc = "Send
 -- Toggle Transparency
 map("n", "<leader>0", "<cmd>TransparentToggle<CR>", { desc = "Transparency" })
 
+-- Toggle Transparency
+map("n", "<leader>ue", "<cmd>SunglassesEnableToggle<CR><cmd>SunglassesRefresh<CR>", { desc = "Toggle Tine" })
+
 -------------------------------------------------------------------------------
 --                           Markdown section
 -------------------------------------------------------------------------------
