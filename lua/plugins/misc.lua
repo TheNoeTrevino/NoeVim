@@ -65,10 +65,16 @@ return {
         yank_macro = "yq",
         stop_macro = "cq",
         toggle_record = "q",
-        cycle_next = "<c-n>",
-        cycle_prev = "<c-p>",
+        cycle_next = false,
+        cycle_prev = false,
         toggle_macro_menu = "<c-q>",
       },
+    },
+  },
+  {
+    "MagicDuck/grug-far.nvim",
+    keys = {
+      { "<leader>sr", false },
     },
   },
 }
