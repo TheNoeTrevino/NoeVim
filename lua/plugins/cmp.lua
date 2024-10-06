@@ -76,13 +76,11 @@ return {
       })
     end,
   },
-  -- Extend nvim-cmp configuration with mkdnflow.nvim
   {
     "hrsh7th/nvim-cmp",
     dependencies = { "jakewvincent/mkdnflow.nvim" },
     ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
-      -- Add mkdnflow completion source
       table.insert(opts.sources, { name = "mkdnflow" })
     end,
   },

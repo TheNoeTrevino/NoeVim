@@ -1,7 +1,7 @@
 return {
   {
     "MeanderingProgrammer/render-markdown.nvim",
-    event = "VeryLazy",
+    ft = { "markdown", "norg", "rmd", "org" },
     opts = {
       checkbox = {
         enabled = true,
@@ -61,7 +61,7 @@ return {
   },
   {
     "jakewvincent/mkdnflow.nvim",
-    event = "VeryLazy",
+    ft = { "markdown", "norg", "rmd", "org" },
     config = function()
       require("mkdnflow").setup({
         foldtext = {
@@ -130,11 +130,11 @@ return {
           MkdnTableNewRowAbove = { "n", "<leader>iR" },
           MkdnTableNewColAfter = { "n", "<leader>ic" },
           MkdnTableNewColBefore = { "n", "<leader>iC" },
-          MkdnFoldSection = false,
-          MkdnUnfoldSection = false,
+          MkdnFoldSection = { "n", "zc" },
+          MkdnUnfoldSection = { "n", "zo" },
         },
       })
     end,
   },
-  { "bullets-vim/bullets.vim", event = "VeryLazy" },
+  { "bullets-vim/bullets.vim", ft = { "markdown", "norg", "rmd", "org" } },
 }
