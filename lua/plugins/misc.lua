@@ -1,5 +1,6 @@
 return {
   -- Util
+  { "jvgrootveld/telescope-zoxide", event = "VeryLazy" },
   { "debugloop/telescope-undo.nvim", event = "VeryLazy" },
   { "tpope/vim-repeat", event = "VeryLazy" },
   { "mbbill/undotree", event = "VeryLazy" },

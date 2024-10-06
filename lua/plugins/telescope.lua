@@ -45,6 +45,7 @@ return {
     { "<leader>sf", "<cmd>Telescope find_files<cr>", desc = "Files" },
     { "<leader>su", "<cmd>Telescope undo<cr><esc>", desc = "Undo" },
     { "<leader>s'", "<cmd>Telescope macroscope<cr><esc>", desc = "Macros" },
+    { "<leader>cd", "<cmd>Telescope zoxide list<cr><esc>", desc = "Zoxide" },
     {
       "<leader>sn",
       function()
@@ -69,6 +70,7 @@ return {
   },
   opts = function()
     local actions = require("telescope.actions")
+    require("telescope").load_extension("zoxide")
 
     local open_with_trouble = function(...)
       return require("trouble.sources.telescope").open(...)
