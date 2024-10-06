@@ -3,6 +3,11 @@ return {
   event = "VeryLazy",
   config = function()
     require("vessel").setup({
+      preview = {
+        options = {
+          border = "rounded",
+        },
+      },
       create_commands = true,
       commands = {
         view_marks = "Marks",
@@ -10,8 +15,6 @@ return {
       },
       jumps = {
         mappings = {
-          -- ctrl_o = "k",
-          -- ctrl_i = "l",
           jump = { ";", "<cr>" },
           close = { "q", "<esc>" },
           clear = { "C" },
@@ -21,8 +24,6 @@ return {
         mappings = {
           close = { "q", "<esc>" },
           delete = { "d" },
-          -- next_group = { "k" },
-          -- prev_group = { "l" },
           jump = { ";", "<cr>" },
           keepj_jump = { "o" },
           tab = { "t" },

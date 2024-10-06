@@ -173,10 +173,19 @@ map('n', '<C-l>', ':KittyNavigateUp<CR>', { noremap = true, silent = true})
 map('n', '<C-;>', ':KittyNavigateRight<CR>', { noremap = true, silent = true})
 
 -- Resize with arrows
-map("n", "<Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
-map("n", "<Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
-map("n", "<Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
-map("n", "<Left>", "<cmd>vertical resize -2<cr>", { desc = "Increase Window Width" })
+map("n", "<Up>", "<cmd>resize +3<cr>", { desc = "Increase Window Height" })
+map("n", "<Down>", "<cmd>resize -3<cr>", { desc = "Decrease Window Height" })
+map("n", "<Right>", "<cmd>vertical resize +3<cr>", { desc = "Increase Window Width" })
+map("n", "<Left>", "<cmd>vertical resize -3<cr>", { desc = "Increase Window Width" })
+
+-- Window arrangement
+map('n', '<leader>wj', '<C-w>H')
+map('n', '<leader>wk', '<C-w>J')
+map('n', '<leader>wl', '<C-w>K')
+map('n', '<leader>w;', '<C-w>L')
+map('n', '<leader>wr', '<C-w>r')
+map('n', '<leader>wR', '<C-w>R')
+map('n', '<leader>wx', '<C-w>x')
 
 -- Better alternate buffer
 map('n', 'L', '<C-^>', { noremap = true, silent = true })
@@ -252,8 +261,11 @@ map('x', '<localleader>sl', '<cmd>ToggleTermSendVisualLines<CR>', { desc = "Send
 -- Toggle Transparency
 map("n", "<leader>0", "<cmd>TransparentToggle<CR>", { desc = "Transparency" })
 
--- Toggle Transparency
+-- Toggle Dimming
 map("n", "<leader>ue", "<cmd>SunglassesEnableToggle<CR><cmd>SunglassesRefresh<CR>", { desc = "Toggle Tine" })
+
+-- Toggle Audowidth
+map("n", "<leader>uW", "<cmd>WindowsToggleAutowidth<CR>", { desc = "Toggle Window Resize" })
 
 -------------------------------------------------------------------------------
 --                           Markdown section
