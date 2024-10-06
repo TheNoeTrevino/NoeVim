@@ -24,6 +24,29 @@ return {
   { "nyoom-engineering/oxocarbon.nvim", event = "VeryLazy" },
   { "nvimdev/zephyr-nvim", event = "VeryLazy" },
   {
+    "nvim-zh/colorful-winsep.nvim",
+    config = function()
+      require("colorful-winsep").setup({
+        -- highlight for Window separator
+        hi = {
+          bg = "#16161E",
+          fg = "#1F3442",
+        },
+        -- This plugin will not be activated for filetype in the following table.
+        no_exec_files = { "packer", "TelescopePrompt", "mason", "CompetiTest", "NvimTree" },
+        -- Symbols for separator lines, the order: horizontal, vertical, top left, top right, bottom left, bottom right.
+        symbols = { "━", "┃", "┏", "┓", "┗", "┛" },
+
+        -- #70: https://github.com/nvim-zh/colorful-winsep.nvim/discussions/70
+        only_line_seq = true,
+        -- Smooth moving switch
+        smooth = false,
+        exponential_smoothing = true,
+      })
+    end,
+    event = { "WinLeave" },
+  },
+  {
     "sontungexpt/witch",
     priority = 1000,
     lazy = true,
@@ -180,11 +203,21 @@ return {
   },
   {
     "miversen33/sunglasses.nvim",
+    -- event = "VeryLazy",
     -- config = true,
     -- cmd = "SunglassesEnableToggle",
     config = function()
       require("sunglasses").setup({
-        filter_percent = 0.05,
+        filter_percent = 0.08,
+        filter_type = "SHADE",
+        excluded_highlights = {
+          "WinSeparator",
+          "GitSignsAdd",
+          "GitSignsChange",
+          "GitSignsCurrentLineBlame",
+
+          { "lualine_.*", glob = true },
+        },
       })
     end,
   },
