@@ -5,6 +5,7 @@ return {
   opts = function()
     return {
       auto_insert_mode = true,
+      show_folds = false,
       show_help = true,
       question_header = "  Noe ",
       answer_header = "  Copilot ",
@@ -32,6 +33,7 @@ return {
         local select = require("CopilotChat.select")
         return select.visual(source) or select.buffer(source)
       end,
+      require("CopilotChat.integrations.cmp").setup(),
     }
   end,
 }

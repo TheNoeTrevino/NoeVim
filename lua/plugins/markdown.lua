@@ -3,6 +3,13 @@ return {
     "MeanderingProgrammer/render-markdown.nvim",
     ft = { "markdown", "norg", "rmd", "org" },
     opts = {
+      paragraph = {
+        enabled = true,
+        -- If a floating point value < 1 is provided it is treated as a percentage of the available window space
+        left_margin = 2,
+        -- Minimum width to use for paragraphs
+        min_width = 0,
+      },
       checkbox = {
         enabled = true,
         position = "inline",
@@ -32,7 +39,6 @@ return {
       },
     },
     dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" }, -- if you prefer nvim-web-devicons
-    ft = { "markdown", "norg", "rmd", "org" },
     config = function(_, opts)
       require("render-markdown").setup(opts)
       LazyVim.toggle.map("<leader>um", {
@@ -50,13 +56,13 @@ return {
         end,
       })
       vim.cmd([[
-  highlight RenderMarkdownH1Bg guibg=#502824 guifg=#fcd2b9 ctermbg=94 ctermfg=230  " Red
-  highlight RenderMarkdownH3Bg guibg=#5a3d33 guifg=#d1c4a5 ctermbg=136 ctermfg=235 " Orange
-  highlight RenderMarkdownH2Bg guibg=#37352f guifg=#d2ccab ctermbg=100 ctermfg=223 " Yellow
-  highlight RenderMarkdownH4Bg guibg=#223b40 guifg=#bfd0d5 ctermbg=23 ctermfg=223  " Blue
-  highlight RenderMarkdownH6Bg guibg=#22312d guifg=#bfd3ca ctermbg=65 ctermfg=235  " Green
-  highlight RenderMarkdownH5Bg guibg=#362930 guifg=#dab9c6 ctermbg=96 ctermfg=230  " Violet
-]])
+        highlight RenderMarkdownH1Bg guibg=#502824 guifg=#fcd2b9 ctermbg=94 ctermfg=230  " Red
+        highlight RenderMarkdownH3Bg guibg=#5a3d33 guifg=#d1c4a5 ctermbg=136 ctermfg=235 " Orange
+        highlight RenderMarkdownH2Bg guibg=#37352f guifg=#d2ccab ctermbg=100 ctermfg=223 " Yellow
+        highlight RenderMarkdownH4Bg guibg=#223b40 guifg=#bfd0d5 ctermbg=23 ctermfg=223  " Blue
+        highlight RenderMarkdownH6Bg guibg=#22312d guifg=#bfd3ca ctermbg=65 ctermfg=235  " Green
+        highlight RenderMarkdownH5Bg guibg=#362930 guifg=#dab9c6 ctermbg=96 ctermfg=230  " Violet
+      ]])
     end,
   },
   {
@@ -137,4 +143,41 @@ return {
     end,
   },
   { "bullets-vim/bullets.vim", ft = { "markdown", "norg", "rmd", "org" } },
+  {
+    "folke/zen-mode.nvim",
+    event = "VeryLazy",
+    opts = {
+      window = {
+        backdrop = 0.8, -- shade the backdrop of the Zen window. Set to 1 to keep the same as Normal
+        width = 110, -- width of the Zen window
+        height = 1, -- height of the Zen window
+        options = {
+          -- signcolumn = "no", -- disable signcolumn
+          -- cursorline = false, -- disable cursorline
+          -- cursorcolumn = false, -- disable cursor column
+          -- foldcolumn = "0", -- disable fold column
+        },
+      },
+      plugins = {
+        options = {
+          enabled = true,
+          ruler = false, -- disables the ruler text in the cmd line area
+          showcmd = false, -- disables the command in the last line of the screen
+          -- you may turn on/off statusline in zen mode by setting 'laststatus'
+          -- statusline will be shown only if 'laststatus' == 3
+          laststatus = 0, -- turn off the statusline in zen mode
+        },
+        twilight = { enabled = true }, -- enable to start Twilight when zen mode opens
+        gitsigns = { enabled = true }, -- disables git signs
+        tmux = { enabled = false }, -- disables the tmux statusline
+        todo = { enabled = false }, -- if set to "true", todo-comments.nvim highlights will be disabled
+        kitty = {
+          enabled = true,
+          font = "+1", -- font size increment
+        },
+      },
+      on_open = function(win) end,
+      on_close = function() end,
+    },
+  },
 }
