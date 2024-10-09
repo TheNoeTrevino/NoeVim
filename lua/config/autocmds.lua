@@ -32,6 +32,8 @@ vim.api.nvim_create_autocmd("FileType", {
 local function setup_highlight_for_gruvbox()
   if vim.g.colors_name == "gruvbox" then
     vim.api.nvim_set_hl(0, "String", { fg = "#89b55b" })
+    vim.api.nvim_set_hl(0, "Search", { fg = "#2E3436", bg = "#A8B665" })
+    vim.api.nvim_set_hl(0, "CurSearch", { fg = "#FFFFFF", bg = "#EA6962" })
     -- vim.api.nvim_set_hl(0, "Identifier", { fg = "#89B482" })
   end
 end
@@ -54,3 +56,42 @@ vim.api.nvim_create_autocmd("ColorScheme", {
   end,
   group = custom_highlight,
 })
+
+-- Copilot is now markdown
+vim.api.nvim_create_autocmd("BufEnter", {
+  pattern = "copilot-*",
+  callback = function()
+    vim.opt_local.relativenumber = true
+    vim.opt_local.number = true
+    local ft = vim.bo.filetype
+    if ft == "copilot-chat" then
+      vim.bo.filetype = "markdown"
+    end
+  end,
+})
+
+vim.api.nvim_create_user_command("LoadColorfulWinsep", function()
+  require("lazy").load({ plugins = { "colorful-winsep.nvim" } })
+end, {})
+
+vim.api.nvim_create_autocmd("User", {
+  pattern = "GitConflictDetected",
+  callback = function()
+    vim.notify("Conflict detected in: " .. vim.fn.expand("%:t") .. " ")
+
+    -- Schedule Telescope to run after the current event loop
+    vim.schedule(function()
+      vim.cmd("GitConflictListQf")
+      vim.cmd("cclose")
+    end)
+  end,
+})
+
+-- vim.api.nvim_create_autocmd("FileType", {
+--   pattern = "java",
+--   callback = function()
+--     vim.bo.shiftwidth = 4
+--     vim.bo.tabstop = 4
+--     vim.bo.expandtab = true
+--   end,
+-- })
