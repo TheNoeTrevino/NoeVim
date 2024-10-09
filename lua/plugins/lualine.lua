@@ -1,8 +1,7 @@
 return {
   "nvim-lualine/lualine.nvim",
-  event = "VeryLazy",
+  event = "UIEnter",
   optional = true,
-
   opts = function(_, opts)
     -- Add custom sections if nvim-navic is not available
     local icons = LazyVim.config.icons
@@ -16,6 +15,11 @@ return {
         end,
       })
     end
+
+    vim.cmd([[
+      hi RecordingIcon guifg=#ff0000
+      hi RecordingText guibg=#000000
+    ]])
 
     opts.options.globalstatus = true
     -- Set custom options for lualine
@@ -34,28 +38,31 @@ return {
       lualine_b = { "branch" }, --"branch"
       lualine_c = {
         {
-          "filename",
-          file_status = true, -- Displays file status (readonly status, modified status)
-          newfile_status = false, -- Display new file status (new file means no write after created)
-          path = 4, -- 0: Just the filename
-          -- 1: Relative path
-          -- 2: Absolute path
-          -- 3: Absolute path, with tilde as the home directory
-          -- 4: Filename and parent dir, with tilde as the home directory
-
-          shorting_target = 40, -- Shortens path to leave 40 spaces in the window
-          -- for other components. (terrible name, any suggestions?)
-          symbols = {
-            modified = "[+]", -- Text to show when the file is modified.
-            readonly = "[-]", -- Text to show when the file is non-modifiable or readonly.
-            unnamed = "[No Name]", -- Text to show for unnamed buffers.
-            newfile = "[New]", -- Text to show for newly created file before first write
-          },
+          function()
+            local recording = vim.fn.reg_recording()
+            if recording ~= "" then
+              -- Using the highlight group for the icon only
+              return "%#RecordingText# REC %*" .. "%#RecordingIcon#  %* " .. recording
+            else
+              local filename = vim.fn.expand("%:t") -- Display filename
+              if vim.bo.modified then
+                filename = filename .. " [+]" -- Append modification indicator
+              end
+              return filename
+            end
+          end,
+          cond = function()
+            return true -- Always show this component
+          end,
         },
-      }, -- Show filename in inactive windows
+      },
       lualine_x = {
-
-        { require("NeoComposer.ui").status_recording },
+        {
+          function()
+            return " " .. os.date("%R")
+          end,
+          color = { fg = "#DCD7BA" },
+        },
       }, -- File encoding, format, and type
       lualine_y = {
         {
@@ -112,7 +119,7 @@ return {
       },
       lualine_z = {
         function()
-          return " " .. os.date("%R")
+          return " " .. os.date("%t")
         end,
       },
     })
