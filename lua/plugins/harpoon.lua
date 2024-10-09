@@ -14,7 +14,7 @@ return {
     local toggle_opts = {
       border = "rounded",
       title_pos = "center",
-      ui_width_ratio = 0.33,
+      ui_width_ratio = 0.3333,
     }
     local harpoon = require("harpoon")
     local keys = {
@@ -22,7 +22,7 @@ return {
         "H",
         function()
           harpoon:list():add()
-          vim.notify(" Harpooned 󱡀 ", vim.log.levels.INFO, { title = "Harpoon" })
+          vim.notify("", vim.log.levels.INFO, { title = "Harpooned  󱡀 " })
         end,
         desc = "󱡀 Harpoon File",
       },
@@ -34,6 +34,21 @@ return {
         desc = "Harpoon Quick Menu",
       },
     }
+    harpoon:extend({
+      UI_CREATE = function(cx)
+        vim.keymap.set("n", "v", function()
+          harpoon.ui:select_menu_item({ vsplit = true })
+        end, { buffer = cx.bufnr })
+
+        vim.keymap.set("n", "s", function()
+          harpoon.ui:select_menu_item({ split = true })
+        end, { buffer = cx.bufnr })
+
+        vim.keymap.set("n", "t", function()
+          harpoon.ui:select_menu_item({ tabedit = true })
+        end, { buffer = cx.bufnr })
+      end,
+    })
     for i = 1, 5 do
       table.insert(keys, {
         "<leader>" .. i,

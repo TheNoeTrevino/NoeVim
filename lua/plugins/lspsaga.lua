@@ -8,7 +8,7 @@ return {
           edit = "<C-c>o",
           vsplit = "v",
           split = "s",
-          tabe = "<C-c>t",
+          tabe = "t",
           quit = { "q", "<ESC>" },
           close = "<C-c>k",
         },
@@ -34,7 +34,7 @@ return {
         left_widith = 0.3,
         keys = {
           vsplit = "v",
-          split = "i",
+          split = "s",
           shuttle = "w", --
           toggle_or_open = "<CR>", --toggle expand or open
           tabe = "t",
