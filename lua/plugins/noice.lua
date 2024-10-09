@@ -3,6 +3,19 @@ return {
   event = "VeryLazy",
   opts = {
     views = {
+      mini = {
+        backend = "mini",
+        relative = "editor",
+        align = "message-left",
+        timeout = 2500,
+        position = {
+          row = 1,
+          col = "100%",
+        },
+        border = {
+          style = "rounded",
+        },
+      },
       cmdline_popup = {
         position = {
           row = "50%",
@@ -37,26 +50,6 @@ return {
           },
         },
       },
-      notify = {
-        position = {
-          row = "50%",
-          col = "50%",
-        },
-        size = {
-          width = "auto",
-          height = "auto",
-        },
-        border = {
-          style = "rounded",
-          text = {
-            top = " Notification ",
-            top_align = "center",
-          },
-        },
-      },
-    },
-    notify = {
-      enabled = false,
     },
     lsp = {
       views = {
@@ -90,23 +83,6 @@ return {
             style = "rounded",
             text = {
               top = " Completion ",
-              top_align = "center",
-            },
-          },
-        },
-        notify = {
-          position = {
-            row = "50%",
-            col = "50%",
-          },
-          size = {
-            width = "auto",
-            height = "auto",
-          },
-          border = {
-            style = "rounded",
-            text = {
-              top = " Notification ",
               top_align = "center",
             },
           },
