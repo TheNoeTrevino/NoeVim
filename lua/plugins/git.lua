@@ -1,7 +1,8 @@
+---@diagnostic disable: missing-fields
 return {
   {
     "lewis6991/gitsigns.nvim",
-    event = "LazyFile",
+    event = "UIEnter",
     opts = {
       current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
       current_line_blame_opts = {
@@ -92,9 +93,9 @@ return {
       })
     end,
   },
-  --@diagnostic disable: missing-fields
   {
     "akinsho/git-conflict.nvim",
+    event = "UIEnter",
     version = "*",
     config = function()
       require("git-conflict").setup({

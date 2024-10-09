@@ -78,6 +78,7 @@ return {
   },
   {
     "hrsh7th/nvim-cmp",
+    event = "VeryLazy",
     dependencies = { "jakewvincent/mkdnflow.nvim" },
     ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
