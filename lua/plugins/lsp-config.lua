@@ -1,6 +1,5 @@
 return {
   "neovim/nvim-lspconfig",
-  event = "VeryLazy",
   opts = {
     inlay_hints = { enabled = false },
     servers = {
@@ -52,8 +51,10 @@ return {
         keys = {
           {
             "<leader>ca",
-            "<cmd>Lspsaga code_action<cr>",
-            desc = "Goto Source Definition",
+            function()
+              vim.lsp.buf.code_action()
+            end,
+            desc = "Code Action",
           },
           {
             "gD",
