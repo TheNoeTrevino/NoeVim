@@ -1,13 +1,14 @@
 require("config.lazy")
-require("colorizer").setup({
-  user_default_options = { mode = "virtualtext" },
-})
 
 -- Colorscheme
 vim.cmd("colorscheme kanagawa-wave")
 
-vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#302e2e", bg = "NONE", bold = true }) -- Customize as needed
+vim.api.nvim_set_hl(0, "YankyYanked", { fg = "#000000", bg = "#F6C177", bold = true }) -- Customize as needed
+vim.api.nvim_set_hl(0, "YankyPut", { fg = "#000000", bg = "#F6C177", bold = true }) -- Customize as needed
+vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#1F3442", bg = "NONE", bold = true }) -- Customize as needed
 vim.api.nvim_set_hl(0, "Visual", { bg = "#454545", fg = nil })
+vim.api.nvim_set_hl(0, "Search", { fg = "#2E3436", bg = "#A8B665" })
+vim.api.nvim_set_hl(0, "CurSearch", { fg = "#FFFFFF", bg = "#EA6962" })
 vim.api.nvim_set_hl(0, "TelescopePromptPrefix", { fg = "#ff79c6", bg = nil })
 vim.api.nvim_set_hl(0, "NoiceCmdlineIcon", { fg = "#ff79c6", bg = nil })
 vim.api.nvim_set_hl(0, "TelescopePromptNormal", { fg = "#f8f8f2", bg = nil })
@@ -34,19 +35,17 @@ vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#fcb205", bg = nil })
 
 vim.api.nvim_set_hl(0, "CmpItemKind", { fg = "#91F2EB" })
 
--- needed since markodwn removes the highlights
+-- Custom Cmp highlights, markdown erases them
 vim.api.nvim_set_hl(0, "CmpItemKindVariable", { fg = "#5bf5ea" })
 vim.api.nvim_set_hl(0, "CmpItemKindMethod", { fg = "#fcb500" })
 vim.api.nvim_set_hl(0, "CmpItemKindFunction", { fg = "#fcb500" })
 vim.api.nvim_set_hl(0, "CmpItemKindConstructor", { fg = "#fcb500" })
-
 vim.api.nvim_set_hl(0, "CmpItemKindSnippet", { fg = "#fc58d6" })
-
 vim.api.nvim_set_hl(0, "CmpItemKindKeyword", { fg = "#D3859B" })
-
 vim.api.nvim_set_hl(0, "CmpItemKindField", { fg = "#44aaf2" })
 vim.api.nvim_set_hl(0, "CmpItemKindProperty", { fg = "#44aaf2" })
 
+-- Defaults, needed bc markdown erasure
 vim.api.nvim_set_hl(0, "CmpItemKindEnumMember", { fg = "#5bf5ea" })
 vim.api.nvim_set_hl(0, "CmpItemKindReference", { fg = "#5bf5ea" })
 vim.api.nvim_set_hl(0, "CmpItemKindInterface", { fg = "#5bf5ea" })
@@ -89,3 +88,6 @@ vim.api.nvim_set_hl(0, "NeoTreeGitConflict", { bg = "#326290", fg = nil })
 
 vim.opt.cursorline = true
 vim.opt.cursorlineopt = "number"
+
+-- Define the Cursor highlight group
+vim.api.nvim_set_hl(0, "Cursor", { fg = "NONE", bg = "#FFFFFF" })
