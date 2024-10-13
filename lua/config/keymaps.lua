@@ -63,6 +63,10 @@ map("i", "<C-BS>", "<C-w>")
 -- Better alternate buffer
 map("n", "L", "<C-^>", { noremap = true, silent = true })
 
+-- Better end and beginning
+map({ "n", "x" }, "-", "_", { noremap = true, silent = true })
+map({ "n", "x" }, "+", "$", { noremap = true, silent = true })
+
 -- Paste without putting into clipboard
 map("x", "<leader>p", [["_dP]])
 
@@ -84,12 +88,12 @@ map("n", "n", "nzzzv", { desc = "Next find and center" })
 map("n", "N", "Nzzzv", { desc = "Prev find and center" })
 
 -- Keep cursor in place when joining
-map("n", "J", "mzJ`z")
+map("n", "J", "mzJ`zdmz<cr>")
 
 -- Easier marks
 map("n", "'", "<cmd>WhichKey `<cr>", { noremap = true, silent = true })
 
--- Easier marks
+-- Matching Bracket
 map({ "n", "x" }, "M", "%", { noremap = true, silent = true })
 
 -------------------------------------------------------------------------------
@@ -146,7 +150,7 @@ map("n", "<leader>wj", "<C-w>H", { desc = "Move Left" })
 map("n", "<leader>wk", "<C-w>J", { desc = "Move Bottom" })
 map("n", "<leader>wl", "<C-w>K", { desc = "Move Top" })
 map("n", "<leader>w;", "<C-w>L", { desc = "Move Right" })
-map("n", "<leader>we", "<cmd>WindowsEqualize<cr>", { desc = "Equalize" })
+map("n", "<leader>we", "<C-w>=", { desc = "Equalize" })
 
 -------------------------------------------------------------------------------
 --                           Toggle Section
