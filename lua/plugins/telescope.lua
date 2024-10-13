@@ -10,7 +10,7 @@ return {
       { "<leader>sb", "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr><esc>", desc = "Buffers" },
       { "<leader>/", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Grep Current Buffer" },
       { "<leader>si", LazyVim.pick.config_files(), desc = "Search Config" },
-      { "<leader>sp", "<cmd>Telescope neoclip<cr><ESC>", desc = "Neoclip" },
+      { "<leader>sy", "<cmd>Telescope yank_history<cr><ESC>", desc = "Yanks" },
       { "<leader>sc", "<cmd>Telescope command_history<cr><esc>", desc = "Command History" },
       { "<leader>sC", "<cmd>Telescope commands<cr>", desc = "Commands" },
       { "<leader>sd", "<cmd>Telescope diagnostics bufnr=0<cr>", desc = "Document Diagnostics" },
@@ -32,7 +32,6 @@ return {
       { "<leader>su", "<cmd>Telescope undo<cr><esc>", desc = "Undo" },
       { "<leader>s'", "<cmd>Telescope macroscope<cr><esc>", desc = "Macros" },
       { "<leader>s;", LazyVim.pick.config_files(), desc = "Config" },
-      { "<leader>cd", "<cmd>Telescope zoxide list<cr><esc>", desc = "Zoxide" },
       {
         "<leader>sm",
         "<cmd>Telescope marks<cr><esc>",
@@ -44,12 +43,6 @@ return {
         "<cmd>Telescope jumplist layout_strategy=vertical layout_config={preview_height=0.7} sort_mru=true sort_lastused=true<cr><esc>",
         mode = { "n" },
         desc = "Jumps",
-      },
-      {
-        "<leader>sy",
-        "<cmd>Telescope yank_history layout_strategy=vertical layout_config={preview_height=0.6} sort_mru=true sort_lastused=true<cr><esc>",
-        mode = { "n" },
-        desc = "Yanks",
       },
       {
         "<leader>sn",
@@ -76,7 +69,6 @@ return {
   end,
   opts = function()
     local actions = require("telescope.actions")
-    require("telescope").load_extension("zoxide")
     local open_with_trouble = function(...)
       return require("trouble.sources.telescope").open(...)
     end
@@ -90,8 +82,6 @@ return {
       local line = action_state.get_current_line()
       LazyVim.pick("find_files", { hidden = true, default_text = line })()
     end
-
-    local path_actions = require("telescope_insert_path")
 
     return {
       defaults = {
@@ -149,17 +139,15 @@ return {
             ["<C-p>"] = actions.cycle_history_prev,
             ["<C-d>"] = actions.preview_scrolling_down,
             ["<C-u>"] = actions.preview_scrolling_up,
-            ["<C-r>"] = path_actions.insert_reltobufpath_a_normal,
           },
           n = {
-            ["d"] = actions.delete_buffer,
+            ["D"] = actions.delete_buffer,
             ["t"] = actions.file_tab,
             ["v"] = actions.file_vsplit,
             ["s"] = actions.file_split,
             ["l"] = actions.move_selection_previous,
             ["k"] = actions.move_selection_next,
             ["q"] = actions.close,
-            ["<leader>r"] = path_actions.insert_reltobufpath_a_normal,
           },
         },
       },
