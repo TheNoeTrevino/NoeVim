@@ -1,16 +1,11 @@
 return {
   -- Util
-  { "LinArcX/telescope-changes.nvim", event = "VeryLazy" },
-  { "jvgrootveld/telescope-zoxide", event = "VeryLazy" },
   { "tpope/vim-repeat", event = "VeryLazy" },
   { "ThePrimeagen/vim-be-good", event = "VeryLazy" },
   { "tummetott/unimpaired.nvim", event = "VeryLazy" },
   { "knubie/vim-kitty-navigator", event = "VeryLazy" },
   { "stevearc/oil.nvim", event = "VeryLazy", opts = {} },
-  { "kiyoon/telescope-insert-path.nvim", event = "LazyFile" },
-  { "nvim-treesitter/nvim-treesitter-refactor", event = "VeryLazy" },
   { "kevinhwang91/nvim-bqf", ft = "qf" },
-  { "chrisgrieser/cmp_yanky", event = "VeryLazy" },
   {
     "stevearc/quicker.nvim",
     event = "FileType qf",
@@ -74,17 +69,6 @@ return {
           return vim.o.columns - start_col
         end,
       })
-    end,
-  },
-  {
-    "AckslD/nvim-neoclip.lua",
-    event = "VeryLazy",
-    dependencies = {
-      { "kkharji/sqlite.lua", module = "sqlite" },
-      { "nvim-telescope/telescope.nvim" },
-    },
-    config = function()
-      require("neoclip").setup()
     end,
   },
   {

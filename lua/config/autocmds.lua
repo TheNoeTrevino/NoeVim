@@ -70,10 +70,6 @@ vim.api.nvim_create_autocmd("BufEnter", {
   end,
 })
 
-vim.api.nvim_create_user_command("LoadColorfulWinsep", function()
-  require("lazy").load({ plugins = { "colorful-winsep.nvim" } })
-end, {})
-
 vim.api.nvim_create_autocmd("User", {
   pattern = "GitConflictDetected",
   callback = function()
@@ -86,12 +82,3 @@ vim.api.nvim_create_autocmd("User", {
     end)
   end,
 })
-
--- vim.api.nvim_create_autocmd("FileType", {
---   pattern = "java",
---   callback = function()
---     vim.bo.shiftwidth = 4
---     vim.bo.tabstop = 4
---     vim.bo.expandtab = true
---   end,
--- })
