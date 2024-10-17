@@ -5,19 +5,18 @@ return {
   opts = {
     win = {
       no_overlap = true,
-      padding = { 1, 2 }, -- extra window padding [top/bottom, right/left]
+      padding = { 1, 2 },
       title = false,
       title_pos = "center",
       zindex = 1000,
-      -- Additional vim.wo and vim.bo options
       bo = {},
       wo = {
-        winblend = 15, -- value between 0-100 0 for fully opaque and 100 for fully transparent
+        winblend = 15,
       },
     },
     layout = {
-      width = { min = 20 }, -- min and max width of the columns
-      spacing = 6, -- spacing between columns
+      width = { min = 20 },
+      spacing = 6,
     },
     delay = 100,
     preset = "modern",

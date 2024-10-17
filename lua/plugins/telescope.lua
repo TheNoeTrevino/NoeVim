@@ -87,10 +87,10 @@ return {
       defaults = {
         path_display = { "smart" },
         layout_config = {
-          width = 0.85, -- Adjust the overall width of Telescope (e.g., 80% of the screen)
-          preview_cutoff = 40, -- Set the preview width to 40 columns when the window is less than 40 columns
+          width = 0.85,
+          preview_cutoff = 40,
           horizontal = {
-            preview_width = 0.666, -- Adjust the preview window to 60% of the Telescope window's width
+            preview_width = 0.666,
           },
         },
         file_ignore_patterns = {
