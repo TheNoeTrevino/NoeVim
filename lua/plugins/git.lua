@@ -104,8 +104,8 @@ return {
           theirs = "ct",
           none = "c0",
           both = "cb",
-          next = "n",
-          prev = "p",
+          next = "cn",
+          prev = "cp",
         },
         default_commands = true, -- disable commands created by this plugin
         disable_diagnostics = true, -- This will disable the diagnostics in a buffer whilst it is conflicted
