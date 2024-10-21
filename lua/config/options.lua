@@ -22,6 +22,7 @@ vim.opt.listchars = {
   nbsp = "+",
 }
 
--- vim.opt.shortmess:append("I")
-
 vim.opt.termguicolors = true
+
+-- Default is 4
+vim.opt.sidescrolloff = 0
