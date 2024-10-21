@@ -18,7 +18,7 @@ return {
       enable = true,
       keymaps = {
         init_selection = "<Leader>ys", -- set to `false` to disable one of the mappings
-        node_incremental = "<leader>",
+        node_incremental = "<leader><leader>",
         node_decremental = "<bs>",
         scope_incremental = false,
       },
