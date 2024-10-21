@@ -64,8 +64,8 @@ map("i", "<C-BS>", "<C-w>")
 map("n", "L", "<C-^>", { noremap = true, silent = true })
 
 -- Better end and beginning
-map({ "n", "x" }, "-", "_", { noremap = true, silent = true })
-map({ "n", "x" }, "+", "$", { noremap = true, silent = true })
+map({ "n", "x", "o" }, "-", "_", { noremap = true, silent = true })
+map({ "n", "x", "o" }, "+", "$", { noremap = true, silent = true })
 
 -- Paste without putting into clipboard
 map("x", "<leader>p", [["_dP]])
@@ -82,6 +82,17 @@ function DeleteMark()
   local mark = vim.fn.nr2char(vim.fn.getchar())
   vim.cmd("delmarks " .. mark)
 end
+
+local search = require("improved-search")
+
+-- Search current word
+map("n", "!", search.current_word)
+
+-- Search selected text in visual mode
+map("x", "/", search.in_place) -- search selection without moving
+
+-- Search by motion in place, |ib searching in the nearest pairs
+map("n", "|", search.in_place)
 
 -- Center when finding
 map("n", "n", "nzzzv", { desc = "Next find and center" })

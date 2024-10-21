@@ -5,6 +5,21 @@ return {
   { "tummetott/unimpaired.nvim", event = "VeryLazy" },
   { "knubie/vim-kitty-navigator", event = "VeryLazy" },
   { "stevearc/oil.nvim", event = "VeryLazy", opts = {} },
+  { "backdround/improved-search.nvim", event = "VeryLazy" },
+  { "nvchad/volt", lazy = true },
+  {
+    "nvchad/minty",
+    cmd = { "Shades", "Huefy" },
+  },
+  {
+    "nvchad/showkeys",
+    cmd = "ShowkeysToggle",
+    opts = {
+      timeout = 1,
+      maxkeys = 5,
+      position = "top-center",
+    },
+  },
   {
     "kylechui/nvim-surround",
     event = "VeryLazy",
