@@ -97,14 +97,6 @@ return {
           -- light = "lotus",
         },
       })
-      if vim.g.colors_name == "kanagawa-wave" then
-        vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#ff5f87", bg = "NONE", bold = true }) -- Customize as needed
-      end
-
-      local kanagawa_themes = { "kanagawa", "kanagawa-wave", "kanagawa-lotus", "kanagawa-dragon" }
-      if vim.tbl_contains(kanagawa_themes, vim.g.colors_name) then
-        vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#ff5f87", bg = "NONE", bold = true }) -- Customize as needed
-      end
     end,
   },
   {
@@ -118,7 +110,7 @@ return {
             enabled = true,
             clear_in_insert_mode = true,
             download_remote_images = true,
-            only_render_image_at_cursor = false,
+            only_render_image_at_cursor = true,
             filetypes = { "markdown", "vimwiki" }, -- markdown extensions (ie. quarto) can go here
           },
           html = {
@@ -136,25 +128,6 @@ return {
         window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
         editor_only_render_when_focused = false, -- auto show/hide images when the editor gains/looses focus
         hijack_file_patterns = { "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp", "*.avif" }, -- render image files as images when opened
-      })
-    end,
-  },
-  {
-    "miversen33/sunglasses.nvim",
-    cmd = "SunglassesEnableToggle",
-    -- event = "UIEnter",
-    config = function()
-      require("sunglasses").setup({
-        filter_percent = 0.08,
-        filter_type = "SHADE",
-        excluded_highlights = {
-          -- "WinSeparator",
-          "GitSignsAdd",
-          "GitSignsChange",
-          "GitSignsCurrentLineBlame",
-
-          { "lualine_.*", glob = true },
-        },
       })
     end,
   },
