@@ -168,4 +168,10 @@ return {
     end,
   },
   { "xiyaowong/transparent.nvim", event = "UIEnter" },
+  {
+    "aliqyan-21/wit.nvim",
+    config = function()
+      require("wit").setup({})
+    end,
+  },
 }
