@@ -7,6 +7,7 @@ vim.cmd("colorscheme " .. colorscheme)
 
 if colorscheme == "kanagawa-wave" then
   vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#ff5f87", bg = "NONE", bold = true }) -- Customize as needed
+  -- typescript
   vim.api.nvim_set_hl(0, "@keyword.coroutine.tsx", { fg = "#53758D", italic = true })
   vim.api.nvim_set_hl(0, "@keyword.conditional.tsx", { fg = "#D27E9A", italic = true })
   vim.api.nvim_set_hl(0, "@keyword.exception.tsx", { fg = "#FF5D62", bold = true, italic = true })
@@ -14,6 +15,13 @@ if colorscheme == "kanagawa-wave" then
   vim.api.nvim_set_hl(0, "@type.builtin.tsx", { fg = "#90CAE1" })
   vim.api.nvim_set_hl(0, "@constructor.tsx", { bold = true })
   vim.api.nvim_set_hl(0, "@keyword.operator.tsx", { fg = "#C0A36E", italic = true, bold = true })
+  -- python
+  vim.api.nvim_set_hl(0, "@keyword.conditional.python", { fg = "#D27E9A", italic = true })
+  vim.api.nvim_set_hl(0, "@keyword.repeat.python", { fg = "#53758D", italic = true })
+  vim.api.nvim_set_hl(0, "@keyword.operator.python", { fg = "#C0A36E", italic = true, bold = true })
+  vim.api.nvim_set_hl(0, "@type.python", { fg = "#688E81" })
+  vim.api.nvim_set_hl(0, "@type.builtin.python", { fg = "#90CAE1" })
+  vim.api.nvim_set_hl(0, "@constructor.python", { fg = "#7AA89F", bold = true })
 end
 
 vim.api.nvim_set_hl(0, "YankyYanked", { fg = "#000000", bg = "#F6C177", bold = true }) -- Customize as needed
