@@ -1,14 +1,27 @@
 require("config.lazy")
 
 -- Colorscheme
-vim.cmd("colorscheme kanagawa-wave")
+local colorscheme = "kanagawa-wave"
+
+vim.cmd("colorscheme " .. colorscheme)
+
+if colorscheme == "kanagawa-wave" then
+  vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#ff5f87", bg = "NONE", bold = true }) -- Customize as needed
+  vim.api.nvim_set_hl(0, "@keyword.coroutine.tsx", { fg = "#53758D", italic = true })
+  vim.api.nvim_set_hl(0, "@keyword.conditional.tsx", { fg = "#D27E9A", italic = true })
+  vim.api.nvim_set_hl(0, "@keyword.exception.tsx", { fg = "#FF5D62", bold = true, italic = true })
+  vim.api.nvim_set_hl(0, "@type.tsx", { fg = "#688E81" })
+  vim.api.nvim_set_hl(0, "@type.builtin.tsx", { fg = "#90CAE1" })
+  vim.api.nvim_set_hl(0, "@constructor.tsx", { bold = true })
+  vim.api.nvim_set_hl(0, "@keyword.operator.tsx", { fg = "#C0A36E", italic = true, bold = true })
+end
 
 vim.api.nvim_set_hl(0, "YankyYanked", { fg = "#000000", bg = "#F6C177", bold = true }) -- Customize as needed
 vim.api.nvim_set_hl(0, "YankyPut", { fg = "#000000", bg = "#F6C177", bold = true }) -- Customize as needed
 vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#1F3442", bg = "NONE", bold = true }) -- Customize as needed
-vim.api.nvim_set_hl(0, "Visual", { bg = "#454545", fg = nil })
-vim.api.nvim_set_hl(0, "Search", { fg = "#2E3436", bg = "#A8B665" })
-vim.api.nvim_set_hl(0, "CurSearch", { fg = "#FFFFFF", bg = "#EA6962" })
+vim.api.nvim_set_hl(0, "Visual", { bg = "#525251", fg = nil })
+vim.api.nvim_set_hl(0, "Search", { bg = "#525251", fg = nil })
+vim.api.nvim_set_hl(0, "CurSearch", { fg = "#000000", bg = "#FF9D3C" })
 vim.api.nvim_set_hl(0, "TelescopePromptPrefix", { fg = "#ff79c6", bg = nil })
 vim.api.nvim_set_hl(0, "NoiceCmdlineIcon", { fg = "#ff79c6", bg = nil })
 vim.api.nvim_set_hl(0, "TelescopePromptNormal", { fg = "#f8f8f2", bg = nil })
