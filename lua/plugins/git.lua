@@ -120,6 +120,7 @@ return {
   },
   {
     "isakbm/gitgraph.nvim",
+    event = "VeryLazy",
     opts = {
       symbols = {
         merge_commit = "M",
@@ -150,6 +151,7 @@ return {
   },
   {
     "lsig/messenger.nvim",
+    event = "VeryLazy",
     opts = {
       border = "rounded",
     },
