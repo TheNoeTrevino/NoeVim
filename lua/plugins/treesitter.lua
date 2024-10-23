@@ -9,6 +9,7 @@ return {
       navigation = {
         enable = true,
         keymaps = {
+          list_definitions_toc = false,
           goto_next_usage = "<C-n>",
           goto_previous_usage = "<C-p>",
         },

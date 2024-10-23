@@ -6,7 +6,7 @@ local colorscheme = "kanagawa-wave"
 vim.cmd("colorscheme " .. colorscheme)
 
 if colorscheme == "kanagawa-wave" then
-  vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#ff5f87", bg = "NONE", bold = true }) -- Customize as needed
+  vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#1F3442", bg = "NONE", bold = true })
   -- typescript
   vim.api.nvim_set_hl(0, "@keyword.coroutine.tsx", { fg = "#53758D", italic = true })
   vim.api.nvim_set_hl(0, "@keyword.conditional.tsx", { fg = "#D27E9A", italic = true })
@@ -22,11 +22,17 @@ if colorscheme == "kanagawa-wave" then
   vim.api.nvim_set_hl(0, "@type.python", { fg = "#688E81" })
   vim.api.nvim_set_hl(0, "@type.builtin.python", { fg = "#90CAE1" })
   vim.api.nvim_set_hl(0, "@constructor.python", { fg = "#7AA89F", bold = true })
+  -- java
+  vim.api.nvim_set_hl(0, "@keyword.conditional.java", { fg = "#D27E9A", italic = true })
+  vim.api.nvim_set_hl(0, "@lsp.typemod.class.public.java", { fg = "#688E81", italic = true })
+  vim.api.nvim_set_hl(0, "@lsp.typemod.class.typeArgument.java", { fg = "#90CAE1", italic = true })
+  vim.api.nvim_set_hl(0, "@lsp.type.modifier.java", { fg = "#947FB8", italic = false })
+  vim.api.nvim_set_hl(0, "@type.builtin.java", { fg = "#7EB4C9", italic = true })
 end
 
-vim.api.nvim_set_hl(0, "YankyYanked", { fg = "#000000", bg = "#F6C177", bold = true }) -- Customize as needed
-vim.api.nvim_set_hl(0, "YankyPut", { fg = "#000000", bg = "#F6C177", bold = true }) -- Customize as needed
-vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#1F3442", bg = "NONE", bold = true }) -- Customize as needed
+vim.api.nvim_set_hl(0, "YankyYanked", { fg = "#000000", bg = "#F6C177", bold = true })
+vim.api.nvim_set_hl(0, "YankyPut", { fg = "#000000", bg = "#F6C177", bold = true })
+vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#1F3442", bg = "NONE", bold = true })
 vim.api.nvim_set_hl(0, "Visual", { bg = "#525251", fg = nil })
 vim.api.nvim_set_hl(0, "Search", { bg = "#525251", fg = nil })
 vim.api.nvim_set_hl(0, "CurSearch", { fg = "#000000", bg = "#FF9D3C" })
@@ -54,37 +60,36 @@ vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#6272a4", bg = nil })
 vim.api.nvim_set_hl(0, "ColorColumn", { bg = "#090909", ctermbg = 0 })
 vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#fcb205", bg = nil })
 
-vim.api.nvim_set_hl(0, "CmpItemKind", { fg = "#91F2EB" })
-
 -- Custom Cmp highlights, markdown erases them
-vim.api.nvim_set_hl(0, "CmpItemKindVariable", { fg = "#5bf5ea" })
-vim.api.nvim_set_hl(0, "CmpItemKindMethod", { fg = "#fcb500" })
-vim.api.nvim_set_hl(0, "CmpItemKindFunction", { fg = "#fcb500" })
-vim.api.nvim_set_hl(0, "CmpItemKindConstructor", { fg = "#fcb500" })
+vim.api.nvim_set_hl(0, "CmpItemKind", { fg = "#90CAE1" })
+vim.api.nvim_set_hl(0, "CmpItemKindVariable", { fg = "#90CAE1" })
+vim.api.nvim_set_hl(0, "CmpItemKindMethod", { fg = "#FFA065" })
+vim.api.nvim_set_hl(0, "CmpItemKindFunction", { fg = "#FFA065" })
+vim.api.nvim_set_hl(0, "CmpItemKindConstructor", { fg = "#FFA065" })
 vim.api.nvim_set_hl(0, "CmpItemKindSnippet", { fg = "#fc58d6" })
 vim.api.nvim_set_hl(0, "CmpItemKindKeyword", { fg = "#D3859B" })
 vim.api.nvim_set_hl(0, "CmpItemKindField", { fg = "#44aaf2" })
 vim.api.nvim_set_hl(0, "CmpItemKindProperty", { fg = "#44aaf2" })
+vim.api.nvim_set_hl(0, "CmpItemKindEnumMember", { fg = "#D27E9A" })
+vim.api.nvim_set_hl(0, "CmpItemKindEnum", { fg = "#D27E9A" })
+vim.api.nvim_set_hl(0, "CmpItemKindFolder", { fg = "#967FB8" })
+vim.api.nvim_set_hl(0, "CmpItemKindFile", { fg = "#967FB8" })
+vim.api.nvim_set_hl(0, "CmpItemKindText", { fg = "#967FB8" })
 
 -- Defaults, needed bc markdown erasure
-vim.api.nvim_set_hl(0, "CmpItemKindEnumMember", { fg = "#5bf5ea" })
-vim.api.nvim_set_hl(0, "CmpItemKindReference", { fg = "#5bf5ea" })
-vim.api.nvim_set_hl(0, "CmpItemKindInterface", { fg = "#5bf5ea" })
-vim.api.nvim_set_hl(0, "CmpItemKindOperator", { fg = "#5bf5ea" })
-vim.api.nvim_set_hl(0, "CmpItemKindConstant", { fg = "#5bf5ea" })
-vim.api.nvim_set_hl(0, "CmpItemMenuDefault", { fg = "#5bf5ea" })
-vim.api.nvim_set_hl(0, "CmpItemKindDefault", { fg = "#5bf5ea" })
-vim.api.nvim_set_hl(0, "CmpItemKindStruct", { fg = "#5bf5ea" })
-vim.api.nvim_set_hl(0, "CmpItemKindModule", { fg = "#5bf5ea" })
-vim.api.nvim_set_hl(0, "CmpItemKindFolder", { fg = "#5bf5ea" })
-vim.api.nvim_set_hl(0, "CmpItemKindValue", { fg = "#5bf5ea" })
-vim.api.nvim_set_hl(0, "CmpItemKindEvent", { fg = "#5bf5ea" })
-vim.api.nvim_set_hl(0, "CmpItemKindColor", { fg = "#5bf5ea" })
-vim.api.nvim_set_hl(0, "CmpItemKindClass", { fg = "#5bf5ea" })
-vim.api.nvim_set_hl(0, "CmpItemKindUnit", { fg = "#5bf5ea" })
-vim.api.nvim_set_hl(0, "CmpItemKindText", { fg = "#5bf5ea" })
-vim.api.nvim_set_hl(0, "CmpItemKindFile", { fg = "#5bf5ea" })
-vim.api.nvim_set_hl(0, "CmpItemKindEnum", { fg = "#5bf5ea" })
+vim.api.nvim_set_hl(0, "CmpItemKindReference", { fg = "#90CAE1" })
+vim.api.nvim_set_hl(0, "CmpItemKindInterface", { fg = "#90CAE1" })
+vim.api.nvim_set_hl(0, "CmpItemKindOperator", { fg = "#90CAE1" })
+vim.api.nvim_set_hl(0, "CmpItemKindConstant", { fg = "#90CAE1" })
+vim.api.nvim_set_hl(0, "CmpItemMenuDefault", { fg = "#90CAE1" })
+vim.api.nvim_set_hl(0, "CmpItemKindDefault", { fg = "#90CAE1" })
+vim.api.nvim_set_hl(0, "CmpItemKindStruct", { fg = "#90CAE1" })
+vim.api.nvim_set_hl(0, "CmpItemKindModule", { fg = "#90CAE1" })
+vim.api.nvim_set_hl(0, "CmpItemKindValue", { fg = "#90CAE1" })
+vim.api.nvim_set_hl(0, "CmpItemKindEvent", { fg = "#90CAE1" })
+vim.api.nvim_set_hl(0, "CmpItemKindColor", { fg = "#90CAE1" })
+vim.api.nvim_set_hl(0, "CmpItemKindClass", { fg = "#90CAE1" })
+vim.api.nvim_set_hl(0, "CmpItemKindUnit", { fg = "#90CAE1" })
 
 -- Current changes (green)
 vim.api.nvim_set_hl(0, "GitConflictCurrentLabel", { bg = "#337367", fg = nil })

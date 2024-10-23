@@ -40,7 +40,6 @@ return {
           tabe = "t",
           tabnew = "r",
           quit = { "q", "<ESC>" },
-          -- close = "<ESC>",
         },
       },
       symbol_in_winbar = {
