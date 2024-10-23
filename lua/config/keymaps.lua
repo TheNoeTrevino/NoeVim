@@ -98,13 +98,20 @@ map("n", "n", "nzzzv", { desc = "Next find and center" })
 map("n", "N", "Nzzzv", { desc = "Prev find and center" })
 
 -- Keep cursor in place when joining
-map("n", "J", "mzJ`zdmz<cr>")
+map("n", "J", "mzJ`z:delm z<cr>")
+
+-- Add a line up or down in normal mode
+map("n", "go", "mzo<ESC>`z:delm z<cr>")
+map("n", "gO", "mzO<ESC>`z:delm z<cr>")
 
 -- Easier marks
 map("n", "'", "<cmd>WhichKey `<cr>", { noremap = true, silent = true })
 
 -- Matching Bracket
 map({ "n", "x" }, "M", "%", { noremap = true, silent = true })
+
+-- Easier case switching
+map("n", "U", "~<Left>", { noremap = true, silent = true })
 
 -------------------------------------------------------------------------------
 --                           Diagnostics Section
