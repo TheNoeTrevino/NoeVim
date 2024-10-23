@@ -211,12 +211,6 @@ LazyVim.toggle.map("<leader>ug", {
 -- Toggle Transparency
 map("n", "<leader>0", "<cmd>TransparentToggle<CR>", { desc = "Transparency" })
 
--- Toggle Dimming
-map("n", "<leader>ue", "<cmd>SunglassesEnableToggle<CR><cmd>SunglassesRefresh<CR>", { desc = "Toggle Tine" })
-
--- Toggle Audowidth
-map("n", "<leader>uW", "<cmd>WindowsToggleAutowidth<CR>", { desc = "Toggle Window Resize" })
-
 -- Toggle Terminal
 map("n", "<leader>fT", "<cmd>ToggleTerm<CR>", { desc = "Terminal Lower" })
 
