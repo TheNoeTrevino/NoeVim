@@ -24,6 +24,12 @@ vim.keymap.del("n", "<leader>fT")
 
 local map = LazyVim.safe_keymap_set
 
+local toggle_opts = {
+  border = "rounded",
+  title_pos = "center",
+  ui_width_ratio = 0.5,
+}
+local harpoon = require("harpoon")
 -------------------------------------------------------------------------------
 --                           Shift Navigation Section
 -------------------------------------------------------------------------------
@@ -73,7 +79,9 @@ map("x", "<leader>p", [["_dP]])
 map("n", "<leader>h", "<cmd>Lspsaga finder tyd+ref+def<CR>", { desc = "Get References" })
 map("n", "<leader>j", "<cmd>Lspsaga goto_definition<CR>", { desc = "Jump to Definition" })
 map("n", "<leader>k", "<cmd>Lspsaga peek_definition<cr>", { desc = "Peek Definition" })
-map("n", "<leader>l", "<cmd>Lspsaga outline<cr>", { desc = "Outline" })
+map("n", "<leader>l", function()
+  harpoon.ui:toggle_quick_menu(harpoon:list(), toggle_opts)
+end, { desc = "Harpoon Quick Menu" })
 
 map("n", "dm", [[:lua DeleteMark()<CR>]], { desc = "Delete Mark x" })
 

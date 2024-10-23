@@ -14,7 +14,7 @@ return {
     local toggle_opts = {
       border = "rounded",
       title_pos = "center",
-      ui_width_ratio = 0.3333,
+      ui_width_ratio = 0.5,
     }
     local harpoon = require("harpoon")
     local keys = {
@@ -47,13 +47,23 @@ return {
         vim.keymap.set("n", "t", function()
           harpoon.ui:select_menu_item({ tabedit = true })
         end, { buffer = cx.bufnr })
+
+        vim.keymap.set("n", "o", function()
+          harpoon.ui:select_menu_item()
+        end, { buffer = cx.bufnr })
+
+        for i = 1, 9 do
+          vim.keymap.set("n", "" .. i, function()
+            harpoon:list():select(i)
+          end)
+        end
       end,
     })
     for i = 1, 5 do
       table.insert(keys, {
         "<leader>" .. i,
         function()
-          require("harpoon"):list():select(i)
+          harpoon:list():select(i)
         end,
         desc = "Harpoon " .. i,
       })

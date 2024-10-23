@@ -24,8 +24,8 @@ return {
       {
         { "<leader>a", "", group = "A.I.", icon = { icon = " ", color = "azure" } },
         mode = { "n", "v" },
-        { "<Tab>", group = "Tabs" },
-        { "<leader>x", group = "Debug", icon = { icon = " ", color = "azure" } },
+        { "<Tab>", group = "Test" },
+        { "<leader>x", group = "Debug", icon = { icon = " ", color = "red" } },
         { "<leader>r", group = "Reame", icon = { icon = "󱦹 ", color = "azure" } },
         { "<leader>c", group = "Code" },
         { "<leader>dt", group = "Trouble" },
@@ -69,9 +69,9 @@ return {
         -- better descriptions
         -- valid colors are: `azure`, `blue`, `cyan`, `green`, `grey`, `orange`, `purple`, `red`, `yellow`
         { "gx", desc = "Open with system app" },
-        { "<leader>e", desc = " NeoTree", icon = { icon = "󰙅 ", color = "azure" } },
+        { "<leader>e", desc = " NeoTree", icon = { icon = "󰙅 ", color = "yellow" } },
         { "<leader>k", desc = " Peek Definition", icon = { icon = "󰈈 ", color = "azure" } },
-        { "<leader>l", desc = " Outline", icon = { icon = "󰧊 ", color = "azure" } },
+        { "<leader>l", desc = " Harpoon", icon = { icon = "󰧊 ", color = "azure" } },
         { "<leader>p", desc = " Yank History", icon = { icon = " ", color = "azure" } },
         { "<leader>0", desc = " Transparency", icon = { icon = " ", color = "azure" }, hidden = true },
         { "<leader>h", desc = " References", icon = { icon = " ", color = "azure" } },
@@ -79,7 +79,7 @@ return {
         { "<leader>?", desc = " Buffer Keymaps", icon = { icon = "  ", color = "azure", hidden = false } },
         { "<leader><leader>", desc = " Search Buffers", icon = { icon = " ", color = "azure" } },
         { "<leader>/", desc = " Grep Buffer", icon = { icon = "󰮗 ", color = "azure" } },
-        { "<leader>t", desc = " Search Tabs", icon = { icon = " ", color = "azure" }, hidden = false },
+        { "<leader>t", desc = "Test", icon = { icon = " ", color = "red" }, hidden = false },
 
         { "<leader>gg", desc = " LazyGit", icon = { icon = "󰋣 ", color = "azure" } },
         { "<leader>gl", desc = " LazyGit Log", icon = { icon = "󰋣 ", color = "azure" } },
