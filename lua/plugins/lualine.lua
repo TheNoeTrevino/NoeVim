@@ -59,7 +59,7 @@ return {
       lualine_x = {
         {
           function()
-            return " " .. os.date("%R")
+            return os.date("%R")
           end,
           color = { fg = "#DCD7BA" },
         },
@@ -119,7 +119,7 @@ return {
       },
       lualine_z = {
         function()
-          return " " .. os.date("%t")
+          return os.date("%t")
         end,
       },
     })

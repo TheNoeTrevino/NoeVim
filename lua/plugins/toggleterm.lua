@@ -3,6 +3,6 @@ return {
   event = "VeryLazy",
   version = "*",
   opts = {--[[ things you want to change go here]]
-    size = 20,
+    size = 10,
   },
 }
