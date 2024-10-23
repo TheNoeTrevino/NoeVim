@@ -6,12 +6,14 @@ return {
       -- git
       { "<leader>gsc", "<cmd>Telescope git_commits<CR>", desc = "Commits" },
       { "<leader>gss", "<cmd>Telescope git_status<CR>", desc = "Statuses" },
+      -- Visual
+      { "<leader>y", mode = { "x" }, "<cmd>Telescope yank_history<cr><ESC>", desc = "Yanks" },
+      { "<leader>g", mode = { "x" }, "y<ESC>:Telescope live_grep default_text=<c-r>0<CR><ESC>", desc = "Grep it" },
       -- search
       { "<leader>sb", "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr><esc>", desc = "Buffers" },
       { "<leader>/", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Grep Current Buffer" },
       { "<leader>si", LazyVim.pick.config_files(), desc = "Search Config" },
       { "<leader>sy", "<cmd>Telescope yank_history<cr><ESC>", desc = "Yanks" },
-      { "<leader>s", mode = { "x" }, "<cmd>Telescope yank_history<cr><ESC>", desc = "Yanks" },
       { "<leader>sc", "<cmd>Telescope command_history<cr><esc>", desc = "Command History" },
       { "<leader>sC", "<cmd>Telescope commands<cr>", desc = "Commands" },
       { "<leader>sd", "<cmd>Telescope diagnostics bufnr=0<cr>", desc = "Document Diagnostics" },
