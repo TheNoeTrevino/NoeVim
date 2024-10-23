@@ -20,6 +20,7 @@ vim.keymap.del("i", ";")
 vim.keymap.del("n", "<leader>fn")
 vim.keymap.del("n", "<leader>xl")
 vim.keymap.del("n", "<leader>xq")
+vim.keymap.del("n", "<leader>fT")
 
 local map = LazyVim.safe_keymap_set
 
@@ -203,7 +204,7 @@ map("n", "<leader>ue", "<cmd>SunglassesEnableToggle<CR><cmd>SunglassesRefresh<CR
 map("n", "<leader>uW", "<cmd>WindowsToggleAutowidth<CR>", { desc = "Toggle Window Resize" })
 
 -- Toggle Terminal
-map("n", "<localleader>t", "<cmd>ToggleTerm<CR>", { desc = "Terminal" })
+map("n", "<leader>fT", "<cmd>ToggleTerm<CR>", { desc = "Terminal Lower" })
 
 -- Toggle ZenMode
 map("n", "<leader>z", "<cmd>ZenMode<CR>", { desc = "Transparency" })

@@ -26,5 +26,3 @@ vim.opt.termguicolors = true
 
 -- Default is 4
 vim.opt.sidescrolloff = 0
-
-vim.opt.mouse = ""

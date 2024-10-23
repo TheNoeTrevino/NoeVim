@@ -29,7 +29,7 @@ return {
         { "<leader>r", group = "Reame", icon = { icon = "󱦹 ", color = "azure" } },
         { "<leader>c", group = "Code" },
         { "<leader>dt", group = "Trouble" },
-        { "<leader>f", group = "Find" },
+        { "<leader>f", group = "Terminal" },
         { "<leader>S", group = "TS Surround", icon = { icon = "󰐅 ", color = "azure" }, hidden = true },
         { "<leader>n", group = "Notification", icon = { icon = "󰵙 ", color = "yellow" }, hidden = false },
         { "<leader>m", group = "Markdown", icon = { icon = "󱦹 ", color = "azure" } },
