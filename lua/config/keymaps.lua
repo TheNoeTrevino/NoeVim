@@ -113,13 +113,14 @@ map("n", "go", "mzo<ESC>`z:delm z<cr>")
 map("n", "gO", "mzO<ESC>`z:delm z<cr>")
 
 -- Easier marks
-map("n", "'", "<cmd>WhichKey `<cr>", { noremap = true, silent = true })
+map("n", "'", "<cmd>WhichKey `<cr>")
 
 -- Matching Bracket
-map({ "n", "x" }, "M", "%", { noremap = true, silent = true })
+map({ "n", "x" }, "M", "%")
+map({ "n", "x" }, "gC", "M")
 
 -- Easier case switching
-map("n", "U", "~<Left>", { noremap = true, silent = true })
+map("n", "U", "~<Left>")
 
 -------------------------------------------------------------------------------
 --                           Diagnostics Section
