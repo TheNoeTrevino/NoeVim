@@ -123,6 +123,7 @@ return {
     { "<leader>snd", false },
     { "<leader>snh", false },
     { "<leader>snl", false },
+    { "<leader>nh", "<cmd>Noice history<cr>", desc = "History" },
     {
       "<leader>nl",
       function()
