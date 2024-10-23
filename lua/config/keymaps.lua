@@ -32,9 +32,11 @@ local map = LazyVim.safe_keymap_set
 map({ "n", "x" }, "k", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
 map({ "n", "x" }, "l", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
 
--- Remap j; for navigation
-map({ "n", "x" }, "j", "h", { desc = "Right", silent = true })
-map({ "n", "x" }, ";", "l", { desc = "Left", silent = true })
+-- Remap j; for navigation/o-pending
+map({ "n", "x", "o" }, "j", "<Left>", { desc = "Right", silent = true })
+map("o", "k", "<Down>", { desc = "Down", silent = true })
+map("o", "l", "<Up>", { desc = "Up", silent = true })
+map({ "n", "x", "o" }, ";", "<Right>", { desc = "Left", silent = true })
 
 -- Move Lines
 map("n", "<A-l>", "<cmd>m .-2<cr>==", { desc = "Move Up" })
@@ -43,10 +45,6 @@ map("n", "<A-k>", "<cmd>m .+1<cr>==", { desc = "Move Down" })
 map("i", "<A-k>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move Down" })
 map("v", "<A-l>", ":m '<-2<cr>gv=gv", { desc = "Move Up" })
 map("v", "<A-k>", ":m '>+1<cr>gv=gv", { desc = "Move Down" })
-
--- Delete Lines
-map("n", "dk", "Vjd", { desc = "Delete current and below line" })
-map("n", "dl", "Vkd", { desc = "Delete current and above line" })
 
 -- Terminal Mappings
 map("t", "<C-j>", "<cmd>wincmd h<cr>", { desc = "Go to Left Window" })
