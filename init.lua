@@ -22,6 +22,8 @@ if colorscheme == "kanagawa-wave" then
   vim.api.nvim_set_hl(0, "@type.python", { fg = "#688E81" })
   vim.api.nvim_set_hl(0, "@type.builtin.python", { fg = "#90CAE1" })
   vim.api.nvim_set_hl(0, "@constructor.python", { fg = "#7AA89F", bold = true })
+  vim.api.nvim_set_hl(0, "@type.builtin.python", { fg = "#938056" })
+
   -- java
   vim.api.nvim_set_hl(0, "@keyword.conditional.java", { fg = "#D27E9A", italic = true })
   vim.api.nvim_set_hl(0, "@lsp.typemod.class.public.java", { fg = "#688E81", italic = true })
