@@ -180,4 +180,5 @@ return {
       on_close = function() end,
     },
   },
+  { "https://github.com/ck-zhang/mistake.nvim" },
 }

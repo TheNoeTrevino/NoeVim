@@ -25,7 +25,6 @@ return {
         [";"] = "open",
         ["j"] = "close_node",
         ["<space>"] = "none",
-        -- ["P"] = { "toggle_preview", config = { use_float = true } },
         ["f"] = "focus_preview",
         ["<C-u>"] = { "scroll_preview", config = { direction = 10 } },
         ["<C-d>"] = { "scroll_preview", config = { direction = -10 } },
