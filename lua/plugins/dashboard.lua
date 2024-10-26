@@ -94,14 +94,6 @@ return {
           },
           {
             action = function()
-              vim.cmd(" Leet")
-            end,
-            desc = " Leetcode",
-            icon = " ",
-            key = "p",
-          },
-          {
-            action = function()
               vim.api.nvim_input("<cmd>qa<cr>")
             end,
             desc = " Quit Neovim",
@@ -119,23 +111,7 @@ return {
             "",
             "  NoeVim loaded in " .. ms .. "ms",
             -- "⚡ NoeVim loaded " .. stats.loaded .. "/" .. stats.count .. " plugins in " .. ms .. "ms",
-          },
-            -- Apply Gruvbox white color to dashboard highlights
-            vim.cmd([[
-            " highlight DashboardHeader guifg=#98BB6C
-            " highlight DashboardFooter guifg=#ebe2be
-            " highlight DashboardProjectTitle guifg=#ebe2be
-            " highlight DashboardProjectTitleIcon guifg=#ebe2be
-            " highlight DashboardProjectIcon guifg=#ebe2be
-            " highlight DashboardMruTitle guifg=#ebe2be
-            " highlight DashboardMruIcon guifg=#ebe2be
-            " highlight DashboardFiles guifg=#ebe2be
-            " highlight DashboardShortCutIcon guifg=#ebe2be
-            " highlight DashboardDesc guifg=#ebe2be
-            " highlight DashboardKey guifg=#ebe2be
-            " highlight DashboardIcon guifg=#ebe2be
-            " highlight DashboardShortCut guifg=#ebe2be
-          ]])
+          }
         end,
       },
     }

@@ -5,7 +5,7 @@ local colorscheme = "kanagawa-wave"
 
 vim.cmd("colorscheme " .. colorscheme)
 
-if colorscheme == "kanagawa-wave" then
+if colorscheme == "kanagawa-wave" or "kanagawa-dragon" then
   vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#1F3442", bg = "NONE", bold = true })
   -- typescript
   vim.api.nvim_set_hl(0, "@keyword.coroutine.tsx", { fg = "#53758D", italic = true })
