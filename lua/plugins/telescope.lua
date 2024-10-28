@@ -62,11 +62,9 @@ return {
       {
         "<leader>sS",
         function()
-          require("telescope.builtin").lsp_document_symbols({
-            symbols = LazyVim.config.get_kind_filter(),
-          })
+          require("persistence").select()
         end,
-        desc = "Goto Symbol",
+        desc = "Sessions",
       },
     }
   end,
