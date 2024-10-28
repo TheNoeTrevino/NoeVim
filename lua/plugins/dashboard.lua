@@ -37,6 +37,12 @@ return {
             icon = " ",
             key = "r",
           },
+          {
+            action = 'require("persistence").select()',
+            desc = " Select Session",
+            icon = " ",
+            key = "s",
+          },
           { action = "lua LazyVim.pick()()", desc = " Find File", icon = "󰥨 ", key = "f" },
           {
             action = function()
