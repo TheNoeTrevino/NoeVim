@@ -3,11 +3,8 @@ return {
   priority = 1001,
   opts = function()
     local logo = [[
-                                                                                
-                                                                                
-                                                                                
 
-
+                                                                                
                                                                                 
                                           ███                               
              ████ ██████              █████    █  ██                   
