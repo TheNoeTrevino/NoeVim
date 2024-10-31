@@ -36,4 +36,8 @@ return {
       require("CopilotChat.integrations.cmp").setup(),
     }
   end,
+  keys = {
+    { "<leader>ae", "<CMD>CopilotChatExplain<CR>", desc = "Toggle (CopilotChat)", mode = { "n", "v" } },
+    { "<leader>af", "<CMD>CopilotChatFix<CR>", desc = "Toggle (CopilotChat)", mode = { "n", "v" } },
+  },
 }
