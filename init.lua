@@ -1,7 +1,7 @@
 require("config.lazy")
 
 -- Colorscheme
-local colorscheme = "kanagawa-wave"
+local colorscheme = "gruvbox-material"
 
 vim.cmd("colorscheme " .. colorscheme)
 
