@@ -55,7 +55,7 @@ return {
       vim.g.matchup_delim_nomids = 1
       vim.g.matchup_delim_noskips = 1
       vim.g.matchup_matchparen_deferred = 1
-      vim.api.nvim_set_hl(0, "MatchParen", { fg = "#FF9D3C", italic = true })
+      vim.api.nvim_set_hl(0, "MatchParen", { fg = "#FF9D3C" })
     end,
   },
 }

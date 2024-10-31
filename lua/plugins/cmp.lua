@@ -85,6 +85,15 @@ return {
     ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
       table.insert(opts.sources, { name = "mkdnflow" })
+      opts.experimental = {
+        ghost_text = false, -- Disable ghost text here
+      }
+
+      local cmp_window = require("cmp.config.window")
+      opts.window = {
+        completion = cmp_window.bordered(),
+        documentation = cmp_window.bordered(),
+      }
     end,
   },
 }
