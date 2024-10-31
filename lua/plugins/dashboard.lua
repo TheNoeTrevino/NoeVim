@@ -114,6 +114,7 @@ return {
           return {
             "",
             "",
+            "",
             "  NoeVim loaded in " .. ms .. "ms",
             -- "⚡ NoeVim loaded " .. stats.loaded .. "/" .. stats.count .. " plugins in " .. ms .. "ms",
           }
