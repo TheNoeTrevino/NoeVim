@@ -5,10 +5,6 @@ return {
     opts = {
       paragraph = {
         enabled = true,
-        -- If a floating point value < 1 is provided it is treated as a percentage of the available window space
-        left_margin = 2,
-        -- Minimum width to use for paragraphs
-        min_width = 0,
       },
       checkbox = {
         enabled = true,
