@@ -91,13 +91,9 @@ return {
     ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
       table.insert(opts.sources, { name = "mkdnflow" })
-      table.insert(opts.sources, { name = "luasnip" })
-      table.insert(opts.sources, { name = "vim-dadbod-completion", priority = 1000 })
       opts.experimental = {
         ghost_text = false, -- Disable ghost text here
       }
-
-      require("vim-react-snippets").lazy_load()
 
       local cmp_window = require("cmp.config.window")
       opts.window = {
