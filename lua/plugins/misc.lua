@@ -47,4 +47,25 @@ return {
       require("wit").setup({})
     end,
   },
+  {
+    "andymass/vim-matchup",
+    event = "VeryLazy",
+    config = function()
+      vim.g.matchup_matchparen_enabled = 1
+      vim.g.matchup_matchparen_hi_surround_always = 1
+      vim.g.matchup_delim_nomids = 1
+      vim.g.matchup_delim_noskips = 1
+      vim.g.matchup_matchparen_deferred = 1
+      vim.api.nvim_set_hl(0, "MatchParen", { fg = "#FF9D3C" })
+    end,
+  },
+
+  {
+    "xiyaowong/virtcolumn.nvim",
+    event = { "BufRead", "BufNewFile" },
+    config = function()
+      vim.opt.colorcolumn = "80,100,120"
+      vim.api.nvim_set_hl(0, "VirtColumn", { fg = "#192020", bg = nil })
+    end,
+  },
 }
