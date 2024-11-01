@@ -34,6 +34,7 @@ return {
         return select.visual(source) or select.buffer(source)
       end,
       require("CopilotChat.integrations.cmp").setup(),
+      vim.keymap.set("n", "<leader>am", "<CMD>CopilotChatModels<CR>"),
     }
   end,
 }
