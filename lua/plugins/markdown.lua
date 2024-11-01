@@ -29,9 +29,8 @@ return {
       },
       file_types = { "markdown", "norg", "rmd", "org" },
       code = {
-        sign = false,
-        width = "block",
-        right_pad = 1,
+        enabled = false,
+        sign = true,
       },
       heading = {
         sign = false,

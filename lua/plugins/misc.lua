@@ -59,7 +59,6 @@ return {
       vim.api.nvim_set_hl(0, "MatchParen", { fg = "#FF9D3C" })
     end,
   },
-
   {
     "xiyaowong/virtcolumn.nvim",
     event = { "BufRead", "BufNewFile" },
