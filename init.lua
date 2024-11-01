@@ -59,7 +59,6 @@ vim.api.nvim_set_hl(0, "NeoTreeFloatBorder", { fg = "#6272a4", bg = nil })
 vim.api.nvim_set_hl(0, "NeoTreeFloatTitle", { fg = "#ffb86c", bg = nil })
 vim.api.nvim_set_hl(0, "NormalFloat", { bg = nil })
 vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#6272a4", bg = nil })
-vim.api.nvim_set_hl(0, "ColorColumn", { bg = "#090909", ctermbg = 0 })
 vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#fcb205", bg = nil })
 
 -- Custom Cmp highlights, markdown erases them
