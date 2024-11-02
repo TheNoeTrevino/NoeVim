@@ -47,15 +47,15 @@ return {
     end,
   },
   {
-    "andymass/vim-matchup",
-    event = "VeryLazy",
-    config = function()
-      vim.g.matchup_matchparen_enabled = 1
-      vim.g.matchup_matchparen_hi_surround_always = 1
-      vim.g.matchup_delim_nomids = 1
-      vim.g.matchup_delim_noskips = 1
-      vim.g.matchup_matchparen_deferred = 1
-      vim.api.nvim_set_hl(0, "MatchParen", { fg = "#FF9D3C" })
+    "utilyre/sentiment.nvim",
+    version = "*",
+    event = "VeryLazy", -- keep for lazy loading
+    opts = {
+      -- config
+    },
+    init = function()
+      -- `matchparen.vim` needs to be disabled manually in case of lazy loading
+      vim.g.loaded_matchparen = 1
     end,
   },
   {
@@ -64,6 +64,27 @@ return {
     config = function()
       vim.opt.colorcolumn = "80,100,120"
       vim.api.nvim_set_hl(0, "VirtColumn", { fg = "#192020", bg = nil })
+    end,
+  },
+  {
+    "cbochs/portal.nvim",
+    event = "VeryLazy",
+    config = function()
+      require("portal").setup({
+        ---@type string[]
+        labels = { "j", "k", "l", ";" },
+        window_options = {
+          relative = "cursor",
+          width = 80,
+          height = 6,
+          col = 2,
+          focusable = false,
+          border = "rounded",
+          noautocmd = true,
+        },
+      })
+      vim.keymap.set("n", "<leader>i", "<CMD>Portal jumplist backward<cr>", { silent = true })
+      vim.keymap.set("n", "<leader>o", "<CMD>Portal jumplist forward<cr>", { silent = true })
     end,
   },
 }
