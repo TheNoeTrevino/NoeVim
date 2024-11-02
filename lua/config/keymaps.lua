@@ -68,10 +68,6 @@ map("i", "<C-BS>", "<C-w>")
 -- Better alternate buffer
 map("n", "L", "<C-^>", { noremap = true, silent = true })
 
--- Better end and beginning
-map({ "n", "x", "o" }, "-", "_", { noremap = true, silent = true })
-map({ "n", "x", "o" }, "+", "$", { noremap = true, silent = true })
-
 -- Paste without putting into clipboard
 map("x", "<leader>p", [["_dP]])
 
@@ -121,6 +117,13 @@ map({ "n", "x" }, "gC", "M")
 
 -- Easier case switching
 map("n", "U", "~<Left>")
+
+-- Better end and beginning
+map({ "n", "x", "o" }, "-", "_", { noremap = true, silent = true })
+map({ "n", "x", "o" }, "+", "$", { noremap = true, silent = true })
+
+map({ "n", "x", "o" }, "gj", "_", { noremap = true, silent = true, desc = "Go to Beginnning" })
+map({ "n", "x", "o" }, "g;", "$", { noremap = true, silent = true, desc = "Go to End" })
 
 -------------------------------------------------------------------------------
 --                           Diagnostics Section
