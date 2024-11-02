@@ -99,6 +99,8 @@ return {
         { "<leader>y", hidden = true },
         { "<leader>b", hidden = true },
         { "<leader>q", hidden = true },
+        { "<leader>i", hidden = true },
+        { "<leader>o", hidden = true },
 
         { "<leader>aa", desc = "Toggle ", icon = { icon = " ", color = "yellow" } },
         { "<leader>am", desc = "Select Model ", icon = { icon = " ", color = "yellow" } },
