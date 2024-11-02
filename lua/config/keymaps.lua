@@ -103,10 +103,6 @@ map("n", "<S-CR>", "<cmd>w<cr>")
 -- Better alternate buffer
 map("n", "L", "<C-^>", { noremap = true, silent = true })
 
--- Better end and beginning
-map({ "n", "x", "o" }, "-", "_", { noremap = true, silent = true })
-map({ "n", "x", "o" }, "+", "$", { noremap = true, silent = true })
-
 -- Paste without putting into clipboard
 map("x", "<leader>p", [["_dP]])
 
