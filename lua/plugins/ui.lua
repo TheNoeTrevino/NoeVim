@@ -99,6 +99,7 @@ return {
       })
     end,
   },
+  { "xiyaowong/transparent.nvim", event = "UIEnter" },
   {
     "3rd/image.nvim",
     event = "LazyFile",
@@ -140,5 +141,34 @@ return {
       })
     end,
   },
-  { "xiyaowong/transparent.nvim", event = "UIEnter" },
+  { "nvchad/volt", lazy = true },
+  {
+    "utilyre/sentiment.nvim",
+    version = "*",
+    event = "VeryLazy",
+    init = function()
+      vim.g.loaded_matchparen = 1
+    end,
+  },
+  {
+    "xiyaowong/virtcolumn.nvim",
+    event = { "BufRead", "BufNewFile" },
+    config = function()
+      vim.opt.colorcolumn = "80,100,120"
+      vim.api.nvim_set_hl(0, "VirtColumn", { fg = "#192020", bg = nil })
+    end,
+  },
+  {
+    "nvchad/minty",
+    cmd = { "Shades", "Huefy" },
+  },
+  {
+    "nvchad/showkeys",
+    cmd = "ShowkeysToggle",
+    opts = {
+      timeout = 1,
+      maxkeys = 5,
+      position = "top-center",
+    },
+  },
 }
