@@ -93,6 +93,29 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+-- Thx chatgpt
+local function update_virtcolumn_color()
+  local count = 0
+  for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+    local config = vim.api.nvim_win_get_config(win)
+    if config.relative == "" then -- Exclude pop-ups
+      count = count + 1
+    end
+  end
+
+  if count > 1 then
+    vim.api.nvim_set_hl(0, "VirtColumn", { fg = "#000000", bg = nil })
+  else
+    vim.api.nvim_set_hl(0, "VirtColumn", { fg = "#192020", bg = nil })
+  end
+end
+
+vim.api.nvim_create_autocmd({ "WinEnter", "WinClosed", "WinNew", "VimResized", "BufWinEnter", "BufWinLeave" }, {
+  callback = update_virtcolumn_color,
+})
+
+update_virtcolumn_color()
+
 -------------------------------------------------------------------------------
 --                           Markdown Section
 -------------------------------------------------------------------------------
