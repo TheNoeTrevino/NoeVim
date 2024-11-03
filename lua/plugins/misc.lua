@@ -60,14 +60,6 @@ return {
     end,
   },
   {
-    "xiyaowong/virtcolumn.nvim",
-    event = { "BufRead", "BufNewFile" },
-    config = function()
-      vim.opt.colorcolumn = "80,100,120"
-      vim.api.nvim_set_hl(0, "VirtColumn", { fg = "#192020", bg = nil })
-    end,
-  },
-  {
     "cbochs/portal.nvim",
     event = "VeryLazy",
     config = function()
