@@ -225,7 +225,9 @@ map("n", "<leader>we", "<C-w>=", { desc = "Equalize" })
 map("n", "<leader>0", "<cmd>TransparentToggle<CR>", { desc = "Transparency" })
 
 -- Toggle Terminal
-map("n", "<leader>tb", "<cmd>ToggleTerm<CR>", { desc = "Terminal Lower" })
+map("n", "<leader>tb", "<cmd>ToggleTerm direction=horizontal<CR>", { desc = "Terminal Lower" })
+
+map("n", "<leader>tf", "<cmd>ToggleTerm direction=float<CR>", { desc = "Terminal Float" })
 
 -- Toggle ZenMode
 map("n", "<leader>z", "<cmd>ZenMode<CR>", { desc = "Transparency" })
