@@ -29,7 +29,6 @@ return {
         { "<leader>r", group = "Reame", icon = { icon = "󱦹 ", color = "azure" } },
         { "<leader>c", group = "Code" },
         { "<leader>dt", group = "Trouble" },
-        { "<leader>f", group = "Terminal" },
         { "<leader>S", group = "TS Surround", icon = { icon = "󰐅 ", color = "azure" }, hidden = true },
         { "<leader>n", group = "Notification", icon = { icon = "󰵙 ", color = "yellow" }, hidden = false },
         { "<leader>m", group = "Markdown", icon = { icon = "󱦹 ", color = "azure" } },
@@ -74,12 +73,14 @@ return {
         { "<leader>l", desc = " Harpoon", icon = { icon = "󰧊 ", color = "azure" } },
         { "<leader>p", desc = " Yank History", icon = { icon = " ", color = "azure" } },
         { "<leader>0", desc = " Transparency", icon = { icon = " ", color = "azure" }, hidden = true },
-        { "<leader>h", desc = " References", icon = { icon = " ", color = "azure" } },
+        { "<leader>h", desc = " References", icon = { icon = " ", color = "purple" } },
         { "<leader>j", desc = " Jump to Definition", icon = { icon = "󰑮 ", color = "red" } },
-        { "<leader>?", desc = " Buffer Keymaps", icon = { icon = "  ", color = "azure", hidden = false } },
-        { "<leader><leader>", desc = " Search Buffers", icon = { icon = " ", color = "azure" } },
-        { "<leader>/", desc = " Grep Buffer", icon = { icon = "󰮗 ", color = "azure" } },
-        { "<leader>t", desc = "Test", icon = { icon = " ", color = "red" }, hidden = false },
+        { "<leader>?", desc = " Buffer Keymaps", icon = { icon = "  ", color = "azure", hidden = true } },
+        { "<leader><leader>", desc = "Search Buffers", icon = { icon = " ", color = "azure" } },
+        { "<leader>/", desc = "Grep Buffer", icon = { icon = "󰮗 ", color = "azure" } },
+        { "<leader>t", desc = "Terminal", icon = { icon = " ", color = "red" }, hidden = false },
+        { "<leader>l", desc = "Jump Backwards", icon = { icon = " ", color = "orange" }, hidden = false },
+        { "<leader>;", desc = "Jump Forwards", icon = { icon = " ", color = "orange" }, hidden = false },
 
         { "<leader>gg", desc = " LazyGit", icon = { icon = "󰋣 ", color = "azure" } },
         { "<leader>gl", desc = " LazyGit Log", icon = { icon = "󰋣 ", color = "azure" } },
@@ -88,6 +89,13 @@ return {
         { "<leader>gG", desc = " Git Graph", icon = { icon = " ", color = "azure" } },
         { "<leader>gL", hidden = true },
         { "<leader>gl", hidden = true },
+
+        { "<leader>aa", desc = "Toggle ", icon = { icon = " ", color = "yellow" } },
+        { "<leader>am", desc = "Select Model ", icon = { icon = " ", color = "yellow" } },
+        { "<leader>ad", desc = "Diagnostic Help", icon = { icon = " ", color = "yellow" } },
+        { "<leader>aq", desc = "Prompt Actions", icon = { icon = " ", color = "yellow" } },
+        { "<leader>ap", desc = "Quick Chat", icon = { icon = " ", color = "yellow" } },
+        { "<leader>ax", desc = "Clear", icon = { icon = " ", color = "yellow" } },
 
         { "<leader>1", hidden = true },
         { "<leader>2", hidden = true },
@@ -98,27 +106,13 @@ return {
         { "<leader>p", hidden = true },
         { "<leader>y", hidden = true },
         { "<leader>b", hidden = true },
-        { "<leader>q", hidden = true },
         { "<leader>i", hidden = true },
         { "<leader>o", hidden = true },
-
-        { "<leader>aa", desc = "Toggle ", icon = { icon = " ", color = "yellow" } },
-        { "<leader>am", desc = "Select Model ", icon = { icon = " ", color = "yellow" } },
-        { "<leader>ad", desc = "Diagnostic Help", icon = { icon = " ", color = "yellow" } },
-        { "<leader>aq", desc = "Prompt Actions", icon = { icon = " ", color = "yellow" } },
-        { "<leader>ap", desc = "Quick Chat", icon = { icon = " ", color = "yellow" } },
-        { "<leader>ax", desc = "Clear", icon = { icon = " ", color = "yellow" } },
+        { "<leader>?", hidden = true },
       },
     },
   },
   keys = {
-    {
-      "<leader>?",
-      function()
-        require("which-key").show({ global = false })
-      end,
-      desc = "Buffer Keymaps (which-key)",
-    },
     {
       "<c-w><space>",
       function()
