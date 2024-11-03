@@ -132,8 +132,8 @@ map({ "n", "x", "o" }, "gj", "_", { noremap = true, silent = true, desc = "Go to
 map({ "n", "x", "o" }, "g;", "$", { noremap = true, silent = true, desc = "Go to End" })
 
 -- Portal
-map("n", "<leader>f", "<CMD>Portal jumplist backward<cr>", { silent = true })
-map("n", "<leader>b", "<CMD>Portal jumplist forward<cr>", { silent = true })
+map("n", "<leader>;", "<CMD>Portal jumplist forward<cr>", { silent = true })
+map("n", "<leader>l", "<CMD>Portal jumplist backward<cr>", { silent = true })
 
 -------------------------------------------------------------------------------
 --                           Diagnostics Section
@@ -225,7 +225,9 @@ LazyVim.toggle.map("<leader>ug", {
 map("n", "<leader>0", "<cmd>TransparentToggle<CR>", { desc = "Transparency" })
 
 -- Toggle Terminal
-map("n", "<leader>fT", "<cmd>ToggleTerm<CR>", { desc = "Terminal Lower" })
+map("n", "<leader>tb", "<cmd>ToggleTerm direction=horizontal<CR>", { desc = "Terminal Lower" })
+
+map("n", "<leader>tf", "<cmd>ToggleTerm direction=float<CR>", { desc = "Terminal Float" })
 
 -- Toggle ZenMode
 map("n", "<leader>z", "<cmd>ZenMode<CR>", { desc = "Transparency" })
