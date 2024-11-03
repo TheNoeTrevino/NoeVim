@@ -151,10 +151,15 @@ return {
     end,
   },
   {
-    "xiyaowong/virtcolumn.nvim",
+    "lukas-reineke/virt-column.nvim",
     event = { "BufRead", "BufNewFile" },
+    opts = {},
     config = function()
-      vim.opt.colorcolumn = "80,100,120"
+      require("virt-column").setup({
+        highlight = "VirtColumn",
+        char = "▕",
+        virtcolumn = "80, 100, 120",
+      })
       vim.api.nvim_set_hl(0, "VirtColumn", { fg = "#192020", bg = nil })
     end,
   },
