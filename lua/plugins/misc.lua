@@ -84,8 +84,6 @@ return {
           noautocmd = true,
         },
       })
-      vim.keymap.set("n", "<leader>i", "<CMD>Portal jumplist backward<cr>", { silent = true })
-      vim.keymap.set("n", "<leader>o", "<CMD>Portal jumplist forward<cr>", { silent = true })
     end,
   },
 }
