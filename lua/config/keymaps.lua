@@ -30,7 +30,9 @@ local toggle_opts = {
   title_pos = "center",
   ui_width_ratio = 0.5,
 }
+
 local harpoon = require("harpoon")
+
 -------------------------------------------------------------------------------
 --                           Shift Navigation Section
 -------------------------------------------------------------------------------
