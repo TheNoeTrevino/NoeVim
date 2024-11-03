@@ -18,6 +18,7 @@ vim.keymap.del("i", ",")
 vim.keymap.del("i", ".")
 vim.keymap.del("i", ";")
 vim.keymap.del("n", "<leader>fn")
+vim.keymap.del("n", "<leader>ft")
 vim.keymap.del("n", "<leader>xl")
 vim.keymap.del("n", "<leader>xq")
 vim.keymap.del("n", "<leader>fT")
@@ -222,6 +223,9 @@ map("n", "<leader>we", "<C-w>=", { desc = "Equalize" })
 
 -- Toggle Transparency
 map("n", "<leader>0", "<cmd>TransparentToggle<CR>", { desc = "Transparency" })
+
+-- Toggle Terminal
+map("n", "<leader>tb", "<cmd>ToggleTerm<CR>", { desc = "Terminal Lower" })
 
 -- Toggle ZenMode
 map("n", "<leader>z", "<cmd>ZenMode<CR>", { desc = "Transparency" })
