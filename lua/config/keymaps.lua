@@ -122,6 +122,17 @@ map({ "n", "x" }, "gC", "M")
 -- Easier case switching
 map("n", "U", "~<Left>")
 
+-- Better end and beginning
+map({ "n", "x", "o" }, "-", "_", { noremap = true, silent = true })
+map({ "n", "x", "o" }, "+", "$", { noremap = true, silent = true })
+
+map({ "n", "x", "o" }, "gj", "_", { noremap = true, silent = true, desc = "Go to Beginnning" })
+map({ "n", "x", "o" }, "g;", "$", { noremap = true, silent = true, desc = "Go to End" })
+
+-- Portal
+map("n", "<leader>f", "<CMD>Portal jumplist backward<cr>", { silent = true })
+map("n", "<leader>b", "<CMD>Portal jumplist forward<cr>", { silent = true })
+
 -------------------------------------------------------------------------------
 --                           Diagnostics Section
 -------------------------------------------------------------------------------
