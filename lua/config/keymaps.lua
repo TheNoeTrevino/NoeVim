@@ -18,6 +18,7 @@ vim.keymap.del("i", ",")
 vim.keymap.del("i", ".")
 vim.keymap.del("i", ";")
 vim.keymap.del("n", "<leader>fn")
+vim.keymap.del("n", "<leader>ft")
 vim.keymap.del("n", "<leader>xl")
 vim.keymap.del("n", "<leader>xq")
 vim.keymap.del("n", "<leader>fT")
@@ -105,8 +106,12 @@ map("n", "N", "Nzzzv", { desc = "Prev find and center" })
 map("n", "J", "mzJ`z:delm z<cr>")
 
 -- Add a line up or down in normal mode
-map("n", "go", "mzo<ESC>`z:delm z<cr>")
-map("n", "gO", "mzO<ESC>`z:delm z<cr>")
+map("n", "go", "mzo<ESC>`z:delm z<cr><down>")
+map("n", "gO", "mzO<ESC>`z:delm z<cr><up>")
+
+-- Start/End of line
+map("n", "gj", "^", { desc = "Start of Line" })
+map("n", "g;", "$", { desc = "End of Line" })
 
 -- Easier marks
 map("n", "'", "<cmd>WhichKey `<cr>")
@@ -215,7 +220,7 @@ LazyVim.toggle.map("<leader>ug", {
 map("n", "<leader>0", "<cmd>TransparentToggle<CR>", { desc = "Transparency" })
 
 -- Toggle Terminal
-map("n", "<leader>fT", "<cmd>ToggleTerm<CR>", { desc = "Terminal Lower" })
+map("n", "<leader>tb", "<cmd>ToggleTerm<CR>", { desc = "Terminal Lower" })
 
 -- Toggle ZenMode
 map("n", "<leader>z", "<cmd>ZenMode<CR>", { desc = "Transparency" })
