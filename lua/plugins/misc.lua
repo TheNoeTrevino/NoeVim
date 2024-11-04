@@ -68,7 +68,7 @@ return {
         window_options = {
           relative = "cursor",
           width = 80,
-          height = 6,
+          height = 5,
           col = 2,
           focusable = false,
           border = "rounded",
