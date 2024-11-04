@@ -81,10 +81,20 @@ return {
   {
     "hrsh7th/nvim-cmp",
     event = "VeryLazy",
-    dependencies = { "jakewvincent/mkdnflow.nvim" },
+    dependencies = { "jakewvincent/mkdnflow.nvim", "L3MON4D3/LuaSnip", "saadparwaiz1/cmp_luasnip" },
     ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
       table.insert(opts.sources, { name = "mkdnflow" })
+      table.insert(opts.sources, { name = "luasnip", priority = 10000 })
+      opts.experimental = {
+        ghost_text = false, -- Disable ghost text here
+      }
+
+      local cmp_window = require("cmp.config.window")
+      opts.window = {
+        completion = cmp_window.bordered(),
+        documentation = cmp_window.bordered(),
+      }
     end,
   },
 }
