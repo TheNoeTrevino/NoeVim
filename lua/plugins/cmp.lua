@@ -91,6 +91,7 @@ return {
     ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
       table.insert(opts.sources, { name = "mkdnflow" })
+      table.insert(opts.sources, { name = "luasnip", priority = 10000 })
       opts.experimental = {
         ghost_text = false, -- Disable ghost text here
       }
