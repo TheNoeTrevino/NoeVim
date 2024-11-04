@@ -67,6 +67,9 @@ map("t", "<C-;>", "<cmd>wincmd l<cr>", { desc = "Go to Right Window" })
 -- Add ctrl backspace
 map("i", "<C-BS>", "<C-w>")
 
+-- Save
+map("n", "<S-CR>", "<cmd>w<cr>")
+
 -- Better alternate buffer
 map("n", "L", "<C-^>", { noremap = true, silent = true })
 
