@@ -141,7 +141,7 @@ return {
             ["<C-u>"] = actions.preview_scrolling_up,
           },
           n = {
-            ["D"] = actions.delete_buffer,
+            ["d"] = actions.delete_buffer,
             ["t"] = actions.file_tab,
             ["v"] = actions.file_vsplit,
             ["s"] = actions.file_split,

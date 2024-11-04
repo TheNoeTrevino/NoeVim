@@ -14,7 +14,7 @@ return {
     local toggle_opts = {
       border = "rounded",
       title_pos = "center",
-      ui_width_ratio = 0.5,
+      ui_width_ratio = 0.333,
     }
     local harpoon = require("harpoon")
     local keys = {
