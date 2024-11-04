@@ -171,7 +171,10 @@ return {
     "nvchad/showkeys",
     cmd = "ShowkeysToggle",
     opts = {
-      timeout = 1,
+      winopts = {
+        border = "rounded",
+      },
+      timeout = 3,
       maxkeys = 5,
       position = "top-center",
     },
