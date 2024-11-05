@@ -55,7 +55,16 @@ return {
       ),
 
       parse(
-        { trig = "ifel", name = "If Err Log Fatal", dscr = "Insert a basic if err not nil statement with log.Fatal" },
+        { trig = "ifele", name = "If Err Log Error", dscr = "Insert a basic if err not nil statement with log.Error" },
+        [[
+     if err != nil {
+       log.Fatal(err)
+     }
+     ]]
+      ),
+
+      parse(
+        { trig = "ifelf", name = "If Err Log Fatal", dscr = "Insert a basic if err not nil statement with log.Fatal" },
         [[
      if err != nil {
        log.Fatal(err)
