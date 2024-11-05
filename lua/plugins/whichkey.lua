@@ -109,6 +109,7 @@ return {
         { "<leader>i", hidden = true },
         { "<leader>o", hidden = true },
         { "<leader>?", hidden = true },
+        { "<leader>f", hidden = true },
       },
     },
   },
