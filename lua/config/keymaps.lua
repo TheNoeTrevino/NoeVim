@@ -22,6 +22,8 @@ vim.keymap.del("n", "<leader>ft")
 vim.keymap.del("n", "<leader>xl")
 vim.keymap.del("n", "<leader>xq")
 vim.keymap.del("n", "<leader>fT")
+vim.keymap.del("n", "<C-F>")
+vim.keymap.del("n", "<C-B>")
 
 local map = LazyVim.safe_keymap_set
 
@@ -235,6 +237,45 @@ map("n", "<leader>tf", "<cmd>ToggleTerm direction=float<CR>", { desc = "Terminal
 
 -- Toggle ZenMode
 map("n", "<leader>z", "<cmd>ZenMode<CR>", { desc = "Transparency" })
+
+
+local neoscroll = require("neoscroll")
+neoscroll.setup({
+  easing = "quadratic",
+})
+local keymap = {
+  ["<C-u>"] = function()
+    neoscroll.ctrl_u({ duration = 150 })
+  end,
+  ["<C-d>"] = function()
+    neoscroll.ctrl_d({ duration = 150 })
+  end,
+  ["<C-b>"] = function()
+    neoscroll.ctrl_b({ duration = 150 })
+  end,
+  ["<C-f>"] = function()
+    neoscroll.ctrl_f({ duration = 150 })
+  end,
+  ["<C-y>"] = function()
+    neoscroll.scroll(-0.1, { move_cursor = true, duration = 100 })
+  end,
+  ["<C-e>"] = function()
+    neoscroll.scroll(0.1, { move_cursor = true, duration = 100 })
+  end,
+  ["zt"] = function()
+    neoscroll.zt({ half_win_duration = 100 })
+  end,
+  ["zz"] = function()
+    neoscroll.zz({ half_win_duration = 150 })
+  end,
+  ["zb"] = function()
+    neoscroll.zb({ half_win_duration = 100 })
+  end,
+}
+local modes = { "n", "v", "x" }
+for key, func in pairs(keymap) do
+  vim.keymap.set(modes, key, func)
+end
 
 -------------------------------------------------------------------------------
 --                           Markdown Section
