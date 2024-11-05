@@ -151,19 +151,6 @@ return {
     end,
   },
   {
-    "lukas-reineke/virt-column.nvim",
-    event = { "BufRead", "BufNewFile" },
-    opts = {},
-    config = function()
-      require("virt-column").setup({
-        highlight = "VirtColumn",
-        char = "▕",
-        virtcolumn = "80, 100, 120",
-      })
-      vim.api.nvim_set_hl(0, "VirtColumn", { fg = "#192020", bg = nil })
-    end,
-  },
-  {
     "nvchad/minty",
     cmd = { "Shades", "Huefy" },
   },
