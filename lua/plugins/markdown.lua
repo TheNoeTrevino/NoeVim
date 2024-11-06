@@ -179,5 +179,5 @@ return {
       on_close = function() end,
     },
   },
-  { "TheNoeTrevino/mistake.nvim", event = "VeryLazy" },
+  -- { "TheNoeTrevino/mistake.nvim", event = "VeryLazy" },
 }

@@ -58,7 +58,7 @@ return {
         { trig = "ifele", name = "If Err Log Error", dscr = "Insert a basic if err not nil statement with log.Error" },
         [[
      if err != nil {
-       log.Fatal(err)
+       log.Error(err)
      }
      ]]
       ),
