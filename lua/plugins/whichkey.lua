@@ -83,7 +83,6 @@ return {
         { "<leader>;", desc = "Jump Forwards", icon = { icon = " ", color = "orange" }, hidden = false },
 
         { "<leader>gg", desc = " LazyGit", icon = { icon = "󰋣 ", color = "azure" } },
-        { "<leader>gl", desc = " LazyGit Log", icon = { icon = "󰋣 ", color = "azure" } },
         { "<leader>gf", desc = " LazyGit File History", icon = { icon = "󰋣 ", color = "azure" } },
         { "<leader>gm", desc = " Commit Messsge", icon = { icon = " ", color = "azure" } },
         { "<leader>gG", desc = " Git Graph", icon = { icon = " ", color = "azure" } },
@@ -96,6 +95,17 @@ return {
         { "<leader>aq", desc = "Prompt Actions", icon = { icon = " ", color = "yellow" } },
         { "<leader>ap", desc = "Quick Chat", icon = { icon = " ", color = "yellow" } },
         { "<leader>ax", desc = "Clear", icon = { icon = " ", color = "yellow" } },
+
+        { "<leader>gl", group = "Golang", icon = { icon = " ", color = "blue" }, hidden = false },
+        { "<leader>glj", desc = "Add JSON Tag", icon = { icon = " ", color = "blue" } },
+        { "<leader>glJ", desc = "Rm JSON Tag", icon = { icon = " ", color = "blue" } },
+        { "<leader>glt", group = "Test", icon = { icon = " ", color = "blue" }, hidden = false },
+        { "<leader>glta", desc = "Add Test for Function", icon = { icon = " ", color = "blue" } },
+        { "<leader>gltA", desc = "Generate All Tests", icon = { icon = " ", color = "blue" } },
+        { "<leader>glg", desc = "Get Package", icon = { icon = " ", color = "blue" } },
+        { "<leader>glT", desc = "Go Tidy", icon = { icon = " ", color = "blue" } },
+        { "<leader>gls", desc = "Go Sync", icon = { icon = " ", color = "blue" } },
+        { "<leader>gle", desc = "Handle Err", icon = { icon = " ", color = "blue" } },
 
         { "<leader>1", hidden = true },
         { "<leader>2", hidden = true },
