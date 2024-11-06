@@ -80,7 +80,6 @@ return {
         { "<leader>k", desc = "Peek References", icon = { icon = " ", color = "red" }, hidden = false },
 
         { "<leader>gg", desc = " LazyGit", icon = { icon = "󰋣 ", color = "azure" } },
-        { "<leader>gl", desc = " LazyGit Log", icon = { icon = "󰋣 ", color = "azure" } },
         { "<leader>gf", desc = " LazyGit File History", icon = { icon = "󰋣 ", color = "azure" } },
         { "<leader>gm", desc = " Commit Messsge", icon = { icon = " ", color = "azure" } },
         { "<leader>gG", desc = " Git Graph", icon = { icon = " ", color = "azure" } },
