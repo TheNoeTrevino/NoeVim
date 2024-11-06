@@ -44,7 +44,7 @@ return {
               -- Using the highlight group for the icon only
               return "%#RecordingText# REC %*" .. "%#RecordingIcon#  %* " .. recording
             else
-              local filename = vim.fn.expand("%:t") -- Display filename
+              local filename = vim.fn.expand("%:~:.") -- Display filename relative to the working directory
               if vim.bo.modified then
                 filename = filename .. " [+]" -- Append modification indicator
               end
