@@ -24,6 +24,7 @@ vim.keymap.del("n", "<leader>xq")
 vim.keymap.del("n", "<leader>fT")
 vim.keymap.del("n", "<C-F>")
 vim.keymap.del("n", "<C-B>")
+vim.keymap.del("n", "<leader>gl")
 
 local map = LazyVim.safe_keymap_set
 
@@ -239,6 +240,10 @@ map("n", "<leader>tf", "<cmd>ToggleTerm direction=float<CR>", { desc = "Terminal
 map("n", "<leader>z", "<cmd>ZenMode<CR>", { desc = "Transparency" })
 
 
+-------------------------------------------------------------------------------
+--                           Scrolling Section
+-------------------------------------------------------------------------------
+
 local neoscroll = require("neoscroll")
 neoscroll.setup({
   easing = "quadratic",
@@ -251,10 +256,10 @@ local keymap = {
     neoscroll.ctrl_d({ duration = 150 })
   end,
   ["<C-b>"] = function()
-    neoscroll.ctrl_b({ duration = 150 })
+    neoscroll.ctrl_b({ duration = 200 })
   end,
   ["<C-f>"] = function()
-    neoscroll.ctrl_f({ duration = 150 })
+    neoscroll.ctrl_f({ duration = 200 })
   end,
   ["<C-y>"] = function()
     neoscroll.scroll(-0.1, { move_cursor = true, duration = 100 })
