@@ -81,7 +81,12 @@ return {
   {
     "hrsh7th/nvim-cmp",
     event = "VeryLazy",
-    dependencies = { "jakewvincent/mkdnflow.nvim", "L3MON4D3/LuaSnip", "saadparwaiz1/cmp_luasnip" },
+    dependencies = {
+      "jakewvincent/mkdnflow.nvim",
+      "L3MON4D3/LuaSnip",
+      "saadparwaiz1/cmp_luasnip",
+      "mlaursen/vim-react-snippets",
+    },
     ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
       table.insert(opts.sources, { name = "mkdnflow" })
@@ -89,6 +94,7 @@ return {
       opts.experimental = {
         ghost_text = false, -- Disable ghost text here
       }
+      require("vim-react-snippets").lazy_load()
 
       local cmp_window = require("cmp.config.window")
       opts.window = {
