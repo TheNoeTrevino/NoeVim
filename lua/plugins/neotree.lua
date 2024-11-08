@@ -18,6 +18,8 @@ return {
     window = {
       position = "float",
       mappings = {
+
+        ["P"] = { "toggle_preview", config = { use_float = true, use_image_nvim = true } },
         ["s"] = "open_split",
         ["v"] = "open_vsplit",
         ["l"] = "none",
