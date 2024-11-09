@@ -216,32 +216,6 @@ map("n", "<leader>we", "<C-w>=", { desc = "Equalize" })
 --                           Toggle Section
 -------------------------------------------------------------------------------
 
--- stylua: ignore start
--- toggle options
-LazyVim.toggle.map("<leader>mm", LazyVim.toggle.maximize)
-LazyVim.toggle.map("<leader>uf", LazyVim.toggle.format())
-LazyVim.toggle.map("<leader>uF", LazyVim.toggle.format(true))
-LazyVim.toggle.map("<leader>us", LazyVim.toggle("spell", { name = "Spelling" }))
-LazyVim.toggle.map("<leader>uw", LazyVim.toggle("wrap", { name = "Wrap" }))
-LazyVim.toggle.map("<leader>uL", LazyVim.toggle("relativenumber", { name = "Relative Number" }))
-LazyVim.toggle.map("<leader>ud", LazyVim.toggle.diagnostics)
-LazyVim.toggle.map("<leader>ul", LazyVim.toggle.number)
-LazyVim.toggle.map( "<leader>uc", LazyVim.toggle("conceallevel", { values = { 0, vim.o.conceallevel > 0 and vim.o.conceallevel or 2 } }))
-LazyVim.toggle.map("<leader>uT", LazyVim.toggle.treesitter)
-LazyVim.toggle.map("<leader>ub", LazyVim.toggle("background", { values = { "light", "dark" }, name = "Background" }))
-if vim.lsp.inlay_hint then
-  LazyVim.toggle.map("<leader>uh", LazyVim.toggle.inlay_hints)
-end
-LazyVim.toggle.map("<leader>ug", {
-  name = "Indention Guides",
-  get = function()
-    return require("ibl.config").get_config(0).enabled
-  end,
-  set = function(state)
-    require("ibl").setup_buffer(0, { enabled = state })
-  end,
-})
-
 -- Toggle Transparency
 map("n", "<leader>0", "<cmd>TransparentToggle<CR>", { desc = "Transparency" })
 
@@ -252,7 +226,6 @@ map("n", "<leader>tf", "<cmd>ToggleTerm direction=float<CR>", { desc = "Terminal
 
 -- Toggle ZenMode
 map("n", "<leader>z", "<cmd>ZenMode<CR>", { desc = "Transparency" })
-
 
 -------------------------------------------------------------------------------
 --                           Scrolling Section
