@@ -40,20 +40,6 @@ return {
     dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" }, -- if you prefer nvim-web-devicons
     config = function(_, opts)
       require("render-markdown").setup(opts)
-      LazyVim.toggle.map("<leader>um", {
-        name = "Render Markdown",
-        get = function()
-          return require("render-markdown.state").enabled
-        end,
-        set = function(enabled)
-          local m = require("render-markdown")
-          if enabled then
-            m.enable()
-          else
-            m.disable()
-          end
-        end,
-      })
       vim.cmd([[
         highlight RenderMarkdownH1Bg guibg=#502824 guifg=#fcd2b9 ctermbg=94 ctermfg=230  " Red
         highlight RenderMarkdownH3Bg guibg=#5a3d33 guifg=#d1c4a5 ctermbg=136 ctermfg=235 " Orange

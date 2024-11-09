@@ -4,17 +4,17 @@ return {
   opts = {
     views = {
       mini = {
-        backend = "mini",
-        relative = "editor",
-        align = "message-left",
-        timeout = 2500,
-        position = {
-          row = 1,
-          col = "100%",
-        },
-        border = {
-          style = "rounded",
-        },
+        -- backend = "mini",
+        -- relative = "editor",
+        -- align = "message-left",
+        -- timeout = 2500,
+        -- position = {
+        --   row = 0,
+        --   col = -2,
+        -- },
+        -- border = {
+        -- style = "rounded",
+        -- },
       },
       cmdline_popup = {
         position = {
