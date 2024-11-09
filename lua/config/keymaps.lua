@@ -237,10 +237,6 @@ map("n", "<leader>z", "<cmd>ZenMode<CR>", { desc = "Transparency" })
 --                           Scrolling Section
 -------------------------------------------------------------------------------
 
--------------------------------------------------------------------------------
---                           Scrolling Section
--------------------------------------------------------------------------------
-
 local neoscroll = require("neoscroll")
 neoscroll.setup({
   easing = "quadratic",
