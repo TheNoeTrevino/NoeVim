@@ -63,6 +63,20 @@ map("t", "<C-l>", "<cmd>wincmd k<cr>", { desc = "Go to Upper Window" })
 map("t", "<C-;>", "<cmd>wincmd l<cr>", { desc = "Go to Right Window" })
 
 -------------------------------------------------------------------------------
+--                           Tab Section
+-------------------------------------------------------------------------------
+
+map("n", "<tab><tab>", "<cmd>tabnew<cr>", { desc = "Tab New" })
+map("n", "<tab>j", "<cmd>tabn<cr>", { desc = "Tab Next" })
+map("n", "<tab>;", "<cmd>tabp<cr>", { desc = "Tab Prev" })
+map("n", "<tab>n", "<cmd>tabn<cr>", { desc = "Tab Next" })
+map("n", "<tab>p", "<cmd>tabp<cr>", { desc = "Tab Prev" })
+map("n", "<tab>c", "<cmd>tabc<cr>", { desc = "Tab Close" })
+map("n", "<tab>q", "<cmd>tabc<cr>", { desc = "Tab Close" })
+map("n", "<tab>q", "<cmd>tabc<cr>", { desc = "Tab Close" })
+map("n", "<tab>r", "<cmd>Tabby rename ", { desc = "Tab Rename" })
+
+-------------------------------------------------------------------------------
 --                           Misc/Util Section
 -------------------------------------------------------------------------------
 
@@ -275,6 +289,19 @@ local modes = { "n", "v", "x" }
 for key, func in pairs(keymap) do
   vim.keymap.set(modes, key, func)
 end
+
+-------------------------------------------------------------------------------
+--                           Database Section
+-------------------------------------------------------------------------------
+
+map(
+  "n",
+  "<localleader>do",
+  "<cmd>tabnew<cr><cmd>Tabby rename_tab Database<cr><cmd>DBUIToggle<CR>",
+  { desc = "Open Database" }
+)
+map("n", "<localleader>du", "<cmd>DBUIToggle<CR>", { desc = "Toggle Database" })
+map("n", "<localleader>df", "<cmd>DBUIFindBuffer<CR>", { desc = "Find Buffer" })
 
 -------------------------------------------------------------------------------
 --                           Markdown Section

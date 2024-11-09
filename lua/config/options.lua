@@ -22,6 +22,8 @@ vim.opt.listchars = {
   nbsp = "+",
 }
 
+vim.g.maplocalleader = ","
+
 vim.opt.termguicolors = true
 
 -- Default is 4
