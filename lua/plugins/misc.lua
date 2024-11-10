@@ -6,6 +6,7 @@ return {
   { "knubie/vim-kitty-navigator", event = "VeryLazy" },
   { "stevearc/oil.nvim", event = "VeryLazy", opts = {} },
   { "backdround/improved-search.nvim", event = "VeryLazy" },
+  { "Pocco81/HighStr.nvim", event = "VeryLazy" },
   {
     "meznaric/key-analyzer.nvim",
     event = "VeryLazy",
