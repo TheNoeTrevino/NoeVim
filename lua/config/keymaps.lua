@@ -82,6 +82,19 @@ map("n", "<tab>r", "<cmd>Tabby rename ", { desc = "Tab Rename" })
 --                           Misc/Util Section
 -------------------------------------------------------------------------------
 
+-- Highlights
+for i = 1, 9 do
+  map("v", "h" .. i, ":<c-u>HSHighlight " .. i .. "<CR>", {
+    noremap = true,
+    silent = true,
+  })
+end
+
+map("v", "h0", ":<c-u>HSRmHighlight<CR>", {
+  noremap = true,
+  silent = true,
+})
+
 -- Add ctrl backspace
 map("i", "<C-BS>", "<C-w>")
 
