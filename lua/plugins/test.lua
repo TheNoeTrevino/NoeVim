@@ -7,6 +7,7 @@ return {
       "mfussenegger/nvim-dap", -- for the debugger
       "rcarriga/nvim-dap-ui", -- recommended
       "theHamsta/nvim-dap-virtual-text", -- recommended
+      "nvim-neotest/neotest-go",
     },
     init = function()
       -- override the default keymaps.
@@ -56,9 +57,8 @@ return {
     },
     opts = {
       adapters = {
-        ["neotest-java"] = {
-          -- config here
-        },
+        ["neotest-go"] = {},
+        ["neotest-java"] = {},
       },
     },
   },
