@@ -87,4 +87,27 @@ return {
       })
     end,
   },
+  {
+    "andrewferrier/debugprint.nvim",
+    opts = {
+      keymaps = {
+        normal = {
+          plain_below = "<leader>xPp",
+          plain_above = "<leader>xPP",
+          variable_below = "<leader> xPv",
+          variable_above = "<leader> xPV",
+          variable_below_alwaysprompt = nil,
+          variable_above_alwaysprompt = nil,
+          textobj_below = "<leader>xPo",
+          textobj_above = "<leader>xPO",
+          toggle_comment_debug_prints = nil,
+          delete_debug_prints = nil,
+        },
+      },
+      commands = {
+        toggle_comment_debug_prints = "ToggleCommentDebugPrints",
+        delete_debug_prints = "DeleteDebugPrints",
+      },
+    },
+  },
 }
