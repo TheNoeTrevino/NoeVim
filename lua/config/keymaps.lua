@@ -22,11 +22,9 @@ vim.keymap.del("n", "<leader>ft")
 vim.keymap.del("n", "<leader>xl")
 vim.keymap.del("n", "<leader>xq")
 vim.keymap.del("n", "<leader>fT")
-vim.keymap.del("n", "<leader>ft")
 vim.keymap.del("n", "<leader>gl")
 vim.keymap.del("n", "<C-F>")
 vim.keymap.del("n", "<C-B>")
-vim.keymap.del("n", "<leader>gl")
 
 local map = LazyVim.safe_keymap_set
 

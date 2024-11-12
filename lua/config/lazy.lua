@@ -31,7 +31,7 @@ require("lazy").setup({
     -- Util
     { import = "lazyvim.plugins.extras.test.core" },
     { import = "lazyvim.plugins.extras.dap.core" },
-    { import = "lazyvim.plugins.extras.coding.copilot-chat" },
+    { import = "lazyvim.plugins.extras.ai.copilot-chat" },
     { import = "lazyvim.plugins.extras.editor.illuminate" },
     { import = "plugins" },
   },
