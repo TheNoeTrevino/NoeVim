@@ -78,7 +78,7 @@ return {
         { "<leader>?", desc = " Buffer Keymaps", icon = { icon = "  ", color = "azure", hidden = true } },
         { "<leader><leader>", desc = "Search Buffers", icon = { icon = " ", color = "azure" } },
         { "<leader>/", desc = "Grep Buffer", icon = { icon = "󰮗 ", color = "azure" } },
-        { "<leader>t", desc = "Terminal", icon = { icon = " ", color = "red" }, hidden = false },
+        { "<leader>t", desc = "Tests", icon = { icon = " ", color = "red" }, hidden = false },
         { "<leader>l", desc = "Jump Backwards", icon = { icon = " ", color = "orange" }, hidden = false },
         { "<leader>;", desc = "Jump Forwards", icon = { icon = " ", color = "orange" }, hidden = false },
 
