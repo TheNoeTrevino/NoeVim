@@ -1,6 +1,6 @@
 return {
   "ThePrimeagen/refactoring.nvim",
-  event = "VeryLazy",
+  lazy = false,
   config = function()
     require("refactoring").setup({})
     local map = vim.keymap.set
