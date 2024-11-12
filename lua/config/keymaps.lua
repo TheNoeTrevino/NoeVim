@@ -96,7 +96,7 @@ map("v", "h0", ":<c-u>HSRmHighlight<CR>", {
 })
 
 -- Add ctrl backspace
-map("i", "<C-BS>", "<C-w>")
+map("i", "<C-BS>", "<ESC>dbi")
 
 -- Save
 map("n", "<S-CR>", "<cmd>w<cr>")
