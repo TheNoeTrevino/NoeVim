@@ -3,5 +3,6 @@ return {
   event = "VeryLazy",
   opts = {
     words = { enabled = false },
+    statuscolumn = { enabled = false },
   },
 }
