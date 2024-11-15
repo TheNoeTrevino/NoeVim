@@ -22,7 +22,11 @@ return {
         "H",
         function()
           harpoon:list():add()
-          vim.notify("", vim.log.levels.INFO, { title = "Harpooned  󱡀 " })
+          vim.notify(
+            "This file has been added to the Harpoon list",
+            vim.log.levels.INFO,
+            { title = "Harpooned  󱡀 " }
+          )
         end,
         desc = "󱡀 Harpoon File",
       },
