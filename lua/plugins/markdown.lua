@@ -3,9 +3,6 @@ return {
     "MeanderingProgrammer/render-markdown.nvim",
     ft = { "markdown", "norg", "rmd", "org" },
     opts = {
-      paragraph = {
-        enabled = true,
-      },
       checkbox = {
         enabled = true,
         position = "inline",
