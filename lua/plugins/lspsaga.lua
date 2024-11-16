@@ -4,6 +4,8 @@ return {
   config = function()
     require("lspsaga").setup({
       definition = {
+        height = 0.6,
+        width = 0.9,
         keys = {
           edit = "<C-c>o",
           vsplit = "v",
