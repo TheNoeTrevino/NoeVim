@@ -148,7 +148,6 @@ return {
       })
     end,
   },
-  { "nvchad/volt", lazy = true },
   {
     "utilyre/sentiment.nvim",
     version = "*",
@@ -157,18 +156,13 @@ return {
       vim.g.loaded_matchparen = 1
     end,
   },
+  { "nvzone/volt", lazy = true },
+  { "nvzone/timerly", cmd = "TimerlyToggle" },
   {
-    "nvchad/minty",
-    cmd = { "Shades", "Huefy" },
-  },
-  {
-    "nvchad/showkeys",
+    "nvzone/showkeys",
     cmd = "ShowkeysToggle",
     opts = {
-      winopts = {
-        border = "rounded",
-      },
-      timeout = 3,
+      timeout = 1,
       maxkeys = 5,
       position = "top-center",
     },
