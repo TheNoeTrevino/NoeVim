@@ -109,11 +109,8 @@ map("x", "<leader>p", [["_dP]])
 
 -- Definition mappings
 map("n", "<leader>h", "<cmd>Lspsaga finder tyd+ref+def<CR>", { desc = "Get References" })
-map("n", "<leader>j", "<cmd>Lspsaga goto_definition<CR>", { desc = "Jump to Definition" })
-map("n", "<leader>k", "<cmd>Lspsaga peek_definition<cr>", { desc = "Peek Definition" })
-map("n", "<leader>l", function()
-  harpoon.ui:toggle_quick_menu(harpoon:list(), toggle_opts)
-end, { desc = "Harpoon Quick Menu" })
+
+map("n", "gk", "<cmd>Lspsaga peek_definition<cr><esc>", { desc = "Peek Definition" })
 
 map("n", "dm", [[:lua DeleteMark()<CR>]], { desc = "Delete Mark x" })
 
@@ -192,13 +189,11 @@ map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 -- Diagnostics
 map("n", "<leader>dn", "<cmd>Lspsaga diagnostic_jump_next<CR>", { desc = "Next Diagnostic" })
 map("n", "<leader>dN", "<cmd>Lspsaga diagnostic_jump_prev<CR>", { desc = "Previous Diagnostic" })
-map("n", "<leader>da", "<cmd>Lspsaga show_workspace_diagnostics<CR>", { desc = "All Diagnostics" })
-map("n", "<leader>db", "<cmd>Lspsaga show_buf_diagnostics<CR>", { desc = "Buffer Diagaostics" })
 map("n", "<leader>dl", "<cmd>Lspsaga show_line_diagnostics<CR>", { desc = "Line Diagnostics" })
 map("n", "<leader>dc", "<cmd>Lspsaga show_cursor_diagnostics<CR>", { desc = "Cursor Diagnostics" })
 
-map("n", "<leader>dta", "<cmd>Trouble diagnostics toggle<CR>", { desc = "All Diagnostics" })
-map("n", "<leader>dtb", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", { desc = "Buffer Diagnostics" })
+map("n", "<leader>da", "<cmd>Trouble diagnostics toggle<CR>", { desc = "All Diagnostics" })
+map("n", "<leader>db", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", { desc = "Buffer Diagnostics" })
 
 -------------------------------------------------------------------------------
 --                           Windows Section
