@@ -28,15 +28,7 @@ vim.keymap.del("n", "<C-B>")
 
 local map = LazyVim.safe_keymap_set
 
-local toggle_opts = {
-  border = "rounded",
-  title_pos = "center",
-  ui_width_ratio = 0.5,
-}
-
-local harpoon = require("harpoon")
-
--------------------------------------------------------------------------------
+----------------------------------------------------------------------------
 --                           Shift Navigation Section
 -------------------------------------------------------------------------------
 
@@ -110,7 +102,17 @@ map("x", "<leader>p", [["_dP]])
 -- Definition mappings
 map("n", "<leader>h", "<cmd>Lspsaga finder tyd+ref+def<CR>", { desc = "Get References" })
 
-map("n", "gk", "<cmd>Lspsaga peek_definition<cr><esc>", { desc = "Peek Definition" })
+local glance = require("glance")
+local actions = glance.actions
+
+local function peek_definition()
+  vim.cmd("Glance definitions") -- Execute the command
+  vim.defer_fn(function()
+    actions.enter_win("preview")() -- Perform the action after 100ms
+  end, 100) -- Delay in milliseconds
+end
+
+vim.keymap.set("n", "gk", peek_definition, { desc = "Peek Definition" })
 
 map("n", "dm", [[:lua DeleteMark()<CR>]], { desc = "Delete Mark x" })
 
