@@ -68,8 +68,6 @@ return {
         -- valid colors are: `azure`, `blue`, `cyan`, `green`, `grey`, `orange`, `purple`, `red`, `yellow`
         { "gx", desc = "Open with system app" },
         { "<leader>e", desc = " NeoTree", icon = { icon = "󰙅 ", color = "yellow" } },
-        -- { "<leader>k", desc = " Peek Definition", icon = { icon = "󰈈 ", color = "red" } },
-        { "<leader>l", desc = " Harpoon", icon = { icon = "󰧊 ", color = "azure" } },
         { "<leader>y", desc = " Yank History", icon = { icon = " ", color = "azure" } },
         { "<leader>0", desc = " Transparency", icon = { icon = " ", color = "azure" }, hidden = true },
         { "<leader>j", desc = " References", icon = { icon = " ", color = "purple" } },
@@ -77,8 +75,6 @@ return {
         { "<leader><leader>", desc = " Search Buffers", icon = { icon = " ", color = "azure" } },
         { "<leader>/", desc = " Grep Buffer", icon = { icon = "󰮗 ", color = "azure" } },
         { "<leader>t", desc = "Tests", icon = { icon = " ", color = "red" }, hidden = false },
-        { "<leader>l", desc = " Jump Backwards", icon = { icon = " ", color = "orange" }, hidden = false },
-        { "<leader>;", desc = " Jump Forwards", icon = { icon = " ", color = "orange" }, hidden = false },
 
         { "<leader>gg", desc = " LazyGit", icon = { icon = "󰋣 ", color = "azure" } },
         { "<leader>gf", desc = " LazyGit File History", icon = { icon = "󰋣 ", color = "azure" } },
@@ -122,6 +118,7 @@ return {
         { "<leader>4", hidden = true },
         { "<leader>5", hidden = true },
         { "<leader>z", hidden = true },
+        { "<leader>q", hidden = true },
         -- { "<leader>p", hidden = true },
         -- { "<leader>y", hidden = true },
         { "<leader>b", hidden = true },

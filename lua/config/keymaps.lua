@@ -122,11 +122,13 @@ end
 
 local search = require("improved-search")
 
+map("n", "gz", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", { noremap = true })
+
 -- Search current word
-map("n", "!", search.current_word)
+map("n", "*", search.current_word)
 
 -- Search selected text in visual mode
-map("x", "/", search.in_place) -- search selection without moving
+map("x", "*", search.in_place) -- search selection without moving
 
 -- Search by motion in place, |ib searching in the nearest pairs
 map("n", "|", search.in_place)
@@ -158,10 +160,6 @@ map({ "n", "x", "o" }, "+", "$", { noremap = true, silent = true })
 
 map({ "n", "x", "o" }, "gj", "zH^", { noremap = true, silent = true, desc = "Go to Beginnning" })
 map({ "n", "x", "o" }, "g;", "$", { noremap = true, silent = true, desc = "Go to End" })
-
--- Portal
-map("n", "<leader>;", "<CMD>Portal jumplist forward<cr>", { silent = true })
-map("n", "<leader>l", "<CMD>Portal jumplist backward<cr>", { silent = true })
 
 -------------------------------------------------------------------------------
 --                           Diagnostics Section
@@ -237,10 +235,10 @@ neoscroll.setup({
 })
 local keymap = {
   ["<C-u>"] = function()
-    neoscroll.ctrl_u({ duration = 150 })
+    neoscroll.ctrl_u({ duration = 100 })
   end,
   ["<C-d>"] = function()
-    neoscroll.ctrl_d({ duration = 150 })
+    neoscroll.ctrl_d({ duration = 100 })
   end,
   ["<C-b>"] = function()
     neoscroll.ctrl_b({ duration = 200 })
