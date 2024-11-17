@@ -13,7 +13,7 @@ return {
       preview_win_opts = { -- Configure preview window options
         cursorline = true,
         number = true,
-        wrap = false,
+        wrap = true,
       },
       border = {
         enable = true, -- Show window borders. Only horizontal borders allowed
@@ -21,8 +21,8 @@ return {
         bottom_char = "―",
       },
       list = {
-        position = "right",
-        width = 0.33, -- 33% width relative to the active window, min 0.1, max 0.5
+        position = "right", -- Position of the list window 'left'|'right'
+        width = 0, -- 33% width relative to the active window, min 0.1, max 0.5
       },
       theme = { -- This feature might not work properly in nvim-0.7.2
         enable = true, -- Will generate colors for the plugin based on your current colorscheme
@@ -42,10 +42,10 @@ return {
           ["s"] = actions.jump_split,
           ["t"] = actions.jump_tab,
           ["<CR>"] = actions.jump,
+          ["o"] = actions.jump,
           [";"] = actions.open_fold,
           ["h"] = actions.close_fold,
           ["j"] = actions.enter_win("preview"), -- Focus preview window
-          ["o"] = actions.enter_win("preview"), -- Focus preview window
           ["q"] = actions.close,
           ["Q"] = actions.close,
           ["gk"] = actions.close,

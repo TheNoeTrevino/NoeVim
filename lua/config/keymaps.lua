@@ -28,15 +28,7 @@ vim.keymap.del("n", "<C-B>")
 
 local map = LazyVim.safe_keymap_set
 
-local toggle_opts = {
-  border = "rounded",
-  title_pos = "center",
-  ui_width_ratio = 0.5,
-}
-
-local harpoon = require("harpoon")
-
--------------------------------------------------------------------------------
+----------------------------------------------------------------------------
 --                           Shift Navigation Section
 -------------------------------------------------------------------------------
 
