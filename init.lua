@@ -109,6 +109,14 @@ h(0, "GitConflictAncestor", { bg = "#545252", fg = nil })
 -- Neo-tree conflict (can match incoming or ancestor)
 h(0, "NeoTreeGitConflict", { bg = "#326290", fg = nil })
 
+h(0, "GlancePreviewNormal", { bg = "#131111", fg = nil })
+h(0, "GlanceListNormal", { bg = "#101010", fg = nil })
+h(0, "GlanceListEndOfBuffer", { bg = "#101010", fg = nil })
+
+h(0, "GlanceListBorderBottom", { bg = "#101010", fg = "#1F3442" })
+h(0, "GlanceBorderTop", { bg = "#101010", fg = "#1F3442" })
+h(0, "GlancePreviewBorderBottom", { bg = "#101010", fg = "#1F3442" })
+
 -- vscode string color
 -- hi(0, "String", { fg = "#CE9178" })
 
