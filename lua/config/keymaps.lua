@@ -100,19 +100,10 @@ map("n", "L", "<C-^>", { noremap = true, silent = true })
 map("x", "<leader>p", [["_dP]])
 
 -- Definition mappings
-map("n", "<leader>h", "<cmd>Lspsaga finder tyd+ref+def<CR>", { desc = "Get References" })
-
-local glance = require("glance")
-local actions = glance.actions
-
-local function peek_definition()
-  vim.cmd("Glance definitions") -- Execute the command
-  vim.defer_fn(function()
-    actions.enter_win("preview")() -- Perform the action after 100ms
-  end, 100) -- Delay in milliseconds
-end
-
-vim.keymap.set("n", "gk", peek_definition, { desc = "Peek Definition" })
+map("n", "<leader>j", "<cmd>Lspsaga finder tyd+ref+def<CR>", { desc = "Get References" })
+map("n", "gk", "<cmd>Glance definitions<cr>", { desc = "Peek Definition" })
+map("n", "<leader>k", "<cmd>Glance definitions<cr>", { desc = "Peek Definition" })
+map("n", "gR", "<cmd>Glance references<cr>", { desc = "Glance References" })
 
 map("n", "dm", [[:lua DeleteMark()<CR>]], { desc = "Delete Mark x" })
 
@@ -122,8 +113,6 @@ function DeleteMark()
 end
 
 local search = require("improved-search")
-
-map("n", "gz", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", { noremap = true })
 
 -- Search current word
 map("n", "*", search.current_word)
@@ -145,10 +134,6 @@ map("n", "J", "mzJ`z:delm z<cr>")
 map("n", "go", "mzo<ESC>`z:delm z<cr><down>")
 map("n", "gO", "mzO<ESC>`z:delm z<cr><up>")
 
--- Start/End of line
-map("n", "gj", "^", { desc = "Start of Line" })
-map("n", "g;", "$", { desc = "End of Line" })
-
 -- Easier marks
 map("n", "'", "<cmd>WhichKey `<cr>")
 
@@ -160,10 +145,10 @@ map({ "n", "x" }, "gC", "M")
 map("n", "U", "~<Left>")
 
 -- Better end and beginning
-map({ "n", "x", "o" }, "-", "_", { noremap = true, silent = true })
+map({ "n", "x", "o" }, "-", "zH^", { noremap = true, silent = true })
 map({ "n", "x", "o" }, "+", "$", { noremap = true, silent = true })
 
-map({ "n", "x", "o" }, "gj", "_", { noremap = true, silent = true, desc = "Go to Beginnning" })
+map({ "n", "x", "o" }, "gj", "zH^", { noremap = true, silent = true, desc = "Go to Beginnning" })
 map({ "n", "x", "o" }, "g;", "$", { noremap = true, silent = true, desc = "Go to End" })
 
 -------------------------------------------------------------------------------
