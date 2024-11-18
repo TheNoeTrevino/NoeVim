@@ -114,8 +114,6 @@ end
 
 local search = require("improved-search")
 
-map("n", "gz", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", { noremap = true })
-
 -- Search current word
 map("n", "*", search.current_word)
 

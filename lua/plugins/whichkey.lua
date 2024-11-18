@@ -75,6 +75,7 @@ return {
         { "<leader><leader>", desc = " Search Buffers", icon = { icon = " ", color = "azure" } },
         { "<leader>/", desc = " Grep Buffer", icon = { icon = "󰮗 ", color = "azure" } },
         { "<leader>t", desc = "Tests", icon = { icon = " ", color = "red" }, hidden = false },
+        { "<leader>k", desc = "Peek References", icon = { icon = " ", color = "red" }, hidden = false },
 
         { "<leader>gg", desc = " LazyGit", icon = { icon = "󰋣 ", color = "azure" } },
         { "<leader>gf", desc = " LazyGit File History", icon = { icon = "󰋣 ", color = "azure" } },
