@@ -111,9 +111,10 @@ map({ "n", "x", "o" }, "+", "$", { noremap = true, silent = true })
 map("x", "<leader>p", [["_dP]])
 
 -- Definition mappings
-map("n", "<leader>h", "<cmd>Lspsaga finder tyd+ref+def<CR>", { desc = "Get References" })
-
-map("n", "gk", "<cmd>Lspsaga peek_definition<cr><esc>", { desc = "Peek Definition" })
+map("n", "<leader>j", "<cmd>Lspsaga finder tyd+ref+def<CR>", { desc = "Get References" })
+map("n", "gk", "<cmd>Glance definitions<cr>", { desc = "Peek Definition" })
+map("n", "<leader>k", "<cmd>Glance definitions<cr>", { desc = "Peek Definition" })
+map("n", "gR", "<cmd>Glance references<cr>", { desc = "Glance References" })
 
 map("n", "dm", [[:lua DeleteMark()<CR>]], { desc = "Delete Mark x" })
 
@@ -141,8 +142,8 @@ map("n", "N", "Nzzzv", { desc = "Prev find and center" })
 map("n", "J", "mzJ`z:delm z<cr>")
 
 -- Add a line up or down in normal mode
-map("n", "go", "mzo<ESC>`z:delm z<cr>")
-map("n", "gO", "mzO<ESC>`z:delm z<cr>")
+map("n", "go", "mzo<ESC>`z:delm z<cr><down>")
+map("n", "gO", "mzO<ESC>`z:delm z<cr><up>")
 
 -- Easier marks
 map("n", "'", "<cmd>WhichKey `<cr>")
@@ -155,10 +156,10 @@ map({ "n", "x" }, "gC", "M")
 map("n", "U", "~<Left>")
 
 -- Better end and beginning
-map({ "n", "x", "o" }, "-", "_", { noremap = true, silent = true })
+map({ "n", "x", "o" }, "-", "zH^", { noremap = true, silent = true })
 map({ "n", "x", "o" }, "+", "$", { noremap = true, silent = true })
 
-map({ "n", "x", "o" }, "gj", "_", { noremap = true, silent = true, desc = "Go to Beginnning" })
+map({ "n", "x", "o" }, "gj", "zH^", { noremap = true, silent = true, desc = "Go to Beginnning" })
 map({ "n", "x", "o" }, "g;", "$", { noremap = true, silent = true, desc = "Go to End" })
 
 -- Portal
