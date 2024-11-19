@@ -96,6 +96,9 @@ map("n", "<S-CR>", "<cmd>w<cr>")
 -- Better alternate buffer
 map("n", "L", "<C-^>", { noremap = true, silent = true })
 
+-- No right ctrl on the macbook :(
+map("n", "Q", "<C-Z>", { noremap = true, silent = true })
+
 -- Paste without putting into clipboard
 map("x", "<leader>p", [["_dP]])
 

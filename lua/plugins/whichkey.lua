@@ -124,7 +124,7 @@ return {
         -- { "<leader>y", hidden = true },
         { "<leader>b", hidden = true },
         { "<leader>?", hidden = true },
-        { "<leader>w", hidden = true },
+        -- { "<leader>w", hidden = true },
       },
     },
   },

@@ -1,6 +1,7 @@
 ---@diagnostic disable: missing-fields
 return {
   "dnlhc/glance.nvim",
+  event = "VeryLazy",
   config = function()
     -- Lua configuration
     local glance = require("glance")
