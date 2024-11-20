@@ -37,4 +37,8 @@ return {
       vim.keymap.set("n", "<leader>am", "<CMD>CopilotChatModels<CR>"),
     }
   end,
+  keys = {
+    { "<leader>ae", "<CMD>CopilotChatExplain<CR>", desc = "Explain", mode = { "n", "v" } },
+    { "<leader>af", "<CMD>CopilotChatFix<CR>", desc = "Fix", mode = { "n", "v" } },
+  },
 }
