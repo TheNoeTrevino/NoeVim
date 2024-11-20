@@ -4,6 +4,7 @@ return {
   opts = function()
     local logo = [[
 
+
                                                                                 
                                                                                 
                                           ███                               
@@ -45,6 +46,7 @@ return {
           { action = "lua LazyVim.pick()()", desc = " Find File", icon = "󰥨 ", key = "f" },
           {
             action = function()
+              vim.cmd("tabnew")
               require("telescope.builtin").find_files({ cwd = "~/notes/" })
             end,
             desc = " Search Notes",

@@ -4,7 +4,7 @@ return {
   cmd = "CopilotChat",
   opts = function()
     return {
-      auto_insert_mode = true,
+      auto_insert = true,
       show_folds = false,
       show_help = true,
       question_header = "  Noe ",
