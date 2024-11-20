@@ -239,10 +239,10 @@ local keymap = {
     neoscroll.ctrl_f({ duration = 150 })
   end,
   ["<C-y>"] = function()
-    neoscroll.scroll(-0.1, { move_cursor = true, duration = 100 })
+    neoscroll.scroll(-0.1, { move_cursor = true, duration = 50 })
   end,
   ["<C-e>"] = function()
-    neoscroll.scroll(0.1, { move_cursor = true, duration = 100 })
+    neoscroll.scroll(0.1, { move_cursor = true, duration = 50 })
   end,
   ["zt"] = function()
     neoscroll.zt({ half_win_duration = 100 })
