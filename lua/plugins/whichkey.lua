@@ -86,7 +86,6 @@ return {
 
         { "<leader>aa", desc = "Toggle ", icon = { icon = " ", color = "yellow" } },
         { "<leader>am", desc = "Select Model ", icon = { icon = " ", color = "yellow" } },
-        { "<leader>ad", desc = "Diagnostic Help", icon = { icon = " ", color = "yellow" } },
         { "<leader>aq", desc = "Prompt Actions", icon = { icon = " ", color = "yellow" } },
         { "<leader>ap", desc = "Quick Chat", icon = { icon = " ", color = "yellow" } },
         { "<leader>ax", desc = "Clear", icon = { icon = " ", color = "yellow" } },
