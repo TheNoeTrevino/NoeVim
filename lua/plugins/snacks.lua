@@ -4,5 +4,6 @@ return {
   opts = {
     words = { enabled = false },
     statuscolumn = { enabled = false },
+    dashboard = { enabled = false },
   },
 }

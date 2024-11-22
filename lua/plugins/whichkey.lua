@@ -30,7 +30,7 @@ return {
         { "<leader>c", group = "Code" },
         { "<leader>dt", group = "Trouble" },
         { "<leader>S", group = "TS Surround", icon = { icon = "󰐅 ", color = "azure" }, hidden = true },
-        { "<leader>n", group = "Notification", icon = { icon = "󰵙 ", color = "yellow" }, hidden = false },
+        { "<leader>n", group = "Notif/Notes", icon = { icon = "󰵙 ", color = "yellow" }, hidden = false },
         { "<leader>m", group = "Markdown", icon = { icon = "󱦹 ", color = "azure" } },
         { "<leader>g", group = "Git", icon = { icon = "󰊤 ", color = "azure" } },
         { "<leader>gs", group = "Stage/Search", icon = { icon = "󰊤 " } },
