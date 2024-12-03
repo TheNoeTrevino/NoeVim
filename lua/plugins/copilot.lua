@@ -4,7 +4,7 @@ return {
   cmd = "CopilotChat",
   opts = function()
     return {
-      auto_insert = true,
+      auto_insert_mode = true,
       show_folds = false,
       show_help = true,
       question_header = "  Noe ",
@@ -13,7 +13,6 @@ return {
         layout = "float", -- 'vertical', 'horizontal', 'float', 'replace'
         width = 0.8, -- fractional width of parent, or absolute width in columns when > 1
         height = 0.8, -- fractional height of parent, or absolute height in rows when > 1
-        -- Ohehehptions below only apply to floating windows
         relative = "editor", -- 'editor', 'win', 'cursor', 'mouse'
         border = "rounded", -- 'none', single', 'double', 'rounded', 'solid', 'shadow'
         row = nil, -- row position of the window, default is centered
