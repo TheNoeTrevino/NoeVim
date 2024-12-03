@@ -29,6 +29,13 @@ return {
     vim.api.nvim_set_keymap("i", "<S-Tab>", [[<cmd>lua require'luasnip'.jump(-1)<Cr>]], { silent = true })
     vim.api.nvim_set_keymap("s", "<S-Tab>", [[<cmd>lua require'luasnip'.jump(-1)<Cr>]], { silent = true })
 
+    ls.add_snippets("markdown", {
+      s({ trig = "todo", name = "Todo List", dscr = "Todo Item" }, {
+        t("- [ ] "),
+        i(1, "todo"),
+      }),
+    })
+
     ls.add_snippets("go", {
       s({ trig = "err", name = "Error", dscr = "Throw an error" }, {
         t("if err != nil {"),

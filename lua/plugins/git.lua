@@ -184,6 +184,9 @@ return {
         title = "GitPad", -- The title of the floating window
         dir = vim.fn.stdpath("data") .. "/gitpad", -- The directory where the notes are stored. Possible value is a valid path ie '~/notes'
         default_text = "", -- Leave this nil if you want to use the default text
+        floating_win_opts = {
+          border = "rounded", -- The border style of the floating window. Possible values are `'single'`, `'double'`, `'shadow'`, `'rounded'`, and `''` (no border).
+        },
         on_attach = function(bufnr)
           vim.api.nvim_buf_set_keymap(bufnr, "n", "q", "<Cmd>wq<CR>", { noremap = true, silent = true })
           vim.api.nvim_buf_set_keymap(bufnr, "n", "<esc>", "<Cmd>wq<CR>", { noremap = true, silent = true })
