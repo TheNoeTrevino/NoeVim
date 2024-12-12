@@ -57,3 +57,11 @@ LLM
 Hadoop's
 config
 nvim
+ROC
+TPR
+TP
+FN
+FP
+FPR
+TRP
+AUC
