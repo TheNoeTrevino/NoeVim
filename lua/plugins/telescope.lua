@@ -10,7 +10,7 @@ return {
       { "<leader>y", mode = { "n", "x" }, "<cmd>Telescope yank_history<cr><ESC>", desc = "Yanks" },
       -- search
       { "<leader>sb", "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr><esc>", desc = "Buffers" },
-      { "<leader>sp", "<cmd>Telescope spell_suggest<cr><esc>", desc = "Spell Suggest" },
+      { "<leader>sp", "<cmd>Telescope spell_suggest theme=cursor<cr><esc>", desc = "Spell Suggest" },
       { "<leader>/", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Grep Current Buffer" },
       { "<leader>si", LazyVim.pick.config_files(), desc = "Search Config" },
       { "<leader>sy", "<cmd>Telescope yank_history<cr><ESC>", desc = "Yanks" },
