@@ -143,6 +143,7 @@ map("n", "'", "<cmd>WhichKey `<cr>")
 -- Matching Bracket
 map({ "n", "x" }, "M", "%")
 map({ "n", "x" }, "gC", "M")
+map({ "n", "x" }, "zm", "M")
 
 -- Easier case switching
 map("n", "U", "~<Left>")

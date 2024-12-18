@@ -2,6 +2,7 @@ return {
   "folke/snacks.nvim",
   event = "VeryLazy",
   opts = {
+    indent = { animate = { enabled = false } },
     statuscolumn = { enabled = false },
     dashboard = { enabled = false },
     scroll = {

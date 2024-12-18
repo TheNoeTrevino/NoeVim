@@ -1,109 +1,85 @@
----@diagnostic disable: missing-fields
 return {
-  {
-    "hrsh7th/cmp-cmdline",
-    event = "VeryLazy",
-    dependencies = {
-      "rcarriga/cmp-dap",
+  "saghen/blink.cmp",
+  ---@module 'blink.cmp'
+  ---@type blink.cmp.Config
+  opts = {
+    appearance = {
+      -- sets the fallback highlight groups to nvim-cmp's highlight groups
+      -- useful for when your theme doesn't support blink.cmp
+      -- will be removed in a future release, assuming themes add support
+      use_nvim_cmp_as_default = false,
+      -- set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
+      -- adjusts spacing to ensure icons are aligned
+      nerd_font_variant = "mono",
     },
-    config = function()
-      local cmp = require("cmp")
+    completion = {
+      accept = {
+        -- experimental auto-brackets support
+        auto_brackets = {
+          enabled = true,
+        },
+      },
+      menu = {
+        winhighlight = "Normal:BlinkCmpMenu,FloatBorder:BlinkCmpMenuBorder,CursorLine:BlinkCmpMenuSelection,Search:None",
+        border = "rounded",
+        winblend = 10,
+        draw = {
+          treesitter = { "lsp" },
+        },
+      },
+      documentation = {
+        window = {
+          border = "rounded",
+          winblend = 10,
+        },
+        auto_show = true,
+        auto_show_delay_ms = 200,
+      },
+      ghost_text = {
+        enabled = false,
+      },
+    },
 
-      local noevim_mappings = {
-        -- Confirm
-        ["<Tab>"] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.confirm({ select = false })
+    -- experimental signature help support
+    -- signature = { enabled = true },
+
+    sources = {
+      -- adding any nvim-cmp sources here will enable them
+      -- with blink.compat
+      compat = {},
+      default = { "lsp", "path", "snippets", "buffer" },
+      cmdline = {},
+    },
+
+    keymap = {
+      preset = "super-tab",
+      ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
+      ["<C-e>"] = { "hide", "fallback" },
+
+      ["<Tab>"] = {
+        function(cmp)
+          if cmp.snippet_active() then
+            return cmp.accept()
           else
-            fallback()
+            return cmp.select_and_accept()
           end
-        end, { "i", "c" }),
-      }
-
-      local next_mappings = { "<Down>", "<C-K>", "<C-N>" }
-      for _, m in ipairs(next_mappings) do
-        noevim_mappings[m] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_next_item()
-          else
-            fallback()
-          end
-        end, { "i", "c" })
-      end
-
-      local previous_mappings = { "<Up>", "<C-L>", "<C-P>" }
-      for _, m in ipairs(previous_mappings) do
-        noevim_mappings[m] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_prev_item()
-          else
-            fallback()
-          end
-        end, { "i", "c" })
-      end
-
-      -- Setup for dap completion
-      cmp.setup({
-        enabled = function()
-          return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt" or require("cmp_dap").is_dap_buffer()
         end,
-        mapping = noevim_mappings,
-      })
+        "snippet_forward",
+        "fallback",
+      },
+      ["<S-Tab>"] = { "snippet_backward", "fallback" },
 
-      cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
-        sources = {
-          { name = "dap" },
-        },
-      })
+      ["<Up>"] = { "select_prev", "fallback" },
+      ["<Down>"] = { "select_next", "fallback" },
+      ["<C-p>"] = { "select_prev", "fallback" },
+      ["<C-n>"] = { "select_next", "fallback" },
+      ["<C-l>"] = { "select_prev", "fallback" },
+      ["<C-k>"] = { "select_next", "fallback" },
 
-      -- Setup for `/`, `?` command-line
-      cmp.setup.cmdline({ "/", "?" }, {
-        sources = {
-          { name = "buffer" },
-        },
-      })
-
-      -- Setup for `:` command-line
-      cmp.setup.cmdline(":", {
-        sources = cmp.config.sources({
-          { name = "path" },
-        }, {
-          {
-            name = "cmdline",
-            option = {
-              ignore_cmds = { "Man", "!" },
-            },
-          },
-        }),
-      })
-    end,
-  },
-  {
-    "hrsh7th/nvim-cmp",
-    event = "VeryLazy",
-    dependencies = {
-      "jakewvincent/mkdnflow.nvim",
-      "L3MON4D3/LuaSnip",
-      "saadparwaiz1/cmp_luasnip",
-      "mlaursen/vim-react-snippets",
+      ["<C-b>"] = { "scroll_documentation_up", "fallback" },
+      ["<C-f>"] = { "scroll_documentation_down", "fallback" },
+      ["<C-u>"] = { "scroll_documentation_up", "fallback" },
+      ["<C-d>"] = { "scroll_documentation_down", "fallback" },
     },
-
-    ---@param opts cmp.ConfigSchema
-    opts = function(_, opts)
-      table.insert(opts.sources, { name = "mkdnflow" })
-      table.insert(opts.sources, { name = "luasnip" })
-      table.insert(opts.sources, { name = "vim-dadbod-completion", priority = 1000 })
-      opts.experimental = {
-        ghost_text = false, -- Disable ghost text here
-      }
-
-      require("vim-react-snippets").lazy_load()
-
-      local cmp_window = require("cmp.config.window")
-      opts.window = {
-        completion = cmp_window.bordered(),
-        documentation = cmp_window.bordered(),
-      }
-    end,
   },
 }
