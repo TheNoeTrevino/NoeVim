@@ -28,7 +28,6 @@ return {
       formatters_by_ft = {
         ["markdown"] = {},
         ["markdown.mdx"] = {},
-        ["java"] = { "google-java-format" }, -- Add this line for Java formatter
       },
     },
   },

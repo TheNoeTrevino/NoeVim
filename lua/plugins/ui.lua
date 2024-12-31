@@ -139,15 +139,16 @@ return {
       })
     end,
   },
-  {
-    "NvChad/nvim-colorizer.lua",
-    event = "UIEnter",
-    config = function()
-      require("colorizer").setup({
-        user_default_options = { mode = "virtualtext" },
-      })
-    end,
-  },
+  -- currently broken
+  -- {
+  --   "catgoose/nvim-colorizer.lua",
+  --   event = "UIEnter",
+  --   config = function()
+  --     require("colorizer").setup({
+  --       user_default_options = { mode = "virtualtext" },
+  --     })
+  --   end,
+  -- },
   {
     "utilyre/sentiment.nvim",
     version = "*",
