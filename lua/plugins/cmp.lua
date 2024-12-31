@@ -3,6 +3,7 @@ return {
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
   opts = {
+
     appearance = {
       -- sets the fallback highlight groups to nvim-cmp's highlight groups
       -- useful for when your theme doesn't support blink.cmp
@@ -48,7 +49,16 @@ return {
       -- with blink.compat
       compat = {},
       default = { "lsp", "path", "snippets", "buffer" },
-      cmdline = {},
+      cmdline = function()
+        local type = vim.fn.getcmdtype()
+        if type == "/" or type == "?" then
+          return { "buffer" }
+        end
+        if type == ":" then
+          return { "cmdline" }
+        end
+        return {}
+      end,
     },
 
     keymap = {
