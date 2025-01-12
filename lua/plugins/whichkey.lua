@@ -75,6 +75,7 @@ return {
         { "<leader>/", desc = " Grep Buffer", icon = { icon = "󰮗 ", color = "azure" } },
         { "<leader>t", desc = "Tests", icon = { icon = " ", color = "red" }, hidden = false },
         { "<leader>k", desc = " Peek Def", icon = { icon = " ", color = "red" }, hidden = false },
+        { "<leader>.", desc = " Scratch Buffer", icon = { icon = " ", color = "red" }, hidden = false },
 
         { "<leader>gg", desc = " LazyGit", icon = { icon = "󰋣 ", color = "azure" } },
         { "<leader>gf", desc = " LazyGit File History", icon = { icon = "󰋣 ", color = "azure" } },
@@ -98,17 +99,7 @@ return {
         { "<leader>gls", desc = "Go Sync", icon = { icon = " ", color = "blue" } },
         { "<leader>gle", desc = "Handle Err", icon = { icon = " ", color = "blue" } },
 
-        { "<leader>h", group = "Highlights", icon = { icon = "󱦹 ", color = "yellow" }, mode = "x" },
         { "<localleader>d", group = "Database", icon = { icon = "󱦹 ", color = "yellow" }, mode = "x" },
-        { "<leader>h1", desc = "Pastel yellow", icon = { icon = "󱦹 ", color = "yellow" }, mode = "x" },
-        { "<leader>h2", desc = "Aqua menthe", icon = { icon = "󱦹 ", color = "cyan" }, mode = "x" },
-        { "<leader>h3", desc = "Proton purple", icon = { icon = "󱦹 ", color = "purple" }, mode = "x" },
-        { "<leader>h4", desc = "Orange red", icon = { icon = "󱦹 ", color = "red" }, mode = "x" },
-        { "<leader>h5", desc = "Office green", icon = { icon = "󱦹 ", color = "green" }, mode = "x" },
-        { "<leader>h6", desc = "Just blue", icon = { icon = "󱦹 ", color = "blue" }, mode = "x" },
-        { "<leader>h7", desc = "Blush pink", icon = { icon = "󱦹 ", color = "pink" }, mode = "x" },
-        { "<leader>h8", desc = "Cosmic latte", icon = { icon = "󱦹 ", color = "white" }, mode = "x" },
-        { "<leader>h9", desc = "Fallow brown", icon = { icon = "󱦹 ", color = "brown" }, mode = "x" },
 
         { "<leader>p", desc = " Void Paste", icon = { icon = "󱦹 ", color = "brown" }, mode = { "n", "x" } },
 
@@ -118,11 +109,9 @@ return {
         { "<leader>4", hidden = true },
         { "<leader>5", hidden = true },
         { "<leader>z", hidden = true },
+
         { "<leader>q", hidden = true },
-        { "<leader>.", hidden = true },
         { "<leader>D", hidden = true },
-        -- { "<leader>p", hidden = true },
-        -- { "<leader>w", hidden = true },
       },
     },
   },
