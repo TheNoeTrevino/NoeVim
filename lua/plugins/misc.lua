@@ -5,7 +5,6 @@ return {
   { "tummetott/unimpaired.nvim", event = "VeryLazy" },
   { "knubie/vim-kitty-navigator", event = "VeryLazy" },
   { "backdround/improved-search.nvim", event = "VeryLazy" },
-  { "Pocco81/HighStr.nvim", event = "VeryLazy" },
   {
     "meznaric/key-analyzer.nvim",
     event = "VeryLazy",
