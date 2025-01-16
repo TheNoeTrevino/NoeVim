@@ -168,4 +168,10 @@ return {
       position = "top-center",
     },
   },
+  {
+    "nvzone/typr",
+    cmd = "TyprStats",
+    dependencies = "nvzone/volt",
+    opts = {},
+  },
 }
