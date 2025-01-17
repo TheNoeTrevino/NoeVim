@@ -111,8 +111,6 @@ return {
         { "<leader>q", hidden = true },
         { "<leader>.", hidden = true },
         { "<leader>D", hidden = true },
-        -- { "<leader>p", hidden = true },
-        -- { "<leader>w", hidden = true },
       },
     },
   },
