@@ -62,6 +62,8 @@ h(0, "NeoTreeFloatTitle", { fg = "#ffb86c", bg = nil })
 h(0, "NormalFloat", { bg = nil })
 h(0, "FloatBorder", { fg = "#6272a4", bg = nil })
 h(0, "CursorLineNr", { fg = "#fcb205", bg = nil })
+h(0, "TelescopeSelection", { bg = "#202030" })
+h(0, "NeoTreeCursorLine", { bg = "#202030" })
 
 -- Current changes (green)
 h(0, "GitConflictCurrentLabel", { bg = "#337367", fg = nil })
