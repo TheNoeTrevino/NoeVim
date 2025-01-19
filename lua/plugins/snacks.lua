@@ -15,5 +15,10 @@ return {
         return vim.g.snacks_scroll ~= false and vim.b[buf].snacks_scroll ~= false
       end,
     },
+    scratch = {
+      ft = function()
+        return "markdown"
+      end,
+    },
   },
 }
