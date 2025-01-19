@@ -63,10 +63,6 @@ h(0, "NormalFloat", { bg = nil })
 h(0, "FloatBorder", { fg = "#6272a4", bg = nil })
 h(0, "CursorLineNr", { fg = "#fcb205", bg = nil })
 
-h(0, "BlinkCmpMenu", { bg = "#000000" })
-h(0, "BlinkCmpMenuBorder", { bg = "#000000" })
-h(0, "BlinkCmpMenuSelection", { bg = "#363646" })
-
 -- Current changes (green)
 h(0, "GitConflictCurrentLabel", { bg = "#337367", fg = nil })
 h(0, "GitConflictCurrent", { bg = "#264033", fg = nil })
@@ -110,7 +106,6 @@ h(0, "BlinkCmpKindFile", { fg = "#967FB8" })
 h(0, "BlinkCmpKindText", { fg = "#967FB8" })
 h(0, "BlinkCmpKindClass", { fg = "#938AA9" })
 
--- Defaults, needed bc markdown erasure
 h(0, "BlinkCmpKindReference", { fg = "#90CAE1" })
 h(0, "BlinkCmpKindInterface", { fg = "#90CAE1" })
 h(0, "BlinkCmpKindOperator", { fg = "#90CAE1" })
@@ -123,6 +118,10 @@ h(0, "BlinkCmpKindValue", { fg = "#90CAE1" })
 h(0, "BlinkCmpKindEvent", { fg = "#90CAE1" })
 h(0, "BlinkCmpKindColor", { fg = "#90CAE1" })
 h(0, "BlinkCmpKindUnit", { fg = "#90CAE1" })
+
+h(0, "BlinkCmpMenu", { bg = "#000000" })
+h(0, "BlinkCmpMenuBorder", { bg = "#000000", fg = "#6272a4" })
+h(0, "BlinkCmpMenuSelection", { bg = "#363646" })
 
 -- vscode string color
 -- hi(0, "String", { fg = "#CE9178" })
