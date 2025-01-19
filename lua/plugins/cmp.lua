@@ -2,8 +2,14 @@ return {
   "saghen/blink.cmp",
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
+  dependencies = {
+    "edte/blink-go-import.nvim",
+    ft = "go",
+    config = function()
+      require("blink-go-import").setup()
+    end,
+  },
   opts = {
-
     appearance = {
       -- sets the fallback highlight groups to nvim-cmp's highlight groups
       -- useful for when your theme doesn't support blink.cmp
@@ -14,12 +20,7 @@ return {
       nerd_font_variant = "mono",
     },
     completion = {
-      accept = {
-        -- experimental auto-brackets support
-        auto_brackets = {
-          enabled = true,
-        },
-      },
+      accept = {},
       menu = {
         winhighlight = "Normal:BlinkCmpMenu,FloatBorder:BlinkCmpMenuBorder,CursorLine:BlinkCmpMenuSelection,Search:None",
         border = "rounded",
@@ -47,8 +48,13 @@ return {
     sources = {
       -- adding any nvim-cmp sources here will enable them
       -- with blink.compat
-      compat = {},
-      default = { "lsp", "path", "snippets", "buffer" },
+      default = { "lsp", "path", "snippets", "buffer", "go_pkgs" },
+      providers = {
+        go_pkgs = {
+          module = "blink-go-import",
+          name = "Import",
+        },
+      },
       cmdline = function()
         local type = vim.fn.getcmdtype()
         if type == "/" or type == "?" then

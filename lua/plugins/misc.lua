@@ -6,6 +6,28 @@ return {
   { "knubie/vim-kitty-navigator", event = "VeryLazy" },
   { "backdround/improved-search.nvim", event = "VeryLazy" },
   {
+    "meznaric/key-analyzer.nvim",
+    event = "VeryLazy",
+    config = function()
+      require("key-analyzer").setup({
+        -- Name of the command to use for the plugin
+        command_name = "KeyAnalyzer", -- or nil to disable the command
+
+        -- Customize the highlight groups
+        highlights = {
+          bracket_used = "KeyAnalyzerBracketUsed",
+          letter_used = "KeyAnalyzerLetterUsed",
+          bracket_unused = "KeyAnalyzerBracketUnused",
+          letter_unused = "KeyAnalyzerLetterUnused",
+          promo_highlight = "KeyAnalyzerPromo",
+
+          -- Set to false if you want to define highlights manually
+          define_default_highlights = true,
+        },
+      })
+    end,
+  },
+  {
     "kylechui/nvim-surround",
     event = "VeryLazy",
     config = function()
@@ -23,6 +45,25 @@ return {
       require("surround-ui").setup({
         root_key = "S",
       })
+    end,
+  },
+  {
+    "aliqyan-21/wit.nvim",
+    event = "VeryLazy",
+    config = function()
+      require("wit").setup({})
+    end,
+  },
+  {
+    "utilyre/sentiment.nvim",
+    version = "*",
+    event = "VeryLazy", -- keep for lazy loading
+    opts = {
+      -- config
+    },
+    init = function()
+      -- `matchparen.vim` needs to be disabled manually in case of lazy loading
+      vim.g.loaded_matchparen = 1
     end,
   },
 }
