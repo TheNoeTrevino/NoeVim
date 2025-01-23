@@ -106,7 +106,7 @@ return {
           MkdnNewListItemAboveInsert = { "n", "O" },
           MkdnExtendList = false,
           MkdnUpdateNumbering = { "n", "<leader>nn" },
-          MkdnTableNextCell = { "i", "<Tab>" },
+          MkdnTableNextCell = { "i", "<C-N>" },
           MkdnTablePrevCell = { "i", "<S-Tab>" },
           MkdnTableNextRow = false,
           MkdnTablePrevRow = { "i", "<S-CR>" },
