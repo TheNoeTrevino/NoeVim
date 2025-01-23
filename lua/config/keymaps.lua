@@ -181,8 +181,18 @@ map("n", "<leader>dN", "<cmd>Lspsaga diagnostic_jump_prev<CR>", { desc = "Previo
 map("n", "<leader>dl", "<cmd>Lspsaga show_line_diagnostics<CR>", { desc = "Line Diagnostics" })
 map("n", "<leader>dc", "<cmd>Lspsaga show_cursor_diagnostics<CR>", { desc = "Cursor Diagnostics" })
 
-map("n", "<leader>da", "<cmd>Trouble diagnostics toggle<CR>", { desc = "All Diagnostics" })
-map("n", "<leader>db", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", { desc = "Buffer Diagnostics" })
+map(
+  "n",
+  "<leader>da",
+  "<cmd>Trouble diagnostics toggle win.position=left auto_jump=true focus=true<CR>",
+  { desc = "All Diagnostics" }
+)
+map(
+  "n",
+  "<leader>db",
+  "<cmd>Trouble diagnostics toggle filter.buf=0 win.position=left focus=true<cr>",
+  { desc = "Buffer Diagnostics" }
+)
 
 -------------------------------------------------------------------------------
 --                           Windows Section
