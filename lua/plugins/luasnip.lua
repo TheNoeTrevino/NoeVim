@@ -19,6 +19,10 @@ return {
     local d = ls.dynamic_node
     local sn = ls.snippet_node
 
+    ls.setup({
+      update_events = { "TextChanged", "TextChangedI" },
+    })
+
     vim.api.nvim_set_keymap(
       "i",
       "<Tab>",
