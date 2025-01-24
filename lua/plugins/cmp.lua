@@ -2,13 +2,6 @@ return {
   "saghen/blink.cmp",
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
-  dependencies = {
-    "edte/blink-go-import.nvim",
-    ft = "go",
-    config = function()
-      require("blink-go-import").setup()
-    end,
-  },
   opts = {
     appearance = {
       -- sets the fallback highlight groups to nvim-cmp's highlight groups
@@ -48,13 +41,7 @@ return {
     sources = {
       -- adding any nvim-cmp sources here will enable them
       -- with blink.compat
-      default = { "lsp", "path", "snippets", "buffer", "go_pkgs" },
-      providers = {
-        go_pkgs = {
-          module = "blink-go-import",
-          name = "Import",
-        },
-      },
+      default = { "lsp", "path", "snippets", "buffer" },
       cmdline = function()
         local type = vim.fn.getcmdtype()
         if type == "/" or type == "?" then
