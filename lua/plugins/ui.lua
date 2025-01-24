@@ -139,7 +139,6 @@ return {
       })
     end,
   },
-  -- currently broken
   {
     "catgoose/nvim-colorizer.lua",
     event = "UIEnter",
