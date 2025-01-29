@@ -56,7 +56,13 @@ return {
 
     keymap = {
       preset = "super-tab",
-      ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
+      ["<C-Space>"] = {
+        function(cmp)
+          cmp.show({
+            providers = { "snippets" },
+          })
+        end,
+      },
       ["<C-e>"] = { "hide", "fallback" },
 
       ["<Tab>"] = {
