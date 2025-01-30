@@ -121,5 +121,4 @@ return {
     end,
   },
   { "bullets-vim/bullets.vim", ft = { "markdown", "norg", "rmd", "org" } },
-  { "TheNoeTrevino/mistake.nvim", event = "VeryLazy" },
 }

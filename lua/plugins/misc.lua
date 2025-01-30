@@ -1,6 +1,6 @@
 return {
   -- Util
-  { "ThePrimeagen/vim-be-good", event = "VeryLazy" },
+  -- { "ThePrimeagen/vim-be-good", event = "VeryLazy" },
   { "knubie/vim-kitty-navigator", event = "VeryLazy" },
   { "backdround/improved-search.nvim", event = "VeryLazy" },
   -- {
@@ -32,19 +32,19 @@ return {
       require("nvim-surround").setup({})
     end,
   },
-  {
-    "roobert/surround-ui.nvim",
-    event = "VeryLazy",
-    dependencies = {
-      "kylechui/nvim-surround",
-      "folke/which-key.nvim",
-    },
-    config = function()
-      require("surround-ui").setup({
-        root_key = "S",
-      })
-    end,
-  },
+  -- {
+  --   "roobert/surround-ui.nvim",
+  --   event = "VeryLazy",
+  --   dependencies = {
+  --     "kylechui/nvim-surround",
+  --     "folke/which-key.nvim",
+  --   },
+  --   config = function()
+  --     require("surround-ui").setup({
+  --       root_key = "S",
+  --     })
+  --   end,
+  -- },
   {
     "aliqyan-21/wit.nvim",
     event = "VeryLazy",
