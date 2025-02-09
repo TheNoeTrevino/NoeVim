@@ -52,4 +52,9 @@ return {
       require("wit").setup({})
     end,
   },
+  {
+    "vyfor/cord.nvim",
+    build = ":Cord update",
+    -- opts = {}
+  },
 }
