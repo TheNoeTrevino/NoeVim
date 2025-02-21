@@ -3,6 +3,23 @@ return {
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
   opts = {
+    cmdline = {
+      enabled = true,
+      keymap = nil, -- Inherits from top level `keymap` config when not set
+      sources = function()
+        local type = vim.fn.getcmdtype()
+        -- Search forward and backward
+        if type == "/" or type == "?" then
+          return { "buffer" }
+        end
+        -- Commands
+        if type == ":" or type == "@" then
+          return { "cmdline" }
+        end
+        return {}
+      end,
+    },
+
     appearance = {
       -- sets the fallback highlight groups to nvim-cmp's highlight groups
       -- useful for when your theme doesn't support blink.cmp
@@ -42,16 +59,6 @@ return {
       -- adding any nvim-cmp sources here will enable them
       -- with blink.compat
       default = { "lsp", "path", "snippets", "buffer" },
-      cmdline = function()
-        local type = vim.fn.getcmdtype()
-        if type == "/" or type == "?" then
-          return { "buffer" }
-        end
-        if type == ":" then
-          return { "cmdline" }
-        end
-        return {}
-      end,
     },
 
     keymap = {
