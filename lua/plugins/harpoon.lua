@@ -38,6 +38,8 @@ return {
         desc = "Harpoon Quick Menu",
       },
     }
+    local harpoon_extensions = require("harpoon.extensions")
+    harpoon:extend(harpoon_extensions.builtins.highlight_current_file())
     harpoon:extend({
       UI_CREATE = function(cx)
         vim.keymap.set("n", "v", function()
