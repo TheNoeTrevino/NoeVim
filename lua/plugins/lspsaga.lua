@@ -45,7 +45,7 @@ return {
         },
       },
       symbol_in_winbar = {
-        enable = false, -- Disable the breadcrumbs
+        enable = true, -- Disable the breadcrumbs
       },
       border_style = "round",
       saga_winblend = 0,
