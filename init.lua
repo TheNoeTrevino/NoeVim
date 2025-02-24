@@ -34,6 +34,8 @@ if colorscheme == "kanagawa-wave" or "kanagawa-dragon" then
   h(0, "@type.builtin.java", { fg = "#7EB4C9", italic = true })
 end
 
+h(0, "MatchParen", { fg = "#FF9D3C", bg = "#353534", bold = true })
+
 h(0, "YankyYanked", { fg = "#000000", bg = "#F6C177", bold = true })
 h(0, "YankyPut", { fg = "#000000", bg = "#F6C177", bold = true })
 
