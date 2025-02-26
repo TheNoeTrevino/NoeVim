@@ -18,6 +18,18 @@ return {
         end
         return {}
       end,
+      completion = {
+        trigger = {
+          show_on_blocked_trigger_characters = {},
+          show_on_x_blocked_trigger_characters = nil, -- Inherits from top level `completion.trigger.show_on_blocked_trigger_characters` config when not set
+        },
+        menu = {
+          auto_show = nil, -- Inherits from top level `completion.menu.auto_show` config when not set
+          draw = {
+            columns = { { "label", "label_description", gap = 1 } },
+          },
+        },
+      },
     },
 
     appearance = {
@@ -51,10 +63,6 @@ return {
         enabled = false,
       },
     },
-
-    -- experimental signature help support
-    -- signature = { enabled = true },
-
     sources = {
       -- adding any nvim-cmp sources here will enable them
       -- with blink.compat
