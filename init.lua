@@ -129,8 +129,14 @@ h(0, "BlinkCmpKindEvent", { fg = "#90CAE1" })
 h(0, "BlinkCmpKindColor", { fg = "#90CAE1" })
 h(0, "BlinkCmpKindUnit", { fg = "#90CAE1" })
 
-h(0, "BlinkCmpMenu", { bg = "#000000" })
-h(0, "BlinkCmpMenuBorder", { bg = "#000000", fg = "#6272a4" })
+-- not transparent
+h(0, "BlinkCmpMenu", { bg = "#181616" })
+h(0, "BlinkCmpMenuBorder", { bg = "#181616", fg = "#6272a4" })
+
+-- transparent
+-- h(0, "BlinkCmpMenu", { bg = "#000000" })
+-- h(0, "BlinkCmpMenuBorder", { bg = "#000000", fg = "#6272a4" })
+
 h(0, "BlinkCmpMenuSelection", { bg = "#363646" })
 
 -- vscode string color
