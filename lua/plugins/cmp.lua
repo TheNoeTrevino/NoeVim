@@ -80,7 +80,7 @@ return {
       accept = {},
       menu = {
         winhighlight = "Normal:BlinkCmpMenu,FloatBorder:BlinkCmpMenuBorder,CursorLine:BlinkCmpMenuSelection,Search:None",
-        border = "rounded",
+        border = "single",
         winblend = 10,
         draw = {
           treesitter = { "lsp" },
@@ -88,7 +88,7 @@ return {
       },
       documentation = {
         window = {
-          border = "rounded",
+          border = "single",
           winblend = 10,
         },
         auto_show = true,

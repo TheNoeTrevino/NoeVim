@@ -26,7 +26,7 @@ return {
           height = "auto",
         },
         border = {
-          style = "rounded",
+          style = "single",
           text = {
             top = " Command ",
             top_align = "center",
@@ -43,7 +43,7 @@ return {
           height = "auto",
         },
         border = {
-          style = "rounded",
+          style = "single",
           text = {
             top = " Completion ",
             top_align = "center",
@@ -52,6 +52,16 @@ return {
       },
     },
     lsp = {
+
+      hover = {
+        enabled = true,
+        silent = false, -- set to true to not show a message if hover is not available
+        view = nil, -- when nil, use defaults from documentation
+        ---@type NoiceViewOptions
+        opts = {
+          border = "single",
+        }, -- merged with defaults from documentation
+      },
       views = {
         cmdline_popup = {
           position = {
@@ -63,7 +73,7 @@ return {
             height = "auto",
           },
           border = {
-            style = "rounded",
+            style = "single",
             text = {
               top = " Command ",
               top_align = "center",
@@ -80,7 +90,7 @@ return {
             height = "auto",
           },
           border = {
-            style = "rounded",
+            style = "single",
             text = {
               top = " Completion ",
               top_align = "center",
