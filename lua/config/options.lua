@@ -29,24 +29,6 @@ vim.opt.termguicolors = true
 -- Default is 4
 vim.opt.sidescrolloff = 0
 
--- Hover Docs Aesthetics
-local border = {
-  { "╭", "FloatBorder" },
-  { "─", "FloatBorder" },
-  { "╮", "FloatBorder" },
-  { "│", "FloatBorder" },
-  { "╯", "FloatBorder" },
-  { "─", "FloatBorder" },
-  { "╰", "FloatBorder" },
-  { "│", "FloatBorder" },
-}
-
-local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
-vim.lsp.util.open_floating_preview = function(contents, syntax, opts, ...)
-  opts = vim.tbl_extend("keep", opts or {}, { border = border })
-  return orig_util_open_floating_preview(contents, syntax, opts, ...)
-end
-
 -- In case you don't want to use `:LazyExtras`,
 -- then you need to set the option below.
 vim.g.lazyvim_picker = "telescope"
