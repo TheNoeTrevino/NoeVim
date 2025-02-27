@@ -5,7 +5,42 @@ return {
   opts = {
     cmdline = {
       enabled = true,
-      keymap = nil, -- Inherits from top level `keymap` config when not set
+      keymap = {
+        preset = "super-tab",
+        ["<C-Space>"] = {
+          function(cmp)
+            cmp.show({
+              providers = { "snippets" },
+            })
+          end,
+        },
+        ["<C-e>"] = { "hide", "fallback" },
+
+        ["<Tab>"] = {
+          function(cmp)
+            if cmp.snippet_active() then
+              return cmp.accept()
+            else
+              return cmp.select_and_accept()
+            end
+          end,
+          "snippet_forward",
+          "fallback",
+        },
+        ["<S-Tab>"] = { "snippet_backward", "fallback" },
+
+        ["<Up>"] = { "select_prev", "fallback" },
+        ["<Down>"] = { "select_next", "fallback" },
+        ["<C-p>"] = { "select_prev", "fallback" },
+        ["<C-n>"] = { "select_next", "fallback" },
+        ["<C-l>"] = { "select_prev", "fallback" },
+        ["<C-k>"] = { "select_next", "fallback" },
+
+        ["<C-b>"] = { "scroll_documentation_up", "fallback" },
+        ["<C-f>"] = { "scroll_documentation_down", "fallback" },
+        ["<C-u>"] = { "scroll_documentation_up", "fallback" },
+        ["<C-d>"] = { "scroll_documentation_down", "fallback" },
+      },
       sources = function()
         local type = vim.fn.getcmdtype()
         -- Search forward and backward
@@ -24,7 +59,7 @@ return {
           show_on_x_blocked_trigger_characters = nil, -- Inherits from top level `completion.trigger.show_on_blocked_trigger_characters` config when not set
         },
         menu = {
-          auto_show = nil, -- Inherits from top level `completion.menu.auto_show` config when not set
+          auto_show = true, -- Inherits from top level `completion.menu.auto_show` config when not set
           draw = {
             columns = { { "label", "label_description", gap = 1 } },
           },
