@@ -22,11 +22,7 @@ return {
         "H",
         function()
           harpoon:list():add()
-          vim.notify(
-            "This file has been added to the Harpoon list",
-            vim.log.levels.INFO,
-            { title = "Harpooned  󱡀 " }
-          )
+          vim.notify("This file has been added to the Harpoon list", vim.log.levels.INFO, { title = "Harpooned 󱡀 " })
         end,
         desc = "󱡀 Harpoon File",
       },
@@ -41,7 +37,7 @@ return {
     -- Highlight the current file if exists
     local harpoon_extensions = require("harpoon.extensions")
     harpoon:extend(harpoon_extensions.builtins.highlight_current_file())
-
+    harpoon:extend(harpoon_extensions.builtins.navigate_with_number())
     harpoon:extend({
       UI_CREATE = function(cx)
         vim.keymap.set("n", "v", function()
@@ -57,6 +53,10 @@ return {
         end, { buffer = cx.bufnr })
 
         vim.keymap.set("n", "o", function()
+          harpoon.ui:select_menu_item()
+        end, { buffer = cx.bufnr })
+
+        vim.keymap.set("n", ";", function()
           harpoon.ui:select_menu_item()
         end, { buffer = cx.bufnr })
 
