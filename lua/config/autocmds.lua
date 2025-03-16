@@ -173,7 +173,6 @@ vim.api.nvim_create_user_command("NoeMap", function()
     },
   })
 
-  vim.keymap.del("n", "h")
   local harpoon = require("harpoon")
 
   local toggle_opts = {
