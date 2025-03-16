@@ -158,6 +158,7 @@ return {
             ["l"] = actions.move_selection_previous,
             ["k"] = actions.move_selection_next,
             ["q"] = actions.close,
+            [";"] = actions.select_default,
           },
         },
       },
