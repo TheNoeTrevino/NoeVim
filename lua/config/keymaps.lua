@@ -25,6 +25,7 @@ vim.keymap.del("n", "<leader>fT")
 vim.keymap.del("n", "<leader>gl")
 vim.keymap.del("n", "<C-F>")
 vim.keymap.del("n", "<C-B>")
+vim.keymap.del("n", "<leader>uG")
 
 local map = LazyVim.safe_keymap_set
 
@@ -239,6 +240,8 @@ map("n", "<leader>0", "<cmd>TransparentToggle<CR>", { desc = "Transparency" })
 -- Toggle ZenMode
 map("n", "<leader>z", "<cmd>ZenMode<CR>", { desc = "Transparency" })
 
+-- Toggle Gutter
+map("n", "<leader>uG", "<cmd>ToggleGutter<CR>", { desc = "Toggle Gutter" })
 -------------------------------------------------------------------------------
 --                           Database Section
 -------------------------------------------------------------------------------

@@ -189,3 +189,17 @@ vim.api.nvim_create_user_command("NoeMap", function()
     harpoon.ui:toggle_quick_menu(harpoon:list(), toggle_opts)
   end, { desc = "󱡀 Harpoon File" })
 end, {})
+
+vim.api.nvim_create_user_command("ToggleGutter", function()
+  if vim.wo.number or vim.wo.relativenumber or vim.wo.signcolumn ~= "no" or vim.wo.foldcolumn ~= "0" then
+    vim.wo.number = false
+    vim.wo.relativenumber = false
+    vim.wo.signcolumn = "no"
+    vim.wo.foldcolumn = "0"
+  else
+    vim.wo.number = true
+    vim.wo.relativenumber = true
+    vim.wo.signcolumn = "yes"
+    vim.wo.foldcolumn = "1"
+  end
+end, {})
