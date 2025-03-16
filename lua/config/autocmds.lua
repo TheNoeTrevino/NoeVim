@@ -82,3 +82,111 @@ vim.api.nvim_create_autocmd("User", {
     end)
   end,
 })
+
+local map = LazyVim.safe_keymap_set
+
+vim.api.nvim_create_user_command("NormMap", function()
+  vim.keymap.del("n", "h")
+  vim.keymap.del("n", "j")
+  vim.keymap.del("n", "l")
+  vim.keymap.del("n", ";")
+
+  map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
+  map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
+
+  -- Remap j; for navigation/o-pending
+  map({ "n", "x", "o" }, "h", "<Left>", { desc = "Right", silent = true })
+  map("o", "j", "<Down>", { desc = "Down", silent = true })
+  map("o", "k", "<Up>", { desc = "Up", silent = true })
+  map({ "n", "x", "o" }, "l", "<Right>", { desc = "Left", silent = true })
+
+  -- Move Lines
+  map("n", "<A-k>", "<cmd>m .-2<cr>==", { desc = "Move Up" })
+  map("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move Up" })
+  map("n", "<A-j>", "<cmd>m .+1<cr>==", { desc = "Move Down" })
+  map("i", "<A-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move Down" })
+  map("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move Up" })
+  map("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move Down" })
+
+  -- Terminal Mappings
+  map("t", "<C-h>", "<cmd>wincmd h<cr>", { desc = "Go to Left Window" })
+  map("t", "<C-j>", "<cmd>wincmd j<cr>", { desc = "Go to Lower Window" })
+  map("t", "<C-k>", "<cmd>wincmd k<cr>", { desc = "Go to Upper Window" })
+  map("t", "<C-l>", "<cmd>wincmd l<cr>", { desc = "Go to Right Window" })
+
+  map("n", "<C-h>", ":KittyNavigateLeft<CR>", { noremap = true, silent = true })
+  map("n", "<C-j>", ":KittyNavigateDown<CR>", { noremap = true, silent = true })
+  map("n", "<C-k>", ":KittyNavigateUp<CR>", { noremap = true, silent = true })
+  map("n", "<C-l>", ":KittyNavigateRight<CR>", { noremap = true, silent = true })
+  local actions = require("telescope.actions")
+  require("telescope").setup({
+    defaults = {
+      mappings = {
+        n = {
+          ["l"] = actions.select_default,
+          ["k"] = actions.move_selection_previous,
+          ["j"] = actions.move_selection_next,
+        },
+      },
+    },
+  })
+end, {})
+
+vim.api.nvim_create_user_command("NoeMap", function()
+  map({ "n", "x" }, "k", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
+  map({ "n", "x" }, "l", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
+
+  -- Remap j; for navigation/o-pending
+  map({ "n", "x", "o" }, "j", "<Left>", { desc = "Right", silent = true })
+  map("o", "k", "<Down>", { desc = "Down", silent = true })
+  map("o", "l", "<Up>", { desc = "Up", silent = true })
+  map({ "n", "x", "o" }, ";", "<Right>", { desc = "Left", silent = true })
+
+  -- Move Lines
+  map("n", "<A-l>", "<cmd>m .-2<cr>==", { desc = "Move Up" })
+  map("i", "<A-l>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move Up" })
+  map("n", "<A-k>", "<cmd>m .+1<cr>==", { desc = "Move Down" })
+  map("i", "<A-k>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move Down" })
+  map("v", "<A-l>", ":m '<-2<cr>gv=gv", { desc = "Move Up" })
+  map("v", "<A-k>", ":m '>+1<cr>gv=gv", { desc = "Move Down" })
+
+  -- Terminal Mappings
+  map("t", "<C-j>", "<cmd>wincmd h<cr>", { desc = "Go to Left Window" })
+  map("t", "<C-k>", "<cmd>wincmd j<cr>", { desc = "Go to Lower Window" })
+  map("t", "<C-l>", "<cmd>wincmd k<cr>", { desc = "Go to Upper Window" })
+  map("t", "<C-;>", "<cmd>wincmd l<cr>", { desc = "Go to Right Window" })
+
+  map("n", "<C-j>", ":KittyNavigateLeft<CR>", { noremap = true, silent = true })
+  map("n", "<C-k>", ":KittyNavigateDown<CR>", { noremap = true, silent = true })
+  map("n", "<C-l>", ":KittyNavigateUp<CR>", { noremap = true, silent = true })
+  map("n", "<C-;>", ":KittyNavigateRight<CR>", { noremap = true, silent = true })
+
+  local actions = require("telescope.actions")
+  require("telescope").setup({
+    defaults = {
+      mappings = {
+        n = {
+          ["l"] = actions.move_selection_previous,
+          ["k"] = actions.move_selection_next,
+        },
+      },
+    },
+  })
+
+  vim.keymap.del("n", "h")
+  local harpoon = require("harpoon")
+
+  local toggle_opts = {
+    border = "rounded",
+    title_pos = "center",
+    ui_width_ratio = 0.333,
+  }
+  map("n", "H", function()
+    harpoon:list():add()
+    vim.notify("This file has been added to the Harpoon list", vim.log.levels.INFO, { title = "Harpooned 󱡀 " })
+  end, { desc = "󱡀 Harpoon File" })
+
+  map("n", "h", function()
+    harpoon.ui:toggle_quick_menu(harpoon:list(), toggle_opts)
+  end, { desc = "󱡀 Harpoon File" })
+end, {})
