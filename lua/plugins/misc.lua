@@ -50,6 +50,11 @@ return {
     event = "VeryLazy",
     config = function()
       require("wit").setup({})
+      require("mason").setup({
+        ui = {
+          border = "rounded",
+        },
+      })
     end,
   },
   {

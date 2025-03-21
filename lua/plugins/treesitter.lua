@@ -19,7 +19,7 @@ return {
       enable = true,
       keymaps = {
         init_selection = false, -- set to `false` to disable one of the mappings
-        node_incremental = "<leader><leader>",
+        node_incremental = "<CR>",
         node_decremental = "<bs>",
         scope_incremental = "<tab>",
       },
