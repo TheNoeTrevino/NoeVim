@@ -85,15 +85,17 @@ return {
 
     return {
       defaults = {
-        border = {
-          prompt = { 2, 2, 2, 2 },
-          results = { 2, 2, 2, 2 },
-          preview = { 2, 2, 2, 2 },
-        },
+        border = true,
+        --   {
+        --   prompt = { 2, 2, 2, 2 },
+        --   results = { 2, 2, 2, 2 },
+        --   preview = { 2, 2, 2, 2 },
+        -- },
         borderchars = {
-          prompt = { "─", " ", "─", "│", "│", " ", "─", "└" },
-          results = { "─", " ", " ", "│", "┌", "─", " ", "│" },
-          preview = { "─", "│", "─", "│", "┬", "┐", "┘", "┴" },
+
+          prompt = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
+          results = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
+          preview = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
         },
         path_display = { "smart" },
         layout_config = {
