@@ -7,4 +7,5 @@ return {
   { "echasnovski/mini.ai", enabled = true },
   { "venv-selector.nvim", enabled = false },
   { "catppuccin", enabled = false },
+  { "nvim-lualine/lualine.nvim", enabled = false },
 }

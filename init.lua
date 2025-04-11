@@ -150,3 +150,5 @@ vim.opt.cursorlineopt = "number"
 
 -- Define the Cursor highlight group
 h(0, "Cursor", { fg = "NONE", bg = "#FFFFFF" })
+
+vim.cmd("set laststatus=0")
