@@ -29,7 +29,8 @@ return {
       { "<leader>sq", "<cmd>Telescope quickfix<cr>", desc = "Quickfix List" },
       { "<leader>ss", "<cmd>Telescope builtin<cr>", desc = "Searchs" },
       { "<leader>sW", LazyVim.pick("grep_string", { word_match = "-w" }), desc = "Word (Root Dir)" },
-      { "<leader>sw", ":WitSearch ", desc = "Web" },
+      { "<leader>sw", LazyVim.pick("grep_string", { word_match = "-w" }), desc = "Word (Root Dir)" },
+      { "<leader>sw", LazyVim.pick("grep_string"), mode = "v", desc = "Selection (Root Dir)" },
       { "<leader>uC", LazyVim.pick("colorscheme", { enable_preview = true }), desc = "Colorscheme with Preview" },
       { "<leader>sf", "<cmd>Telescope find_files<cr>", desc = "Files" },
       { "<leader>su", "<cmd>Telescope undo<cr><esc>", desc = "Undo" },
@@ -68,6 +69,70 @@ return {
     }
   end,
   opts = function()
+    -- HARPOON
+    local harpoon = require("harpoon")
+    harpoon:setup({})
+
+    local function toggle_telescope()
+      local harpoon = require("harpoon")
+      local harpoon_list = harpoon:list()
+      local conf = require("telescope.config").values
+      local file_paths = {}
+
+      for _, item in ipairs(harpoon_list.items) do
+        table.insert(file_paths, item.value)
+      end
+
+      local entry_display = require("telescope.pickers.entry_display")
+
+      require("telescope.pickers")
+        .new({
+          prompt_title = "Harpoon",
+          initial_mode = "normal",
+          layout_strategy = "vertical",
+          layout_config = {
+            preview_height = 0.8,
+          },
+        }, {
+          finder = require("telescope.finders").new_table({
+            results = file_paths,
+            entry_maker = function(entry)
+              local Path = require("plenary.path")
+              local path = Path:new(entry)
+              local filename = path:make_relative():match("[^/\\]+$") or entry
+              local relative_path = path:make_relative()
+
+              local displayer = entry_display.create({
+                separator = " ",
+                items = {
+                  { width = #filename },
+                  { remaining = true },
+                },
+              })
+
+              return {
+                value = entry,
+                display = function()
+                  return displayer({
+                    { filename },
+                    { relative_path, "TelescopeMutedPath" },
+                  })
+                end,
+                ordinal = entry,
+                path = entry,
+              }
+            end,
+          }),
+          previewer = conf.file_previewer({}),
+          sorter = conf.generic_sorter({}),
+        })
+        :find()
+    end
+
+    vim.keymap.set("n", "h", function()
+      toggle_telescope()
+    end, { desc = "Open harpoon window" })
+
     local actions = require("telescope.actions")
     local open_with_trouble = function(...)
       return require("trouble.sources.telescope").open(...)
@@ -97,12 +162,12 @@ return {
           results = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
           preview = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
         },
-        path_display = { "smart" },
+        path_display = { "filename_first" },
         layout_config = {
-          width = 0.85,
+          width = 0.90,
           preview_cutoff = 40,
           horizontal = {
-            preview_width = 0.666,
+            preview_width = 0.6,
           },
         },
         file_ignore_patterns = {
@@ -151,8 +216,12 @@ return {
             ["<C-p>"] = actions.cycle_history_prev,
             ["<C-d>"] = actions.preview_scrolling_down,
             ["<C-u>"] = actions.preview_scrolling_up,
+            ["<c-l>"] = actions.move_selection_previous,
+            ["<c-k>"] = actions.move_selection_next,
           },
           n = {
+            ["<down>"] = actions.preview_scrolling_down,
+            ["<up>"] = actions.preview_scrolling_up,
             ["d"] = actions.delete_buffer,
             ["t"] = actions.file_tab,
             ["v"] = actions.file_vsplit,
@@ -164,6 +233,7 @@ return {
           },
         },
       },
+      require("telescope").load_extension("harpoon"),
     }
   end,
 }
