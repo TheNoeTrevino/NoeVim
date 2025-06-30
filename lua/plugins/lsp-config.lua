@@ -25,7 +25,16 @@ return {
     "stevearc/conform.nvim",
     optional = true,
     opts = {
+      formatters = {
+        sqruff = {},
+      },
       formatters_by_ft = {
+        ["java"] = { "prettier", "google-java-format" },
+        ["xml"] = { "xmlformat" },
+        ["htmlangular"] = { "prettier" },
+        ["cs"] = { "csharpier" },
+        ["typescript"] = { "biome" },
+        ["sql"] = { "sqruff" },
         ["markdown"] = {},
         ["markdown.mdx"] = {},
       },
