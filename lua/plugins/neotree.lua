@@ -16,6 +16,16 @@ return {
       use_libuv_file_watcher = true,
     },
     window = {
+      popup = {
+        title = function()
+          local cwd = vim.fn.getcwd()
+          local path = vim.fn.expand("%:p:h")
+          local file = vim.fn.expand("%:t")
+          local rel_path = path:gsub(cwd, ""):gsub("^/", "")
+          local base = rel_path ~= "" and rel_path or vim.fn.fnamemodify(cwd, ":t")
+          return file ~= "" and base .. "/" .. file or base
+        end,
+      },
       position = "float",
       mappings = {
 
