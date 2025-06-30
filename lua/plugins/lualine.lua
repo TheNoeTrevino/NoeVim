@@ -5,6 +5,7 @@ return {
   opts = function(_, opts)
     -- Add custom sections if nvim-navic is not available
     local icons = LazyVim.config.icons
+    local harpoon_files = require("harpoon_files")
     if not vim.g.trouble_lualine then
       table.insert(opts.sections.lualine_c, {
         function()
@@ -37,43 +38,20 @@ return {
       lualine_a = { "mode" },
       lualine_b = { "branch" }, --"branch"
       lualine_c = {
-        {
-          function()
-            local recording = vim.fn.reg_recording()
-            if recording ~= "" then
-              -- Using the highlight group for the icon only
-              return "%#RecordingText# REC %*" .. "%#RecordingIcon#  %* " .. recording
-            else
-              local filename = vim.fn.expand("%:~:.") -- Display filename relative to the working directory
-              if vim.bo.modified then
-                filename = filename .. " [+]" -- Append modification indicator
-              end
-              return filename
-            end
-          end,
-          cond = function()
-            return true -- Always show this component
-          end,
-        },
+        function()
+          local state = require("timerly.state")
+          if state.progress == 0 then
+            return harpoon_files.lualine_component()
+          end
+
+          local total = math.max(0, state.total_secs + 1) -- Add 1 to sync with timer display
+          local mins = math.floor(total / 60)
+          local secs = total % 60
+
+          return string.format("%s %02d:%02d", state.mode:gsub("^%l", string.upper), mins, secs)
+        end,
       },
-      lualine_x = {
-        {
-          function()
-            local state = require("timerly.state")
-            if state.progress == 0 then
-              return ""
-            end
-
-            local total = math.max(0, state.total_secs + 1) -- Add 1 to sync with timer display
-            local mins = math.floor(total / 60)
-            local secs = total % 60
-
-            return string.format("%s %02d:%02d", state.mode:gsub("^%l", string.upper), mins, secs)
-          end,
-
-          table.insert(opts.sections.lualine_x, get_timerly_status),
-        },
-      },
+      lualine_x = { "filename" },
       lualine_y = {
         {
           "diff",

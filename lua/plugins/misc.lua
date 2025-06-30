@@ -32,6 +32,27 @@ return {
       require("nvim-surround").setup({})
     end,
   },
+  {
+    "mawkler/refjump.nvim",
+    event = "LspAttach", -- Uncomment to lazy load
+    opts = {},
+  },
+  {
+    "kiennt63/harpoon-files.nvim",
+    dependencies = {
+      { "ThePrimeagen/harpoon" },
+    },
+    opts = {
+      max_length = 15,
+      icon = "",
+      show_icon = true,
+      show_index = true,
+      show_filename = true,
+      separator_left = "",
+      separator_right = "",
+    },
+  },
+
   -- {
   --   "roobert/surround-ui.nvim",
   --   event = "VeryLazy",
