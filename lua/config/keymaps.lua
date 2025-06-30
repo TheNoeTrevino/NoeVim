@@ -69,7 +69,7 @@ map("n", "<tab>p", "<cmd>tabp<cr>", { desc = "Tab Prev" })
 map("n", "<tab>c", "<cmd>tabc<cr>", { desc = "Tab Close" })
 map("n", "<tab>q", "<cmd>tabc<cr>", { desc = "Tab Close" })
 map("n", "<tab>q", "<cmd>tabc<cr>", { desc = "Tab Close" })
-map("n", "<tab>r", "<cmd>Tabby rename ", { desc = "Tab Rename" })
+map("n", "<tab>r", ":TabRename", { desc = "Tab Rename" })
 
 -------------------------------------------------------------------------------
 --                           Misc/Util Section
@@ -242,18 +242,19 @@ map("n", "<leader>z", "<cmd>ZenMode<CR>", { desc = "Transparency" })
 
 -- Toggle Gutter
 map("n", "<leader>uG", "<cmd>ToggleGutter<CR>", { desc = "Toggle Gutter" })
+
 -------------------------------------------------------------------------------
 --                           Database Section
 -------------------------------------------------------------------------------
 
 map(
   "n",
-  "<localleader>do",
+  "<localleader>,",
   "<cmd>tabnew<cr><cmd>Tabby rename_tab Database<cr><cmd>DBUIToggle<CR>",
   { desc = "Open Database" }
 )
-map("n", "<localleader>du", "<cmd>DBUIToggle<CR>", { desc = "Toggle Database" })
-map("n", "<localleader>df", "<cmd>DBUIFindBuffer<CR>", { desc = "Find Buffer" })
+map("n", "<localleader>u", "<cmd>DBUIToggle<CR>", { desc = "Toggle Database" })
+map("n", "<localleader>f", "<cmd>DBUIFindBuffer<CR>", { desc = "Find Buffer" })
 
 -------------------------------------------------------------------------------
 --                           Markdown Section
