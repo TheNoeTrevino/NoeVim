@@ -203,3 +203,28 @@ vim.api.nvim_create_user_command("ToggleGutter", function()
     vim.wo.foldcolumn = "1"
   end
 end, {})
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "sql",
+  callback = function()
+    vim.keymap.set("v", "<CR>", "<Plug>(DBUI_ExecuteQuery)", { buffer = true, desc = "Execute SQL" })
+    vim.keymap.set(
+      "v",
+      "<leader>E",
+      "<Plug>(DBUI_EditBindParameters)|",
+      { buffer = true, desc = "Edit Parameters SQL" }
+    )
+  end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "java",
+  callback = function()
+    vim.bo.expandtab = true
+    vim.bo.shiftwidth = 2
+    vim.bo.tabstop = 2
+    vim.bo.softtabstop = 2
+    vim.bo.cindent = true
+    vim.bo.cinoptions = "j1,J1,(0,w1,W1"
+  end,
+})
