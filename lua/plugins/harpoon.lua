@@ -12,9 +12,9 @@ return {
   },
   keys = function()
     local toggle_opts = {
-      border = "rounded",
+      border = "single",
       title_pos = "center",
-      ui_width_ratio = 0.333,
+      ui_width_ratio = 0.66666666666666667,
     }
     local harpoon = require("harpoon")
     local keys = {
@@ -27,11 +27,11 @@ return {
         desc = "󱡀 Harpoon File",
       },
       {
-        "h",
+        "<leader>h",
         function()
           harpoon.ui:toggle_quick_menu(harpoon:list(), toggle_opts)
         end,
-        desc = "Harpoon Quick Menu",
+        desc = "Harpoon Menu",
       },
     }
     -- Highlight the current file if exists
@@ -67,7 +67,7 @@ return {
         end
       end,
     })
-    for i = 1, 5 do
+    for i = 1, 9 do
       table.insert(keys, {
         "<leader>" .. i,
         function()
