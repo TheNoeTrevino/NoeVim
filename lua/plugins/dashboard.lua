@@ -37,6 +37,17 @@ return {
             key = "r",
           },
           {
+            action = function()
+              vim.cmd("tabnew")
+              vim.cmd("Tabby rename_tab Database")
+              vim.cmd("DBUIToggle")
+              vim.cmd("tabonly")
+            end,
+            desc = " Dadbod",
+            icon = "󰆼 ",
+            key = "d",
+          },
+          {
             action = 'require("persistence").select()',
             desc = " Select Session",
             icon = " ",
