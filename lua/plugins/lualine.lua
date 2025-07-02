@@ -61,7 +61,7 @@ return {
           return harpoon_files.lualine_component()
         end,
       },
-      lualine_x = {},
+      lualine_x = { "diagnostics" },
       lualine_y = {
         {
           "diff",
