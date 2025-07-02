@@ -150,5 +150,6 @@ vim.opt.cursorlineopt = "number"
 
 -- Define the Cursor highlight group
 h(0, "Cursor", { fg = "NONE", bg = "#FFFFFF" })
+h(0, "TelescopeMutedPath", { fg = "#888888" })
 
 vim.cmd("set laststatus=0")
