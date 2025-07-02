@@ -214,6 +214,13 @@ vim.api.nvim_create_autocmd("FileType", {
       "<Plug>(DBUI_EditBindParameters)|",
       { buffer = true, desc = "Edit Parameters SQL" }
     )
+
+    vim.bo.expandtab = true
+    vim.bo.shiftwidth = 4
+    vim.bo.tabstop = 4
+    vim.bo.softtabstop = 4
+    vim.bo.cindent = true
+    vim.bo.cinoptions = "j1,J1,(0,w1,W1"
   end,
 })
 
