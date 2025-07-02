@@ -227,9 +227,6 @@ map("n", "<leader>we", "<C-w>=", { desc = "Equalize" })
 map("n", "\\", "<C-o>", { desc = "Jumplist Forwards" })
 map("n", "<C-o>", "<C-i>", { desc = "Jumplist Backwards" })
 
-map("n", "<leader>i", "<C-o>", { desc = "Jumplist Forwards" })
-map("n", "<leader>o", "<C-i>", { desc = "Jumplist Backwards" })
-
 -------------------------------------------------------------------------------
 --                           Toggle Section
 -------------------------------------------------------------------------------
