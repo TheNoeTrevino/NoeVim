@@ -5,11 +5,55 @@ return {
     events = { "BufWritePost", "BufReadPost", "InsertLeave", "BufEnter", "TextChanged", "TextChangedI" },
 
     linters_by_ft = {
-      sql = { "sqruff" },
+      sql = { "sqruff", "squawk" },
     },
 
     linters = {
       sqruff = {},
+      squawk = {
+        cmd = "squawk",
+        stdin = false,
+        args = {
+          "--reporter",
+          "Json",
+          vim.api.nvim_buf_get_name(0),
+        },
+        stream = "stdout",
+        ignore_exitcode = true,
+
+        parser = function(output, bufnr)
+          local ok, decoded = pcall(vim.json.decode, output)
+
+          if not ok or type(decoded) ~= "table" then
+            print("Something went wrong with the json decoding. squak lint config")
+            return {}
+          end
+
+          local diagnostics = {}
+
+          for _, item in ipairs(decoded) do
+            table.insert(diagnostics, {
+              bufnr = bufnr,
+              lnum = (item.line or 1),
+              col = (item.column or 1),
+              end_lnum = (item.line or 1),
+              end_col = item.column or 1,
+              severity = vim.diagnostic.severity.WARN,
+              source = "squawk",
+              message = "Problem: "
+                .. item.message
+                .. (type(item.rule_name) == "string" and (" [" .. item.rule_name .. "]") or "")
+                .. (type(item.help) == "string" and ("\n" .. "Solution: " .. item.help) or ""),
+            })
+          end
+
+          return diagnostics
+        end,
+
+        condition = function(ctx)
+          return ctx.filename:match("backend/migrations/.*%.sql$") ~= nil
+        end,
+      },
     },
   },
 
