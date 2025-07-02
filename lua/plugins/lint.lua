@@ -51,7 +51,20 @@ return {
         end,
 
         condition = function(ctx)
-          return ctx.filename:match("backend/migrations/.*%.sql$") ~= nil
+          -- if a file has the annotation @migration, the file will be treated
+          -- as a migration file
+          local is_migration = ctx.filename:match("backend/migrations/.*%.sql$") ~= nil
+          if not is_migration then
+            local content = vim.fn.readfile(ctx.filename)
+            for _, line in ipairs(content) do
+              if line:match("%-%-@migration") then
+                return true
+              end
+            end
+            return false
+          end
+
+          return true
         end,
       },
     },
