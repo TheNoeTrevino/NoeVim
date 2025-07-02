@@ -38,10 +38,11 @@ return {
   end,
   keys = {
     { "<leader>ae", "<CMD>CopilotChatExplain<CR>", desc = "Explain", mode = { "n", "v" } },
+    { "<leader>ad", "<CMD>CopilotChatFixDiagnostic<CR>", desc = "Diagnostics", mode = { "n", "v" } },
     { "<leader>af", "<CMD>CopilotChatFix<CR>", desc = "Fix", mode = { "n", "v" } },
     { "<leader>am", "<CMD>CopilotChatModels<CR>", desc = "Models", mode = { "n", "v" } },
-    { "<leader>as", "<CMD>CopilotChatCommit<CR>", desc = "Commit", mode = { "n", "v" } },
-    { "<leader>ac", "<CMD>CopilotChatCommitStaged<CR>", desc = "Commit - Staged", mode = { "n", "v" } },
-    { "<leader>ar", "<CMD>CopilotChatCommitReview<CR>", desc = "Review", mode = { "n", "v" } },
+    { "<leader>ac", "<CMD>CopilotChatCommit<CR>", desc = "Commit", mode = { "n", "v" } },
+    { "<leader>as", "<CMD>CopilotChatCommitStaged<CR>", desc = "Commit - Staged", mode = { "n", "v" } },
+    { "<leader>ar", "<CMD>CopilotChatCommitReview<CR>", desc = "Commit - Review", mode = { "n", "v" } },
   },
 }
