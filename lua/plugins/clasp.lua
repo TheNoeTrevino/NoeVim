@@ -1,5 +1,6 @@
 return {
   "xzbdmw/clasp.nvim",
+  event = "VeryLazy",
   config = function()
     require("clasp").setup({
 

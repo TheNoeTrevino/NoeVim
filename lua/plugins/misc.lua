@@ -33,12 +33,8 @@ return {
     end,
   },
   {
-    "mawkler/refjump.nvim",
-    event = "LspAttach", -- Uncomment to lazy load
-    opts = {},
-  },
-  {
     "kiennt63/harpoon-files.nvim",
+    event = "UIEnter",
     dependencies = {
       { "ThePrimeagen/harpoon" },
     },
@@ -80,7 +76,13 @@ return {
   },
   {
     "vyfor/cord.nvim",
+    event = "VeryLazy",
     build = ":Cord update",
+    -- opts = {}
+  },
+  {
+    "pocco81/high-str.nvim",
+    event = "VeryLazy",
     -- opts = {}
   },
 }
