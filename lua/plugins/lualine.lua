@@ -39,9 +39,20 @@ return {
       lualine_b = { "branch" }, --"branch"
       lualine_c = {
         function()
+          local recording = vim.fn.reg_recording()
+          if recording ~= "" then
+            -- Using the highlight group for the icon only
+            return "%#RecordingText# REC %*" .. "%#RecordingIcon#  %* " .. recording
+          else
+            return harpoon_files.lualine_component()
+          end
+        end,
+      },
+      lualine_x = {
+        function()
           local state = require("timerly.state")
           if state.progress == 0 then
-            return harpoon_files.lualine_component()
+            return vim.fn.expand("%:t")
           end
 
           local total = math.max(0, state.total_secs + 1) -- Add 1 to sync with timer display
@@ -51,7 +62,6 @@ return {
           return string.format("%s %02d:%02d", state.mode:gsub("^%l", string.upper), mins, secs)
         end,
       },
-      lualine_x = { "filename" },
       lualine_y = {
         {
           "diff",
