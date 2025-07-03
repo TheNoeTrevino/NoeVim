@@ -28,7 +28,6 @@ return {
       },
       position = "float",
       mappings = {
-
         ["P"] = { "toggle_preview", config = { use_float = true, use_image_nvim = true } },
         ["s"] = "open_split",
         ["v"] = "open_vsplit",
@@ -40,6 +39,7 @@ return {
         ["f"] = "focus_preview",
         ["<C-u>"] = { "scroll_preview", config = { direction = 10 } },
         ["<C-d>"] = { "scroll_preview", config = { direction = -10 } },
+        ["/"] = "none",
       },
     },
     default_component_configs = {
