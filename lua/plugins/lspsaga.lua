@@ -47,7 +47,7 @@ return {
       symbol_in_winbar = {
         enable = false, -- Disable the breadcrumbs
       },
-      border_style = "round",
+      border_style = "single",
       saga_winblend = 0,
       move_in_saga = { prev = "<C-p>", next = "<C-n>" },
       code_action = {
