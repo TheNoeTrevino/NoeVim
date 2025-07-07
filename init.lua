@@ -153,3 +153,23 @@ h(0, "Cursor", { fg = "NONE", bg = "#FFFFFF" })
 h(0, "TelescopeMutedPath", { fg = "#888888" })
 
 vim.cmd("set laststatus=0")
+
+-- repsec, comment out when at home
+require("lspconfig").angularls.setup({
+  cmd = { "ngserver", "--stdio", "--tsProbeLocations", "", "--ngProbeLocations", "" },
+  on_new_config = function(new_config, root_dir)
+    local node_modules_path = root_dir .. "/frontend/node_modules"
+
+    -- Set paths based on the found node_modules
+    if vim.fn.isdirectory(node_modules_path) then
+      new_config.cmd = {
+        "ngserver",
+        "--stdio",
+        "--tsProbeLocations",
+        node_modules_path .. "/typescript/lib",
+        "--ngProbeLocations",
+        node_modules_path .. "/@angular/language-service/lib",
+      }
+    end
+  end,
+})
