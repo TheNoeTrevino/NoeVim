@@ -173,3 +173,12 @@ require("lspconfig").angularls.setup({
     end
   end,
 })
+
+vim.cmd([[
+  highlight RenderMarkdownH1Bg guibg=#502824 guifg=#fcd2b9 ctermbg=94 ctermfg=230  " Red
+  highlight RenderMarkdownH3Bg guibg=#5a3d33 guifg=#d1c4a5 ctermbg=136 ctermfg=235 " Orange
+  highlight RenderMarkdownH2Bg guibg=#37352f guifg=#d2ccab ctermbg=100 ctermfg=223 " Yellow
+  highlight RenderMarkdownH4Bg guibg=#223b40 guifg=#bfd0d5 ctermbg=23 ctermfg=223  " Blue
+  highlight RenderMarkdownH6Bg guibg=#22312d guifg=#bfd3ca ctermbg=65 ctermfg=235  " Green
+  highlight RenderMarkdownH5Bg guibg=#362930 guifg=#dab9c6 ctermbg=96 ctermfg=230  " Violet
+]])
