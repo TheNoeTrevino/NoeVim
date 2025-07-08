@@ -1,10 +1,17 @@
+local h = vim.api.nvim_set_hl
+
+h(0, "AvanteSidebarWinSeparator", { fg = "#6272a4", bg = nil })
+h(0, "AvanteSidebarWinHorizontalSeparator", { fg = "#6272a4", bg = nil })
+h(0, "AvanteReversedThirdTitle", { fg = "#6272a4", bg = nil })
+h(0, "AvanteReversedTitle", { fg = "#6272a4", bg = nil })
+h(0, "AvanteTitle", { fg = "#6272a4", bg = nil })
+
 require("config.lazy")
 
 -- Colorscheme
 local colorscheme = "kanagawa-wave"
 
 vim.cmd("colorscheme " .. colorscheme)
-local h = vim.api.nvim_set_hl
 
 if colorscheme == "kanagawa-wave" or "kanagawa-dragon" then
   h(0, "WinSeparator", { fg = "#1F3442", bg = "NONE", bold = true })
@@ -173,6 +180,12 @@ require("lspconfig").angularls.setup({
     end
   end,
 })
+
+h(0, "AvanteSidebarWinSeparator", { fg = "#6272a4", bg = nil })
+h(0, "AvanteSidebarWinHorizontalSeparator", { fg = "#6272a4", bg = nil })
+h(0, "AvanteReversedThirdTitle", { fg = "#6272a4", bg = nil })
+h(0, "AvanteReversedTitle", { fg = "#6272a4", bg = nil })
+h(0, "AvanteTitle", { fg = "#6272a4", bg = nil })
 
 vim.cmd([[
   highlight RenderMarkdownH1Bg guibg=#502824 guifg=#fcd2b9 ctermbg=94 ctermfg=230  " Red
