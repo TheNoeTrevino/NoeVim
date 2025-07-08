@@ -5,7 +5,6 @@ return {
   opts = function(_, opts)
     -- Add custom sections if nvim-navic is not available
     local icons = LazyVim.config.icons
-    local harpoon_files = require("harpoon_files")
     if not vim.g.trouble_lualine then
       table.insert(opts.sections.lualine_c, {
         function()
@@ -35,33 +34,23 @@ return {
 
     -- Define sections
     opts.sections = vim.tbl_extend("force", opts.sections or {}, {
-      lualine_a = { "branch" },
-      lualine_b = {
+      lualine_a = { "mode" },
+      lualine_b = { "branch" }, --"branch"
+      lualine_c = {
         function()
           local state = require("timerly.state")
           if state.progress == 0 then
             return vim.fn.expand("%:t")
           end
 
-          local total = math.max(0, state.total_secs + 1) -- Add 1 to sync with timer display
+          local total = math.max(0, state.total_secs + 1)
           local mins = math.floor(total / 60)
           local secs = total % 60
 
           return string.format("%s %02d:%02d", state.mode:gsub("^%l", string.upper), mins, secs)
         end,
       },
-      lualine_c = {
-        function()
-          local recording = vim.fn.reg_recording()
-          if recording ~= "" then
-            -- Using the highlight group for the icon only
-            return "%#RecordingText# REC %*" .. "%#RecordingIcon#  %* " .. recording
-          end
-
-          return harpoon_files.lualine_component()
-        end,
-      },
-      lualine_x = { "diagnostics" },
+      lualine_x = { "" },
       lualine_y = {
         {
           "diff",
@@ -83,6 +72,43 @@ return {
         },
       }, -- Progress through the file (e.g., 50%)
       lualine_z = { "location" }, -- Line and column number
+    })
+
+    -- Define inactive sections
+    opts.inactive_sections = vim.tbl_extend("force", opts.inactive_sections or {}, {
+      lualine_a = { "mode" },
+      lualine_b = {},
+      lualine_c = {
+        {
+          "filename",
+          file_status = true, -- Displays file status (readonly status, modified status)
+          newfile_status = false, -- Display new file status (new file means no write after created)
+          path = 0, -- 0: Just the filename
+          -- 1: Relative path
+          -- 2: Absolute path
+          -- 3: Absolute path, with tilde as the home directory
+          -- 4: Filename and parent dir, with tilde as the home directory
+
+          shorting_target = 40, -- Shortens path to leave 40 spaces in the window
+          -- for other components. (terrible name, any suggestions?)
+          symbols = {
+            modified = "[+]", -- Text to show when the file is modified.
+            readonly = "[-]", -- Text to show when the file is non-modifiable or readonly.
+            unnamed = "[No Name]", -- Text to show for unnamed buffers.
+            newfile = "[New]", -- Text to show for newly created file before first write
+          },
+        },
+      }, -- Show filename in inactive windows
+      lualine_x = {}, -- Show location in inactive windows
+      lualine_y = {
+        -- { "progress", separator = " ", padding = { left = 1, right = 0 } },
+        { "location", padding = { left = 0, right = 1 } },
+      },
+      lualine_z = {
+        function()
+          return os.date("%t")
+        end,
+      },
     })
   end,
   dependencies = {

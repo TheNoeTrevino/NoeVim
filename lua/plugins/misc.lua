@@ -32,22 +32,6 @@ return {
       require("nvim-surround").setup({})
     end,
   },
-  {
-    "kiennt63/harpoon-files.nvim",
-    event = "UIEnter",
-    dependencies = {
-      { "ThePrimeagen/harpoon" },
-    },
-    opts = {
-      max_length = 15,
-      icon = "",
-      show_icon = true,
-      show_index = true,
-      show_filename = true,
-      separator_left = "",
-      separator_right = "",
-    },
-  },
   -- {
   --   "roobert/surround-ui.nvim",
   --   event = "VeryLazy",

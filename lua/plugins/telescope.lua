@@ -69,70 +69,6 @@ return {
     }
   end,
   opts = function()
-    -- HARPOON
-    local harpoon = require("harpoon")
-    harpoon:setup({})
-
-    local function toggle_telescope()
-      local harpoon = require("harpoon")
-      local harpoon_list = harpoon:list()
-      local conf = require("telescope.config").values
-      local file_paths = {}
-
-      for _, item in ipairs(harpoon_list.items) do
-        table.insert(file_paths, item.value)
-      end
-
-      local entry_display = require("telescope.pickers.entry_display")
-
-      require("telescope.pickers")
-        .new({
-          prompt_title = "Harpoon",
-          initial_mode = "normal",
-          layout_strategy = "vertical",
-          layout_config = {
-            preview_height = 0.8,
-          },
-        }, {
-          finder = require("telescope.finders").new_table({
-            results = file_paths,
-            entry_maker = function(entry)
-              local Path = require("plenary.path")
-              local path = Path:new(entry)
-              local filename = path:make_relative():match("[^/\\]+$") or entry
-              local relative_path = path:make_relative()
-
-              local displayer = entry_display.create({
-                separator = " ",
-                items = {
-                  { width = #filename },
-                  { remaining = true },
-                },
-              })
-
-              return {
-                value = entry,
-                display = function()
-                  return displayer({
-                    { filename },
-                    { relative_path, "TelescopeMutedPath" },
-                  })
-                end,
-                ordinal = entry,
-                path = entry,
-              }
-            end,
-          }),
-          previewer = conf.file_previewer({}),
-          sorter = conf.generic_sorter({}),
-        })
-        :find()
-    end
-
-    vim.keymap.set("n", "h", function()
-      toggle_telescope()
-    end, { desc = "Open harpoon window" })
-
     local actions = require("telescope.actions")
     local open_with_trouble = function(...)
       return require("trouble.sources.telescope").open(...)
@@ -233,7 +169,6 @@ return {
           },
         },
       },
-      require("telescope").load_extension("harpoon"),
     }
   end,
 }
