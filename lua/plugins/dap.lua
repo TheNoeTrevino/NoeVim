@@ -50,11 +50,14 @@ return {
   {
     "rcarriga/nvim-dap-ui",
     dependencies = { "nvim-neotest/nvim-nio" },
-    keys = {
+    keys = function()
+      return {
         -- stylua: ignore start
-      { "<leader>xu", function() require("dapui").toggle({ }) end, desc = "Dap UI" },
-      { "<leader>xe", function() require("dapui").eval() end, desc = "Eval", mode = {"n", "v"} },
-    },
+        { "<leader>xu", function() require("dapui").toggle({}) end, desc = "Dap UI", },
+        { "<leader>xe", function() require("dapui").eval() end, desc = "Eval", mode = { "n", "v" }, },
+      }
+    end,
+        -- stylua: ignore start
     opts = {},
     config = function(_, opts)
       local dap = require("dap")

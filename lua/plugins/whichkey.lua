@@ -81,11 +81,7 @@ return {
         { "<leader>gm", desc = " Commit Messsge", icon = { icon = " ", color = "azure" } },
         { "<leader>gG", desc = " Git Graph", icon = { icon = " ", color = "azure" } },
 
-        { "<leader>aa", desc = "Toggle ", icon = { icon = " ", color = "yellow" } },
-        { "<leader>am", desc = "Select Model ", icon = { icon = " ", color = "yellow" } },
-        { "<leader>aq", desc = "Prompt Actions", icon = { icon = " ", color = "yellow" } },
-        { "<leader>ap", desc = "Quick Chat", icon = { icon = " ", color = "yellow" } },
-        { "<leader>ax", desc = "Clear", icon = { icon = " ", color = "yellow" } },
+        { "<leader>ax", desc = "avante: clear", icon = { icon = " ", color = "yellow" } },
 
         { "<leader>gl", group = "Golang", icon = { icon = " ", color = "blue" }, hidden = false },
         { "<leader>glj", desc = "Add JSON Tag", icon = { icon = " ", color = "blue" } },
