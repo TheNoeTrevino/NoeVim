@@ -18,5 +18,9 @@ return {
       mason = false,
       autostart = false,
     },
+    eslint = {
+      mason = false,
+      autostart = false,
+    },
   },
 }
