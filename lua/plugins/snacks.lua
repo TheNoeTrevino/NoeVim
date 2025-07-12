@@ -130,6 +130,7 @@ return {
     { "<leader>sw", function() Snacks.picker.grep_word() end, desc = "Visual selection or word", mode = { "n", "x" } },
     -- search
     { "<leader>so", function() Snacks.picker.recent() end, desc = "Recent" },
+    { "<leader>sr", function() Snacks.picker.resume() end, desc = "Resume" },
     { "<leader>sP", function() Snacks.picker.projects() end, desc = "Projects" },
     { "<leader>sp", function() Snacks.picker.spelling() end, desc = "Spelling" },
     { "<leader>sy", function() Snacks.picker.yanky() end, desc = "Yanks" },
