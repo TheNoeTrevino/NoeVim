@@ -86,12 +86,6 @@ return {
     return {
       { "<leader>e", "<cmd>Neotree reveal_force_cwd toggle<cr>", desc = "Explorer NeoTree (Root Dir)", remap = true },
       {
-        "<leader>ne",
-        "<cmd>Neotree reveal toggle dir=~/notes/<cr>",
-        desc = "Notes explorer",
-        remap = true,
-      },
-      {
         "<leader>ge",
         function()
           require("neo-tree.command").execute({ source = "git_status", toggle = true })

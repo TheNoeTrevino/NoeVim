@@ -127,35 +127,6 @@ return {
       long_message_to_split = true,
     },
   },
-  keys = {
-    { "<leader>sn", false },
-    { "<leader>sna", false },
-    { "<leader>snd", false },
-    { "<leader>snh", false },
-    { "<leader>snl", false },
-    { "<leader>nh", "<cmd>Noice history<cr>", desc = "History" },
-    {
-      "<leader>nl",
-      function()
-        require("noice").cmd("last")
-      end,
-      desc = "Last Message",
-    },
-    {
-      "<leader>nd",
-      function()
-        require("noice").cmd("dismiss")
-      end,
-      desc = "Dismiss All",
-    },
-    {
-      "<leader>nt",
-      function()
-        require("noice").cmd("pick")
-      end,
-      desc = "Noice Picker",
-    },
-  },
   config = function(_, opts)
     if vim.o.filetype == "lazy" then
       vim.cmd([[messages clear]])

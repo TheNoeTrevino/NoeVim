@@ -107,9 +107,7 @@ map("x", "<leader>d", [["_d]])
 map("n", "<leader>ax", "<cmd>AvanteClear<cr>")
 
 -- Definition mappings
-map("n", "<leader>j", "<cmd>Lspsaga finder tyd+ref+def<CR>", { desc = "Get References" })
 map("n", "gk", "<cmd>Glance definitions<cr>", { desc = "Peek Definition" })
-map("n", "<leader>k", "<cmd>Glance definitions<cr>", { desc = "Peek Definition" })
 map("n", "gR", "<cmd>Glance references<cr>", { desc = "Glance References" })
 
 map("n", "dm", [[:lua DeleteMark()<CR>]], { desc = "Delete Mark x" })
