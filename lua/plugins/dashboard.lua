@@ -56,8 +56,7 @@ return {
           { action = "lua LazyVim.pick()()", desc = " Find File", icon = "󰥨 ", key = "f" },
           {
             action = function()
-              vim.cmd("tabnew")
-              require("telescope.builtin").find_files({ cwd = "~/notes/" })
+              Snacks.picker.files({ dirs = { "~/notes" } })
             end,
             desc = " Search Notes",
             icon = " ",
@@ -65,7 +64,7 @@ return {
           },
           {
             action = function()
-              vim.cmd("Telescope live_grep")
+              Snacks.picker.grep()
             end,
             desc = " Grep",
             icon = "󰩉 ",
@@ -81,7 +80,7 @@ return {
           },
           {
             action = function()
-              vim.cmd("Telescope keymaps")
+              Snacks.picker.keymaps()
             end,
             desc = " Key Mappings",
             icon = " ",
@@ -95,7 +94,7 @@ return {
           },
           {
             action = function()
-              vim.cmd("Telescope colorscheme")
+              Snacks.picker.colorschemes()
             end,
             desc = " Colorscheme",
             icon = " ",
