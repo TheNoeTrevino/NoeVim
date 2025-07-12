@@ -1,11 +1,11 @@
 return {
   {
     "MeanderingProgrammer/render-markdown.nvim",
-    ft = { "markdown", "norg", "rmd", "org", "Avante", "AvanteInput" },
+    ft = { "markdown", "norg", "rmd", "org", "Avante", "AvanteInput", "copilot-chat" },
     dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" }, -- if you prefer nvim-web-devicons
     config = function()
       require("render-markdown").setup({
-        file_types = { "markdown", "norg", "rmd", "org", "Avante", "AvanteInput" },
+        file_types = { "markdown", "norg", "rmd", "org", "Avante", "AvanteInput", "copilot-chat" },
         checkbox = {
           enabled = true,
           position = "inline",

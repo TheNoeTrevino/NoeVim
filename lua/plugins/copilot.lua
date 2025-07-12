@@ -1,5 +1,6 @@
 return {
   "CopilotC-Nvim/CopilotChat.nvim",
+  event = "VeryLazy",
   branch = "canary",
   cmd = "CopilotChat",
   opts = function()
@@ -11,9 +12,7 @@ return {
       question_header = "  Noe ",
       answer_header = "  Copilot ",
       window = {
-        layout = "float", -- 'vertical', 'horizontal', 'float', 'replace'
-        width = 0.8, -- fractional width of parent, or absolute width in columns when > 1
-        height = 0.8, -- fractional height of parent, or absolute height in rows when > 1
+        layout = "vertical", -- 'vertical', 'horizontal', 'float', 'replace'
         relative = "editor", -- 'editor', 'win', 'cursor', 'mouse'
         border = "single", -- 'none', single', 'double', 'rounded', 'solid', 'shadow'
         row = nil, -- row position of the window, default is centered
@@ -44,5 +43,13 @@ return {
     { "<leader>ac", "<CMD>CopilotChatCommit<CR>", desc = "Commit", mode = { "n", "v" } },
     { "<leader>as", "<CMD>CopilotChatCommitStaged<CR>", desc = "Commit - Staged", mode = { "n", "v" } },
     { "<leader>ar", "<CMD>CopilotChatCommitReview<CR>", desc = "Commit - Review", mode = { "n", "v" } },
+    {
+      "<leader>ax",
+      function()
+        return require("CopilotChat").reset()
+      end,
+      desc = "Clear (CopilotChat)",
+      mode = { "n", "v" },
+    },
   },
 }

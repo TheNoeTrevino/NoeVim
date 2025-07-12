@@ -57,19 +57,6 @@ vim.api.nvim_create_autocmd("ColorScheme", {
   group = custom_highlight,
 })
 
--- Copilot is now markdown
-vim.api.nvim_create_autocmd("BufEnter", {
-  pattern = "copilot-*",
-  callback = function()
-    vim.opt_local.relativenumber = true
-    vim.opt_local.number = true
-    local ft = vim.bo.filetype
-    if ft == "copilot-chat" then
-      vim.bo.filetype = "markdown"
-    end
-  end,
-})
-
 vim.api.nvim_create_autocmd("User", {
   pattern = "GitConflictDetected",
   callback = function()
