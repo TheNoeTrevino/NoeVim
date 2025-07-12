@@ -96,7 +96,7 @@ h(0, "GlanceBorderTop", { bg = "#101010", fg = "#1F3442" })
 h(0, "GlancePreviewBorderBottom", { bg = "#101010", fg = "#1F3442" })
 
 h(0, "IblScope", { fg = "#426787" })
-h(0, "IblIndent", { fg = "#353A56" })
+h(0, "IblIndent", { fg = "#152A36" })
 
 -- Custom Cmp hghlights, markdown erases them
 h(0, "BlinkCmpKind", { fg = "#90CAE1" })
