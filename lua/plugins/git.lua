@@ -39,10 +39,10 @@ return {
         map("n", "]H", function() gs.nav_hunk("last") end, "Last Hunk")
         map("n", "[H", function() gs.nav_hunk("first") end, "First Hunk")
         -- Staging
-        map({ "n", "v" }, "<leader>gsh", ":Gitsigns stage_hunk<CR>", "Stage Hunk")
-        map("n", "<leader>gsb", gs.stage_buffer, "Stage Buffer")
+        map({ "n", "v" }, "<leader>gSh", ":Gitsigns stage_hunk<CR>", "Stage Hunk")
+        map("n", "<leader>gSb", gs.stage_buffer, "Stage Buffer")
         -- Stage Undo
-        map("n", "<leader>gsuh", gs.undo_stage_hunk, "Undo Stage Hunk")
+        map("n", "<leader>gSuh", gs.undo_stage_hunk, "Undo Stage Hunk")
         -- Reset
         map({ "n", "v" }, "<leader>grh", ":Gitsigns reset_hunk<CR>", "Reset Hunk")
         map("n", "<leader>grb", gs.reset_buffer, "Reset Buffer")
@@ -50,9 +50,9 @@ return {
         map("n", "<leader>gpi", gs.preview_hunk_inline, "Preview Hunk Inline")
         map("n", "<leader>gpf", "<cmd>Gitsigns preview_hunk<CR>", "Preview Hunk Float")
         -- Git blame
-        map("n", "<leader>gbl", function() gs.blame_line({ full = true }) end, "Blame Line")
-        map("n", "<leader>gbt", "<cmd>Gitsigns toggle_current_line_blame<CR>", "Toggle Blame Line")
-        map("n", "<leader>gbb", function() gs.blame() end, "Blame Buffer")
+        map("n", "<leader>gBl", function() gs.blame_line({ full = true }) end, "Blame Line")
+        map("n", "<leader>gBt", "<cmd>Gitsigns toggle_current_line_blame<CR>", "Toggle Blame Line")
+        map("n", "<leader>gBb", function() gs.blame() end, "Blame Buffer")
         -- Git diff
         map("n", "<leader>gdo", '<cmd>DiffviewOpen<CR>', "Diff Open")
         map("n", "<leader>gdc", '<cmd>DiffviewClose<CR>', "Diff Close")

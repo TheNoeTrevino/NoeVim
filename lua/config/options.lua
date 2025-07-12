@@ -31,7 +31,7 @@ vim.opt.sidescrolloff = 0
 
 -- In case you don't want to use `:LazyExtras`,
 -- then you need to set the option below.
-vim.g.lazyvim_picker = "telescope"
+vim.g.lazyvim_picker = "snacks"
 
 vim.g.db_ui_use_nerd_fonts = 1
 

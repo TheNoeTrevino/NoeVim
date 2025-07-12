@@ -32,11 +32,11 @@ return {
         { "<leader>n", group = "Notif/Notes", icon = { icon = "󰵙 ", color = "yellow" }, hidden = false },
         { "<leader>m", group = "Markdown", icon = { icon = "󱦹 ", color = "azure" } },
         { "<leader>g", group = "Git", icon = { icon = "󰊤 ", color = "azure" } },
-        { "<leader>gs", group = "Stage/Search", icon = { icon = "󰊤 " } },
+        { "<leader>gS", group = "Stage", icon = { icon = "󰊤 " } },
         { "<leader>gsu", group = "Unstage", icon = { icon = " " } },
         { "<leader>gp", group = "Preview", icon = { icon = " " } },
         { "<leader>gr", group = "Reset", icon = { icon = " " } },
-        { "<leader>gb", group = "Blame", icon = { icon = " ", color = "azure" } },
+        { "<leader>gB", group = "Blame", icon = { icon = " ", color = "azure" } },
         { "<leader>gd", group = "Diff", icon = { icon = " ", color = "azure" } },
         { "<leader>q", group = "Quit/session" },
         { "<leader>s", group = "Search", icon = { icon = " ", color = "orange" } },
@@ -66,10 +66,10 @@ return {
         -- better descriptions
         -- valid colors are: `azure`, `blue`, `cyan`, `green`, `grey`, `orange`, `purple`, `red`, `yellow`
         { "gx", desc = "Open with system app" },
-        { "<leader>e", desc = " NeoTree", icon = { icon = "󰙅 ", color = "yellow" } },
+        { "<leader>e", desc = " File Tree", icon = { icon = "󰙅 ", color = "yellow" } },
         { "<leader>y", desc = " Yank History", icon = { icon = " ", color = "azure" } },
         { "<leader>0", desc = " Transparency", icon = { icon = " ", color = "azure" }, hidden = true },
-        { "<leader>j", desc = " References", icon = { icon = " ", color = "purple" } },
+        { "<leader>j", desc = " References", icon = { icon = " ", color = "purple" }, hidden = true },
         { "<leader>?", desc = " Buffer Keymaps", icon = { icon = "  ", color = "azure", hidden = true } },
         { "<leader><leader>", desc = " Search Buffers", icon = { icon = " ", color = "azure" } },
         { "<leader>/", desc = " Grep Buffer", icon = { icon = "󰮗 ", color = "azure" } },
@@ -80,6 +80,8 @@ return {
         { "<leader>gf", desc = " LazyGit File History", icon = { icon = "󰋣 ", color = "azure" } },
         { "<leader>gm", desc = " Commit Messsge", icon = { icon = " ", color = "azure" } },
         { "<leader>gG", desc = " Git Graph", icon = { icon = " ", color = "azure" } },
+        { "<leader>gs", desc = " Search", icon = { icon = " ", color = "azure" } },
+        { "<leader>gb", desc = " Branch", icon = { icon = " ", color = "azure" } },
 
         { "<leader>ax", desc = "avante: clear", icon = { icon = " ", color = "yellow" } },
 

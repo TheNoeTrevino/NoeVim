@@ -118,18 +118,6 @@ vim.api.nvim_create_user_command("NormMap", function()
   map("n", "<C-j>", ":KittyNavigateDown<CR>", { noremap = true, silent = true })
   map("n", "<C-k>", ":KittyNavigateUp<CR>", { noremap = true, silent = true })
   map("n", "<C-l>", ":KittyNavigateRight<CR>", { noremap = true, silent = true })
-  local actions = require("telescope.actions")
-  require("telescope").setup({
-    defaults = {
-      mappings = {
-        n = {
-          ["l"] = actions.select_default,
-          ["k"] = actions.move_selection_previous,
-          ["j"] = actions.move_selection_next,
-        },
-      },
-    },
-  })
 end, {})
 
 vim.api.nvim_create_user_command("NoeMap", function()
@@ -160,34 +148,6 @@ vim.api.nvim_create_user_command("NoeMap", function()
   map("n", "<C-k>", ":KittyNavigateDown<CR>", { noremap = true, silent = true })
   map("n", "<C-l>", ":KittyNavigateUp<CR>", { noremap = true, silent = true })
   map("n", "<C-;>", ":KittyNavigateRight<CR>", { noremap = true, silent = true })
-
-  local actions = require("telescope.actions")
-  require("telescope").setup({
-    defaults = {
-      mappings = {
-        n = {
-          ["l"] = actions.move_selection_previous,
-          ["k"] = actions.move_selection_next,
-        },
-      },
-    },
-  })
-
-  local harpoon = require("harpoon")
-
-  local toggle_opts = {
-    border = "rounded",
-    title_pos = "center",
-    ui_width_ratio = 0.333,
-  }
-  map("n", "H", function()
-    harpoon:list():add()
-    vim.notify("This file has been added to the Harpoon list", vim.log.levels.INFO, { title = "Harpooned 󱡀 " })
-  end, { desc = "󱡀 Harpoon File" })
-
-  map("n", "h", function()
-    harpoon.ui:toggle_quick_menu(harpoon:list(), toggle_opts)
-  end, { desc = "󱡀 Harpoon File" })
 end, {})
 
 vim.api.nvim_create_user_command("ToggleGutter", function()
