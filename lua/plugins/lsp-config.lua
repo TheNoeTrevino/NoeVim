@@ -4,7 +4,6 @@ return {
   opts = {
     inlay_hints = { enabled = false },
   },
-
   servers = {
     basedpyright = {
       mason = false,

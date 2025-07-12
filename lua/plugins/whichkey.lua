@@ -83,7 +83,7 @@ return {
         { "<leader>gs", desc = " Search", icon = { icon = " ", color = "azure" } },
         { "<leader>gb", desc = " Branch", icon = { icon = " ", color = "azure" } },
 
-        { "<leader>ax", desc = "avante: clear", icon = { icon = " ", color = "yellow" } },
+        { "<leader>ax", desc = "Clear", icon = { icon = " ", color = "yellow" } },
 
         { "<leader>gl", group = "Golang", icon = { icon = " ", color = "blue" }, hidden = false },
         { "<leader>glj", desc = "Add JSON Tag", icon = { icon = " ", color = "blue" } },

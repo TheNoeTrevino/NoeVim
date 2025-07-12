@@ -1,5 +1,6 @@
 return {
   "saghen/blink.cmp",
+  event = "VeryLazy",
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
   opts = {

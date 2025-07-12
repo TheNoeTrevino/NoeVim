@@ -49,6 +49,7 @@ return {
   },
   {
     "rcarriga/nvim-dap-ui",
+    event = "VeryLazy",
     dependencies = { "nvim-neotest/nvim-nio" },
     keys = function()
       return {
