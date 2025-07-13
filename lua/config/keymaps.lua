@@ -200,6 +200,15 @@ map("n", "<leader>wl", "<C-w>K", { desc = "Move Top" })
 map("n", "<leader>w;", "<C-w>L", { desc = "Move Right" })
 map("n", "<leader>we", "<C-w>=", { desc = "Equalize" })
 
+map("n", "<leader>we", "<C-w>=", { desc = "Equalize" })
+
+map("i", "<c-;>", function()
+  require("clasp").wrap("next")
+end)
+map("i", "<c-j>", function()
+  require("clasp").wrap("prev")
+end)
+
 -------------------------------------------------------------------------------
 --                           Jumplist Section
 -------------------------------------------------------------------------------
