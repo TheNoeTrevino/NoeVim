@@ -31,9 +31,8 @@ return {
       layout = {
         reverse = true,
         layout = {
-          preset = "vscode",
           box = "horizontal",
-          backdrop = false,
+          backdrop = true,
           width = 0.9,
           height = 0.9,
           border = "none",

@@ -137,7 +137,8 @@ map("n", "gO", "mzO<ESC>`z:delm z<cr><up>")
 map("n", "'", "<cmd>WhichKey `<cr>")
 
 -- Matching Bracket
-map({ "n", "x" }, "M", "%")
+map("n", "M", "<Plug>(MatchitNormalForward)")
+map({ "x", "v" }, "M", "%")
 
 -- Easier case switching
 map("n", "U", "~<Left>")

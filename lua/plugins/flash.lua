@@ -2,7 +2,14 @@ return {
   "folke/flash.nvim",
   event = "VeryLazy",
   vscode = true,
-  opts = {},
+  opts = {
+    modes = {
+      -- `f`, `F`, `t`, `T`, `;` and `,` motions
+      char = {
+        highlight = { backdrop = false },
+      },
+    },
+  },
   keys = function()
     -- stylua: ignore
     return {
