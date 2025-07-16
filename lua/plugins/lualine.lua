@@ -1,6 +1,6 @@
 return {
   "nvim-lualine/lualine.nvim",
-  event = "VeryLazy",
+  event = "UIEnter",
   optional = true,
   opts = function(_, opts)
     -- Add custom sections if nvim-navic is not available
