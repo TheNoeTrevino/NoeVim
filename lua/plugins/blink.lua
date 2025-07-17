@@ -78,6 +78,12 @@ return {
       nerd_font_variant = "mono",
     },
     completion = {
+      list = {
+        selection = {
+          preselect = false,
+          auto_insert = false,
+        },
+      },
       accept = {},
       menu = {
         winhighlight = "Normal:BlinkCmpMenu,FloatBorder:BlinkCmpMenuBorder,CursorLine:BlinkCmpMenuSelection,Search:None",
@@ -96,20 +102,27 @@ return {
         auto_show_delay_ms = 200,
       },
       ghost_text = {
-        enabled = false,
+        enabled = true,
+        show_with_selection = true,
+        show_without_selection = false,
+        show_with_menu = true,
+        show_without_menu = true,
       },
     },
     sources = {
       -- adding any nvim-cmp sources here will enable them
       -- with blink.compat
-      default = { "lsp", "path", "snippets", "buffer" },
-
+      default = { "lsp", "copilot", "path", "snippets", "buffer" },
       providers = {
+        lsp = {
+          score_offset = 100,
+          async = true,
+        },
         copilot = {
           name = "copilot",
           module = "blink-cmp-copilot",
           kind = "Copilot",
-          score_offset = -100,
+          score_offset = 10,
           async = true,
         },
       },
@@ -120,12 +133,41 @@ return {
       ["<C-Space>"] = {
         function(cmp)
           cmp.show({
+            providers = { "copilot" },
+          })
+        end,
+      },
+      ["<C-S>"] = {
+        function(cmp)
+          cmp.show({
             providers = { "snippets" },
           })
         end,
       },
+      ["<C-h>"] = {
+        function(cmp)
+          cmp.show({
+            providers = { "lsp" },
+          })
+        end,
+      },
+      ["<C-;>"] = {
+        function()
+          require("copilot.suggestion").accept_line()
+        end,
+        "hide",
+      },
+      ["<C-n>"] = {
+        function()
+          require("copilot.suggestion").next()
+        end,
+      },
+      ["<C-p>"] = {
+        function()
+          require("copilot.suggestion").prev()
+        end,
+      },
       ["<C-e>"] = { "hide", "fallback" },
-
       ["<Tab>"] = {
         function(cmp)
           if cmp.snippet_active() then
@@ -141,8 +183,6 @@ return {
 
       ["<Up>"] = { "select_prev", "fallback" },
       ["<Down>"] = { "select_next", "fallback" },
-      ["<C-p>"] = { "select_prev", "fallback" },
-      ["<C-n>"] = { "select_next", "fallback" },
       ["<C-l>"] = { "select_prev", "fallback" },
       ["<C-k>"] = { "select_next", "fallback" },
 
