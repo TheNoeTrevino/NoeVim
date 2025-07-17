@@ -163,13 +163,13 @@ require("lspconfig").angularls.setup({
     local node_modules_path = find_node_modules(root_dir)
 
     if node_modules_path then
-      local angular_ls_path = node_modules_path .. "/@angular/language-service/lib"
+      local angular_ls_path = node_modules_path .. "/@angular/language-server/bin"
       if vim.fn.isdirectory(angular_ls_path) == 1 then
         new_config.cmd = {
           "ngserver",
           "--stdio",
           "--tsProbeLocations",
-          node_modules_path .. "/typescript/lib",
+          node_modules_path .. "/typescript/bin",
           "--ngProbeLocations",
           angular_ls_path,
         }

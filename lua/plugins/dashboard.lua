@@ -25,7 +25,7 @@ return {
       hide = {
         -- this is taken care of by lualine
         -- enabling this messes up the actual laststatus setting after loading a file
-        statusline = true,
+        -- statusline = true,
       },
       config = {
         header = vim.split(logo, "\n"),
@@ -39,7 +39,6 @@ return {
           {
             action = function()
               vim.cmd("tabnew")
-              vim.cmd("Tabby rename_tab Database")
               vim.cmd("DBUIToggle")
               vim.cmd("tabonly")
             end,

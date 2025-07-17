@@ -18,10 +18,13 @@ return {
             return found
           end
         end,
+        -- Dont forget to npm install prettier and the java plugin
+        append_args = { "--config", ".prettierrc.json" },
       },
     },
     formatters_by_ft = {
-      ["java"] = { "google-java-format" },
+      -- ["java"] = { "google-java-format" },
+      ["java"] = { "prettier" },
       ["xml"] = { "xmlformat" },
       ["htmlangular"] = { "prettier" },
       ["cs"] = { "csharpier" },
