@@ -198,12 +198,8 @@ map("n", "<leader>we", "<C-w>=", { desc = "Equalize" })
 
 map("n", "<leader>we", "<C-w>=", { desc = "Equalize" })
 
-map("i", "<c-;>", function()
-  require("clasp").wrap("next")
-end)
-map("i", "<c-j>", function()
-  require("clasp").wrap("prev")
-end)
+map("n", "<c-n>", "<cmd>bn<cr>")
+map("n", "<c-p>", "<cmd>bp<cr>")
 
 -------------------------------------------------------------------------------
 --                           Jumplist Section

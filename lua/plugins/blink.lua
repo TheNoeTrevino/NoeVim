@@ -8,6 +8,7 @@ return {
       enabled = true,
       keymap = {
         preset = "super-tab",
+
         ["<C-Space>"] = {
           function(cmp)
             cmp.show({
@@ -117,6 +118,11 @@ return {
         lsp = {
           score_offset = 100,
           async = true,
+        },
+        dadbod = {
+          name = "Dadbod",
+          module = "vim_dadbod_completion.blink",
+          score_offset = 50,
         },
         copilot = {
           name = "copilot",
