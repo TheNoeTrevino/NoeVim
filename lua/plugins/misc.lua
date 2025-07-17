@@ -2,7 +2,6 @@ return {
   -- Util
   -- { "ThePrimeagen/vim-be-good", event = "VeryLazy" },
   { "knubie/vim-kitty-navigator", event = "VeryLazy" },
-  { "backdround/improved-search.nvim", event = "VeryLazy" },
   -- {
   --   "meznaric/key-analyzer.nvim",
   --   event = "VeryLazy",

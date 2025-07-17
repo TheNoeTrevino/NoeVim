@@ -91,6 +91,7 @@ return {
             ["gg"] = "list_top",
             ["k"] = "list_down",
             ["l"] = "list_up",
+            [";"] = { "confirm", mode = "n" },
             ["<c-k>"] = { "list_down", mode = { "i", "n" } },
             ["<c-l>"] = { "list_up", mode = { "i", "n" } },
             ["q"] = "close",

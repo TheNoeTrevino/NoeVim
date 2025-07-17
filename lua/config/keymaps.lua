@@ -117,11 +117,6 @@ function DeleteMark()
   vim.cmd("delmarks " .. mark)
 end
 
-local search = require("improved-search")
-map("n", "*", search.current_word)
-map("x", "*", search.in_place) -- search selection without moving
-map("n", "|", search.in_place)
-
 -- Center when finding
 map("n", "n", "nzzzv", { desc = "Next find and center" })
 map("n", "N", "Nzzzv", { desc = "Prev find and center" })
