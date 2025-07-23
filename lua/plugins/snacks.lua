@@ -73,6 +73,7 @@ return {
             ["<Tab>"] = { "select_and_next", mode = { "i", "n" } },
             ["<c-f>"] = { "toggle_follow", mode = { "i", "n" } },
             ["<c-h>"] = { "toggle_hidden", mode = { "i", "n" } },
+            ["H"] = { "toggle_hidden", mode = { "n" } },
             ["<c-i>"] = { "toggle_ignored", mode = { "i", "n" } },
             ["<c-m>"] = { "toggle_maximize", mode = { "i", "n" } },
             ["<c-a>"] = { "select_all", mode = { "n", "i" } },
