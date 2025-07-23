@@ -154,7 +154,7 @@ h(0, "TelescopeMutedPath", { fg = "#888888" })
 
 vim.cmd("set laststatus=0")
 
--- repsec, comment out when at home
+-- just remember to npm i @angular/language-server on your angular projects
 require("lspconfig").angularls.setup({
   cmd = { "ngserver", "--stdio" },
   on_new_config = function(new_config, root_dir)
@@ -165,17 +165,47 @@ require("lspconfig").angularls.setup({
     local node_modules_path = find_node_modules(root_dir)
 
     if node_modules_path then
+      local angular_ls_path = node_modules_path .. "/@angular/language-service/lib"
+      if vim.fn.isdirectory(angular_ls_path) == 1 then
+        new_config.cmd = {
+          "ngserver",
+          "--stdio",
+          "--tsProbeLocations",
+          node_modules_path .. "/typescript/lib",
+          "--ngProbeLocations",
+          angular_ls_path,
+        }
+      else
+        vim.defer_fn(function()
+          print(
+            "Node modules found, but @angular/language-service is missing.\nDon't forget to npm i @angular/language-server"
+          )
+        end, 2000)
+
+        new_config.cmd = {
+          "ngserver",
+          "--stdio",
+          "--tsProbeLocations",
+          vim.fn.stdpath("data") .. "/mason/packages/typescript-language-server/node_modules/typescript/lib",
+          "--ngProbeLocations",
+          vim.fn.stdpath("data")
+            .. "/mason/packages/angular-language-server/node_modules/@angular/language-service/lib",
+        }
+      end
+    else
+      -- Fallback to global TypeScript and Angular Language Service
+      vim.defer_fn(function()
+        print("Don't forget to npm i @angular/language-server")
+      end, 2000) -- 2000 milliseconds = 2 seconds
+
       new_config.cmd = {
         "ngserver",
         "--stdio",
         "--tsProbeLocations",
-        node_modules_path .. "/typescript/lib",
+        vim.fn.stdpath("data") .. "/mason/packages/typescript-language-server/node_modules/typescript/lib",
         "--ngProbeLocations",
-        node_modules_path .. "/@angular/language-service/lib",
+        vim.fn.stdpath("data") .. "/mason/packages/angular-language-server/node_modules/@angular/language-service/lib",
       }
-    else
-      -- Fallback to global Angular Language Service
-      vim.notify("Local node_modules not found. Falling back to global Angular Language Service.", vim.log.levels.WARN)
     end
   end,
 })
