@@ -91,7 +91,6 @@ return {
             ["gg"] = "list_top",
             ["k"] = "list_down",
             ["l"] = "list_up",
-            [";"] = { "confirm", mode = "n" },
             ["<c-k>"] = { "list_down", mode = { "i", "n" } },
             ["<c-l>"] = { "list_up", mode = { "i", "n" } },
             ["q"] = "close",
@@ -155,7 +154,7 @@ return {
     { "<leader>su", function() Snacks.picker.undo() end, desc = "Undo History" },
     { "<leader>ss", function() Snacks.picker.pickers() end, desc = "Pickers" },
     { "<leader>uC", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
-    -- { "<leader><leader>", function() Snacks.picker.buffers({ on_show = function() vim.cmd.stopinsert() end}) end, desc = "Buffers" },
+    { "<leader><leader>", function() Snacks.picker.buffers({ on_show = function() vim.cmd.stopinsert() end}) end, desc = "Buffers" },
     -- LSP
     { "gd", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition" },
     { "gD", function() Snacks.picker.lsp_declarations() end, desc = "Goto Declaration" },
