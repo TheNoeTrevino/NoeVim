@@ -5,7 +5,7 @@ return {
   cmd = "CopilotChat",
   opts = function()
     return {
-      model = "claude-3.7-sonnet",
+      -- model = "claude-3.7-sonnet",
       auto_insert_mode = true,
       show_folds = false,
       show_help = true,
