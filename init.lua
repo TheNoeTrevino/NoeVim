@@ -156,12 +156,15 @@ vim.cmd("set laststatus=0")
 
 -- repsec, comment out when at home
 require("lspconfig").angularls.setup({
-  cmd = { "ngserver", "--stdio", "--tsProbeLocations", "", "--ngProbeLocations", "" },
+  cmd = { "ngserver", "--stdio" },
   on_new_config = function(new_config, root_dir)
-    local node_modules_path = root_dir .. "/frontend/node_modules"
+    local function find_node_modules(start_dir)
+      return vim.fs.find("node_modules", { upward = true, path = start_dir })[1]
+    end
 
-    -- Set paths based on the found node_modules
-    if vim.fn.isdirectory(node_modules_path) then
+    local node_modules_path = find_node_modules(root_dir)
+
+    if node_modules_path then
       new_config.cmd = {
         "ngserver",
         "--stdio",
@@ -170,6 +173,9 @@ require("lspconfig").angularls.setup({
         "--ngProbeLocations",
         node_modules_path .. "/@angular/language-service/lib",
       }
+    else
+      -- Fallback to global Angular Language Service
+      vim.notify("Local node_modules not found. Falling back to global Angular Language Service.", vim.log.levels.WARN)
     end
   end,
 })
