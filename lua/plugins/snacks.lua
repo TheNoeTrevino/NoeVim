@@ -44,7 +44,7 @@ return {
           {
             win = "preview",
             title = "{preview:Preview}",
-            width = 0.6,
+            width = 0.66,
             border = "single",
             title_pos = "center",
           },
