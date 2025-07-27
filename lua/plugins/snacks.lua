@@ -95,6 +95,7 @@ return {
             ["<c-k>"] = { "list_down", mode = { "i", "n" } },
             ["<c-l>"] = { "list_up", mode = { "i", "n" } },
             ["q"] = "close",
+            ["dd"] = "bufdelete",
           },
         },
         -- preview window
