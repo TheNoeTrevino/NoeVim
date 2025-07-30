@@ -57,8 +57,11 @@ return {
       end,
       completion = {
         trigger = {
+          show_on_backspace_in_keyword = true,
+          show_on_backspace_after_accept = true,
+          show_on_backspace_after_insert_enter = true,
           show_on_blocked_trigger_characters = {},
-          show_on_x_blocked_trigger_characters = nil, -- Inherits from top level `completion.trigger.show_on_blocked_trigger_characters` config when not set
+          show_on_x_blocked_trigger_characters = {}, -- Inherits from top level `completion.trigger.show_on_blocked_trigger_characters` config when not set
         },
         menu = {
           auto_show = true, -- Inherits from top level `completion.menu.auto_show` config when not set
@@ -113,11 +116,16 @@ return {
     sources = {
       -- adding any nvim-cmp sources here will enable them
       -- with blink.compat
-      default = { "lsp", "copilot", "path", "snippets", "buffer" },
+      default = { "lsp", "copilot", "path", "snippets", "buffer", "html-css" },
       providers = {
         lsp = {
           score_offset = 100,
           async = true,
+        },
+        ["html-css"] = {
+          score_offset = 110,
+          name = "html-css",
+          module = "blink.compat.source",
         },
         dadbod = {
           name = "Dadbod",
@@ -133,7 +141,6 @@ return {
         },
       },
     },
-
     keymap = {
       preset = "super-tab",
       ["<C-Space>"] = {
