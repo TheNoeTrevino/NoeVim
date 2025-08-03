@@ -57,6 +57,23 @@ map("t", "<C-k>", "<cmd>wincmd j<cr>", { desc = "Go to Lower Window" })
 map("t", "<C-l>", "<cmd>wincmd k<cr>", { desc = "Go to Upper Window" })
 map("t", "<C-;>", "<cmd>wincmd l<cr>", { desc = "Go to Right Window" })
 
+map({ "i", "n", "s" }, "<esc>", function()
+  vim.cmd("noh")
+  require("copilot.suggestion").dismiss()
+  LazyVim.cmp.actions.snippet_stop()
+  return "<esc>"
+end, { expr = true, desc = "Escape and Clear hlsearch" })
+
+-------------------------------------------------------------------------------
+--                           Buffers Section
+-------------------------------------------------------------------------------
+
+-- Better alternate buffer
+map("n", "L", "<C-^>", { noremap = true, silent = true })
+
+map("t", "<C-A-j>", "<cmd>bp<cr>", { desc = "Previous Buffer" })
+map("t", "<C-A-;>", "<cmd>bp<cr>", { desc = "Next Buffer" })
+
 -------------------------------------------------------------------------------
 --                           Tab Section
 -------------------------------------------------------------------------------
