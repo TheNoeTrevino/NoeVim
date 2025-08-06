@@ -1,64 +1,64 @@
 return {
   -- Extra Colors
   -- Uncomment below to choose a colorscheme
-  { "loctvl842/monokai-pro.nvim", event = "VeryLazy" },
-  { "catppuccin/nvim", name = "catppuccin", event = "VeryLazy" },
-  { "tokyonight.nvim", event = "VeryLazy" },
-  { "Mofiqul/vscode.nvim", event = "VeryLazy" },
-  { "bluz71/vim-moonfly-colors", event = "VeryLazy" },
-  { "bluz71/vim-nightfly-colors", event = "VeryLazy" },
-  { "ellisonleao/gruvbox.nvim", event = "VeryLazy" },
-  { "sainnhe/gruvbox-material", event = "VeryLazy" },
-  { "projekt0n/github-nvim-theme", event = "VeryLazy" },
-  { "scottmckendry/cyberdream.nvim", event = "VeryLazy" },
-  { "tiagovla/tokyodark.nvim", event = "VeryLazy" },
-  { "sainnhe/edge", event = "VeryLazy" },
-  { "EdenEast/nightfox.nvim", event = "VeryLazy" },
-  { "marko-cerovac/material.nvim", event = "VeryLazy" },
-  { "sainnhe/sonokai", event = "VeryLazy" },
-  { "Shatur/neovim-ayu", event = "VeryLazy" },
-  { "ChristianChiarulli/nvcode-color-schemes.vim", event = "VeryLazy" },
-  { "comfysage/evergarden", event = "VeryLazy" },
-  { "nyoom-engineering/oxocarbon.nvim", event = "VeryLazy" },
-  { "nvimdev/zephyr-nvim", event = "VeryLazy" },
-  {
-    "rose-pine/neovim",
-    name = "rose-pine",
-    lazy = true,
-    config = function()
-      require("rose-pine").setup({
-        variant = "auto", -- auto, main, moon, or dawn
-        dark_variant = "main", -- main, moon, or dawn
-        dim_inactive_windows = false,
-        extend_background_behind_borders = true,
-        enable = {
-          terminal = true,
-          legacy_highlights = true, -- Improve compatibility for previous versions of Neovim
-          migrations = true, -- Handle deprecated options automatically
-        },
-        styles = {
-          bold = true,
-          italic = false,
-          transparency = true,
-        },
-        highlight_groups = {
-          -- String = { fg = "#FF0000" },
-          -- Comment = { fg = "foam" },
-          -- VertSplit = { fg = "muted", bg = "muted" },
-        },
-      })
-    end,
-  },
-  {
-    "https://gitlab.com/bartekjaszczak/distinct-nvim",
-
-    event = "VeryLazy",
-    config = function()
-      require("distinct").setup({
-        doc_comments_different_color = true, -- Use different colour for documentation comments
-      })
-    end,
-  },
+  -- { "loctvl842/monokai-pro.nvim", event = "VeryLazy" },
+  -- { "catppuccin/nvim", name = "catppuccin", event = "VeryLazy" },
+  -- { "tokyonight.nvim", event = "VeryLazy" },
+  -- { "Mofiqul/vscode.nvim", event = "VeryLazy" },
+  -- { "bluz71/vim-moonfly-colors", event = "VeryLazy" },
+  -- { "bluz71/vim-nightfly-colors", event = "VeryLazy" },
+  -- { "ellisonleao/gruvbox.nvim", event = "VeryLazy" },
+  -- { "sainnhe/gruvbox-material", event = "VeryLazy" },
+  -- { "projekt0n/github-nvim-theme", event = "VeryLazy" },
+  -- { "scottmckendry/cyberdream.nvim", event = "VeryLazy" },
+  -- { "tiagovla/tokyodark.nvim", event = "VeryLazy" },
+  -- { "sainnhe/edge", event = "VeryLazy" },
+  -- { "EdenEast/nightfox.nvim", event = "VeryLazy" },
+  -- { "marko-cerovac/material.nvim", event = "VeryLazy" },
+  -- { "sainnhe/sonokai", event = "VeryLazy" },
+  -- { "Shatur/neovim-ayu", event = "VeryLazy" },
+  -- { "ChristianChiarulli/nvcode-color-schemes.vim", event = "VeryLazy" },
+  -- { "comfysage/evergarden", event = "VeryLazy" },
+  -- { "nyoom-engineering/oxocarbon.nvim", event = "VeryLazy" },
+  -- { "nvimdev/zephyr-nvim", event = "VeryLazy" },
+  -- {
+  --   "rose-pine/neovim",
+  --   name = "rose-pine",
+  --   lazy = true,
+  --   config = function()
+  --     require("rose-pine").setup({
+  --       variant = "auto", -- auto, main, moon, or dawn
+  --       dark_variant = "main", -- main, moon, or dawn
+  --       dim_inactive_windows = false,
+  --       extend_background_behind_borders = true,
+  --       enable = {
+  --         terminal = true,
+  --         legacy_highlights = true, -- Improve compatibility for previous versions of Neovim
+  --         migrations = true, -- Handle deprecated options automatically
+  --       },
+  --       styles = {
+  --         bold = true,
+  --         italic = false,
+  --         transparency = true,
+  --       },
+  --       highlight_groups = {
+  --         -- String = { fg = "#FF0000" },
+  --         -- Comment = { fg = "foam" },
+  --         -- VertSplit = { fg = "muted", bg = "muted" },
+  --       },
+  --     })
+  --   end,
+  -- },
+  -- {
+  --   "https://gitlab.com/bartekjaszczak/distinct-nvim",
+  --
+  --   event = "VeryLazy",
+  --   config = function()
+  --     require("distinct").setup({
+  --       doc_comments_different_color = true, -- Use different colour for documentation comments
+  --     })
+  --   end,
+  -- },
   {
     "rebelot/kanagawa.nvim",
     event = "VeryLazy",
@@ -138,6 +138,7 @@ return {
   },
   {
     "aaron-p1/match-visual.nvim",
+    event = "VeryLazy",
     config = function()
       require("match-visual").setup({
         -- minimum length of text to match
