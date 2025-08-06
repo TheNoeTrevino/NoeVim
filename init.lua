@@ -157,7 +157,7 @@ require("lspconfig").angularls.setup({
   cmd = { "ngserver", "--stdio" },
   on_new_config = function(new_config, root_dir)
     local function find_node_modules(start_dir)
-      return vim.fs.find("node_modules", { upward = true, path = start_dir })[1]
+      return vim.fs.find(".nvim/node_modules", { upward = true, path = start_dir })[1]
     end
 
     local node_modules_path = find_node_modules(root_dir)
