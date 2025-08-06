@@ -26,6 +26,8 @@ vim.keymap.del("n", "<leader>gl")
 vim.keymap.del("n", "<C-F>")
 vim.keymap.del("n", "<C-B>")
 vim.keymap.del("n", "<leader>uG")
+vim.keymap.del("n", "H")
+vim.keymap.del("n", "L")
 
 local map = LazyVim.safe_keymap_set
 
@@ -69,10 +71,9 @@ end, { expr = true, desc = "Escape and Clear hlsearch" })
 -------------------------------------------------------------------------------
 
 -- Better alternate buffer
-map("n", "L", "<C-^>", { noremap = true, silent = true })
-
-map("t", "<C-A-j>", "<cmd>bp<cr>", { desc = "Previous Buffer" })
-map("t", "<C-A-;>", "<cmd>bp<cr>", { desc = "Next Buffer" })
+-- map("n", "L", "<C-^>", { noremap = true, silent = true })
+map("n", "<C-,>", "<cmd>bp<cr>", { noremap = true, silent = true, desc = "Previous Buffer" })
+map("n", "<C-.>", "<cmd>bn<cr>", { noremap = true, silent = true, desc = "Next Buffer" })
 
 -------------------------------------------------------------------------------
 --                           Tab Section
@@ -111,9 +112,6 @@ map("i", "<C-BS>", "<ESC>cb")
 -- Save
 map("n", "<S-CR>", "<cmd>w<cr>")
 
--- Better alternate buffer
-map("n", "L", "<C-^>", { noremap = true, silent = true })
-
 -- No right ctrl on the macbook :(
 map("n", "Q", "<C-Z>", { noremap = true, silent = true })
 
@@ -149,8 +147,8 @@ map("n", "gO", "mzO<ESC>`z:delm z<cr><up>")
 map("n", "'", "<cmd>WhichKey `<cr>")
 
 -- Matching Bracket
-map("n", "M", "<Plug>(MatchitNormalForward)")
-map({ "x", "v" }, "M", "%")
+map("n", "<C-M>", "<Plug>(MatchitNormalForward)")
+map({ "x", "v" }, "<C-M>", "%")
 
 -- Easier case switching
 map("n", "U", "~<Left>")
