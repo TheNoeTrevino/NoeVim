@@ -2,117 +2,147 @@ return {
   "nvim-lualine/lualine.nvim",
   event = "UIEnter",
   optional = true,
-  opts = function(_, opts)
-    -- Add custom sections if nvim-navic is not available
+  config = function()
     local icons = LazyVim.config.icons
-    if not vim.g.trouble_lualine then
-      table.insert(opts.sections.lualine_c, {
-        function()
-          return require("nvim-navic").get_location()
-        end,
-        cond = function()
-          return package.loaded["nvim-navic"] and require("nvim-navic").is_available()
-        end,
-      })
-    end
-
-    vim.cmd([[
-      hi RecordingIcon guifg=#ff0000
-      hi RecordingText guibg=#000000
-    ]])
-
-    opts.options.globalstatus = true
-    -- Set custom options for lualine
-    opts.options = vim.tbl_extend("force", opts.options or {}, {
-      icons_enabled = true, -- Enable/disable icons in the statusline
-      theme = "auto", -- Theme for the statusline (you can change it to any available theme)
-      component_separators = { left = "", right = "" }, -- Separators for components
-      section_separators = { left = "", right = "" }, -- Separators for sections
-      disabled_filetypes = {}, -- Filetypes to disable lualine for
-      always_divide_middle = true, -- Ensure sections are always divided
-    })
-
-    -- Define sections
-    opts.sections = vim.tbl_extend("force", opts.sections or {}, {
-      lualine_a = { "mode" },
-      lualine_b = { "branch" }, --"branch"
-      lualine_c = {
-        function()
-          local state = require("timerly.state")
-          if state.progress == 0 then
-            return vim.fn.expand("%:t")
-          end
-
-          local total = math.max(0, state.total_secs + 1)
-          local mins = math.floor(total / 60)
-          local secs = total % 60
-
-          return string.format("%s %02d:%02d", state.mode:gsub("^%l", string.upper), mins, secs)
-        end,
-      },
-      lualine_x = { "" },
-      lualine_y = {
-        {
-          "diff",
-          symbols = {
-            added = icons.git.added,
-            modified = icons.git.modified,
-            removed = icons.git.removed,
+    local navic = require("nvim-navic")
+    require("lualine").setup({
+      options = {
+        icons_enabled = true,
+        theme = "auto",
+        component_separators = { left = "", right = "" },
+        section_separators = { left = "", right = "" },
+        disabled_filetypes = {
+          statusline = {},
+          winbar = {},
+        },
+        ignore_focus = {},
+        always_divide_middle = true,
+        always_show_tabline = true,
+        globalstatus = true,
+        refresh = {
+          statusline = 1000,
+          tabline = 1000,
+          winbar = 1000,
+          refresh_time = 16, -- ~60fps
+          events = {
+            "WinEnter",
+            "BufEnter",
+            "BufWritePost",
+            "SessionLoadPost",
+            "FileChangedShellPost",
+            "VimResized",
+            "Filetype",
+            "CursorMoved",
+            "CursorMovedI",
+            "ModeChanged",
           },
-          source = function()
-            local gitsigns = vim.b.gitsigns_status_dict
-            if gitsigns then
-              return {
-                added = gitsigns.added,
-                modified = gitsigns.changed,
-                removed = gitsigns.removed,
-              }
+        },
+      },
+      sections = {
+        lualine_a = { "mode" },
+        lualine_b = { "branch" }, --"branch"
+        lualine_c = {
+          function()
+            local state = require("timerly.state")
+            if state.progress == 0 then
+              return vim.fn.expand("%:t")
             end
+
+            local total = math.max(0, state.total_secs + 1)
+            local mins = math.floor(total / 60)
+            local secs = total % 60
+
+            return string.format("%s %02d:%02d", state.mode:gsub("^%l", string.upper), mins, secs)
           end,
-        },
-      }, -- Progress through the file (e.g., 50%)
-      lualine_z = { "location" }, -- Line and column number
-    })
-
-    -- Define inactive sections
-    opts.inactive_sections = vim.tbl_extend("force", opts.inactive_sections or {}, {
-      lualine_a = { "mode" },
-      lualine_b = {},
-      lualine_c = {
-        {
-          "filename",
-          file_status = true, -- Displays file status (readonly status, modified status)
-          newfile_status = false, -- Display new file status (new file means no write after created)
-          path = 0, -- 0: Just the filename
-          -- 1: Relative path
-          -- 2: Absolute path
-          -- 3: Absolute path, with tilde as the home directory
-          -- 4: Filename and parent dir, with tilde as the home directory
-
-          shorting_target = 40, -- Shortens path to leave 40 spaces in the window
-          -- for other components. (terrible name, any suggestions?)
-          symbols = {
-            modified = "[+]", -- Text to show when the file is modified.
-            readonly = "[-]", -- Text to show when the file is non-modifiable or readonly.
-            unnamed = "[No Name]", -- Text to show for unnamed buffers.
-            newfile = "[New]", -- Text to show for newly created file before first write
+          {
+            "diagnostics",
+            symbols = {
+              error = icons.diagnostics.Error,
+              warn = icons.diagnostics.Warn,
+              info = icons.diagnostics.Info,
+              hint = icons.diagnostics.Hint,
+            },
           },
         },
-      }, -- Show filename in inactive windows
-      lualine_x = {}, -- Show location in inactive windows
-      lualine_y = {
-        -- { "progress", separator = " ", padding = { left = 1, right = 0 } },
-        { "location", padding = { left = 0, right = 1 } },
+        lualine_x = {
+          {
+            function()
+              local ok, api = pcall(require, "copilot.api")
+              if not ok or not api.status or not api.status.data then
+                return ""
+              end
+
+              local status = api.status.data.status
+              return (status == "InProgress" and "󰪞") or (status == "Warning" and " ") or " "
+            end,
+
+            cond = function()
+              local ok, clients = pcall(function()
+                return require("vim.lsp").get_active_clients({ name = "copilot" })
+              end)
+              return ok and clients and #clients > 0
+            end,
+            color = function()
+              local ok, api = pcall(require, "copilot.api")
+              if not ok or not api.status or not api.status.data then
+                return {}
+              end
+
+              local status = api.status.data.status
+              return {
+                fg = (status == "InProgress" and "#cba6f7") or (status == "Warning" and "#f38ba8") or "#a6e3a1",
+              }
+            end,
+          },
+          Snacks.profiler.status(),
+          -- stylua: ignore
+          {
+            function() return require("noice").api.status.mode.get() end,
+            cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
+            color = function() return { fg = Snacks.util.color("Constant") } end,
+          },
+          -- stylua: ignore
+          {
+            function() return "  " .. require("dap").status() end,
+            cond = function() return package.loaded["dap"] and require("dap").status() ~= "" end,
+            color = function() return { fg = Snacks.util.color("Debug") } end,
+          },
+          -- stylua: ignore
+          {
+            require("lazy.status").updates,
+            cond = require("lazy.status").has_updates,
+            color = function() return { fg = Snacks.util.color("Special") } end,
+          },
+        },
+        lualine_y = {
+          {
+            "diff",
+            symbols = {
+              added = icons.git.added,
+              modified = icons.git.modified,
+              removed = icons.git.removed,
+            },
+            source = function()
+              local gitsigns = vim.b.gitsigns_status_dict
+              if gitsigns then
+                return {
+                  added = gitsigns.added,
+                  modified = gitsigns.changed,
+                  removed = gitsigns.removed,
+                }
+              end
+            end,
+          },
+        },
+        lualine_z = {
+          -- { "progress", separator = " ", padding = { left = 1, right = 0 } },
+          { "location", padding = { left = 0, right = 1 } },
+        },
       },
-      lualine_z = {
-        function()
-          return os.date("%t")
-        end,
-      },
+      tabline = {},
+      inactive_winbar = {},
+      -- tabline = {},
+      extensions = {},
     })
   end,
-  dependencies = {
-    "nvim-tree/nvim-web-devicons", -- Optional, for file icons
-    opt = true, -- Optional, load it when needed
-  },
 }
