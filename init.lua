@@ -45,7 +45,8 @@ h(0, "Visual", { bg = "#525251", fg = nil })
 h(0, "VisualMatch", { bg = "#353534", fg = nil })
 h(0, "Search", { bg = "#595959", fg = nil })
 h(0, "CurSearch", { fg = "#000000", bg = "#FF9D3C" })
-h(0, "SnacksPickerPreviewCursorLine", { bg = "#0000FF", fg = "#FF0000" })
+h(0, "SnacksPickerListCursorLine", { bg = "#2b2b2a" })
+
 h(0, "SnacksPickerPrompt", { fg = "#ff79c6" })
 
 h(0, "NoiceCmdlineIcon", { fg = "#ff79c6", bg = nil })
