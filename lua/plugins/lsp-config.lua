@@ -5,6 +5,7 @@ return {
     inlay_hints = { enabled = false },
   },
   servers = {
+    omnisharp = false,
     basedpyright = {
       mason = false,
       autostart = false,
