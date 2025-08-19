@@ -220,5 +220,6 @@ vim.cmd([[
   highlight RenderMarkdownH6Bg guibg=#22312d guifg=#bfd3ca ctermbg=65 ctermfg=235  " Green
   highlight RenderMarkdownH5Bg guibg=#362930 guifg=#dab9c6 ctermbg=96 ctermfg=230  " Violet
 ]])
+
 local keys = require("lazyvim.plugins.lsp.keymaps").get()
 keys[#keys + 1] = { "<C-k>", false, mode = "i" }
