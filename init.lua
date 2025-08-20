@@ -45,7 +45,7 @@ h(0, "Visual", { bg = "#525251", fg = nil })
 h(0, "VisualMatch", { bg = "#353534", fg = nil })
 h(0, "Search", { bg = "#595959", fg = nil })
 h(0, "CurSearch", { fg = "#000000", bg = "#FF9D3C" })
-h(0, "SnacksPickerListCursorLine", { bg = "#2b2b2a" })
+h(0, "SnacksPickerListCursorLine", { bg = "#202030" })
 
 h(0, "SnacksPickerPrompt", { fg = "#ff79c6" })
 
@@ -64,16 +64,9 @@ h(0, "NeoTreeCursorLine", { bg = "#202030" })
 
 h(0, "NormalFloat", { bg = nil })
 h(0, "FloatBorder", { fg = "#6272a4", bg = nil })
-h(0, "CursorLineNr", { fg = "#fcb205", bg = nil })
-
-h(0, "TelescopeSelection", { bg = "#202030" })
-h(0, "TelescopePromptPrefix", { fg = "#ff79c6", bg = nil })
-h(0, "TelescopePromptNormal", { fg = "#f8f8f2", bg = nil })
-h(0, "TelescopeNormal", { fg = "#f8f8f2", bg = nil })
+h(0, "CursorLineNr", { fg = "#fcb205", bg = "#202030" })
 
 h(0, "FloatTitle", { fg = "#ffb86c", bg = nil })
-h(0, "TelescopeTitle", { fg = "#ffb86c", bg = nil })
-h(0, "TelescopeBorder", { fg = "#6272a4", bg = nil })
 
 -- Current changes (green)
 h(0, "GitConflictCurrentLabel", { bg = "#337367", fg = nil })
