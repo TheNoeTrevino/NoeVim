@@ -73,8 +73,9 @@ return {
             ["<Tab>"] = { "select_and_next", mode = { "i", "n" } },
             ["<c-f>"] = { "toggle_follow", mode = { "i", "n" } },
             ["<c-h>"] = { "toggle_hidden", mode = { "i", "n" } },
+            ["<c-i>"] = { "toggle_ignore", mode = { "i", "n" } },
+            ["I"] = { "toggle_ignore", mode = { "n" } },
             ["H"] = { "toggle_hidden", mode = { "n" } },
-            ["<c-i>"] = { "toggle_ignored", mode = { "i", "n" } },
             ["<c-m>"] = { "toggle_maximize", mode = { "i", "n" } },
             ["<c-a>"] = { "select_all", mode = { "n", "i" } },
             ["<c-g>"] = { "toggle_live", mode = { "i", "n" } }, -- pretty cool, can add two arguments to the grep
@@ -113,14 +114,16 @@ return {
   keys = {
     -- Top Pickers & Explorer
     -- stylua: ignore start
-    { "<leader>,", function() Snacks.picker.buffers() end, desc = "Buffers" },
+    { "<leader>,", function() Snacks.picker.buffers({ on_show = function() vim.cmd.stopinsert() end}) end, desc = "Buffers" },
     { "<leader>/", function() Snacks.picker.grep() end, desc = "Grep" },
     { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
     { "<leader>n", function() Snacks.picker.notifications() end, desc = "Notification History" },
+    -- Git
     { "<leader>gb", function() Snacks.picker.git_branches() end, desc = "Git Branches" },
     { "<leader>gl", function() Snacks.picker.git_log() end, desc = "Git Log" },
     { "<leader>gL", function() Snacks.picker.git_log_line() end, desc = "Git Log Line" },
     { "<leader>gs", function() Snacks.picker.git_status({on_show = function () vim.cmd.stopinsert() end}) end, desc = "Git Status" },
+    { "H", function() Snacks.picker.git_status({on_show = function () vim.cmd.stopinsert() end}) end, desc = "Git Status" },
     { "<leader>gS", function() Snacks.picker.git_stash() end, desc = "Git Stash" },
     { "<leader>gd", function() Snacks.picker.git_diff() end, desc = "Git Diff (Hunks)" },
     { "<leader>gf", function() Snacks.picker.git_log_file() end, desc = "Git Log File" },
@@ -138,7 +141,6 @@ return {
     { '<leader>s"', function() Snacks.picker.registers() end, desc = "Registers" },
     { '<leader>s/', function() Snacks.picker.search_history() end, desc = "Search History" },
     { "<leader>sa", function() Snacks.picker.autocmds() end, desc = "Autocmds" },
-    { "<leader>sb", function() Snacks.picker.buffers() end, desc = "Buffers" },
     { "<leader>sc", function() Snacks.picker.command_history() end, desc = "Command History" },
     { "<leader>sC", function() Snacks.picker.commands() end, desc = "Commands" },
     { "<leader>sd", function() Snacks.picker.diagnostics() end, desc = "Diagnostics" },
@@ -156,7 +158,10 @@ return {
     { "<leader>su", function() Snacks.picker.undo() end, desc = "Undo History" },
     { "<leader>ss", function() Snacks.picker.pickers() end, desc = "Pickers" },
     { "<leader>uC", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
+    { "<leader>sb", function() Snacks.picker.buffers({ on_show = function() vim.cmd.stopinsert() end}) end, desc = "Buffers" },
+    { "<leader>st", function() Snacks.picker.todo_comments({ on_show = function() vim.cmd.stopinsert() end}) end, desc = "Todo" },
     { "<leader><leader>", function() Snacks.picker.buffers({ on_show = function() vim.cmd.stopinsert() end}) end, desc = "Buffers" },
+    { "h", function() Snacks.picker.buffers({ on_show = function() vim.cmd.stopinsert() end}) end, desc = "Buffers" },
     -- LSP
     { "gd", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition" },
     { "gD", function() Snacks.picker.lsp_declarations() end, desc = "Goto Declaration" },

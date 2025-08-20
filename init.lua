@@ -223,3 +223,4 @@ vim.cmd([[
 
 local keys = require("lazyvim.plugins.lsp.keymaps").get()
 keys[#keys + 1] = { "<C-k>", false, mode = "i" }
+keys[#keys + 1] = { "<leader>ss", false, mode = "n" }

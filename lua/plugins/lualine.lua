@@ -40,19 +40,8 @@ return {
       sections = {
         lualine_a = { "mode" },
         lualine_b = { "branch" }, --"branch"
+        -- stylua: ignore
         lualine_c = {
-          function()
-            local state = require("timerly.state")
-            if state.progress == 0 then
-              return vim.fn.expand("%:t")
-            end
-
-            local total = math.max(0, state.total_secs + 1)
-            local mins = math.floor(total / 60)
-            local secs = total % 60
-
-            return string.format("%s %02d:%02d", state.mode:gsub("^%l", string.upper), mins, secs)
-          end,
           {
             "diagnostics",
             symbols = {
@@ -62,6 +51,11 @@ return {
               hint = icons.diagnostics.Hint,
             },
           },
+          {
+            function() return require("noice").api.status.mode.get() end,
+            cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
+            color = function() return { fg = Snacks.util.color("Constant") } end,
+          }
         },
         lualine_x = {
           {
@@ -93,20 +87,12 @@ return {
               }
             end,
           },
-          Snacks.profiler.status(),
-          -- stylua: ignore
-          {
-            function() return require("noice").api.status.mode.get() end,
-            cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
-            color = function() return { fg = Snacks.util.color("Constant") } end,
-          },
-          -- stylua: ignore
+          -- stylua: ignore start
           {
             function() return "  " .. require("dap").status() end,
             cond = function() return package.loaded["dap"] and require("dap").status() ~= "" end,
             color = function() return { fg = Snacks.util.color("Debug") } end,
           },
-          -- stylua: ignore
           {
             require("lazy.status").updates,
             cond = require("lazy.status").has_updates,

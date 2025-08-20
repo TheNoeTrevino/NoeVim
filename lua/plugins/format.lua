@@ -31,4 +31,5 @@ return {
       ["markdown.mdx"] = {},
     },
   },
+  -- dotnet tool install -g csharpier
 }

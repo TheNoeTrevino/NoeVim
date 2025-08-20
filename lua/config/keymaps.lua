@@ -6,7 +6,6 @@ vim.keymap.del("n", "<leader>L")
 vim.keymap.del("n", "<leader>l")
 vim.keymap.del("n", "<leader>K")
 vim.keymap.del("n", "<leader>snt")
-vim.keymap.del("n", "<leader>st")
 vim.keymap.del("n", "<leader><Tab>[")
 vim.keymap.del("n", "<leader><Tab>]")
 vim.keymap.del("n", "<leader><Tab>d")
@@ -22,11 +21,9 @@ vim.keymap.del("n", "<leader>ft")
 vim.keymap.del("n", "<leader>xl")
 vim.keymap.del("n", "<leader>xq")
 vim.keymap.del("n", "<leader>fT")
-vim.keymap.del("n", "<leader>gl")
 vim.keymap.del("n", "<C-F>")
 vim.keymap.del("n", "<C-B>")
 vim.keymap.del("n", "<leader>uG")
-vim.keymap.del("n", "H")
 vim.keymap.del("n", "L")
 
 local map = LazyVim.safe_keymap_set
@@ -148,8 +145,9 @@ map("n", "gO", "mzO<ESC>`z:delm z<cr><up>")
 map("n", "'", "<cmd>WhichKey `<cr>")
 
 -- Matching Bracket
-map("n", "<C-M>", "<Plug>(MatchitNormalForward)")
-map({ "x", "v" }, "<C-M>", "%")
+map({ "n", "x", "v" }, "M", "%")
+
+map({ "n", "x", "v" }, "L", "<C-^>")
 
 -- Easier case switching
 map("n", "U", "~<Left>")

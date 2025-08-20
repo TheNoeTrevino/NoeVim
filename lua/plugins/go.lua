@@ -16,22 +16,22 @@ return {
     ---@type gopher.Config
     opts = {},
 
-    config = function()
-      local map = LazyVim.safe_keymap_set
-      -- Tags
-      map("n", "<leader>glj", "<cmd>GoTagAdd json<cr>", { desc = "Add JSON Tag" })
-      map("n", "<leader>glJ", "<cmd>GoTagRm json<cr>", { desc = "Rm JSON Tag" })
-      map("n", "<leader>gld", "<cmd>GoTagAdd db<cr>", { desc = "Add DB Tag" })
-      map("n", "<leader>glD", "<cmd>GoTagRm db<cr>", { desc = "Rm DB Tag" })
-      map("n", "<leader>glv", "<cmd>GoTagAdd validate<cr>", { desc = "Add Validate Tag" })
-      map("n", "<leader>glV", "<cmd>GoTagRm validate<cr>", { desc = "Rm Validate Tag" })
-      -- Other
-      map("n", "<leader>glta", "<cmd>GoTestAdd<cr>", { desc = "Add Test for Function" })
-      map("n", "<leader>gltA", "<cmd>GoTestsAll<cr>", { desc = "Generate All Tests" })
-      map("n", "<leader>glg", ":GoGet", { desc = "Get Package" })
-      map("n", "<leader>glT", "<cmd>GoMod tidy<cr>", { desc = "Go Tidy" })
-      map("n", "<leader>gls", "<cmd>GoWork sync<cr>", { desc = "Go Sync" })
-      map("n", "<leader>gle", "<cmd>GoIfErr<cr>", { desc = "Handle Err" })
-    end,
+    -- config = function()
+    --   local map = LazyVim.safe_keymap_set
+    --   -- Tags
+    --   map("n", "<leader>glj", "<cmd>GoTagAdd json<cr>", { desc = "Add JSON Tag" })
+    --   map("n", "<leader>glJ", "<cmd>GoTagRm json<cr>", { desc = "Rm JSON Tag" })
+    --   map("n", "<leader>gld", "<cmd>GoTagAdd db<cr>", { desc = "Add DB Tag" })
+    --   map("n", "<leader>glD", "<cmd>GoTagRm db<cr>", { desc = "Rm DB Tag" })
+    --   map("n", "<leader>glv", "<cmd>GoTagAdd validate<cr>", { desc = "Add Validate Tag" })
+    --   map("n", "<leader>glV", "<cmd>GoTagRm validate<cr>", { desc = "Rm Validate Tag" })
+    --   -- Other
+    --   map("n", "<leader>glta", "<cmd>GoTestAdd<cr>", { desc = "Add Test for Function" })
+    --   map("n", "<leader>gltA", "<cmd>GoTestsAll<cr>", { desc = "Generate All Tests" })
+    --   map("n", "<leader>glg", ":GoGet", { desc = "Get Package" })
+    --   map("n", "<leader>glT", "<cmd>GoMod tidy<cr>", { desc = "Go Tidy" })
+    --   map("n", "<leader>gls", "<cmd>GoWork sync<cr>", { desc = "Go Sync" })
+    --   map("n", "<leader>gle", "<cmd>GoIfErr<cr>", { desc = "Handle Err" })
+    -- end,
   },
 }
