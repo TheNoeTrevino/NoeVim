@@ -152,6 +152,13 @@ map({ "n", "x", "v" }, "L", "<C-^>")
 -- Easier case switching
 map("n", "U", "~<Left>")
 
+map(
+  { "n", "x", "o" },
+  "g.",
+  "g;",
+  { noremap = true, silent = true, desc = "Go to [count] older position in the change list" }
+)
+
 -- Better end and beginning
 map({ "n", "x", "o" }, "gj", "zH^", { noremap = true, silent = true, desc = "Go to Beginnning" })
 map({ "n", "x", "o" }, "g;", "$", { noremap = true, silent = true, desc = "Go to End" })
