@@ -64,10 +64,10 @@ return {
           },
           {
             action = function()
-              Snacks.picker.grep()
+              Snacks.lazygit()
             end,
-            desc = " Grep",
-            icon = "󰩉 ",
+            desc = " Git",
+            icon = "󰊤 ",
             key = "g",
           },
           {

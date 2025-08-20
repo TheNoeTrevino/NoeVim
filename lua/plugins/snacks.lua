@@ -96,7 +96,7 @@ return {
             ["<c-k>"] = { "list_down", mode = { "i", "n" } },
             ["<c-l>"] = { "list_up", mode = { "i", "n" } },
             ["q"] = "close",
-            ["dd"] = "bufdelete",
+            ["d"] = "bufdelete",
           },
         },
         -- preview window
@@ -160,7 +160,7 @@ return {
     { "<leader>uC", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
     { "<leader>sb", function() Snacks.picker.buffers({ on_show = function() vim.cmd.stopinsert() end}) end, desc = "Buffers" },
     { "<leader>st", function() Snacks.picker.todo_comments({ on_show = function() vim.cmd.stopinsert() end}) end, desc = "Todo" },
-    { "<leader><leader>", function() Snacks.picker.buffers({ on_show = function() vim.cmd.stopinsert() end}) end, desc = "Buffers" },
+    { "<leader><leader>", function() Snacks.lazygit( { cwd = LazyVim.root.git() }) end, desc = "Lazygit" },
     { "h", function() Snacks.picker.buffers({ on_show = function() vim.cmd.stopinsert() end}) end, desc = "Buffers" },
     -- LSP
     { "gd", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition" },
