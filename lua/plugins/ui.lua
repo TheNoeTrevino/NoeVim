@@ -100,7 +100,6 @@ return {
       })
     end,
   },
-  { "xiyaowong/transparent.nvim", event = "UIEnter" },
   {
     "catgoose/nvim-colorizer.lua",
     event = "UIEnter",
