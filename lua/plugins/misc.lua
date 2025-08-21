@@ -104,4 +104,23 @@ return {
       vim.keymap.set("n", "];", dropbar_api.select_next_context, { desc = "Select next context" })
     end,
   },
+  {
+    "mizlan/iswap.nvim",
+    event = "VeryLazy",
+    config = function()
+      require("iswap").setup({
+        -- Highlight group for the sniping value (asdf etc.)
+        -- default 'Search'
+        hl_snipe = "ISwapSelection",
+
+        -- Highlight group for the visual selection of terms
+        -- default 'Visual'
+        hl_selection = "Visual",
+
+        -- Automatically swap with only two arguments
+        -- default nil
+        autoswap = true,
+      })
+    end,
+  },
 }
