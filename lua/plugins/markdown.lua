@@ -118,4 +118,9 @@ return {
     end,
   },
   { "bullets-vim/bullets.vim", ft = { "markdown", "norg", "rmd", "org" } },
+  {
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    ft = { "markdown" },
+  },
 }
