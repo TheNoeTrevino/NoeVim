@@ -10,7 +10,9 @@ vim.cmd("colorscheme " .. colorscheme)
 if colorscheme == "kanagawa-wave" or "kanagawa-dragon" then
   h(0, "WinSeparator", { fg = "#1F3442", bg = "NONE", bold = true })
   -- typescript
+  --
   h(0, "@keyword.coroutine.tsx", { fg = "#53758D", italic = true })
+  h(0, "@keyword.coroutine.typescript", { fg = "#53758D", italic = true })
   h(0, "@keyword.conditional.tsx", { fg = "#D27E9A", italic = true })
   h(0, "@keyword.exception.tsx", { fg = "#FF5D62", bold = true, italic = true })
   h(0, "@type.tsx", { fg = "#688E81" })
