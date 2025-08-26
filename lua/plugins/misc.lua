@@ -123,4 +123,23 @@ return {
       })
     end,
   },
+  {
+    "shortcuts/no-neck-pain.nvim",
+    version = "*",
+    config = function()
+      require("no-neck-pain").setup({
+        width = 120,
+        buffers = {
+          scratchPad = {
+            enabled = true,
+            fileName = "neckPain",
+            location = "~/notes/neckpain",
+          },
+          bo = {
+            filetype = "md",
+          },
+        },
+      })
+    end,
+  },
 }

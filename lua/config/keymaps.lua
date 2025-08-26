@@ -106,6 +106,8 @@ map("v", "h0", ":<c-u>HSRmHighlight<CR>", {
 -- Add ctrl backspace
 map("i", "<C-BS>", "<ESC>cb")
 
+map("n", "<leader>up", "<cmd>NoNeckPain<CR>")
+
 -- Save
 map("n", "<S-CR>", "<cmd>w<cr>")
 
