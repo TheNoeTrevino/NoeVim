@@ -56,13 +56,6 @@ return {
         return {}
       end,
       completion = {
-        trigger = {
-          show_on_backspace_in_keyword = true,
-          show_on_backspace_after_accept = true,
-          show_on_backspace_after_insert_enter = true,
-          show_on_blocked_trigger_characters = {},
-          show_on_x_blocked_trigger_characters = {}, -- Inherits from top level `completion.trigger.show_on_blocked_trigger_characters` config when not set
-        },
         menu = {
           auto_show = true, -- Inherits from top level `completion.menu.auto_show` config when not set
           draw = {
