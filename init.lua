@@ -55,9 +55,9 @@ h(0, "NoiceCmdlineIcon", { fg = "#ff79c6", bg = nil })
 h(0, "NoiceCmdlinePopupTitleCmdline", { fg = "#ffb86c", bg = nil })
 h(0, "NoiceCmdlinePopupBorderCmdline", { fg = "#6272a4", bg = nil })
 
-h(0, "GitSignsAdd", { fg = "#04b004", bg = "#000000" })
-h(0, "GitSignsChange", { fg = "#e08300", bg = "#000000" })
-h(0, "GitSignsDelete", { fg = "#ff0000", bg = "#000000" })
+h(0, "GitSignsAdd", { fg = "#04b004", bg = nil })
+h(0, "GitSignsChange", { fg = "#e08300", bg = nil })
+h(0, "GitSignsDelete", { fg = "#ff0000", bg = nil })
 h(0, "GitSignsCurrentLineBlame", { fg = "#888888", bg = nil, italic = true })
 
 h(0, "NeoTreeFloatBorder", { fg = "#6272a4", bg = nil })

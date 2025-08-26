@@ -69,16 +69,16 @@ return {
       verbosity = 0,
       saving_path = "/tmp/highstr/",
       highlight_colors = {
-        color_0 = { "#0c0d0e", "smart" },
-        color_1 = { "#e5c07b", "smart" },
-        color_2 = { "#7FFFD4", "smart" },
-        color_3 = { "#8A2BE2", "smart" },
-        color_4 = { "#FF4500", "smart" },
-        color_5 = { "#008000", "smart" },
-        color_6 = { "#0000FF", "smart" },
-        color_7 = { "#FFC0CB", "smart" },
-        color_8 = { "#FFF9E3", "smart" },
-        color_9 = { "#7d5c34", "smart" },
+        color_0 = { "#502824 ", "smart" },
+        color_1 = { "#bd9b3e", "smart" },
+        color_2 = { "#5a3d33 ", "smart" },
+        color_3 = { "#37352f ", "smart" },
+        color_4 = { "#223b40 ", "smart" },
+        color_5 = { "#22312d ", "smart" },
+        color_6 = { "#362930 ", "smart" },
+        color_7 = { "#0000FF", "smart" },
+        color_8 = { "#FFC0CB", "smart" },
+        color_9 = { "#FFF9E3", "smart" },
       },
     },
   },
@@ -128,7 +128,7 @@ return {
     version = "*",
     config = function()
       require("no-neck-pain").setup({
-        width = 120,
+        width = 180,
         buffers = {
           scratchPad = {
             enabled = true,

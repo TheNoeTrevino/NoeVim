@@ -94,13 +94,13 @@ map("n", "<tab>r", ":TabRename", { desc = "Tab Rename" })
 for i = 1, 9 do
   map("v", "h" .. i, ":<c-u>HSHighlight " .. i .. "<CR>", {
     noremap = true,
-    silent = true,
+    desc = "Highlight " .. i,
   })
 end
 
 map("v", "h0", ":<c-u>HSRmHighlight<CR>", {
   noremap = true,
-  silent = true,
+  desc = "No Highlight",
 })
 
 -- Add ctrl backspace
