@@ -82,6 +82,14 @@ return {
               { desc = "Open the diff for the selected entry" },
             },
           },
+          file_history_panel = {
+            -- stylua: ignore start
+            { "n", "j", actions.close_fold,   { desc = "Collapse fold" } },
+            { "n", "k", actions.next_entry,   { desc = "Bring the cursor to the next file entry" } },
+            { "n", "l", actions.prev_entry,   { desc = "Bring the cursor to the previous file entry" } },
+            { "n", ";", actions.select_entry, { desc = "Open the diff for the selected entry" } },
+            -- stylua: ignore end
+          },
         },
       })
     end,
