@@ -234,14 +234,11 @@ map("n", "<C-o>", "<C-i>", { desc = "Jumplist Backwards" })
 --                           Toggle Section
 -------------------------------------------------------------------------------
 
--- Toggle Transparency
-map("n", "<leader>0", "<cmd>TransparentToggle<CR>", { desc = "Transparency" })
-
 -- Toggle ZenMode
 map("n", "<leader>z", "<cmd>ZenMode<CR>", { desc = "Transparency" })
 
--- Toggle Gutter
-map("n", "<leader>uG", "<cmd>ToggleGutter<CR>", { desc = "Toggle Gutter" })
+-- Code Lens
+map("n", "<leader>ut", "<cmd>LenslineToggle<cr>", { desc = "Toggle Gutter" })
 
 -------------------------------------------------------------------------------
 --                           Database Section
