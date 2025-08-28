@@ -222,3 +222,10 @@ vim.cmd([[
 local keys = require("lazyvim.plugins.lsp.keymaps").get()
 keys[#keys + 1] = { "<C-k>", false, mode = "i" }
 keys[#keys + 1] = { "<leader>ss", false, mode = "n" }
+
+require("mason").setup({
+  registries = {
+    "github:mason-org/mason-registry",
+    "github:Crashdummyy/mason-registry",
+  },
+})
