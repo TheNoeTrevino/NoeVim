@@ -155,6 +155,7 @@ h(0, "TelescopeMutedPath", { fg = "#888888" })
 vim.cmd("set laststatus=0")
 
 -- just remember to npm i @angular/language-server on your angular projects
+-- npm install @angular/language-server@x.x.x typescript
 require("lspconfig").angularls.setup({
   cmd = { "ngserver", "--stdio" },
   on_new_config = function(new_config, root_dir)

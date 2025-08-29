@@ -6,6 +6,10 @@ return {
   },
   servers = {
     omnisharp = false,
+    angularls = {
+      mason = false,
+      autostart = false,
+    },
     basedpyright = {
       mason = false,
       autostart = false,
