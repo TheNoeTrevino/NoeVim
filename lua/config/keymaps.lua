@@ -121,8 +121,9 @@ map("x", "<leader>d", [["_d]])
 map("n", "<leader>ax", "<cmd>AvanteClear<cr>")
 
 -- Definition mappings
-map("n", "gk", "<cmd>Glance definitions<cr>", { desc = "Peek Definition" })
+map("n", "gk", "<cmd>Glance definitions<cr>", { desc = "Glance Definition" })
 map("n", "gR", "<cmd>Glance references<cr>", { desc = "Glance References" })
+map("n", "gY", "<cmd>Glance type_definitions<cr>", { desc = "Glance Type" })
 
 map("n", "dm", [[:lua DeleteMark()<CR>]], { desc = "Delete Mark x" })
 
