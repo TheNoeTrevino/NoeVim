@@ -145,4 +145,11 @@ return {
       })
     end,
   },
+  {
+    "rodolfojsv/reminders.nvim",
+    event = "VeryLazy",
+    config = function()
+      require("reminders").setup({ directory_path = "~/notes/reminders/" })
+    end,
+  },
 }
