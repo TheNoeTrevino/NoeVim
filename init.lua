@@ -150,9 +150,6 @@ vim.opt.cursorlineopt = "number"
 
 -- Define the Cursor highlight group
 h(0, "Cursor", { fg = "NONE", bg = "#FFFFFF" })
-h(0, "TelescopeMutedPath", { fg = "#888888" })
-
-vim.cmd("set laststatus=0")
 
 -- just remember to npm i @angular/language-server on your angular projects
 -- npm install @angular/language-server@x.x.x typescript
