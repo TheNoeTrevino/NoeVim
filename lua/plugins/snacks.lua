@@ -86,6 +86,8 @@ return {
             ["<c-q>"] = { "qflist", mode = { "i", "n" } },
             ["<c-n>"] = { "history_forward", mode = { "i", "n" } },
             ["<c-p>"] = { "history_back", mode = { "i", "n" } },
+            [";"] = { "confirm", mode = { "n" } },
+            ["S"] = { "flash" },
             ["?"] = "toggle_help_input",
             ["s"] = { "edit_split", mode = { "n" } },
             ["v"] = { "edit_vsplit", mode = { "n" } },
