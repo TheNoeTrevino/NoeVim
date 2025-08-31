@@ -2,57 +2,10 @@ return {
   "folke/noice.nvim",
   event = "VeryLazy",
   opts = {
-    views = {
-      mini = {
-        -- backend = "mini",
-        -- relative = "editor",
-        -- align = "message-left",
-        -- timeout = 2500,
-        -- position = {
-        --   row = 0,
-        --   col = -2,
-        -- },
-        -- border = {
-        -- style = "rounded",
-        -- },
-      },
-      cmdline_popup = {
-        position = {
-          row = "50%",
-          col = "50%",
-        },
-        size = {
-          width = "auto",
-          height = "auto",
-        },
-        border = {
-          style = "single",
-          text = {
-            top = " Command ",
-            top_align = "center",
-          },
-        },
-      },
-      popupmenu = {
-        position = {
-          row = "50%",
-          col = "50%",
-        },
-        size = {
-          width = "auto",
-          height = "auto",
-        },
-        border = {
-          style = "single",
-          text = {
-            top = " Completion ",
-            top_align = "center",
-          },
-        },
-      },
+    cmdline = {
+      view = "cmdline",
     },
     lsp = {
-
       hover = {
         enabled = true,
         silent = false, -- set to true to not show a message if hover is not available
@@ -102,17 +55,17 @@ return {
         enabled = false,
       },
     },
+    -- command line workaround
     routes = {
       {
-        filter = {
-          event = "msg_show",
-          any = {
-            { find = "%d+L, %d+B" },
-            { find = "; after #%d+" },
-            { find = "; before #%d+" },
-          },
-        },
-        view = "mini",
+        filter = { event = "msg_show", kind = "shell_out" },
+        view = "notify",
+        opts = { level = "info", title = "Terminal" },
+      },
+      {
+        filter = { event = "msg_show", kind = "shell_err" },
+        view = "notify",
+        opts = { level = "error", title = "Stderror" },
       },
     },
     presets = {
