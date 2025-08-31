@@ -130,6 +130,9 @@ return {
       require("no-neck-pain").setup({
         width = 180,
         buffers = {
+          right = {
+            enabled = false,
+          },
           scratchPad = {
             enabled = true,
             fileName = "neckPain",
