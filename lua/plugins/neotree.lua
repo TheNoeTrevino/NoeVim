@@ -3,20 +3,18 @@ return {
   -- event = "UIEnter",
   cmd = "Neotree",
   opts = {
+    add_blank_line_at_top = true,
     popup_border_style = "single",
-    sources = { "filesystem", "buffers", "git_status" },
-    open_files_do_not_replace_types = { "terminal", "Trouble", "trouble", "qf", "Outline" },
-    filesystem = {
-      bind_to_cwd = false,
-      wd_target = {
-        sidebar = "global",
-        current = "global",
-      },
-      follow_current_file = { enabled = false },
-      use_libuv_file_watcher = true,
+    source_selector = {
+      winbar = true,
+      content_layout = "center", -- only with `tabs_layout` = "equal", "focus"
     },
     window = {
       popup = {
+        size = {
+          height = "85%",
+          width = "50%",
+        },
         title = "NoeVim",
       },
       position = "float",
@@ -35,38 +33,10 @@ return {
         ["/"] = "none",
       },
     },
-    default_component_configs = {
-      indent = {
-        with_expanders = true, -- if nil and file nesting is enabled, will enable expanders
-        expander_collapsed = "",
-        expander_expanded = "",
-        expander_highlight = "NeoTreeExpander",
-      },
-      git_status = {
-        symbols = {
-          unstaged = "󰄱",
-          staged = "󰱒",
-        },
-      },
-    },
   },
   keys = function()
     return {
       { "<leader>e", "<cmd>Neotree reveal_force_cwd toggle<cr>", desc = "Explorer NeoTree (Root Dir)", remap = true },
-      {
-        "<leader>ge",
-        function()
-          require("neo-tree.command").execute({ source = "git_status", toggle = true })
-        end,
-        desc = "Git Explorer",
-      },
-      {
-        "<leader>be",
-        function()
-          require("neo-tree.command").execute({ source = "buffers", toggle = true })
-        end,
-        desc = "Buffer Explorer",
-      },
     }
   end,
 }
