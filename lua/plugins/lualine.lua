@@ -43,13 +43,11 @@ return {
         -- stylua: ignore
         lualine_c = {
           {
-            "diagnostics",
-            symbols = {
-              error = icons.diagnostics.Error,
-              warn = icons.diagnostics.Warn,
-              info = icons.diagnostics.Info,
-              hint = icons.diagnostics.Hint,
-            },
+            function()
+              local filepath = vim.fn.expand("%:p:h:t")
+              local filename = vim.fn.expand("%:t")
+              return filepath .. "/" .. filename
+            end,
           },
           {
             function() return require("noice").api.status.mode.get() end,
@@ -58,6 +56,15 @@ return {
           }
         },
         lualine_x = {
+          {
+            "diagnostics",
+            symbols = {
+              error = icons.diagnostics.Error,
+              warn = icons.diagnostics.Warn,
+              info = icons.diagnostics.Info,
+              hint = icons.diagnostics.Hint,
+            },
+          },
           {
             function()
               local ok, api = pcall(require, "copilot.api")
