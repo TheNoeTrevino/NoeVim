@@ -227,3 +227,10 @@ require("mason").setup({
     "github:Crashdummyy/mason-registry",
   },
 })
+-- add this when you wanna install rosalyn
+-- require("mason").setup({
+--   registries = {
+--     "github:mason-org/mason-registry",
+--     "github:Crashdummyy/mason-registry",
+--   },
+-- })

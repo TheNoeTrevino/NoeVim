@@ -1,5 +1,6 @@
 return {
   "seblyng/roslyn.nvim",
+  event = "VeryLazy",
   opts = {
     settings = {
       ["csharp|inlay_hints"] = {
