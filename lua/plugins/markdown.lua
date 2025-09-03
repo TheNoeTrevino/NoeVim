@@ -34,9 +34,8 @@ return {
           },
         },
         code = {
-          language_border = " ",
-          language_left = "",
-          language_right = "",
+          style = "full",
+          border = "thick",
         },
       })
     end,

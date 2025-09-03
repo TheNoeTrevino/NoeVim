@@ -224,6 +224,7 @@ keys[#keys + 1] = { "<leader>sS", false, mode = "n" }
 keys[#keys + 1] = { "gr", false, mode = "n" }
 keys[#keys + 1] = { "gI", false, mode = "n" }
 keys[#keys + 1] = { "gY", false, mode = "n" }
+keys[#keys + 1] = { "K", false, mode = "n" }
 
 -- add this when you wanna install rosalyn
 -- require("mason").setup({

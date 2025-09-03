@@ -105,6 +105,10 @@ map("v", "h0", ":<c-u>HSRmHighlight<CR>", {
 -- Add ctrl backspace
 map("i", "<C-BS>", "<ESC>cb")
 
+map("n", "K", function()
+  vim.lsp.buf.hover({ border = "single" })
+end, { desc = "Hover Docs" })
+
 map("n", "<leader>up", "<cmd>NoNeckPain<CR>")
 
 -- Save
