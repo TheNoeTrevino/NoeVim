@@ -56,7 +56,6 @@ map("t", "<C-l>", "<cmd>wincmd k<cr>", { desc = "Go to Upper Window" })
 map("t", "<C-;>", "<cmd>wincmd l<cr>", { desc = "Go to Right Window" })
 
 map({ "i", "n", "s" }, "<esc>", function()
-  vim.cmd("NoiceDismiss")
   vim.cmd("noh")
   require("copilot.suggestion").dismiss()
   LazyVim.cmp.actions.snippet_stop()
