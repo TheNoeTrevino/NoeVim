@@ -4,6 +4,7 @@ return {
   opts_extend = { "spec" },
   opts = {
     win = {
+      border = "single",
       no_overlap = true,
       padding = { 1, 2 },
       title = false,
