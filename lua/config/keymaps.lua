@@ -147,7 +147,7 @@ map("n", "gO", "mzO<ESC>`z:delm z<cr><up>")
 map("n", "'", "<cmd>WhichKey `<cr>")
 
 -- Matching Bracket
-map({ "n", "x", "v" }, "M", "%")
+map({ "n", "x", "v", "o" }, "M", "%")
 
 map({ "n", "x", "v" }, "L", "<C-^>")
 

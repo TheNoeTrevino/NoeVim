@@ -22,7 +22,7 @@ return {
       -- Replace text with register
       replace = {
         -- NOTE: Default `gr*` LSP mappings are removed
-        prefix = "gr",
+        prefix = "",
 
         -- Whether to reindent new text to match previous indent
         reindent_linewise = true,
