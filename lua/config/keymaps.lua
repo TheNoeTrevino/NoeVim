@@ -235,9 +235,6 @@ map("n", "<C-o>", "<C-i>", { desc = "Jumplist Backwards" })
 --                           Toggle Section
 -------------------------------------------------------------------------------
 
--- Toggle ZenMode
-map("n", "<leader>z", "<cmd>ZenMode<CR>", { desc = "Transparency" })
-
 -- Code Lens
 map("n", "<leader>ut", "<cmd>LenslineToggle<cr>", { desc = "Toggle Gutter" })
 
