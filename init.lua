@@ -42,7 +42,6 @@ h(0, "MatchParen", { fg = "#FF9D3C", bg = "#353534", bold = true })
 h(0, "YankyYanked", { fg = "#000000", bg = "#F6C177", bold = true })
 h(0, "YankyPut", { fg = "#000000", bg = "#F6C177", bold = true })
 
-h(0, "WinSeparator", { fg = "#1F3442", bg = "NONE", bold = true })
 h(0, "Visual", { bg = "#525251", fg = nil })
 h(0, "VisualMatch", { bg = "#353534", fg = nil })
 h(0, "Search", { bg = "#595959", fg = nil })

@@ -109,7 +109,10 @@ map("n", "K", function()
   vim.lsp.buf.hover({ border = "single" })
 end, { desc = "Hover Docs" })
 
-map("n", "<leader>up", "<cmd>NoNeckPain<CR>")
+map("n", "<leader>up", function()
+  vim.cmd("NoNeckPain")
+  vim.cmd('lua vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#000000", bg = "NONE", bold = true })')
+end)
 
 -- Save
 map("n", "<S-CR>", "<cmd>w<cr>")
