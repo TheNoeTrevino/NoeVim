@@ -11,7 +11,7 @@ local picker_keys = {
   ["<c-a>"] = { "select_all", mode = { "n", "i" } },
   ["<c-g>"] = { "toggle_live", mode = { "i", "n" } }, -- pretty cool, can add two arguments to the grep
   ["/"] = "toggle_focus",
-  ["<Esc>"] = "cancel",
+  ["<Esc>"] = "close",
   ["<c-u>"] = { "preview_scroll_up", mode = { "i", "n" } },
   ["<c-d>"] = { "preview_scroll_down", mode = { "i", "n" } },
   ["<c-q>"] = { "qflist", mode = { "i", "n" } },
