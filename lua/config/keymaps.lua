@@ -57,6 +57,7 @@ map("t", "<C-;>", "<cmd>wincmd l<cr>", { desc = "Go to Right Window" })
 
 map({ "i", "n", "s" }, "<esc>", function()
   vim.cmd("noh")
+  vim.cmd("Noice dismiss")
   require("copilot.suggestion").dismiss()
   LazyVim.cmp.actions.snippet_stop()
   return "<esc>"
@@ -104,10 +105,6 @@ map("v", "h0", ":<c-u>HSRmHighlight<CR>", {
 
 -- Add ctrl backspace
 map("i", "<C-BS>", "<ESC>cb")
-
-map("n", "K", function()
-  vim.lsp.buf.hover({ border = "single" })
-end, { desc = "Hover Docs" })
 
 map("n", "<leader>up", function()
   vim.cmd("NoNeckPain")
