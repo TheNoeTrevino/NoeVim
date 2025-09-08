@@ -5,4 +5,5 @@ return {
   { "rcarriga/nvim-notify", enabled = false },
   { "venv-selector.nvim", enabled = false },
   { "catppuccin", enabled = false },
+  { "CopilotC-Nvim/CopilotChat.nvim", enabled = false },
 }

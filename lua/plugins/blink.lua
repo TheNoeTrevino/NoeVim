@@ -109,7 +109,8 @@ return {
     sources = {
       -- adding any nvim-cmp sources here will enable them
       -- with blink.compat
-      default = { "lsp", "copilot", "path", "snippets", "buffer", "html-css" },
+      default = { "lsp", "path", "snippets", "buffer", "html-css" },
+      -- default = { "lsp", "copilot", "path", "snippets", "buffer", "html-css" },
       providers = {
         lsp = {
           score_offset = 100,
@@ -125,24 +126,24 @@ return {
           module = "vim_dadbod_completion.blink",
           score_offset = 50,
         },
-        copilot = {
-          name = "copilot",
-          module = "blink-cmp-copilot",
-          kind = "Copilot",
-          score_offset = 10,
-          async = true,
-        },
+        -- copilot = {
+        --   name = "copilot",
+        --   module = "blink-cmp-copilot",
+        --   kind = "Copilot",
+        --   score_offset = 10,
+        --   async = true,
+        -- },
       },
     },
     keymap = {
       preset = "super-tab",
-      ["<C-Space>"] = {
-        function(cmp)
-          cmp.show({
-            providers = { "copilot" },
-          })
-        end,
-      },
+      -- ["<C-Space>"] = {
+      --   function(cmp)
+      --     cmp.show({
+      --       providers = { "copilot" },
+      --     })
+      --   end,
+      -- },
       ["<C-S>"] = {
         function(cmp)
           cmp.show({
@@ -157,22 +158,22 @@ return {
           })
         end,
       },
-      ["<C-;>"] = {
-        function()
-          require("copilot.suggestion").accept_line()
-        end,
-        "hide",
-      },
-      ["<C-n>"] = {
-        function()
-          require("copilot.suggestion").next()
-        end,
-      },
-      ["<C-p>"] = {
-        function()
-          require("copilot.suggestion").prev()
-        end,
-      },
+      -- ["<C-;>"] = {
+      --   function()
+      --     require("copilot.suggestion").accept_line()
+      --   end,
+      --   "hide",
+      -- },
+      -- ["<C-n>"] = {
+      --   function()
+      --     require("copilot.suggestion").next()
+      --   end,
+      -- },
+      -- ["<C-p>"] = {
+      --   function()
+      --     require("copilot.suggestion").prev()
+      --   end,
+      -- },
       ["<C-e>"] = { "hide", "fallback" },
       ["<Tab>"] = {
         function(cmp)

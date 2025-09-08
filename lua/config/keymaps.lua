@@ -58,7 +58,7 @@ map("t", "<C-;>", "<cmd>wincmd l<cr>", { desc = "Go to Right Window" })
 map({ "i", "n", "s" }, "<esc>", function()
   vim.cmd("noh")
   vim.cmd("Noice dismiss")
-  require("copilot.suggestion").dismiss()
+  -- require("copilot.suggestion").dismiss()
   LazyVim.cmp.actions.snippet_stop()
   return "<esc>"
 end, { expr = true, desc = "Escape and Clear hlsearch" })
