@@ -13,12 +13,12 @@ return {
     },
   },
   config = function(_, opts)
+    -- if this isnt working, remember to get the lsp from mason like below
     require("mason").setup({
       registries = {
         "github:mason-org/mason-registry",
         "github:Crashdummyy/mason-registry",
       },
     })
-    require("roslyn").setup(opts) -- this is what actually starts it
   end,
 }

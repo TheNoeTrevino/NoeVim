@@ -182,3 +182,22 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.bo.cinoptions = "j1,J1,(0,w1,W1"
   end,
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "*",
+  callback = function()
+    -- let o make a new line
+    vim.opt.formatoptions:remove({ "o" })
+  end,
+  desc = "Disable New Line Comment",
+})
+
+vim.api.nvim_create_user_command("PrettySQL", function()
+  vim.api.nvim_buf_set_option(0, "modifiable", true)
+  vim.cmd([[
+      %s/-/━/g
+      %s/|/┃/g
+      %s/+/╋/g
+    ]])
+  vim.api.nvim_buf_set_option(0, "modifiable", false)
+end, {})
