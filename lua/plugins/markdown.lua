@@ -123,4 +123,26 @@ return {
     cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
     ft = { "markdown" },
   },
+  {
+    "sotte/presenting.nvim",
+    ft = "markdown",
+    opts = function()
+      require("presenting").setup({
+        keymaps = {
+          -- These are local mappings for the open slide buffer.
+          -- Disable existing keymaps by setting them to `nil`.
+          -- Add your own keymaps as you desire.
+          -- stylua: ignore start
+          ["n"] = function() Presenting.next() end,
+          ["p"] = function() Presenting.prev() end,
+          ["q"] = function() Presenting.quit() end,
+          ["f"] = function() Presenting.first() end,
+          ["l"] = function() Presenting.last() end,
+          ["<CR>"] = function() Presenting.next() end,
+          ["<BS>"] = function() Presenting.prev() end,
+          -- stylua: ignore end
+        },
+      })
+    end,
+  },
 }
