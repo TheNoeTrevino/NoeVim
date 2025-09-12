@@ -174,6 +174,7 @@ return {
       formatters = {
         file = {
           filename_first = true, -- display filename before the file path
+          truncate = 50, -- truncate the file path to (roughly) this length
           git_status_hl = true, -- use the git status highlight group for the filename
         },
       },
@@ -236,10 +237,10 @@ return {
     { "<leader>sw", function() Snacks.picker.grep_word(picker_opts) end, desc = "Visual selection or word", mode = { "n", "x" } },
     -- search
     { "<leader>so", function() Snacks.picker.recent(vim.tbl_deep_extend("force", picker_opts, { on_show = function() vim.cmd.stopinsert() end})) end, desc = "Recent" },
-    { "<leader>sr", function() Snacks.picker.resume(picker_opts) end, desc = "Resume" },
+    { "<leader>sr", function() Snacks.picker.resume() end, desc = "Resume" },
     { "<leader>sP", function() Snacks.picker.projects(picker_opts) end, desc = "Projects" },
     { "<leader>sp", function() Snacks.picker.spelling(spelling_opts) end, desc = "Spelling" },
-    { "<leader>sy", function() Snacks.picker.yanky(picker_opts) end, desc = "Yanks" },
+    { "<leader>sy", function() Snacks.picker.yanky(vim.tbl_deep_extend("force", picker_opts, { on_show = function() vim.cmd.stopinsert() end})) end, desc = "Yanks" },
     { "<leader>sf", function() Snacks.picker.files(picker_opts) end, desc = "Find Files" },
     { '<leader>s"', function() Snacks.picker.registers(picker_opts) end, desc = "Registers" },
     { '<leader>s/', function() Snacks.picker.search_history(vim.tbl_deep_extend("force", vscode_opts, { on_show = function() vim.cmd.stopinsert() end})) end, desc = "Search History" },
