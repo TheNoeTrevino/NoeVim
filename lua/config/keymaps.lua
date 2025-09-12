@@ -192,13 +192,13 @@ map("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
 map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 
 -- Diagnostics
-map("n", "<leader>dn", "<cmd>Lspsaga diagnostic_jump_next<CR>", { desc = "Next Diagnostic" })
-map("n", "<leader>dN", "<cmd>Lspsaga diagnostic_jump_prev<CR>", { desc = "Previous Diagnostic" })
-map("n", "<leader>dl", "<cmd>Lspsaga show_line_diagnostics<CR>", { desc = "Line Diagnostics" })
-map("n", "<leader>dc", "<cmd>Lspsaga show_cursor_diagnostics<CR>", { desc = "Cursor Diagnostics" })
+map("n", "<leader>xn", "<cmd>Lspsaga diagnostic_jump_next<CR>", { desc = "Next Diagnostic" })
+map("n", "<leader>xN", "<cmd>Lspsaga diagnostic_jump_prev<CR>", { desc = "Previous Diagnostic" })
+map("n", "<leader>xl", "<cmd>Lspsaga show_line_diagnostics<CR>", { desc = "Line Diagnostics" })
+map("n", "<leader>xc", "<cmd>Lspsaga show_cursor_diagnostics<CR>", { desc = "Cursor Diagnostics" })
 
-map("n", "<leader>da", "<cmd>Trouble diagnostics toggle auto_jump=true focus=true<CR>", { desc = "All Diagnostics" })
-map("n", "<leader>db", "<cmd>Trouble diagnostics toggle filter.buf=0 focus=true<cr>", { desc = "Buffer Diagnostics" })
+map("n", "<leader>xa", "<cmd>Trouble diagnostics toggle auto_jump=true focus=true<CR>", { desc = "All Diagnostics" })
+map("n", "<leader>xb", "<cmd>Trouble diagnostics toggle filter.buf=0 focus=true<cr>", { desc = "Buffer Diagnostics" })
 
 -------------------------------------------------------------------------------
 --                           Windows Section

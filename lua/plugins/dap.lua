@@ -24,26 +24,26 @@ return {
     keys = function()
       return {
         -- stylua: ignore start
-        { "<leader>x", group = "  Debug" },
-        { "<leader>xB", function() require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: ")) end, desc = "Breakpoint Condition", },
-        { "<leader>xb", function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint", },
-        { "<leader>xc", function() require("dap").continue() end, desc = "Continue", },
-        { "<leader>xa", function() require("dap").continue({ before = get_args }) end, desc = "Run with Args", },
-        { "<leader>xC", function() require("dap").run_to_cursor() end, desc = "Run to Cursor", },
-        { "<leader>xg", function() require("dap").goto_() end, desc = "Go to Line (No Execute)", },
-        { "<leader>xi", function() require("dap").step_into() end, desc = "Step Into", },
-        { "<leader>xj", function() require("dap").down() end, desc = "Down", },
-        { "<leader>xk", function() require("dap").up() end, desc = "Up", },
-        { "<leader>xl", function() require("dap").run_last() end, desc = "Run Last", },
-        { "<leader>xO", function() require("dap").step_out() end, desc = "Step Out", },
-        { "<leader>xo", function() require("dap").step_over() end, desc = "Step Over", },
-        { "<leader>xp", function() require("dap").pause() end, desc = "Pause", },
-        { "<leader>xr", function() require("dap").repl.toggle() end, desc = "Toggle REPL", },
-        { "<leader>xs", function() require("dap").session() end, desc = "Session", },
-        { "<leader>xt", function() require("dap").terminate() end, desc = "Terminate", },
-        { "<leader>xw", function() require("dap.ui.widgets").hover() end, desc = "Widgets", },
-        { "<leader>xPt", function() require("dap-python").test_method() end, desc = "Debug Method", ft = "python", },
-        { "<leader>xPc", function() require("dap-python").test_class() end, desc = "Debug Class", ft = "python", },
+        { "<leader>d", group = "  Debug" },
+        { "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: ")) end, desc = "Breakpoint Condition", },
+        { "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint", },
+        { "<leader>dc", function() require("dap").continue() end, desc = "Continue", },
+        { "<leader>da", function() require("dap").continue({ before = get_args }) end, desc = "Run with Args", },
+        { "<leader>dC", function() require("dap").run_to_cursor() end, desc = "Run to Cursor", },
+        { "<leader>dg", function() require("dap").goto_() end, desc = "Go to Line (No Execute)", },
+        { "<leader>di", function() require("dap").step_into() end, desc = "Step Into", },
+        { "<leader>dk", function() require("dap").down() end, desc = "Down", },
+        { "<leader>dl", function() require("dap").up() end, desc = "Up", },
+        { "<leader>dl", function() require("dap").run_last() end, desc = "Run Last", },
+        { "<leader>dO", function() require("dap").step_out() end, desc = "Step Out", },
+        { "<leader>do", function() require("dap").step_over() end, desc = "Step Over", },
+        { "<leader>dp", function() require("dap").pause() end, desc = "Pause", },
+        { "<leader>dr", function() require("dap").repl.toggle() end, desc = "Toggle REPL", },
+        { "<leader>ds", function() require("dap").session() end, desc = "Session", },
+        { "<leader>dt", function() require("dap").terminate() end, desc = "Terminate", },
+        { "<leader>dw", function() require("dap.ui.widgets").hover() end, desc = "Widgets", },
+        { "<leader>dPt", function() require("dap-python").test_method() end, desc = "Debug Method", ft = "python", },
+        { "<leader>dPc", function() require("dap-python").test_class() end, desc = "Debug Class", ft = "python", },
       }
     end,
   },
@@ -54,12 +54,50 @@ return {
     keys = function()
       return {
         -- stylua: ignore start
-        { "<leader>xu", function() require("dapui").toggle({}) end, desc = "Dap UI", },
-        { "<leader>xe", function() require("dapui").eval() end, desc = "Eval", mode = { "n", "v" }, },
+        { "<leader>du", function() require("dapui").toggle({}) end, desc = "Dap UI", },
+        { "<leader>de", function() require("dapui").eval() end, desc = "Eval", mode = { "n", "v" }, },
       }
     end,
-        -- stylua: ignore start
-    opts = {},
+    opts = {
+      layouts = {
+        {
+          elements = {
+            {
+              id = "scopes",
+              size = 0.4,
+            },
+            {
+              id = "watches",
+              size = 0.4,
+            },
+            {
+              id = "breakpoints",
+              size = 0.1,
+            },
+            {
+              id = "stacks",
+              size = 0.1,
+            },
+          },
+          position = "left",
+          size = 50,
+        },
+        {
+          elements = {
+            {
+              id = "repl",
+              size = 0.5,
+            },
+            {
+              id = "console",
+              size = 0.5,
+            },
+          },
+          position = "bottom",
+          size = 10,
+        },
+      },
+    },
     config = function(_, opts)
       local dap = require("dap")
       local dapui = require("dapui")
