@@ -100,15 +100,6 @@ return {
       })
     end,
   },
-  {
-    "catgoose/nvim-colorizer.lua",
-    event = "UIEnter",
-    config = function()
-      require("colorizer").setup({
-        user_default_options = { mode = "virtualtext" },
-      })
-    end,
-  },
   { "nvzone/volt", lazy = true },
   { "nvzone/timerly", cmd = "TimerlyToggle" },
   {

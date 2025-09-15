@@ -52,7 +52,7 @@ return {
         },
       },
       progress = {
-        enabled = true,
+        enabled = false,
       },
     },
     -- command line workaround
