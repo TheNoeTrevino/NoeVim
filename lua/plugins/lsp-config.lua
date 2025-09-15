@@ -5,7 +5,11 @@ return {
     inlay_hints = { enabled = false },
   },
   servers = {
-    omnisharp = false,
+    omnisharp = {
+      enabled = false,
+      mason = false,
+      autostart = false,
+    },
     angularls = {
       mason = false,
       autostart = false,
@@ -27,4 +31,9 @@ return {
       autostart = false,
     },
   },
+  config = function()
+    if require("lspconfig").omnisharp then
+      require("lspconfig").omnisharp = nil
+    end
+  end,
 }
