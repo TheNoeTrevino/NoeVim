@@ -1,4 +1,15 @@
 return {
+  -- when you wanna enable for a computer put this:
+  --
+  -- require("mason").setup({
+  --   registries = {
+  --     "github:mason-org/mason-registry",
+  --     "github:Crashdummyy/mason-registry",
+  --   },
+  -- })
+  --
+  -- in init.lua. then install rzls and rosalyn. i also completely disable
+  -- omnisharp in the lspconfig
   {
     "seblyng/roslyn.nvim",
     ft = { "cs", "razor" },

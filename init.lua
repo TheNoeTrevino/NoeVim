@@ -232,9 +232,3 @@ keys[#keys + 1] = { "K", false, mode = "n" }
 --     "github:Crashdummyy/mason-registry",
 --   },
 -- })
-require("mason").setup({
-  registries = {
-    "github:mason-org/mason-registry",
-    "github:Crashdummyy/mason-registry",
-  },
-})
