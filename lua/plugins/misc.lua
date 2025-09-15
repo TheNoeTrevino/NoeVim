@@ -106,4 +106,14 @@ return {
       })
     end,
   },
+  {
+    "zerochae/endpoint.nvim",
+    dependencies = { "nvim-telescope/telescope.nvim" },
+    cmd = {
+      "Endpoint",
+    },
+    config = function()
+      require("endpoint").setup()
+    end,
+  },
 }
