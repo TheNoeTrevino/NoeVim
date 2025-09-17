@@ -1,11 +1,19 @@
+local function is_dap_buffer()
+  return require("cmp_dap").is_dap_buffer()
+end
+
 return {
   "saghen/blink.cmp",
   event = "VeryLazy",
+  dependencies = { "rcarriga/cmp-dap" },
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
   opts = {
     cmdline = {
       enabled = true,
+      -- enabled = function()
+      --   return vim.bo.buftype ~= "prompt" or is_dap_buffer()
+      -- end,
       keymap = {
         preset = "super-tab",
 
@@ -109,7 +117,17 @@ return {
     sources = {
       -- adding any nvim-cmp sources here will enable them
       -- with blink.compat
-      default = { "lsp", "path", "snippets", "buffer", "html-css" },
+      -- default = { "lsp", "path", "snippets", "buffer", "html-css" },
+      default = function()
+        local sql_filetypes = { mysql = true, sql = true }
+        if sql_filetypes[vim.bo.filetype] ~= nil then
+          return { "dadbod", "snippets", "buffer" }
+        elseif is_dap_buffer() then
+          return { "dap", "snippets", "buffer" }
+        else
+          return { "lsp", "path", "snippets" } -- "buffer" }
+        end
+      end,
       -- default = { "lsp", "copilot", "path", "snippets", "buffer", "html-css" },
       providers = {
         lsp = {
@@ -126,6 +144,7 @@ return {
           module = "vim_dadbod_completion.blink",
           score_offset = 50,
         },
+        dap = { name = "dap", module = "blink.compat.source" },
         -- copilot = {
         --   name = "copilot",
         --   module = "blink-cmp-copilot",

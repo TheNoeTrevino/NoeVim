@@ -6,7 +6,7 @@ return {
   },
   servers = {
     omnisharp = {
-      enabled = false,
+      -- enabled = false,
       mason = false,
       autostart = false,
     },
@@ -31,9 +31,9 @@ return {
       autostart = false,
     },
   },
-  config = function()
-    if require("lspconfig").omnisharp then
-      require("lspconfig").omnisharp = nil
-    end
-  end,
+  -- config = function()
+  --   if require("lspconfig").omnisharp then
+  --     require("lspconfig").omnisharp = nil
+  --   end
+  -- end,
 }
