@@ -144,7 +144,7 @@ return {
           module = "vim_dadbod_completion.blink",
           score_offset = 50,
         },
-        dap = { name = "dap", module = "blink.compat.source" },
+        dap = { name = "dap", module = "blink.compat.source", score_offset = 200 },
         -- copilot = {
         --   name = "copilot",
         --   module = "blink-cmp-copilot",
