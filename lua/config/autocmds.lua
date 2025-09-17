@@ -192,12 +192,10 @@ vim.api.nvim_create_autocmd("FileType", {
   desc = "Disable New Line Comment",
 })
 
-vim.api.nvim_create_user_command("PrettySQL", function()
-  vim.api.nvim_buf_set_option(0, "modifiable", true)
-  vim.cmd([[
-      %s/-/━/g
-      %s/|/┃/g
-      %s/+/╋/g
-    ]])
-  vim.api.nvim_buf_set_option(0, "modifiable", false)
-end, {})
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "dap-repl", "dapui_watches", "dapui_hover" },
+  callback = function()
+    vim.b.completion = true
+  end,
+  desc = "Enable completion for DAP-REPL filetypes",
+})
