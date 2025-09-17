@@ -22,9 +22,7 @@ return {
       },
     },
     config = function()
-      local mason_registry = require("mason-registry")
-      local rzls_pkg = mason_registry.get_package("rzls")
-      local rzls_path = vim.fs.joinpath(rzls_pkg:get_install_path(), "libexec")
+      local rzls_path = vim.fn.expand("$MASON/share/rzls/libexec")
 
       local cmd = {
         "roslyn",

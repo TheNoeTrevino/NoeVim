@@ -226,9 +226,13 @@ keys[#keys + 1] = { "gY", false, mode = "n" }
 keys[#keys + 1] = { "K", false, mode = "n" }
 
 -- add this when you wanna install rosalyn
--- require("mason").setup({
---   registries = {
---     "github:mason-org/mason-registry",
---     "github:Crashdummyy/mason-registry",
---   },
--- })
+require("mason").setup({
+  registries = {
+    "github:mason-org/mason-registry",
+    "github:Crashdummyy/mason-registry",
+  },
+})
+
+vim.keymap.set("n", "K", function()
+  vim.lsp.buf.hover({ border = "single", max_height = 25, max_width = 120 })
+end)

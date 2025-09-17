@@ -36,6 +36,7 @@ return {
     }
   end,
   keys = {
+    { "<leader>aa", "<CMD>CopilotChat<CR>", desc = "Explain", mode = { "n", "v" } },
     { "<leader>ae", "<CMD>CopilotChatExplain<CR>", desc = "Explain", mode = { "n", "v" } },
     { "<leader>ad", "<CMD>CopilotChatFixDiagnostic<CR>", desc = "Diagnostics", mode = { "n", "v" } },
     { "<leader>af", "<CMD>CopilotChatFix<CR>", desc = "Fix", mode = { "n", "v" } },
