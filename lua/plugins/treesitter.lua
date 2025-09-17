@@ -1,8 +1,5 @@
 return {
   "nvim-treesitter/nvim-treesitter",
-  dependencies = {
-    "nvim-treesitter/nvim-treesitter-refactor",
-  },
   opts = {
     refactor = {
       highlight_definitions = { enable = false },
@@ -25,7 +22,4 @@ return {
       },
     },
   },
-  config = function(_, opts)
-    require("nvim-treesitter.configs").setup(opts)
-  end,
 }

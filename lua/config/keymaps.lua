@@ -5,7 +5,7 @@ vim.keymap.del("n", "<leader>-")
 vim.keymap.del("n", "<leader>L")
 vim.keymap.del("n", "<leader>l")
 vim.keymap.del("n", "<leader>K")
-vim.keymap.del("n", "<leader>snt")
+-- vim.keymap.del("n", "<leader>snt")
 vim.keymap.del("n", "<leader><Tab>[")
 vim.keymap.del("n", "<leader><Tab>]")
 vim.keymap.del("n", "<leader><Tab>d")
@@ -21,8 +21,8 @@ vim.keymap.del("n", "<leader>ft")
 vim.keymap.del("n", "<leader>xl")
 vim.keymap.del("n", "<leader>xq")
 vim.keymap.del("n", "<leader>fT")
-vim.keymap.del("n", "<C-F>")
-vim.keymap.del("n", "<C-B>")
+-- vim.keymap.del("n", "<C-F>")
+-- vim.keymap.del("n", "<C-B>")
 vim.keymap.del("n", "L")
 
 local map = LazyVim.safe_keymap_set
@@ -57,7 +57,6 @@ map("t", "<C-;>", "<cmd>wincmd l<cr>", { desc = "Go to Right Window" })
 
 map({ "i", "n", "s" }, "<esc>", function()
   vim.cmd("noh")
-  vim.cmd("Noice dismiss")
   -- require("copilot.suggestion").dismiss()
   LazyVim.cmp.actions.snippet_stop()
   return "<esc>"
@@ -207,10 +206,10 @@ map("n", "<leader>xb", "<cmd>Trouble diagnostics toggle filter.buf=0 focus=true<
 -- Navigate Between Neovim and Kitty splits
 -- Disable the default mappings from vim-kitty-navigator
 vim.g.kitty_navigator_no_mappings = 1
-map("n", "<C-j>", ":KittyNavigateLeft<CR>", { noremap = true, silent = true })
-map("n", "<C-k>", ":KittyNavigateDown<CR>", { noremap = true, silent = true })
-map("n", "<C-l>", ":KittyNavigateUp<CR>", { noremap = true, silent = true })
-map("n", "<C-;>", ":KittyNavigateRight<CR>", { noremap = true, silent = true })
+map("n", "<C-j>", "<c-w>h", { noremap = true, silent = true })
+map("n", "<C-k>", "<c-w>j", { noremap = true, silent = true })
+map("n", "<C-l>", "<c-w>k", { noremap = true, silent = true })
+map("n", "<C-;>", "<c-w>l", { noremap = true, silent = true })
 
 -- Resize with arrows
 map("n", "<Up>", "<cmd>resize +3<cr>", { desc = "Increase Window Height" })
