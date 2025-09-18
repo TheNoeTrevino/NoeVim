@@ -46,7 +46,7 @@ require("lazy").setup({
   ui = {
     title = " NoeVim ",
     title_pos = "center", ---@type "center" | "left" | "right"
-    border = "rounded",
+    border = "single",
     backdrop = 50,
   },
 })
