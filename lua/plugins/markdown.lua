@@ -22,20 +22,10 @@ return {
           custom = {
             todo = { raw = "[-]", rendered = "󰅐 ", highlight = "RenderMarkdownTodo" },
           },
-          code = {
-            enabled = false,
-            render_modes = true,
-            sign = true,
-            style = "none",
-          },
           heading = {
             sign = false,
             icons = { "󰎦 ", "󰎩 ", "󰎬 ", "󰎮 ", "󰎰 ", "󰎵 " },
           },
-        },
-        code = {
-          style = "full",
-          border = "thick",
         },
       })
     end,

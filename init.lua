@@ -236,3 +236,41 @@ require("mason").setup({
 vim.keymap.set("n", "K", function()
   vim.lsp.buf.hover({ border = "single", max_height = 25, max_width = 120 })
 end)
+
+require("render-markdown").setup({
+  code = {
+    enabled = true,
+    render_modes = false,
+    sign = true,
+    conceal_delimiters = true,
+    language = true,
+    position = "left",
+    language_icon = true,
+    language_name = true,
+    language_info = true,
+    language_pad = 0,
+    disable_background = { "diff" },
+    width = "block",
+    left_pad = 1,
+    right_pad = 4,
+    left_margin = 0,
+    min_width = 0,
+    border = "thick",
+    language_border = " ",
+    language_left = "██", --
+    language_right = "█",
+    above = "▄",
+    below = "▀",
+    inline = true,
+    inline_left = "",
+    inline_right = "",
+    inline_pad = 0,
+    highlight = "RenderMarkdownCode",
+    highlight_info = "RenderMarkdownCodeInfo",
+    highlight_language = nil,
+    highlight_border = "RenderMarkdownCodeBorder",
+    highlight_fallback = "RenderMarkdownCodeFallback",
+    highlight_inline = "RenderMarkdownCodeInline",
+    style = "full",
+  },
+})

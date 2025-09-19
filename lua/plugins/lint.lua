@@ -51,13 +51,17 @@ return {
         end,
 
         condition = function(ctx)
+          if not ctx.filename or vim.loop.fs_stat(ctx.filename) == nil then
+            -- File doesn't exist, skip linting
+            return false
+          end
           -- if a file has the annotation @migration, the file will be treated
           -- as a migration file
           local is_migration = ctx.filename:match("backend/migrations/.*%.sql$") ~= nil
             or ctx.filename:match("migration")
 
           if not is_migration then
-            local content = vim.fn.readfile(ctx.filename)
+            local content = vim.fn.readfile(ctx.filename) -- here
             for _, line in ipairs(content) do
               if line:match("%-%-@migration") then
                 return true
