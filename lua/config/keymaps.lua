@@ -62,6 +62,9 @@ map({ "i", "n", "s" }, "<esc>", function()
   return "<esc>"
 end, { expr = true, desc = "Escape and Clear hlsearch" })
 
+map("n", "zj", "5zh", { desc = "Scroll Left" })
+map("n", "z;", "5zl", { desc = "Scroll right" })
+
 -------------------------------------------------------------------------------
 --                           Buffers Section
 -------------------------------------------------------------------------------
