@@ -7,136 +7,218 @@ local colorscheme = "kanagawa-wave"
 
 vim.cmd("colorscheme " .. colorscheme)
 
+-- Color Palette
+local colors = {
+  -- Core colors
+  white = "#FFFFFF",
+  black = "#000000",
+
+  -- Grays and dark tones
+  gray_dark = "#101010",
+  gray_darker = "#131111",
+  gray_light = "#888888",
+  gray_medium = "#6272a4",
+
+  -- Background variations
+  bg_subtle = "#202030",
+  bg_visual = "#525251",
+  bg_visual_alt = "#353534",
+  bg_search = "#595959",
+  bg_selection = "#363646",
+  bg_separator = "#1F3442",
+  bg_cmp = "#000001",
+
+  -- UI element backgrounds
+  bg_conflict_current = "#264033",
+  bg_conflict_current_label = "#337367",
+  bg_conflict_incoming = "#283B4D",
+  bg_conflict_incoming_label = "#326290",
+  bg_conflict_ancestor = "#545252",
+  bg_conflict_ancestor_label = "#393939",
+
+  -- Indent guides
+  indent_scope = "#426787",
+  indent_normal = "#152A36",
+
+  -- Syntax colors
+  blue = "#7E9CD8",
+  blue_light = "#90CAE1",
+  blue_bright = "#7EB4C9",
+  cyan = "#53758D",
+  green = "#688E81",
+  green_alt = "#7AA89F",
+  orange = "#FFA065",
+  orange_bright = "#FF9D3C",
+  orange_warning = "#e08300",
+  pink = "#D27E9A",
+  purple = "#947FB8",
+  purple_alt = "#967FB8",
+  purple_dark = "#938AA9",
+  red = "#FF5D62",
+  red_bright = "#ff0000",
+  red_git = "#C34143",
+  yellow = "#C0A36E",
+  yellow_alt = "#938056",
+  yellow_bright = "#F6C177",
+  yellow_cursor = "#fcb205",
+
+  -- Dracula theme colors
+  dracula_pink = "#ff79c6",
+  dracula_orange = "#ffb86c",
+
+  -- Git colors
+  git_add = "#04b004",
+
+  -- Markdown header backgrounds
+  md_h1_bg = "#502824",
+  md_h1_fg = "#fcd2b9",
+  md_h2_bg = "#37352f",
+  md_h2_fg = "#d2ccab",
+  md_h3_bg = "#5a3d33",
+  md_h3_fg = "#d1c4a5",
+  md_h4_bg = "#223b40",
+  md_h4_fg = "#bfd0d5",
+  md_h5_bg = "#362930",
+  md_h5_fg = "#dab9c6",
+  md_h6_bg = "#22312d",
+  md_h6_fg = "#bfd3ca",
+
+  -- Additional completion colors
+  cmp_snippet = "#E46876",
+  cmp_keyword_alt = "#D3859B",
+}
+
 if colorscheme == "kanagawa-wave" or "kanagawa-dragon" then
-  h(0, "WinSeparator", { fg = "#1F3442", bg = "NONE", bold = true })
+  h(0, "WinSeparator", { fg = colors.bg_separator, bg = "NONE", bold = true })
   -- typescript
   --
-  h(0, "@keyword.coroutine.tsx", { fg = "#53758D", italic = true })
-  h(0, "@keyword.coroutine.typescript", { fg = "#53758D", italic = true })
-  h(0, "@keyword.conditional.tsx", { fg = "#D27E9A", italic = true })
-  h(0, "@keyword.exception.tsx", { fg = "#FF5D62", bold = true, italic = true })
-  h(0, "@type.tsx", { fg = "#688E81" })
-  h(0, "@type.builtin.tsx", { fg = "#90CAE1" })
+  h(0, "@keyword.coroutine.tsx", { fg = colors.cyan, italic = true })
+  h(0, "@keyword.coroutine.typescript", { fg = colors.cyan, italic = true })
+  h(0, "@keyword.conditional.tsx", { fg = colors.pink, italic = true })
+  h(0, "@keyword.exception.tsx", { fg = colors.red, bold = true, italic = true })
+  h(0, "@type.tsx", { fg = colors.green })
+  h(0, "@type.builtin.tsx", { fg = colors.blue_light })
   h(0, "@constructor.tsx", { bold = true })
-  h(0, "@keyword.operator.tsx", { fg = "#C0A36E", italic = true, bold = true })
+  h(0, "@keyword.operator.tsx", { fg = colors.yellow, italic = true, bold = true })
 
   -- python
-  h(0, "@keyword.conditional.python", { fg = "#D27E9A", italic = true })
-  h(0, "@keyword.repeat.python", { fg = "#53758D", italic = true })
-  h(0, "@keyword.operator.python", { fg = "#C0A36E", italic = true, bold = true })
-  h(0, "@type.python", { fg = "#688E81" })
-  h(0, "@type.builtin.python", { fg = "#90CAE1" })
-  h(0, "@constructor.python", { fg = "#7AA89F", bold = true })
-  h(0, "@type.builtin.python", { fg = "#938056" })
+  h(0, "@keyword.conditional.python", { fg = colors.pink, italic = true })
+  h(0, "@keyword.conditional.python", { fg = colors.pink, italic = true })
+  h(0, "@keyword.repeat.python", { fg = colors.cyan, italic = true })
+  h(0, "@keyword.operator.python", { fg = colors.yellow, italic = true, bold = true })
+  h(0, "@type.python", { fg = colors.green })
+  h(0, "@type.builtin.python", { fg = colors.blue_light })
+  h(0, "@constructor.python", { fg = colors.green_alt, bold = true })
+  h(0, "@type.builtin.python", { fg = colors.yellow_alt })
 
   -- java
-  h(0, "@keyword.conditional.java", { fg = "#D27E9A", italic = true })
-  h(0, "@lsp.typemod.class.public.java", { fg = "#688E81", italic = true })
-  h(0, "@lsp.typemod.class.typeArgument.java", { fg = "#90CAE1", italic = true })
-  h(0, "@lsp.type.modifier.java", { fg = "#947FB8", italic = false })
-  h(0, "@type.builtin.java", { fg = "#7EB4C9", italic = true })
+  h(0, "@keyword.conditional.java", { fg = colors.pink, italic = true })
+  h(0, "@lsp.typemod.class.public.java", { fg = colors.green, italic = true })
+  h(0, "@lsp.typemod.class.typeArgument.java", { fg = colors.blue_light, italic = true })
+  h(0, "@lsp.type.modifier.java", { fg = colors.purple, italic = false })
+  h(0, "@type.builtin.java", { fg = colors.blue_bright, italic = true })
 end
 
-h(0, "MatchParen", { fg = "#FF9D3C", bg = "#353534", bold = true })
+h(0, "MatchParen", { fg = colors.orange_bright, bg = colors.bg_visual_alt, bold = true })
 
-h(0, "YankyYanked", { fg = "#000000", bg = "#F6C177", bold = true })
-h(0, "YankyPut", { fg = "#000000", bg = "#F6C177", bold = true })
+h(0, "YankyYanked", { fg = colors.black, bg = colors.yellow_bright, bold = true })
+h(0, "YankyPut", { fg = colors.black, bg = colors.yellow_bright, bold = true })
 
-h(0, "Visual", { bg = "#525251", fg = nil })
-h(0, "VisualMatch", { bg = "#353534", fg = nil })
-h(0, "Search", { bg = "#595959", fg = nil })
-h(0, "CurSearch", { fg = "#000000", bg = "#FF9D3C" })
-h(0, "SnacksPickerListCursorLine", { bg = "#202030" })
+h(0, "Visual", { bg = colors.bg_visual, fg = nil })
+h(0, "VisualMatch", { bg = colors.bg_visual_alt, fg = nil })
+h(0, "Search", { bg = colors.bg_search, fg = nil })
+h(0, "CurSearch", { fg = colors.black, bg = colors.orange_bright })
+h(0, "SnacksPickerListCursorLine", { bg = colors.bg_subtle })
 
-h(0, "SnacksPickerPrompt", { fg = "#ff79c6" })
+h(0, "SnacksPickerPrompt", { fg = colors.dracula_pink })
 
-h(0, "NoiceCmdlineIcon", { fg = "#ff79c6", bg = nil })
-h(0, "NoiceCmdlinePopupTitleCmdline", { fg = "#ffb86c", bg = nil })
-h(0, "NoiceCmdlinePopupBorderCmdline", { fg = "#6272a4", bg = nil })
+h(0, "NoiceCmdlineIcon", { fg = colors.dracula_pink, bg = nil })
+h(0, "NoiceCmdlinePopupTitleCmdline", { fg = colors.dracula_orange, bg = nil })
+h(0, "NoiceCmdlinePopupBorderCmdline", { fg = colors.gray_medium, bg = nil })
 
-h(0, "GitSignsAdd", { fg = "#04b004", bg = nil })
-h(0, "GitSignsChange", { fg = "#e08300", bg = nil })
-h(0, "GitSignsDelete", { fg = "#ff0000", bg = nil })
-h(0, "GitSignsCurrentLineBlame", { fg = "#888888", bg = nil, italic = true })
+h(0, "GitSignsAdd", { fg = colors.git_add, bg = nil })
+h(0, "GitSignsChange", { fg = colors.orange_warning, bg = nil })
+h(0, "GitSignsDelete", { fg = colors.red_bright, bg = nil })
+h(0, "GitSignsCurrentLineBlame", { fg = colors.gray_light, bg = nil, italic = true })
 
-h(0, "NeoTreeFloatBorder", { fg = "#6272a4", bg = nil })
-h(0, "NeoTreeFloatTitle", { fg = "#ffb86c", bg = nil })
-h(0, "NeoTreeCursorLine", { bg = "#202030" })
+h(0, "NeoTreeFloatBorder", { fg = colors.gray_medium, bg = nil })
+h(0, "NeoTreeFloatTitle", { fg = colors.dracula_orange, bg = nil })
+h(0, "NeoTreeCursorLine", { bg = colors.bg_subtle })
 
 h(0, "NormalFloat", { bg = nil })
-h(0, "FloatBorder", { fg = "#6272a4", bg = nil })
-h(0, "CursorLineNr", { fg = "#fcb205", bg = "#202030" })
+h(0, "FloatBorder", { fg = colors.gray_medium, bg = nil })
+h(0, "CursorLineNr", { fg = colors.yellow_cursor, bg = colors.bg_subtle })
 
-h(0, "FloatTitle", { fg = "#ffb86c", bg = nil })
+h(0, "FloatTitle", { fg = colors.dracula_orange, bg = nil })
 
 -- Current changes (green)
-h(0, "GitConflictCurrentLabel", { bg = "#337367", fg = nil })
-h(0, "GitConflictCurrent", { bg = "#264033", fg = nil })
+h(0, "GitConflictCurrentLabel", { bg = colors.bg_conflict_current_label, fg = nil })
+h(0, "GitConflictCurrent", { bg = colors.bg_conflict_current, fg = nil })
 
 -- Incoming changes (baby blue)
-h(0, "GitConflictIncomingLabel", { bg = "#326290", fg = nil })
-h(0, "GitConflictIncoming", { bg = "#283B4D", fg = nil })
+h(0, "GitConflictIncomingLabel", { bg = colors.bg_conflict_incoming_label, fg = nil })
+h(0, "GitConflictIncoming", { bg = colors.bg_conflict_incoming, fg = nil })
 
 -- Ancestor label (purple/blue)
-h(0, "GitConflictAncestorLabel", { bg = "#393939", fg = nil })
-h(0, "GitConflictAncestor", { bg = "#545252", fg = nil })
+h(0, "GitConflictAncestorLabel", { bg = colors.bg_conflict_ancestor_label, fg = nil })
+h(0, "GitConflictAncestor", { bg = colors.bg_conflict_ancestor, fg = nil })
 
 -- Neo-tree conflict (can match incoming or ancestor)
-h(0, "NeoTreeGitConflict", { bg = "#326290", fg = nil })
+h(0, "NeoTreeGitConflict", { bg = colors.bg_conflict_incoming_label, fg = nil })
 
-h(0, "GlancePreviewNormal", { bg = "#131111", fg = nil })
-h(0, "GlanceListNormal", { bg = "#101010", fg = nil })
-h(0, "GlanceListEndOfBuffer", { bg = "#101010", fg = nil })
+h(0, "GlancePreviewNormal", { bg = colors.gray_darker, fg = nil })
+h(0, "GlanceListNormal", { bg = colors.gray_dark, fg = nil })
+h(0, "GlanceListEndOfBuffer", { bg = colors.gray_dark, fg = nil })
 
-h(0, "GlanceListBorderBottom", { bg = "#101010", fg = "#1F3442" })
-h(0, "GlanceBorderTop", { bg = "#101010", fg = "#1F3442" })
-h(0, "GlancePreviewBorderBottom", { bg = "#101010", fg = "#1F3442" })
+h(0, "GlanceListBorderBottom", { bg = colors.gray_dark, fg = colors.bg_separator })
+h(0, "GlanceBorderTop", { bg = colors.gray_dark, fg = colors.bg_separator })
+h(0, "GlancePreviewBorderBottom", { bg = colors.gray_dark, fg = colors.bg_separator })
 
-h(0, "IblScope", { fg = "#426787" })
-h(0, "IblIndent", { fg = "#152A36" })
+h(0, "IblScope", { fg = colors.indent_scope })
+h(0, "IblIndent", { fg = colors.indent_normal })
 
 -- Custom Cmp hghlights, markdown erases them
-h(0, "BlinkCmpKind", { fg = "#90CAE1" })
-h(0, "BlinkCmpKindVariable", { fg = "#90CAE1" })
-h(0, "BlinkCmpKindMethod", { fg = "#FFA065" })
-h(0, "BlinkCmpKindFunction", { fg = "#FFA065" })
-h(0, "BlinkCmpKindConstructor", { fg = "#FFA065" })
-h(0, "BlinkCmpKindSnippet", { fg = "#E46876" })
-h(0, "BlinkCmpKindKeyword", { fg = "#D3859B" })
-h(0, "BlinkCmpKindField", { fg = "#7E9CD8" })
-h(0, "BlinkCmpKindProperty", { fg = "#7E9CD8" })
-h(0, "BlinkCmpKindEnumMember", { fg = "#D27E9A" })
-h(0, "BlinkCmpKindEnum", { fg = "#D27E9A" })
-h(0, "BlinkCmpKindFolder", { fg = "#967FB8" })
-h(0, "BlinkCmpKindFile", { fg = "#967FB8" })
-h(0, "BlinkCmpKindText", { fg = "#967FB8" })
-h(0, "BlinkCmpKindClass", { fg = "#938AA9" })
+h(0, "BlinkCmpKind", { fg = colors.blue_light })
+h(0, "BlinkCmpKindVariable", { fg = colors.blue_light })
+h(0, "BlinkCmpKindMethod", { fg = colors.orange })
+h(0, "BlinkCmpKindFunction", { fg = colors.orange })
+h(0, "BlinkCmpKindConstructor", { fg = colors.orange })
+h(0, "BlinkCmpKindSnippet", { fg = colors.cmp_snippet })
+h(0, "BlinkCmpKindKeyword", { fg = colors.cmp_keyword_alt })
+h(0, "BlinkCmpKindField", { fg = colors.blue })
+h(0, "BlinkCmpKindProperty", { fg = colors.blue })
+h(0, "BlinkCmpKindEnumMember", { fg = colors.pink })
+h(0, "BlinkCmpKindEnum", { fg = colors.pink })
+h(0, "BlinkCmpKindFolder", { fg = colors.purple_alt })
+h(0, "BlinkCmpKindFile", { fg = colors.purple_alt })
+h(0, "BlinkCmpKindText", { fg = colors.purple_alt })
+h(0, "BlinkCmpKindClass", { fg = colors.purple_dark })
 
-h(0, "BlinkCmpKindReference", { fg = "#90CAE1" })
-h(0, "BlinkCmpKindInterface", { fg = "#90CAE1" })
-h(0, "BlinkCmpKindOperator", { fg = "#90CAE1" })
-h(0, "BlinkCmpKindConstant", { fg = "#90CAE1" })
-h(0, "BlinkCmpMenuDefault", { fg = "#90CAE1" })
-h(0, "BlinkCmpKindDefault", { fg = "#90CAE1" })
-h(0, "BlinkCmpKindStruct", { fg = "#90CAE1" })
-h(0, "BlinkCmpKindModule", { fg = "#90CAE1" })
-h(0, "BlinkCmpKindValue", { fg = "#90CAE1" })
-h(0, "BlinkCmpKindEvent", { fg = "#90CAE1" })
-h(0, "BlinkCmpKindColor", { fg = "#90CAE1" })
-h(0, "BlinkCmpKindUnit", { fg = "#90CAE1" })
+h(0, "BlinkCmpKindReference", { fg = colors.blue_light })
+h(0, "BlinkCmpKindInterface", { fg = colors.blue_light })
+h(0, "BlinkCmpKindOperator", { fg = colors.blue_light })
+h(0, "BlinkCmpKindConstant", { fg = colors.blue_light })
+h(0, "BlinkCmpMenuDefault", { fg = colors.blue_light })
+h(0, "BlinkCmpKindDefault", { fg = colors.blue_light })
+h(0, "BlinkCmpKindStruct", { fg = colors.blue_light })
+h(0, "BlinkCmpKindModule", { fg = colors.blue_light })
+h(0, "BlinkCmpKindValue", { fg = colors.blue_light })
+h(0, "BlinkCmpKindEvent", { fg = colors.blue_light })
+h(0, "BlinkCmpKindColor", { fg = colors.blue_light })
+h(0, "BlinkCmpKindUnit", { fg = colors.blue_light })
 
 -- not transparent
-h(0, "BlinkCmpMenu", { bg = "#000001" })
-h(0, "BlinkCmpMenuBorder", { bg = "#000001", fg = "#6272a4" })
+h(0, "BlinkCmpMenu", { bg = colors.bg_cmp })
+h(0, "BlinkCmpMenuBorder", { bg = colors.bg_cmp, fg = colors.gray_medium })
 
 -- transparent
--- h(0, "BlinkCmpMenu", { bg = "#000000" })
--- h(0, "BlinkCmpMenuBorder", { bg = "#000000", fg = "#6272a4" })
+-- h(0, "BlinkCmpMenu", { bg = colors.black })
+-- h(0, "BlinkCmpMenuBorder", { bg = colors.black, fg = colors.gray_medium })
 
-h(0, "BlinkCmpMenuSelection", { bg = "#363646" })
+h(0, "BlinkCmpMenuSelection", { bg = colors.bg_selection })
 
-h(0, "ISwapSelection", { bg = "#C34143" })
-h(0, "ISwapHighlight", { fg = nil, bg = "#FF9D3C" })
+h(0, "ISwapSelection", { bg = colors.red_git })
+h(0, "ISwapHighlight", { fg = nil, bg = colors.orange_bright })
 
 -- vscode string color
 -- hi(0, "String", { fg = "#CE9178" })
@@ -148,7 +230,7 @@ vim.opt.cursorline = true
 vim.opt.cursorlineopt = "number"
 
 -- Define the Cursor highlight group
-h(0, "Cursor", { fg = "NONE", bg = "#FFFFFF" })
+h(0, "Cursor", { fg = "NONE", bg = colors.white })
 
 -- just remember to npm i @angular/language-server on your angular projects
 -- npm install @angular/language-server@x.x.x typescript
@@ -207,14 +289,30 @@ require("lspconfig").angularls.setup({
   end,
 })
 
-vim.cmd([[
-  highlight RenderMarkdownH1Bg guibg=#502824 guifg=#fcd2b9 ctermbg=94 ctermfg=230  " Red
-  highlight RenderMarkdownH3Bg guibg=#5a3d33 guifg=#d1c4a5 ctermbg=136 ctermfg=235 " Orange
-  highlight RenderMarkdownH2Bg guibg=#37352f guifg=#d2ccab ctermbg=100 ctermfg=223 " Yellow
-  highlight RenderMarkdownH4Bg guibg=#223b40 guifg=#bfd0d5 ctermbg=23 ctermfg=223  " Blue
-  highlight RenderMarkdownH6Bg guibg=#22312d guifg=#bfd3ca ctermbg=65 ctermfg=235  " Green
-  highlight RenderMarkdownH5Bg guibg=#362930 guifg=#dab9c6 ctermbg=96 ctermfg=230  " Violet
-]])
+vim.cmd(
+  string.format(
+    [[
+  highlight RenderMarkdownH1Bg guibg=%s guifg=%s ctermbg=94 ctermfg=230  " Red
+  highlight RenderMarkdownH3Bg guibg=%s guifg=%s ctermbg=136 ctermfg=235 " Orange
+  highlight RenderMarkdownH2Bg guibg=%s guifg=%s ctermbg=100 ctermfg=223 " Yellow
+  highlight RenderMarkdownH4Bg guibg=%s guifg=%s ctermbg=23 ctermfg=223  " Blue
+  highlight RenderMarkdownH6Bg guibg=%s guifg=%s ctermbg=65 ctermfg=235  " Green
+  highlight RenderMarkdownH5Bg guibg=%s guifg=%s ctermbg=96 ctermfg=230  " Violet
+]],
+    colors.md_h1_bg,
+    colors.md_h1_fg,
+    colors.md_h3_bg,
+    colors.md_h3_fg,
+    colors.md_h2_bg,
+    colors.md_h2_fg,
+    colors.md_h4_bg,
+    colors.md_h4_fg,
+    colors.md_h6_bg,
+    colors.md_h6_fg,
+    colors.md_h5_bg,
+    colors.md_h5_fg
+  )
+)
 
 local keys = require("lazyvim.plugins.lsp.keymaps").get()
 keys[#keys + 1] = { "<C-k>", false, mode = "i" }
