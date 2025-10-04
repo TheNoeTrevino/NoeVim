@@ -111,6 +111,10 @@ map("i", "<C-BS>", "<ESC>cb")
 -- wsl thing
 map("n", "<leader>dM", ":%s/\\r//")
 
+map({ "n", "x" }, "<leader>ca", function()
+  require("tiny-code-action").code_action()
+end, { noremap = true, silent = true })
+
 map("n", "<leader>up", function()
   vim.cmd("NoNeckPain")
   vim.cmd('lua vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#000000", bg = "NONE", bold = true })')
