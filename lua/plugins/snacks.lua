@@ -22,6 +22,7 @@ return {
       formatters = {
         file = {
           filename_first = true, -- display filename before the file path
+          truncate = 60, -- truncate the file path to (roughly) this length
           git_status_hl = true, -- use the git status highlight group for the filename
         },
       },
@@ -45,7 +46,7 @@ return {
           {
             win = "preview",
             title = "{preview:Preview}",
-            width = 0.66,
+            width = 0.60,
             border = "single",
             title_pos = "center",
           },
@@ -137,8 +138,8 @@ return {
     -- search
     { "<leader>so", function() Snacks.picker.recent({ on_show = function() vim.cmd.stopinsert() end}) end, desc = "Recent" },
     { "<leader>sr", function() Snacks.picker.resume() end, desc = "Resume" },
-    { "<leader>sP", function() Snacks.picker.projects() end, desc = "Projects" },
-    { "<leader>sp", function() Snacks.picker.spelling() end, desc = "Spelling" },
+    { "<leader>sP", "<CMD>lua Snacks.picker.projects( { layout = { preview = false, reverse = false, layout = { backdrop = false, row = 1, width = 0.4, min_width = 80, height = 0.4, border = 'none', box = 'vertical', { win = 'input', height = 1, border = 'single', title = '{title} {live} {flags}', title_pos = 'center' }, { win = 'list', border = 'single' }, { win = 'preview', title = '{preview}', border = 'rounded' }, }, }, on_show = function() vim.cmd.stopinsert() end, })<CR>", desc = "Projects" },
+    { "<leader>sp", "<CMD>lua Snacks.picker.spelling( { layout = { preview = false, reverse = false, layout = { backdrop = false, row = 1, width = 0.4, min_width = 80, height = 0.4, border = 'none', box = 'vertical', { win = 'input', height = 1, border = 'single', title = '{title} {live} {flags}', title_pos = 'center' }, { win = 'list', border = 'single' }, { win = 'preview', title = '{preview}', border = 'rounded' }, }, }, on_show = function() vim.cmd.stopinsert() end, })<CR>", desc = "Spelling" },
     { "<leader>sy", function() Snacks.picker.yanky() end, desc = "Yanks" },
     { "<leader>sf", function() Snacks.picker.files() end, desc = "Find Files" },
     { '<leader>s"', function() Snacks.picker.registers() end, desc = "Registers" },
@@ -162,7 +163,7 @@ return {
     { "<leader>ss", function() Snacks.picker.pickers() end, desc = "Pickers" },
     { "<leader>uC", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
     { "<leader>sb", function() Snacks.picker.buffers({ on_show = function() vim.cmd.stopinsert() end}) end, desc = "Buffers" },
-    { "<leader>st", function() Snacks.picker.todo_comments({ on_show = function() vim.cmd.stopinsert() end}) end, desc = "Todo" },
+    { "<leader>st", "<CMD>lua Snacks.picker.todo_comments({ on_show = function() vim.cmd.stopinsert() end})<CR>", desc = "Todo" },
     { "<leader><leader>", function() Snacks.lazygit( { cwd = LazyVim.root.git() }) end, desc = "Lazygit" },
     { "h", function() Snacks.picker.buffers({ on_show = function() vim.cmd.stopinsert() end}) end, desc = "Buffers" },
     -- LSP
