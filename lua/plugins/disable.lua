@@ -6,6 +6,6 @@ return {
   { "venv-selector.nvim", enabled = false },
   { "catppuccin", enabled = false },
   -- { "CopilotC-Nvim/CopilotChat.nvim", enabled = false },
-  -- { "omnisharp-extended-lsp.nvim", enabled = false },
+  { "omnisharp-extended-lsp.nvim", enabled = false },
   { "folke/noice.nvim", enabled = false },
 }
