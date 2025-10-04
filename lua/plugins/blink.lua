@@ -18,9 +18,6 @@ return {
     opts = {
       cmdline = {
         enabled = true,
-        -- enabled = function()
-        --   return vim.bo.buftype ~= "prompt" or is_dap_buffer()
-        -- end,
         keymap = {
           preset = "super-tab",
 
@@ -132,7 +129,7 @@ return {
           elseif is_dap_buffer() then
             return { "dap", "snippets", "buffer" }
           else
-            return { "lsp", "path", "snippets" } -- "buffer" }
+            return { "lsp", "path", "snippets", "copilot" } -- "buffer" }
           end
         end,
         -- default = { "lsp", "copilot", "path", "snippets", "buffer", "html-css" },
