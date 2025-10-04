@@ -6,7 +6,7 @@ return {
   },
   servers = {
     omnisharp = {
-      -- enabled = false,
+      enabled = false,
       mason = false,
       autostart = false,
     },
