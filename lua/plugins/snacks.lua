@@ -19,6 +19,7 @@ return {
       end,
     },
     picker = {
+      ui_select = true, -- replace `vim.ui.select` with the snacks picker
       formatters = {
         file = {
           filename_first = true, -- display filename before the file path
@@ -152,14 +153,14 @@ return {
     { "<leader>sh", function() Snacks.picker.help() end, desc = "Help Pages" },
     { "<leader>sH", function() Snacks.picker.highlights() end, desc = "Highlights" },
     { "<leader>sc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
-    { "<leader>sj", function() Snacks.picker.jumps({ on_show = function() vim.cmd.stopinsert() end}) end, desc = "Jumps" },
+    { "<leader>sj", "<CMD>lua Snacks.picker.jumps({on_show = function() vim.cmd.stopinsert() end, layout = {preview = true,layout = {box = 'vertical',backdrop = false,row = -1,width = 0,height = 0.33,border = 'top',title = ' {title} {live} {flags}',title_pos = 'left',{ win = 'input', height = 1, border = 'bottom' },{box = 'horizontal',{ win = 'list', border = 'none' },{ win = 'preview', title = '{preview}', width = 0.7, border = 'left' }, },},},})<CR>", desc = "Jumps" },
     { "<leader>sk", function() Snacks.picker.keymaps() end, desc = "Keymaps" },
     { "<leader>sl", function() Snacks.picker.loclist() end, desc = "Location List" },
     { "<leader>sm", function() Snacks.picker.marks({ on_show = function() vim.cmd.stopinsert() end}) end, desc = "Marks" },
     { "<leader>sM", function() Snacks.picker.man() end, desc = "Man Pages" },
     { "<leader>sq", function() Snacks.picker.qflist({ on_show = function() vim.cmd.stopinsert() end}) end, desc = "Quickfix List" },
     { "<leader>sR", function() Snacks.picker.resume({ on_show = function() vim.cmd.stopinsert() end}) end, desc = "Resume" },
-    { "<leader>su", function() Snacks.picker.undo() end, desc = "Undo History" },
+    { "<leader>su", function() Snacks.picker.undo({on_show = function() vim.cmd.stopinsert()end}) end, desc = "Undo History" },
     { "<leader>ss", function() Snacks.picker.pickers() end, desc = "Pickers" },
     { "<leader>uC", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
     { "<leader>sb", function() Snacks.picker.buffers({ on_show = function() vim.cmd.stopinsert() end}) end, desc = "Buffers" },
