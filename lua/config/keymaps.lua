@@ -57,8 +57,9 @@ map("t", "<C-;>", "<cmd>wincmd l<cr>", { desc = "Go to Right Window" })
 
 map({ "i", "n", "s" }, "<esc>", function()
   vim.cmd("noh")
-  -- require("copilot.suggestion").dismiss()
+  require("copilot.suggestion").dismiss()
   LazyVim.cmp.actions.snippet_stop()
+  vim.cmd("Sidekick nes clear")
   return "<esc>"
 end, { expr = true, desc = "Escape and Clear hlsearch" })
 
@@ -73,20 +74,6 @@ map("n", "z;", "5zl", { desc = "Scroll right" })
 -- map("n", "L", "<C-^>", { noremap = true, silent = true })
 map("n", "<C-,>", "<cmd>bp<cr>", { noremap = true, silent = true, desc = "Previous Buffer" })
 map("n", "<C-.>", "<cmd>bn<cr>", { noremap = true, silent = true, desc = "Next Buffer" })
-
--------------------------------------------------------------------------------
---                           Tab Section
--------------------------------------------------------------------------------
-
-map("n", "<tab><tab>", "<cmd>tabnew<cr>", { desc = "Tab New" })
-map("n", "<tab>j", "<cmd>tabn<cr>", { desc = "Tab Next" })
-map("n", "<tab>;", "<cmd>tabp<cr>", { desc = "Tab Prev" })
-map("n", "<tab>n", "<cmd>tabn<cr>", { desc = "Tab Next" })
-map("n", "<tab>p", "<cmd>tabp<cr>", { desc = "Tab Prev" })
-map("n", "<tab>c", "<cmd>tabc<cr>", { desc = "Tab Close" })
-map("n", "<tab>q", "<cmd>tabc<cr>", { desc = "Tab Close" })
-map("n", "<tab>q", "<cmd>tabc<cr>", { desc = "Tab Close" })
-map("n", "<tab>r", ":TabRename", { desc = "Tab Rename" })
 
 -------------------------------------------------------------------------------
 --                           Misc/Util Section

@@ -91,6 +91,7 @@ return {
             ["<c-p>"] = { "history_back", mode = { "i", "n" } },
             [";"] = { "confirm", mode = { "n" } },
             ["S"] = { "flash" },
+            ["<c-s>"] = { "flash", mode = { "i" } },
             ["?"] = "toggle_help_input",
             ["s"] = { "edit_split", mode = { "n" } },
             ["v"] = { "edit_vsplit", mode = { "n" } },
@@ -122,7 +123,7 @@ return {
     { "<leader>,", function() Snacks.picker.buffers({ on_show = function() vim.cmd.stopinsert() end}) end, desc = "Buffers" },
     { "<leader>/", function() Snacks.picker.grep() end, desc = "Grep" },
     { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
-    { "<leader>n", function() Snacks.picker.notifications() end, desc = "Notification History" },
+    { "<leader>N", function() Snacks.picker.notifications() end, desc = "Notification History" },
     -- Git
     { "<leader>gb", function() Snacks.picker.git_branches() end, desc = "Git Branches" },
     { "<leader>gl", function() Snacks.picker.git_log() end, desc = "Git Log" },

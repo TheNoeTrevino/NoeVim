@@ -2,6 +2,8 @@ local function is_dap_buffer()
   return require("cmp_dap").is_dap_buffer()
 end
 
+local sidekicknes = require("sidekick.nes")
+
 return {
   {
     "saghen/blink.compat",
@@ -155,13 +157,24 @@ return {
       },
       keymap = {
         preset = "super-tab",
-        -- ["<C-Space>"] = {
-        --   function(cmp)
-        --     cmp.show({
-        --       providers = { "copilot" },
-        --     })
-        --   end,
-        -- },
+        ["<Tab>"] = {
+          function(cmp)
+            if cmp.snippet_active() then
+              return cmp.accept()
+            else
+              return cmp.select_and_accept()
+            end
+          end,
+          "snippet_forward",
+          "fallback",
+        },
+        ["<C-Space>"] = {
+          function(cmp)
+            cmp.show({
+              providers = { "copilot" },
+            })
+          end,
+        },
         ["<C-S>"] = {
           function(cmp)
             cmp.show({
@@ -176,34 +189,23 @@ return {
             })
           end,
         },
-        -- ["<C-;>"] = {
-        --   function()
-        --     require("copilot.suggestion").accept_line()
-        --   end,
-        --   "hide",
-        -- },
-        -- ["<C-n>"] = {
-        --   function()
-        --     require("copilot.suggestion").next()
-        --   end,
-        -- },
-        -- ["<C-p>"] = {
-        --   function()
-        --     require("copilot.suggestion").prev()
-        --   end,
-        -- },
-        ["<C-e>"] = { "hide", "fallback" },
-        ["<Tab>"] = {
-          function(cmp)
-            if cmp.snippet_active() then
-              return cmp.accept()
-            else
-              return cmp.select_and_accept()
-            end
+        ["<C-;>"] = {
+          function()
+            require("copilot.suggestion").accept_line()
           end,
-          "snippet_forward",
-          "fallback",
+          "hide",
         },
+        ["<C-n>"] = {
+          function()
+            require("copilot.suggestion").next()
+          end,
+        },
+        ["<C-p>"] = {
+          function()
+            require("copilot.suggestion").prev()
+          end,
+        },
+        ["<C-e>"] = { "hide", "fallback" },
         ["<S-Tab>"] = { "snippet_backward", "fallback" },
 
         ["<Up>"] = { "select_prev", "fallback" },
