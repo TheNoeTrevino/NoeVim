@@ -38,5 +38,9 @@ vim.g.db_ui_use_nerd_fonts = 1
 vim.opt.smartindent = true
 
 vim.o.cmdheight = 0
+
 vim.cmd([[ autocmd RecordingEnter * set cmdheight=1 ]])
 vim.cmd([[ autocmd RecordingLeave * set cmdheight=0 ]])
+
+vim.highlight.priorities.semantic_tokens = 90 -- default is 125
+vim.highlight.priorities.treesitter = 200 -- default is 100
