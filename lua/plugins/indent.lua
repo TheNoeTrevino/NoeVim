@@ -21,6 +21,7 @@ return {
       exclude = {
         filetypes = {
           "Trouble",
+          "markdown",
           "alpha",
           "dashboard",
           "help",
