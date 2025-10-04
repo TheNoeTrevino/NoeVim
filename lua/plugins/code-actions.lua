@@ -13,31 +13,11 @@ return {
     --
     -- You can also set `picker = "<picker>"` without any opts.
     picker = {
-      "buffer",
-      opts = {
-        hotkeys = false, -- Enable hotkeys for quick selection of actions
-        hotkeys_mode = "text_diff_based", -- Modes for generating hotkeys
-        auto_preview = true, -- Enable or disable automatic preview
-        auto_accept = false, -- Automatically accept the selected action
-        position = "right", -- Position of the picker window
-        winborder = "single", -- Border style for picker and preview windows
-        custom_keys = {
-          { key = "m", pattern = "Fill match arms" },
-          { key = "r", pattern = "Rename.*" }, -- Lua pattern matching
-        },
-      },
+      "snacks",
     },
     backend_opts = {
       delta = {
-        -- Header from delta can be quite large.
-        -- You can remove them by setting this to the number of lines to remove
         header_lines_to_remove = 4,
-
-        -- The arguments to pass to delta
-        -- If you have a custom configuration file, you can set the path to it like so:
-        -- args = {
-        --     "--config" .. os.getenv("HOME") .. "/.config/delta/config.yml",
-        -- }
         args = {
           "--no-gitconfig",
         },
@@ -45,6 +25,11 @@ return {
     },
 
     resolve_timeout = 100, -- Timeout in milliseconds to resolve code actions
+
+    keymaps = {
+      select = { "<CR>", ";" },
+      close = { "<esc>" },
+    },
 
     signs = {
       quickfix = { "", { link = "DiagnosticWarning" } },
