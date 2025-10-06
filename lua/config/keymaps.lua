@@ -28,6 +28,46 @@ vim.keymap.del("n", "L")
 local map = LazyVim.safe_keymap_set
 
 ----------------------------------------------------------------------------
+--                          Treesitter Navigation Section
+-------------------------------------------------------------------------------
+
+local move = require("nvim-treesitter-textobjects.move")
+local swap = require("nvim-treesitter-textobjects.swap")
+
+-- custom moves
+map({ "n", "x", "o" }, "]a", function()
+  move.goto_next_start("@parameter.inner", "textobjects")
+end, { desc = "Next Parameter Start" })
+map({ "n", "x", "o" }, "]A", function()
+  move.goto_next_end("@parameter.inner", "textobjects")
+end, { desc = "Next Parameter End" })
+
+map({ "n", "x", "o" }, "[a", function()
+  move.goto_previous_start({ "@parameter.inner", "@loop.outer" }, "textobjects")
+end, { desc = "Previous Parameter Start" })
+
+map({ "n", "x", "o" }, "[A", function()
+  move.goto_previous_end("@parameter.inner", "locals")
+end, { desc = "Previous Parameter End" })
+
+-- custom swaps
+map("n", "_a", function()
+  swap.swap_next("@parameter.inner")
+end)
+
+map("n", "_A", function()
+  swap.swap_next("@parameter.inner")
+end)
+
+map("n", "_f", function()
+  swap.swap_next("@function.outer")
+end)
+
+map("n", "_F", function()
+  swap.swap_previous("@function.outer")
+end)
+
+----------------------------------------------------------------------------
 --                           Shift Navigation Section
 -------------------------------------------------------------------------------
 
@@ -57,9 +97,9 @@ map("t", "<C-;>", "<cmd>wincmd l<cr>", { desc = "Go to Right Window" })
 
 map({ "i", "n", "s" }, "<esc>", function()
   vim.cmd("noh")
-  require("copilot.suggestion").dismiss()
+  -- require("copilot.suggestion").dismiss()
   LazyVim.cmp.actions.snippet_stop()
-  vim.cmd("Sidekick nes clear")
+  -- vim.cmd("Sidekick nes clear")
   return "<esc>"
 end, { expr = true, desc = "Escape and Clear hlsearch" })
 
@@ -98,9 +138,7 @@ map("i", "<C-BS>", "<ESC>cb")
 -- wsl thing
 map("n", "<leader>dM", ":%s/\\r//")
 
-map({ "n", "x" }, "<leader>ca", function()
-  require("tiny-code-action").code_action()
-end, { noremap = true, silent = true })
+map({ "n", "x" }, "<leader>ca", "<cmd>Lspsaga code_action<cr>", { noremap = true, silent = true })
 
 map("n", "<leader>up", function()
   vim.cmd("NoNeckPain")
