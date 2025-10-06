@@ -2,7 +2,7 @@ return {
   {
     "pocco81/high-str.nvim",
     event = "VeryLazy",
-    config = {
+    opts = {
       verbosity = 0,
       saving_path = "/tmp/highstr/",
       highlight_colors = {
