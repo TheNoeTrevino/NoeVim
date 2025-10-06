@@ -2,8 +2,6 @@ local function is_dap_buffer()
   return require("cmp_dap").is_dap_buffer()
 end
 
-local sidekicknes = require("sidekick.nes")
-
 return {
   {
     "saghen/blink.compat",
@@ -131,10 +129,9 @@ return {
           elseif is_dap_buffer() then
             return { "dap", "snippets", "buffer" }
           else
-            return { "lsp", "path", "snippets", "copilot" } -- "buffer" }
+            return { "lsp", "path", "snippets" } -- "buffer", "copilot" }
           end
         end,
-        -- default = { "lsp", "copilot", "path", "snippets", "buffer", "html-css" },
         providers = {
           lsp = {
             score_offset = 100,

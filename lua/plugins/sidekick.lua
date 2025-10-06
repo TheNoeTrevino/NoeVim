@@ -1,5 +1,3 @@
-local sidekicknes = require("sidekick.nes")
-
 return {
   "folke/sidekick.nvim",
   opts = function()

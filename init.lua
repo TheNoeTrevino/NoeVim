@@ -333,8 +333,11 @@ require("mason").setup({
   },
 })
 
+-- lsp mappings
 vim.keymap.set("n", "K", function()
   vim.lsp.buf.hover({ border = "single", max_height = 25, max_width = 120 })
 end)
 
--- Hello there!
+require("inc_rename").setup({
+  input_buffer_type = "snacks",
+})
