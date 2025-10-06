@@ -165,13 +165,6 @@ return {
           "snippet_forward",
           "fallback",
         },
-        ["<C-Space>"] = {
-          function(cmp)
-            cmp.show({
-              providers = { "copilot" },
-            })
-          end,
-        },
         ["<C-S>"] = {
           function(cmp)
             cmp.show({
@@ -186,22 +179,29 @@ return {
             })
           end,
         },
-        ["<C-;>"] = {
-          function()
-            require("copilot.suggestion").accept_line()
-          end,
-          "hide",
-        },
-        ["<C-n>"] = {
-          function()
-            require("copilot.suggestion").next()
-          end,
-        },
-        ["<C-p>"] = {
-          function()
-            require("copilot.suggestion").prev()
-          end,
-        },
+        -- ["<C-Space>"] = {
+        --   function(cmp)
+        --     cmp.show({
+        --       providers = { "copilot" },
+        --     })
+        --   end,
+        -- },
+        -- ["<C-;>"] = {
+        --   function()
+        --     require("copilot.suggestion").accept_line()
+        --   end,
+        --   "hide",
+        -- },
+        -- ["<C-n>"] = {
+        --   function()
+        --     require("copilot.suggestion").next()
+        --   end,
+        -- },
+        -- ["<C-p>"] = {
+        --   function()
+        --     require("copilot.suggestion").prev()
+        --   end,
+        -- },
         ["<C-e>"] = { "hide", "fallback" },
         ["<S-Tab>"] = { "snippet_backward", "fallback" },
 
