@@ -50,7 +50,7 @@ return {
       map("n", "<leader>ghl", "<cmd>Gitsigns toggle_linehl<CR>", "Toggle Line hl")
       map("n", "<leader>ghw", "<cmd>Gitsigns toggle_word_diff<CR>", "Toggle Word Diff")
       map("n", "<leader>ghq", "<cmd>Gitsigns setqflist<CR>", "Toggle Word Diff")
-      map({ "o", "x" }, "ih", "<cmd><C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
+      map({ "o", "x" }, "ih", "<cmd>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
       end,
     },
   },
