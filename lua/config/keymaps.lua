@@ -21,6 +21,9 @@ vim.keymap.del("n", "<leader>ft")
 vim.keymap.del("n", "<leader>xl")
 vim.keymap.del("n", "<leader>xq")
 vim.keymap.del("n", "<leader>fT")
+vim.keymap.del("n", "<leader>uD")
+-- vim.keymap.del("n", "<c-/>")
+-- vim.keymap.del("t", "<c-/>")
 -- vim.keymap.del("n", "<C-F>")
 -- vim.keymap.del("n", "<C-B>")
 vim.keymap.del("n", "L")
@@ -274,6 +277,20 @@ map("n", "<C-o>", "<C-i>", { desc = "Jumplist Backwards" })
 
 -- Code Lens
 map("n", "<leader>ut", "<cmd>LenslineToggle<cr>", { desc = "Toggle Gutter" })
+
+-- Buffer diagnostics
+map("n", "<leader>uD", function()
+  vim.diagnostic.enable(not vim.diagnostic.is_enabled({ bufnr = 0 }), {
+    bufnr = 0,
+  })
+end, { desc = "Toggle Diagnostics (Buffer)" })
+
+map("n", "<leader>ub", function()
+  vim.diagnostic.enable(not vim.diagnostic.is_enabled({ bufnr = 0 }), {
+    bufnr = 0,
+  })
+  vim.cmd("lua vim.b.autoformat = not vim.b.autoformat")
+end, { desc = "Toggle Formating and Diagnotics (Buffer)" })
 
 -------------------------------------------------------------------------------
 --                           Database Section
