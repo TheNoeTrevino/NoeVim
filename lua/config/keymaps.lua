@@ -22,8 +22,8 @@ vim.keymap.del("n", "<leader>xl")
 vim.keymap.del("n", "<leader>xq")
 vim.keymap.del("n", "<leader>fT")
 vim.keymap.del("n", "<leader>uD")
--- vim.keymap.del("n", "<c-/>")
--- vim.keymap.del("t", "<c-/>")
+vim.keymap.del("n", "<c-/>")
+vim.keymap.del("t", "<c-/>")
 -- vim.keymap.del("n", "<C-F>")
 -- vim.keymap.del("n", "<C-B>")
 vim.keymap.del("n", "L")
@@ -122,6 +122,11 @@ map("t", "<C-\\>", function()
 end, { desc = "Go to Right Window" })
 
 map("n", "<c-/>", function()
+  require("sidekick.cli").toggle("claude")
+end, { desc = "Claude" })
+
+-- idk man, windows
+map("n", "", function()
   require("sidekick.cli").toggle("claude")
 end, { desc = "Claude" })
 
