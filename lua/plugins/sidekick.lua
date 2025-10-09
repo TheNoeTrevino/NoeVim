@@ -23,12 +23,12 @@ return {
         -- Options used when layout is "left"|"bottom"|"top"|"right"
         ---@type vim.api.keyset.win_config
         split = {
-          width = 180,
+          width = 100,
           height = 20,
         },
         keys = {
           hide_n = { "q", "hide", mode = "n" }, -- hide the terminal window in normal mode
-          hide_t = { "<c-t>", "hide" }, -- hide the terminal window in terminal mode
+          hide_t = { "<c-/>", "hide" }, -- hide the terminal window in terminal mode
           win_p = { "<c-w>p", "blur" }, -- leave the cli window
           prompt = { "<c-p>", "prompt" }, -- insert prompt or context
         },
@@ -37,7 +37,7 @@ return {
       ---@field backend? "tmux"|"zellij" Multiplexer backend to persist CLI sessions
       mux = {
         backend = "tmux",
-        enabled = false,
+        enabled = true,
         -- terminal: new sessions will be created for each CLI tool and shown in a Neovim terminal
         -- window: when run inside a terminal multiplexer, new sessions will be created in a new tab
         -- split: when run inside a terminal multiplexer, new sessions will be created in a new split
@@ -64,14 +64,15 @@ return {
     { "<leader>a", "", desc = "+ai", mode = { "n", "v" } },
     {
       "<leader>aa",
-      function() require("sidekick.cli").toggle("claude") end,
+      function() require("sidekick.cli").toggle() end,
       desc = "Sidekick Toggle CLI",
     },
     {
       "<leader>as",
-      function() require("sidekick.cli").select() end,
+      function()
+        require("sidekick.cli").select({ filter = { installed = true } })
+      end,
       -- Or to select only installed tools:
-      -- require("sidekick.cli").select({ filter = { installed = true } })
       desc = "Select CLI",
     },
     {

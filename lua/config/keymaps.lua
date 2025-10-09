@@ -117,9 +117,17 @@ map("t", "<C-j>", "<cmd>wincmd h<cr>", { desc = "Go to Left Window" })
 map("t", "<C-k>", "<cmd>wincmd j<cr>", { desc = "Go to Lower Window" })
 map("t", "<C-l>", "<cmd>wincmd k<cr>", { desc = "Go to Upper Window" })
 map("t", "<C-;>", "<cmd>wincmd l<cr>", { desc = "Go to Right Window" })
-map("n", "<c-t>", function()
+map("t", "<C-\\>", function()
+  vim.cmd.stopinsert()
+end, { desc = "Go to Right Window" })
+
+map("n", "<c-/>", function()
   require("sidekick.cli").toggle("claude")
 end, { desc = "Claude" })
+
+map("n", "<c-t>", function()
+  Snacks.terminal(nil, { cwd = LazyVim.root() })
+end, { desc = "Terminal (Root Dir)" })
 
 map({ "i", "n", "s" }, "<esc>", function()
   vim.cmd("noh")
@@ -281,6 +289,7 @@ map("n", "<leader>wk", "<C-w>J", { desc = "Move Bottom" })
 map("n", "<leader>wl", "<C-w>K", { desc = "Move Top" })
 map("n", "<leader>w;", "<C-w>L", { desc = "Move Right" })
 map("n", "<leader>we", "<C-w>=", { desc = "Equalize" })
+map("n", "<leader>wT", "<C-w>=", { desc = "Equalize" })
 
 map("n", "<leader>we", "<C-w>=", { desc = "Equalize" })
 
