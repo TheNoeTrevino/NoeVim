@@ -1,14 +1,62 @@
 return {
   "folke/sidekick.nvim",
-  opts = function()
-    -- Accept inline suggestions or next edits
-    LazyVim.cmp.actions.ai_nes = function()
-      local Nes = require("sidekick.nes")
-      if Nes.have() and (Nes.jump() or Nes.apply()) then
-        return true
-      end
-    end
-  end,
+  cmd = "Sidekick",
+  opts = {
+    ---@class sidekick.Config
+    cli = {
+      watch = true, -- notify Neovim of file changes done by AI CLI tools
+      ---@class sidekick.win.Opts
+      win = {
+        --- This is run when a new terminal is created, before starting it.
+        --- Here you can change window options `terminal.opts`.
+        ---@param terminal sidekick.cli.Terminal
+        config = function(terminal) end,
+        wo = {}, ---@type vim.wo
+        bo = {}, ---@type vim.bo
+        layout = "right", ---@type "float"|"left"|"bottom"|"top"|"right"
+        --- Options used when layout is "float"
+        ---@type vim.api.keyset.win_config
+        float = {
+          width = 0.9,
+          height = 0.9,
+        },
+        -- Options used when layout is "left"|"bottom"|"top"|"right"
+        ---@type vim.api.keyset.win_config
+        split = {
+          width = 180,
+          height = 20,
+        },
+        keys = {
+          hide_n = { "q", "hide", mode = "n" }, -- hide the terminal window in normal mode
+          hide_t = { "<c-t>", "hide" }, -- hide the terminal window in terminal mode
+          win_p = { "<c-w>p", "blur" }, -- leave the cli window
+          prompt = { "<c-p>", "prompt" }, -- insert prompt or context
+        },
+      },
+      ---@class sidekick.cli.Mux
+      ---@field backend? "tmux"|"zellij" Multiplexer backend to persist CLI sessions
+      mux = {
+        backend = "tmux",
+        enabled = false,
+        -- terminal: new sessions will be created for each CLI tool and shown in a Neovim terminal
+        -- window: when run inside a terminal multiplexer, new sessions will be created in a new tab
+        -- split: when run inside a terminal multiplexer, new sessions will be created in a new split
+        -- NOTE: zellij only supports `terminal`
+        create = "terminal", ---@type "terminal"|"window"|"split"
+        split = {
+          vertical = true, -- vertical or horizontal split
+          size = 0.5, -- size of the split (0-1 for percentage)
+        },
+      },
+    },
+    copilot = {
+      -- track copilot's status with `didChangeStatus`
+      status = {
+        enabled = true,
+      },
+    },
+    debug = false, -- enable debug logging
+  },
   -- stylua: ignore
   keys = {
     -- nes is also useful in normal mode
@@ -16,7 +64,7 @@ return {
     { "<leader>a", "", desc = "+ai", mode = { "n", "v" } },
     {
       "<leader>aa",
-      function() require("sidekick.cli").toggle() end,
+      function() require("sidekick.cli").toggle("claude") end,
       desc = "Sidekick Toggle CLI",
     },
     {
