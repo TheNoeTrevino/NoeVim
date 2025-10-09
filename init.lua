@@ -314,17 +314,6 @@ vim.cmd(
   )
 )
 
-local keys = require("lazyvim.plugins.lsp.keymaps").get()
-keys[#keys + 1] = { "<C-k>", false, mode = "i" }
-keys[#keys + 1] = { "<leader>ss", false, mode = "n" }
-keys[#keys + 1] = { "<leader>sS", false, mode = "n" }
-keys[#keys + 1] = { "gr", false, mode = "n" }
-keys[#keys + 1] = { "gI", false, mode = "n" }
-keys[#keys + 1] = { "gY", false, mode = "n" }
-keys[#keys + 1] = { "K", false, mode = "n" }
-keys[#keys + 1] = { "<leader>ca", false, mode = "n" }
-keys[#keys + 1] = { "<leader>ca", false, mode = "v" }
-
 -- add this when you wanna install rosalyn
 require("mason").setup({
   registries = {
@@ -332,11 +321,6 @@ require("mason").setup({
     "github:Crashdummyy/mason-registry",
   },
 })
-
--- lsp mappings
-vim.keymap.set("n", "K", function()
-  vim.lsp.buf.hover({ border = "single", max_height = 25, max_width = 120 })
-end)
 
 require("inc_rename").setup({
   input_buffer_type = "snacks",

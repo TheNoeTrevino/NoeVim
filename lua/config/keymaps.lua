@@ -30,7 +30,27 @@ vim.keymap.del("n", "L")
 
 local map = LazyVim.safe_keymap_set
 
-----------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+--                          LSP Section
+-------------------------------------------------------------------------------
+
+local keys = require("lazyvim.plugins.lsp.keymaps").get()
+keys[#keys + 1] = { "<C-k>", false, mode = "i" }
+keys[#keys + 1] = { "<leader>ss", false, mode = "n" }
+keys[#keys + 1] = { "<leader>sS", false, mode = "n" }
+keys[#keys + 1] = { "gr", false, mode = "n" }
+keys[#keys + 1] = { "gI", false, mode = "n" }
+keys[#keys + 1] = { "gY", false, mode = "n" }
+keys[#keys + 1] = { "<leader>ca", false, mode = "v" }
+keys[#keys + 1] = { "K", false, mode = "n" }
+keys[#keys + 1] = { "<leader>ca", false, mode = "n" }
+
+-- lsp mappings
+vim.keymap.set("n", "K", function()
+  vim.lsp.buf.hover({ border = "single", max_height = 25, max_width = 120 })
+end)
+
+-------------------------------------------------------------------------------
 --                          Treesitter Navigation Section
 -------------------------------------------------------------------------------
 
@@ -70,7 +90,7 @@ map("n", "_F", function()
   swap.swap_previous("@function.outer")
 end)
 
-----------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 --                           Shift Navigation Section
 -------------------------------------------------------------------------------
 
