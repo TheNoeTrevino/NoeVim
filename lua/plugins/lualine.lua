@@ -60,35 +60,6 @@ return {
               hint = icons.diagnostics.Hint,
             },
           },
-          {
-            function()
-              local ok, api = pcall(require, "copilot.api")
-              if not ok or not api.status or not api.status.data then
-                return ""
-              end
-
-              local status = api.status.data.status
-              return (status == "InProgress" and "󰪞") or (status == "Warning" and " ") or " "
-            end,
-
-            cond = function()
-              local ok, clients = pcall(function()
-                return require("vim.lsp").get_active_clients({ name = "copilot" })
-              end)
-              return ok and clients and #clients > 0
-            end,
-            color = function()
-              local ok, api = pcall(require, "copilot.api")
-              if not ok or not api.status or not api.status.data then
-                return {}
-              end
-
-              local status = api.status.data.status
-              return {
-                fg = (status == "InProgress" and "#cba6f7") or (status == "Warning" and "#f38ba8") or "#a6e3a1",
-              }
-            end,
-          },
           -- stylua: ignore start
           {
             function() return "  " .. require("dap").status() end,
