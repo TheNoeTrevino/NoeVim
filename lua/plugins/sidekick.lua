@@ -3,6 +3,7 @@ return {
   cmd = "Sidekick",
   opts = {
     ---@class sidekick.Config
+    nes = { enabled = false },
     cli = {
       watch = true, -- notify Neovim of file changes done by AI CLI tools
       ---@class sidekick.win.Opts
