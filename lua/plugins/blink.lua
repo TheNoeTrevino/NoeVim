@@ -12,7 +12,7 @@ return {
   {
     "saghen/blink.cmp",
     event = "VeryLazy",
-    dependencies = { "rcarriga/cmp-dap" },
+    dependencies = { "rcarriga/cmp-dap", "milanglacier/minuet-ai.nvim" },
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
@@ -129,10 +129,19 @@ return {
           elseif is_dap_buffer() then
             return { "dap", "snippets", "buffer" }
           else
-            return { "lsp", "path", "snippets" } -- "buffer", "copilot" }
+            return { "lsp", "path", "snippets", "minuet" } -- "buffer", "copilot" }
           end
         end,
         providers = {
+          minuet = {
+            name = "minuet",
+            module = "minuet.blink",
+            async = true,
+            -- Should match minuet.config.request_timeout * 1000,
+            -- since minuet.config.request_timeout is in seconds
+            timeout_ms = 3000,
+            score_offset = 50, -- Gives minuet higher priority among suggestions
+          },
           lsp = {
             score_offset = 100,
             async = true,
