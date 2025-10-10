@@ -36,6 +36,7 @@ return {
       })
     end,
   },
+  "tpope/vim-fugitive",
   {
     "vyfor/cord.nvim",
     event = "VeryLazy",
