@@ -12,7 +12,7 @@ return {
   {
     "saghen/blink.cmp",
     event = "VeryLazy",
-    dependencies = { "rcarriga/cmp-dap", "milanglacier/minuet-ai.nvim" },
+    dependencies = { "rcarriga/cmp-dap", "milanglacier/minuet-ai.nvim", "giuxtaposition/blink-cmp-copilot" },
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
@@ -188,29 +188,29 @@ return {
             })
           end,
         },
-        -- ["<C-Space>"] = {
-        --   function(cmp)
-        --     cmp.show({
-        --       providers = { "copilot" },
-        --     })
-        --   end,
-        -- },
-        -- ["<C-;>"] = {
-        --   function()
-        --     require("copilot.suggestion").accept_line()
-        --   end,
-        --   "hide",
-        -- },
-        -- ["<C-n>"] = {
-        --   function()
-        --     require("copilot.suggestion").next()
-        --   end,
-        -- },
-        -- ["<C-p>"] = {
-        --   function()
-        --     require("copilot.suggestion").prev()
-        --   end,
-        -- },
+        ["<C-Space>"] = {
+          function(cmp)
+            cmp.show({
+              providers = { "copilot" },
+            })
+          end,
+        },
+        ["<C-;>"] = {
+          function()
+            require("copilot.suggestion").accept_line()
+          end,
+          "hide",
+        },
+        ["<C-n>"] = {
+          function()
+            require("copilot.suggestion").next()
+          end,
+        },
+        ["<C-p>"] = {
+          function()
+            require("copilot.suggestion").prev()
+          end,
+        },
         ["<C-e>"] = { "hide", "fallback" },
         ["<S-Tab>"] = { "snippet_backward", "fallback" },
 
