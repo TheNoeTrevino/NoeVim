@@ -294,7 +294,7 @@ map("n", "<leader>wk", "<C-w>J", { desc = "Move Bottom" })
 map("n", "<leader>wl", "<C-w>K", { desc = "Move Top" })
 map("n", "<leader>w;", "<C-w>L", { desc = "Move Right" })
 map("n", "<leader>we", "<C-w>=", { desc = "Equalize" })
-map("n", "<leader>wT", "<C-w>=", { desc = "Equalize" })
+map("n", "<leader>wT", "<C-w>T", { desc = "Split Into Tab" })
 
 map("n", "<leader>we", "<C-w>=", { desc = "Equalize" })
 

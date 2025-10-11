@@ -1,3 +1,4 @@
 return {
-  { "TheNoeTrevino/roids.nvim" },
+  -- { "TheNoeTrevino/roids.nvim" },
+  -- TODO: this gives a parser error
 }
