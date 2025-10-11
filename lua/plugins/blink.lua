@@ -129,7 +129,7 @@ return {
           elseif is_dap_buffer() then
             return { "dap", "snippets", "buffer" }
           else
-            return { "lsp", "path", "snippets", "minuet" } -- "buffer", "copilot" }
+            return { "lsp", "path", "snippets", "copilot" } -- "buffer" }
           end
         end,
         providers = {
@@ -152,13 +152,13 @@ return {
             score_offset = 50,
           },
           dap = { name = "dap", module = "blink.compat.source", score_offset = 200 },
-          -- copilot = {
-          --   name = "copilot",
-          --   module = "blink-cmp-copilot",
-          --   kind = "Copilot",
-          --   score_offset = 10,
-          --   async = true,
-          -- },
+          copilot = {
+            name = "copilot",
+            module = "blink-cmp-copilot",
+            kind = "Copilot",
+            score_offset = 10,
+            async = true,
+          },
         },
       },
       keymap = {
