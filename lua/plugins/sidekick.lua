@@ -3,7 +3,7 @@ return {
   cmd = "Sidekick",
   opts = {
     ---@class sidekick.Config
-    nes = { enabled = false },
+    nes = { enabled = true },
     cli = {
       watch = true, -- notify Neovim of file changes done by AI CLI tools
       ---@class sidekick.win.Opts
@@ -32,6 +32,14 @@ return {
           hide_t = { "<c-/>", "hide" }, -- hide the terminal window in terminal mode
           win_p = { "<c-w>p", "blur" }, -- leave the cli window
           prompt = { "<c-p>", "prompt" }, -- insert prompt or context
+        },
+      },
+      tools = {
+        ["qwen2.5-coder:7b"] = {
+          cmd = { "aider", "--model", "ollama/qwen2.5-coder:7b" },
+        },
+        ["qwen2.5-coder:32b"] = {
+          cmd = { "aider", "--model", "ollama/qwen2.5-coder:32b" },
         },
       },
       ---@class sidekick.cli.Mux
