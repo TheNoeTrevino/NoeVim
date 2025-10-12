@@ -72,6 +72,7 @@ return {
             auto_show = true, -- Inherits from top level `completion.menu.auto_show` config when not set
             draw = {
               columns = { { "label", "label_description", gap = 1 } },
+              reverse = true,
             },
           },
         },
