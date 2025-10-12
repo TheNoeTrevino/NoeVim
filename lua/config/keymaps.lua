@@ -24,8 +24,6 @@ vim.keymap.del("n", "<leader>fT")
 vim.keymap.del("n", "<leader>uD")
 vim.keymap.del("n", "<c-/>")
 vim.keymap.del("t", "<c-/>")
--- vim.keymap.del("n", "<C-F>")
--- vim.keymap.del("n", "<C-B>")
 vim.keymap.del("n", "L")
 
 local map = LazyVim.safe_keymap_set
@@ -276,11 +274,19 @@ map("n", "<leader>xb", "<cmd>Trouble diagnostics toggle filter.buf=0 focus=true<
 
 -- Navigate Between Neovim and Kitty splits
 -- Disable the default mappings from vim-kitty-navigator
-vim.g.kitty_navigator_no_mappings = 1
-map("n", "<C-j>", "<c-w>h", { noremap = true, silent = true })
-map("n", "<C-k>", "<c-w>j", { noremap = true, silent = true })
-map("n", "<C-l>", "<c-w>k", { noremap = true, silent = true })
-map("n", "<C-;>", "<c-w>l", { noremap = true, silent = true })
+if vim.env.TMUX then
+  vim.notify("tmux")
+  map("n", "<C-j>", "<cmd><C-U>TmuxNavigateLeft<cr>", { noremap = true, silent = true })
+  map("n", "<C-k>", "<cmd>TmuxNavigateDown<CR>", { noremap = true, silent = true })
+  map("n", "<C-l>", "<cmd>TmuxNavigateUp<CR>", { noremap = true, silent = true })
+  map("n", "<C-;>", "<cmd>TmuxNavigateRight<CR>", { noremap = true, silent = true })
+else
+  vim.notify("no")
+  map("n", "<C-j>", "<c-w>h", { noremap = true, silent = true })
+  map("n", "<C-k>", "<c-w>j", { noremap = true, silent = true })
+  map("n", "<C-l>", "<c-w>k", { noremap = true, silent = true })
+  map("n", "<C-;>", "<c-w>l", { noremap = true, silent = true })
+end
 
 -- Resize with arrows
 map("n", "<Up>", "<cmd>resize +3<cr>", { desc = "Increase Window Height" })

@@ -101,10 +101,18 @@ vim.api.nvim_create_user_command("NormMap", function()
   map("t", "<C-k>", "<cmd>wincmd k<cr>", { desc = "Go to Upper Window" })
   map("t", "<C-l>", "<cmd>wincmd l<cr>", { desc = "Go to Right Window" })
 
-  map("n", "<C-h>", ":KittyNavigateLeft<CR>", { noremap = true, silent = true })
-  map("n", "<C-j>", ":KittyNavigateDown<CR>", { noremap = true, silent = true })
-  map("n", "<C-k>", ":KittyNavigateUp<CR>", { noremap = true, silent = true })
-  map("n", "<C-l>", ":KittyNavigateRight<CR>", { noremap = true, silent = true })
+  -- Use vim-tmux-navigator if in tmux, otherwise use kitty navigator
+  if vim.env.TMUX then
+    map("n", "<C-h>", "<cmd>TmuxNavigateLeft<CR>", { noremap = true, silent = true })
+    map("n", "<C-j>", "<cmd>TmuxNavigateDown<CR>", { noremap = true, silent = true })
+    map("n", "<C-k>", "<cmd>TmuxNavigateUp<CR>", { noremap = true, silent = true })
+    map("n", "<C-l>", "<cmd>TmuxNavigateRight<CR>", { noremap = true, silent = true })
+  else
+    map("n", "<C-h>", ":KittyNavigateLeft<CR>", { noremap = true, silent = true })
+    map("n", "<C-j>", ":KittyNavigateDown<CR>", { noremap = true, silent = true })
+    map("n", "<C-k>", ":KittyNavigateUp<CR>", { noremap = true, silent = true })
+    map("n", "<C-l>", ":KittyNavigateRight<CR>", { noremap = true, silent = true })
+  end
 end, {})
 
 vim.api.nvim_create_user_command("NoeMap", function()
@@ -131,10 +139,18 @@ vim.api.nvim_create_user_command("NoeMap", function()
   map("t", "<C-l>", "<cmd>wincmd k<cr>", { desc = "Go to Upper Window" })
   map("t", "<C-;>", "<cmd>wincmd l<cr>", { desc = "Go to Right Window" })
 
-  map("n", "<C-j>", ":KittyNavigateLeft<CR>", { noremap = true, silent = true })
-  map("n", "<C-k>", ":KittyNavigateDown<CR>", { noremap = true, silent = true })
-  map("n", "<C-l>", ":KittyNavigateUp<CR>", { noremap = true, silent = true })
-  map("n", "<C-;>", ":KittyNavigateRight<CR>", { noremap = true, silent = true })
+  -- Use vim-tmux-navigator if in tmux, otherwise use kitty navigator
+  if vim.env.TMUX then
+    map("n", "<C-j>", "<cmd>TmuxNavigateLeft<CR>", { noremap = true, silent = true })
+    map("n", "<C-k>", "<cmd>TmuxNavigateDown<CR>", { noremap = true, silent = true })
+    map("n", "<C-l>", "<cmd>TmuxNavigateUp<CR>", { noremap = true, silent = true })
+    map("n", "<C-;>", "<cmd>TmuxNavigateRight<CR>", { noremap = true, silent = true })
+  else
+    map("n", "<C-j>", ":KittyNavigateLeft<CR>", { noremap = true, silent = true })
+    map("n", "<C-k>", ":KittyNavigateDown<CR>", { noremap = true, silent = true })
+    map("n", "<C-l>", ":KittyNavigateUp<CR>", { noremap = true, silent = true })
+    map("n", "<C-;>", ":KittyNavigateRight<CR>", { noremap = true, silent = true })
+  end
 end, {})
 
 vim.api.nvim_create_user_command("ToggleGutter", function()
