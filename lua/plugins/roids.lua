@@ -1,4 +1,4 @@
 return {
-  -- { "TheNoeTrevino/roids.nvim" },
-  -- TODO: this gives a parser error
+  { "TheNoeTrevino/roids.nvim" },
+  -- { dir = "~/roids.nvim/" },
 }
