@@ -32,6 +32,11 @@ return {
           hide_t = { "<c-/>", "hide" }, -- hide the terminal window in terminal mode
           win_p = { "<c-w>p", "blur" }, -- leave the cli window
           prompt = { "<c-p>", "prompt" }, -- insert prompt or context
+
+          nav_left = { "<c-j>", "nav_left", expr = true, desc = "navigate to the left window" },
+          nav_down = { "<c-k>", "nav_down", expr = true, desc = "navigate to the below window" },
+          nav_up = { "<c-l>", "nav_up", expr = true, desc = "navigate to the above window" },
+          nav_right = { "<c-;>", "nav_right", expr = true, desc = "navigate to the right window" },
         },
       },
       tools = {

@@ -25,9 +25,9 @@ return {
           left_margin = 0,
           min_width = 0,
           border = "thick",
-          language_border = " ",
-          language_left = "██", --
-          language_right = "█",
+          -- language_border = " ",
+          -- language_left = "██", --
+          -- language_right = "█",
           above = "▄",
           below = "▀",
           inline = true,
