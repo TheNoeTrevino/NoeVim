@@ -282,13 +282,17 @@ map("n", "<leader>xb", "<cmd>Trouble diagnostics toggle filter.buf=0 focus=true<
 -- Navigate Between Neovim and Kitty splits
 -- Disable the default mappings from vim-kitty-navigator
 if vim.env.TMUX then
-  vim.notify("tmux")
-  map("n", "<C-j>", "<cmd><C-U>TmuxNavigateLeft<cr>", { noremap = true, silent = true })
-  map("n", "<C-k>", "<cmd>TmuxNavigateDown<CR>", { noremap = true, silent = true })
-  map("n", "<C-l>", "<cmd>TmuxNavigateUp<CR>", { noremap = true, silent = true })
-  map("n", "<C-;>", "<cmd>TmuxNavigateRight<CR>", { noremap = true, silent = true })
+  -- TODO: why does this not work?
+  -- map("n", "<C-j>", "<cmd>TmuxNavigateLeft<cr>", { noremap = true, silent = true })
+  -- map("n", "<C-k>", "<cmd>TmuxNavigateDown<CR>", { noremap = true, silent = true })
+  -- map("n", "<C-l>", "<cmd>TmuxNavigateUp<CR>", { noremap = true, silent = true })
+  -- map("n", "<C-;>", "<cmd>TmuxNavigateRight<CR>", { noremap = true, silent = true })
+
+  map("n", "<C-j>", "<c-w>h", { noremap = true, silent = true })
+  map("n", "<C-k>", "<c-w>j", { noremap = true, silent = true })
+  map("n", "<C-l>", "<c-w>k", { noremap = true, silent = true })
+  map("n", "<C-;>", "<c-w>l", { noremap = true, silent = true })
 else
-  vim.notify("no")
   map("n", "<C-j>", "<c-w>h", { noremap = true, silent = true })
   map("n", "<C-k>", "<c-w>j", { noremap = true, silent = true })
   map("n", "<C-l>", "<c-w>k", { noremap = true, silent = true })
