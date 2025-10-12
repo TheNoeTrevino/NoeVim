@@ -22,8 +22,10 @@ vim.keymap.del("n", "<leader>xl")
 vim.keymap.del("n", "<leader>xq")
 vim.keymap.del("n", "<leader>fT")
 vim.keymap.del("n", "<leader>uD")
-vim.keymap.del("n", "<c-/>")
 vim.keymap.del("t", "<c-/>")
+vim.keymap.del("n", "<c-/>")
+vim.keymap.del("t", "<c-_>")
+vim.keymap.del("n", "<c-_>")
 vim.keymap.del("n", "L")
 
 local map = LazyVim.safe_keymap_set
@@ -74,19 +76,19 @@ end, { desc = "Previous Parameter End" })
 -- custom swaps
 map("n", "_a", function()
   swap.swap_next("@parameter.inner")
-end)
+end, { desc = "Swap with Next Param" })
 
 map("n", "_A", function()
-  swap.swap_next("@parameter.inner")
-end)
+  swap.swap_previous("@parameter.inner")
+end, { desc = "Swap with Prev Param" })
 
 map("n", "_f", function()
   swap.swap_next("@function.outer")
-end)
+end, { desc = "Swap with Next Func" })
 
 map("n", "_F", function()
   swap.swap_previous("@function.outer")
-end)
+end, { desc = "Swap with Next Func" })
 
 -------------------------------------------------------------------------------
 --                           Shift Navigation Section
@@ -120,6 +122,11 @@ map("t", "<C-\\>", function()
 end, { desc = "Go to Right Window" })
 
 map("n", "<c-/>", function()
+  require("sidekick.cli").toggle("claude")
+end, { desc = "Claude" })
+
+-- TMUX
+map("n", "<c-_>", function()
   require("sidekick.cli").toggle("claude")
 end, { desc = "Claude" })
 

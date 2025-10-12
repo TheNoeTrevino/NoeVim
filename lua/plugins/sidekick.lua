@@ -30,6 +30,7 @@ return {
         keys = {
           hide_n = { "q", "hide", mode = "n" }, -- hide the terminal window in normal mode
           hide_t = { "<c-/>", "hide" }, -- hide the terminal window in terminal mode
+          hide_t = { "<c-_>", "hide" }, -- tmux
           win_p = { "<c-w>p", "blur" }, -- leave the cli window
           prompt = { "<c-p>", "prompt" }, -- insert prompt or context
 
