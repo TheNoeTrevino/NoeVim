@@ -88,6 +88,9 @@ return {
         nerd_font_variant = "mono",
       },
       completion = {
+        trigger = {
+          show_on_backspace = true,
+        },
         list = {
           selection = {
             preselect = false,
