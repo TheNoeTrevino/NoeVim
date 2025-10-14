@@ -5,6 +5,7 @@ return {
     inlay_hints = { enabled = false },
   },
   servers = {
+    copilot = { enabled = true },
     omnisharp = {
       enabled = false,
       mason = false,

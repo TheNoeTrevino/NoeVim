@@ -80,7 +80,7 @@ return {
     {
       "<leader>aa",
       function() require("sidekick.cli").toggle() end,
-      desc = "Sidekick Toggle CLI",
+      desc = "Toggle CLI",
     },
     {
       "<leader>as",
@@ -106,7 +106,7 @@ return {
       "<leader>ap",
       function() require("sidekick.cli").prompt() end,
       mode = { "n", "x" },
-      desc = "Sidekick Select Prompt",
+      desc = "Select Prompt",
     },
     {
       "<c-.>",
@@ -126,7 +126,7 @@ return {
         -- if there is a next edit, jump to it, otherwise apply it if any
         if require("sidekick").nes_jump_or_apply() then
           return -- jumped or applied
-        else 
+        else
           vim.cmd("Sidekick nes update")
         end
 
@@ -141,7 +141,7 @@ return {
       function()
         vim.cmd("Sidekick nes update")
       end,
-      desc = "Sidekick NES Update",
+      desc = "NES Update",
     },
     {
       "<leader>nt",
