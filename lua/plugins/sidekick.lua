@@ -75,7 +75,6 @@ return {
   -- stylua: ignore
   keys = {
     -- nes is also useful in normal mode
-    { "<tab>", LazyVim.cmp.map({ "ai_nes" }, "<tab>"), mode = { "n" }, expr = true },
     { "<leader>a", "", desc = "+ai", mode = { "n", "v" } },
     {
       "<leader>aa",
@@ -132,7 +131,7 @@ return {
 
         return "<tab>"
       end,
-      mode = {  "n" },
+      mode = { "i", "n" },
       expr = true,
       desc = "Goto/Apply Next Edit Suggestion",
     },

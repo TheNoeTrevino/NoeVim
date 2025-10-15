@@ -46,10 +46,10 @@ return {
       map("n", "<leader>ghb", "<cmd>Gitsigns toggle_current_line_blame<CR>", "Blame Current Line")
       map("n", "<leader>ghB", function() gs.blame() end, "Blame Buffer")
       map("n", "<leader>ghd", gs.diffthis, "Diff This")
-      map("n", "<leader>ghD", "<cmd>Gitsigns toggle_deleted<CR>", "Toggle Deleted")
+      map("n", "<leader>ghD", "<cmd>Gitsigns toggle_deleted<CR>", "Toggle Deleted Diff")
       map("n", "<leader>ghl", "<cmd>Gitsigns toggle_linehl<CR>", "Toggle Line hl")
       map("n", "<leader>ghw", "<cmd>Gitsigns toggle_word_diff<CR>", "Toggle Word Diff")
-      map("n", "<leader>ghq", "<cmd>Gitsigns setqflist<CR>", "Toggle Word Diff")
+      map("n", "<leader>ghq", "<cmd>Gitsigns setqflist<CR>", "QF Diffs")
       map({ "o", "x" }, "ih", "<cmd>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
       end,
     },
@@ -63,6 +63,12 @@ return {
         keymaps = {
           disable_defaults = false, -- Disable the default keymaps
           file_panel = {
+            {
+              "j",
+              "k",
+              actions.next_entry,
+              { desc = "Bring the cursor to the next file entry" },
+            },
             {
               "n",
               "k",
