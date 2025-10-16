@@ -163,3 +163,8 @@ Systemd
 Tmux
 hjkl
 jkl
+zsh
+Fzf
+fd
+lazygit
+eza
