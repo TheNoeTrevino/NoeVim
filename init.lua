@@ -1,3 +1,17 @@
+if vim.env.PROF then
+  -- example for lazy.nvim
+  -- change this to the correct path for your plugin manager
+  local snacks = vim.fn.stdpath("data") .. "/lazy/snacks.nvim"
+  vim.opt.rtp:append(snacks)
+  require("snacks.profiler").startup({
+    startup = {
+      event = "VimEnter", -- stop profiler on this event. Defaults to `VimEnter`
+      -- event = "UIEnter",
+      -- event = "VeryLazy",
+    },
+  })
+end
+
 local h = vim.api.nvim_set_hl
 
 require("config.lazy")
@@ -260,44 +274,44 @@ vim.cmd(
 )
 
 -- add this when you wanna install rosalyn
-require("mason").setup({
-  registries = {
-    "github:mason-org/mason-registry",
-    "github:Crashdummyy/mason-registry",
-  },
-})
-
+-- require("mason").setup({
+--   registries = {
+--     "github:mason-org/mason-registry",
+--     "github:Crashdummyy/mason-registry",
+--   },
+-- })
+--
 require("inc_rename").setup({
   input_buffer_type = "snacks",
 })
-
-local minuet = require("minuet")
-minuet.setup({
-  provider = "claude",
-})
-
+--
+-- local minuet = require("minuet")
+-- minuet.setup({
+--   provider = "claude",
+-- })
+--
 --makes a function that says hello
-require("blink-cmp").setup({
-  keymap = {
-    -- Manually invoke minuet completion.
-    ["<c-y>"] = minuet.make_blink_map(),
-  },
-  sources = {
-    -- Enable minuet for autocomplete
-    default = { "lsp", "path", "buffer", "snippets", "minuet" },
-    -- For manual completion only, remove 'minuet' from default
-    providers = {
-      minuet = {
-        name = "minuet",
-        module = "minuet.blink",
-        async = true,
-        -- Should match minuet.config.request_timeout * 1000,
-        -- since minuet.config.request_timeout is in seconds
-        timeout_ms = 3000,
-        score_offset = 50, -- Gives minuet higher priority among suggestions
-      },
-    },
-  },
-  -- Recommended to avoid unnecessary request
-  completion = { trigger = { prefetch_on_insert = false } },
-})
+-- require("blink-cmp").setup({
+--   keymap = {
+--     -- Manually invoke minuet completion.
+--     ["<c-y>"] = minuet.make_blink_map(),
+--   },
+--   sources = {
+--     -- Enable minuet for autocomplete
+--     default = { "lsp", "path", "buffer", "snippets", "minuet" },
+--     -- For manual completion only, remove 'minuet' from default
+--     providers = {
+--       minuet = {
+--         name = "minuet",
+--         module = "minuet.blink",
+--         async = true,
+--         -- Should match minuet.config.request_timeout * 1000,
+--         -- since minuet.config.request_timeout is in seconds
+--         timeout_ms = 3000,
+--         score_offset = 50, -- Gives minuet higher priority among suggestions
+--       },
+--     },
+--   },
+--   -- Recommended to avoid unnecessary request
+--   completion = { trigger = { prefetch_on_insert = false } },
+-- })
