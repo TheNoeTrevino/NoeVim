@@ -64,9 +64,9 @@ return {
           disable_defaults = false, -- Disable the default keymaps
           file_panel = {
             {
+              "n",
               "j",
-              "k",
-              actions.next_entry,
+              actions.close_fold,
               { desc = "Bring the cursor to the next file entry" },
             },
             {
