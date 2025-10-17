@@ -35,7 +35,7 @@ return {
   },
   keys = function()
     return {
-      { "<leader>e", "<cmd>Neotree toggle<cr>", desc = "Explorer NeoTree (Root Dir)", remap = true },
+      { "<leader>e", "<cmd>Neotree reveal_force_cwd toggle<cr>", desc = "Explorer NeoTree (Root Dir)", remap = true },
       {
         "<leader>E",
         function()
