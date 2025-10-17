@@ -3,7 +3,6 @@ return {
   -- event = "UIEnter",
   cmd = "Neotree",
   opts = {
-    add_blank_line_at_top = true,
     popup_border_style = "single",
     source_selector = {
       winbar = true,
@@ -36,7 +35,17 @@ return {
   },
   keys = function()
     return {
-      { "<leader>e", "<cmd>Neotree reveal_force_cwd toggle<cr>", desc = "Explorer NeoTree (Root Dir)", remap = true },
+      { "<leader>e", "<cmd>Neotree toggle<cr>", desc = "Explorer NeoTree (Root Dir)", remap = true },
+      {
+        "<leader>E",
+        function()
+          vim.cmd("Neotree position=left git_status selector=false toggle")
+          vim.cmd("split")
+          vim.cmd("Neotree position=left buffers selector=false toggle")
+        end,
+        desc = "Git Status + Buffers Split",
+        remap = true,
+      },
     }
   end,
 }
