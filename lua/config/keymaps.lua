@@ -113,17 +113,15 @@ map("v", "<A-l>", ":m '<-2<cr>gv=gv", { desc = "Move Up" })
 map("v", "<A-k>", ":m '>+1<cr>gv=gv", { desc = "Move Down" })
 
 -- Terminal Mappings
+map("i", "<C-j>", function()
+  vim.cmd.stopinsert()
+  vim.cmd("wincmd h")
+end, { desc = "Go to Left Window" })
+
 map("t", "<C-j>", "<cmd>wincmd h<cr>", { desc = "Go to Left Window" })
 map("t", "<C-k>", "<cmd>wincmd j<cr>", { desc = "Go to Lower Window" })
 map("t", "<C-l>", "<cmd>wincmd k<cr>", { desc = "Go to Upper Window" })
 map("t", "<C-;>", "<cmd>wincmd l<cr>", { desc = "Go to Right Window" })
-map("t", "<C-\\>", function()
-  vim.cmd.stopinsert()
-end, { desc = "Go to Right Window" })
-
-map("n", "<c-/>", function()
-  require("sidekick.cli").toggle("claude")
-end, { desc = "Claude" })
 
 -- TMUX
 map("n", "<c-_>", function()
@@ -135,7 +133,7 @@ map("n", "", function()
   require("sidekick.cli").toggle("claude")
 end, { desc = "Claude" })
 
-map("n", "<c-t>", function()
+map({ "n", "t" }, "<c-\\>", function()
   Snacks.terminal(nil, { cwd = LazyVim.root() })
 end, { desc = "Terminal (Root Dir)" })
 
@@ -322,7 +320,6 @@ map("n", "<c-p>", "<cmd>bp<cr>")
 --                           Jumplist Section
 -------------------------------------------------------------------------------
 
-map("n", "\\", "<C-o>", { desc = "Jumplist Forwards" })
 map("n", "<C-o>", "<C-i>", { desc = "Jumplist Backwards" })
 
 -------------------------------------------------------------------------------
