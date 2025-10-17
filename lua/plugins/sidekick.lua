@@ -24,7 +24,7 @@ return {
         -- Options used when layout is "left"|"bottom"|"top"|"right"
         ---@type vim.api.keyset.win_config
         split = {
-          width = 100,
+          width = 80,
           height = 20,
         },
         keys = {
@@ -57,7 +57,7 @@ return {
         -- window: when run inside a terminal multiplexer, new sessions will be created in a new tab
         -- split: when run inside a terminal multiplexer, new sessions will be created in a new split
         -- NOTE: zellij only supports `terminal`
-        create = "terminal", ---@type "terminal"|"window"|"split"
+        create = "split", ---@type "terminal"|"window"|"split"
         split = {
           vertical = true, -- vertical or horizontal split
           size = 0.5, -- size of the split (0-1 for percentage)
