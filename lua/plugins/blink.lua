@@ -92,7 +92,7 @@ return {
         },
         list = {
           selection = {
-            preselect = false,
+            preselect = true,
             auto_insert = false,
           },
         },
@@ -116,7 +116,7 @@ return {
         ghost_text = {
           enabled = true,
           show_with_selection = true,
-          show_without_selection = false,
+          show_without_selection = true,
           show_with_menu = true,
           show_without_menu = true,
         },
@@ -159,7 +159,7 @@ return {
             name = "copilot",
             module = "blink-cmp-copilot",
             kind = "Copilot",
-            score_offset = 10,
+            score_offset = 150,
             async = true,
           },
         },

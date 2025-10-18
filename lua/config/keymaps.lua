@@ -112,16 +112,16 @@ map("i", "<A-k>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move Down" })
 map("v", "<A-l>", ":m '<-2<cr>gv=gv", { desc = "Move Up" })
 map("v", "<A-k>", ":m '>+1<cr>gv=gv", { desc = "Move Down" })
 
--- Terminal Mappings
-map("i", "<C-j>", function()
-  vim.cmd.stopinsert()
-  vim.cmd("wincmd h")
-end, { desc = "Go to Left Window" })
-
-map("t", "<C-j>", "<cmd>wincmd h<cr>", { desc = "Go to Left Window" })
-map("t", "<C-k>", "<cmd>wincmd j<cr>", { desc = "Go to Lower Window" })
-map("t", "<C-l>", "<cmd>wincmd k<cr>", { desc = "Go to Upper Window" })
-map("t", "<C-;>", "<cmd>wincmd l<cr>", { desc = "Go to Right Window" })
+-- -- Terminal Mappings
+-- map("i", "<C-j>", function()
+--   vim.cmd.stopinsert()
+--   vim.cmd("wincmd h")
+-- end, { desc = "Go to Left Window" })
+--
+-- map("t", "<C-j>", "<cmd>wincmd h<cr>", { desc = "Go to Left Window" })
+-- map("t", "<C-k>", "<cmd>wincmd j<cr>", { desc = "Go to Lower Window" })
+-- map("t", "<C-l>", "<cmd>wincmd k<cr>", { desc = "Go to Upper Window" })
+-- map("t", "<C-;>", "<cmd>wincmd l<cr>", { desc = "Go to Right Window" })
 
 -- TMUX
 map("n", "<c-_>", function()
@@ -149,7 +149,7 @@ map("n", "zj", "5zh", { desc = "Scroll Left" })
 map("n", "z;", "5zl", { desc = "Scroll right" })
 
 -------------------------------------------------------------------------------
---                           Buffers Section
+--                           Buffers Sectiokeyn
 -------------------------------------------------------------------------------
 
 -- Better alternate buffer
@@ -276,26 +276,6 @@ map("n", "<leader>xb", "<cmd>Trouble diagnostics toggle filter.buf=0 focus=true<
 -------------------------------------------------------------------------------
 --                           Windows Section
 -------------------------------------------------------------------------------
-
--- Navigate Between Neovim and Kitty splits
--- Disable the default mappings from vim-kitty-navigator
-if vim.env.TMUX then
-  -- TODO: why does this not work?
-  -- map("n", "<C-j>", "<cmd>TmuxNavigateLeft<cr>", { noremap = true, silent = true })
-  -- map("n", "<C-k>", "<cmd>TmuxNavigateDown<CR>", { noremap = true, silent = true })
-  -- map("n", "<C-l>", "<cmd>TmuxNavigateUp<CR>", { noremap = true, silent = true })
-  -- map("n", "<C-;>", "<cmd>TmuxNavigateRight<CR>", { noremap = true, silent = true })
-
-  map("n", "<C-j>", "<c-w>h", { noremap = true, silent = true })
-  map("n", "<C-k>", "<c-w>j", { noremap = true, silent = true })
-  map("n", "<C-l>", "<c-w>k", { noremap = true, silent = true })
-  map("n", "<C-;>", "<c-w>l", { noremap = true, silent = true })
-else
-  map("n", "<C-j>", "<c-w>h", { noremap = true, silent = true })
-  map("n", "<C-k>", "<c-w>j", { noremap = true, silent = true })
-  map("n", "<C-l>", "<c-w>k", { noremap = true, silent = true })
-  map("n", "<C-;>", "<c-w>l", { noremap = true, silent = true })
-end
 
 -- Resize with arrows
 map("n", "<Up>", "<cmd>resize +3<cr>", { desc = "Increase Window Height" })

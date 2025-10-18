@@ -315,3 +315,4 @@ require("inc_rename").setup({
 --   -- Recommended to avoid unnecessary request
 --   completion = { trigger = { prefetch_on_insert = false } },
 -- })
+--
