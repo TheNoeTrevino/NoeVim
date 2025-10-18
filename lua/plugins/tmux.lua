@@ -1,6 +1,7 @@
 return {
-  name = "vim-tmux-navigator",
-  dir = "~/projects/vim-tmux-navigator",
+  "TheNoeTrevino/vim-tmux-navigator",
+  -- name = "vim-tmux-navigator",
+  -- dir = "~/projects/vim-tmux-navigator",
   cmd = {
     "TmuxNavigateLeft",
     "TmuxNavigateDown",
