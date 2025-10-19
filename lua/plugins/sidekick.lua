@@ -60,7 +60,7 @@ return {
         create = "split", ---@type "terminal"|"window"|"split"
         split = {
           vertical = true, -- vertical or horizontal split
-          size = 0.5, -- size of the split (0-1 for percentage)
+          size = 0.3, -- size of the split (0-1 for percentage)
         },
       },
     },
