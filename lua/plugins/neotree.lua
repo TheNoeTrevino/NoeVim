@@ -16,7 +16,7 @@ return {
         },
         title = "NoeVim",
       },
-      position = "float",
+      position = "current",
       mappings = {
         ["P"] = { "toggle_preview", config = { use_float = true, use_image_nvim = true } },
         ["s"] = "open_split",
@@ -30,6 +30,9 @@ return {
         ["<C-u>"] = { "scroll_preview", config = { direction = 10 } },
         ["<C-d>"] = { "scroll_preview", config = { direction = -10 } },
         ["/"] = "none",
+        ["<esc>"] = function(state)
+          vim.cmd("Neotree toggle")
+        end,
       },
     },
   },

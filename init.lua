@@ -319,4 +319,15 @@ require("inc_rename").setup({
 
 require("telescope").load_extension("git_worktree")
 
-vim.keymap.set("n", "<leader>gw", "<cmd>lua require('telescope').extensions.git_worktree.git_worktrees()<cr>")
+vim.keymap.set(
+  "n",
+  "<leader>gw",
+  "<cmd>lua require('telescope').extensions.git_worktree.git_worktrees()<cr>",
+  { desc = "Git Worktrees" }
+)
+vim.keymap.set(
+  "n",
+  "<leader>gW",
+  "<cmd>lua require('telescope').extensions.git_worktree.create_git_worktree()<cr>",
+  { desc = "Create Git Worktree" }
+)
