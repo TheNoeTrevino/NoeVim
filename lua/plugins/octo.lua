@@ -6,7 +6,7 @@ return {
     enable_builtin = true,
     default_to_projects_v2 = true,
     default_merge_method = "squash",
-    picker = "snacks",
+    picker = "telescope",
     use_local_fs = false, -- use local files on right side of reviews
     default_remote = { "upstream", "origin" }, -- order to try remotes
     default_delete_branch = false, -- whether to delete branch when merging pull request with either `Octo pr merge` or from picker (can be overridden with `delete`/`nodelete` argument to `Octo pr merge`)
