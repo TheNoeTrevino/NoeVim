@@ -16,7 +16,7 @@ return {
         },
         title = "NoeVim",
       },
-      position = "current",
+      position = "float",
       mappings = {
         ["P"] = { "toggle_preview", config = { use_float = true, use_image_nvim = true } },
         ["s"] = "open_split",
