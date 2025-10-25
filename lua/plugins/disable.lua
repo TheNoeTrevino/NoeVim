@@ -7,4 +7,5 @@ return {
   { "catppuccin", enabled = false },
   { "omnisharp-extended-lsp.nvim", enabled = false },
   { "folke/noice.nvim", enabled = false },
+  { "nvim-dap-python", enabled = false },
 }
