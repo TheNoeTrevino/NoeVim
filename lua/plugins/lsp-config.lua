@@ -3,38 +3,41 @@ return {
   event = "VeryLazy",
   opts = {
     inlay_hints = { enabled = false },
+    servers = {
+      ["*"] = {
+        keys = {
+          { "<C-k>", false, mode = "i" },
+          { "<leader>ss", false, mode = "n" },
+          { "<leader>sS", false, mode = "n" },
+          { "gr", false, mode = "n" },
+          { "gI", false, mode = "n" },
+          { "gY", false, mode = "n" },
+          { "<leader>ca", false, mode = "v" },
+          { "K", false, mode = "n" },
+          {
+            "K",
+            function()
+              vim.lsp.buf.hover({ border = "single" })
+            end,
+            mode = "n",
+          },
+          { "<leader>ca", false, mode = "n" },
+        },
+      },
+      copilot = { enabled = false },
+      omnisharp = {
+        enabled = false,
+        mason = false,
+        autostart = false,
+      },
+      ruff = {
+        mason = false,
+        autostart = false,
+      },
+      markdownlint = {
+        mason = false,
+        autostart = false,
+      },
+    },
   },
-  servers = {
-    copilot = { enabled = true },
-    omnisharp = {
-      enabled = false,
-      mason = false,
-      autostart = false,
-    },
-    angularls = {
-      mason = false,
-      autostart = false,
-    },
-    basedpyright = {
-      mason = false,
-      autostart = false,
-    },
-    ruff = {
-      mason = false,
-      autostart = false,
-    },
-    markdownlint = {
-      mason = false,
-      autostart = false,
-    },
-    eslint = {
-      mason = false,
-      autostart = false,
-    },
-  },
-  -- config = function()
-  --   if require("lspconfig").omnisharp then
-  --     require("lspconfig").omnisharp = nil
-  --   end
-  -- end,
 }
