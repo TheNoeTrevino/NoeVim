@@ -23,32 +23,32 @@ return {
         desc = "Run File",
       }
       -- run nearest test
-      keys[#keys + 1] = {
-        "<leader>tr",
-        function()
-          require("neotest").run.run()
-        end,
-        mode = "n",
-        desc = "Run Nearest Test",
-      }
-      -- debug test file
-      keys[#keys + 1] = {
-        "<leader>tD",
-        function()
-          require("neotest").run.run({ strategy = "dap" })
-        end,
-        mode = "n",
-        desc = "Debug File",
-      }
-      -- debug nearest test
-      keys[#keys + 1] = {
-        "<leader>td",
-        function()
-          require("neotest").run.run({ vim.fn.expand("%"), strategy = "dap" })
-        end,
-        mode = "n",
-        desc = "Debug Nearest Test",
-      }
+      -- keys[#keys + 1] = {
+      --   "<leader>tr",
+      --   function()
+      --     require("neotest").run.run()
+      --   end,
+      --   mode = "n",
+      --   desc = "Run Nearest Test",
+      -- }
+      -- -- debug test file
+      -- keys[#keys + 1] = {
+      --   "<leader>tD",
+      --   function()
+      --     require("neotest").run.run({ strategy = "dap" })
+      --   end,
+      --   mode = "n",
+      --   desc = "Debug File",
+      -- }
+      -- -- debug nearest test
+      -- keys[#keys + 1] = {
+      --   "<leader>td",
+      --   function()
+      --     require("neotest").run.run({ vim.fn.expand("%"), strategy = "dap" })
+      --   end,
+      --   mode = "n",
+      --   desc = "Debug Nearest Test",
+      -- }
     end,
   },
   {
