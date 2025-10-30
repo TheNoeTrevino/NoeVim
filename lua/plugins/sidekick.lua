@@ -57,7 +57,7 @@ return {
         -- window: when run inside a terminal multiplexer, new sessions will be created in a new tab
         -- split: when run inside a terminal multiplexer, new sessions will be created in a new split
         -- NOTE: zellij only supports `terminal`
-        create = "split", ---@type "terminal"|"window"|"split"
+        create = "terminal", ---@type "terminal"|"window"|"split"
         split = {
           vertical = true, -- vertical or horizontal split
           size = 0.3, -- size of the split (0-1 for percentage)
