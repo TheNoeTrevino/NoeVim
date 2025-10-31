@@ -5,8 +5,8 @@ local telescope = {
     layout = {
       box = "horizontal",
       backdrop = true,
-      width = 0.9,
-      height = 0.9,
+      width = 0.95,
+      height = 0.95,
       border = "none",
       {
         box = "vertical",
