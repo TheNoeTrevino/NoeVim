@@ -65,7 +65,7 @@ return {
         quit = { "q", "<ESC>" },
       },
       hover = {
-        border_style = "round",
+        border_style = "single",
         border = "single",
         max_width = 0.9,
         max_height = 0.8,
@@ -76,6 +76,7 @@ return {
         },
       },
       diagnostics = {
+        border_style = "single",
         keys = {
           quit = { "q", "<ESC>" },
         },

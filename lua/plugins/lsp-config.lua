@@ -17,7 +17,7 @@ return {
           {
             "K",
             function()
-              vim.lsp.buf.hover({ border = "single" })
+              vim.lsp.buf.hover()
             end,
             mode = "n",
           },
@@ -37,6 +37,11 @@ return {
       markdownlint = {
         mason = false,
         autostart = false,
+      },
+    },
+    diagnostics = {
+      float = {
+        border = "single",
       },
     },
   },

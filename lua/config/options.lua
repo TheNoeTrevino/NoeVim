@@ -42,5 +42,7 @@ vim.o.cmdheight = 0
 vim.cmd([[ autocmd RecordingEnter * set cmdheight=1 ]])
 vim.cmd([[ autocmd RecordingLeave * set cmdheight=0 ]])
 
+vim.o.winborder = "single"
+
 vim.highlight.priorities.semantic_tokens = 90 -- default is 125
 vim.highlight.priorities.treesitter = 200 -- default is 100
