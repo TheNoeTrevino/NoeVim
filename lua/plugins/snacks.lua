@@ -60,9 +60,9 @@ return {
     statuscolumn = { enabled = false },
     dashboard = { enabled = false },
     scroll = {
-      enabled = false,
+      enabled = true,
       animate = {
-        duration = { step = 15, total = 120 },
+        duration = { step = 15, total = 80 },
         easing = "linear",
       },
       filter = function(buf)
