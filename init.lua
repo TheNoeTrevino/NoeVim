@@ -19,8 +19,6 @@ require("config.lazy")
 -- Colorscheme
 local colorscheme = "kanagawa-wave"
 
-vim.cmd("colorscheme " .. colorscheme)
-
 -- Color Palette
 local colors = {
   -- Core colors
@@ -325,6 +323,7 @@ vim.keymap.set(
   "<cmd>lua require('telescope').extensions.git_worktree.git_worktrees()<cr>",
   { desc = "Git Worktrees" }
 )
+
 vim.keymap.set(
   "n",
   "<leader>gW",
