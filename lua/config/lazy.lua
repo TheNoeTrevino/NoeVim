@@ -24,6 +24,10 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.lang.sql" },
     { import = "lazyvim.plugins.extras.lang.go" },
     { import = "lazyvim.plugins.extras.lang.tailwind" },
+    -- npm install @angular/language-service --no-save
+    -- for icris and other projects that need the version and such
+    -- or just do save-dev usually
+    { import = "lazyvim.plugins.extras.lang.angular" },
     { import = "lazyvim.plugins.extras.lang.json" },
     -- Formatting
     { import = "lazyvim.plugins.extras.formatting.black" },
