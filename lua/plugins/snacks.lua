@@ -57,7 +57,7 @@ local telescpe_nm = {
 local grep_directory = function()
   local snacks = require("snacks")
   local has_fd = vim.fn.executable("fd") == 1
-  local cwd = vim.g.initial_cwd
+  local cwd = vim.fn.getcwd()
 
   local function show_picker(dirs)
     if #dirs == 0 then
@@ -139,7 +139,7 @@ end
 local search_file_directory = function()
   local snacks = require("snacks")
   local has_fd = vim.fn.executable("fd") == 1
-  local cwd = vim.g.initial_cwd
+  local cwd = vim.fn.getcwd()
 
   local function show_picker(dirs)
     if #dirs == 0 then
