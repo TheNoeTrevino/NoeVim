@@ -53,6 +53,171 @@ local telescpe_nm = {
   },
 }
 
+-- TODO: extract this lol
+local grep_directory = function()
+  local snacks = require("snacks")
+  local has_fd = vim.fn.executable("fd") == 1
+  local cwd = vim.g.initial_cwd
+
+  local function show_picker(dirs)
+    if #dirs == 0 then
+      vim.notify("No directories found", vim.log.levels.WARN)
+      return
+    end
+
+    local items = {}
+    for i, item in ipairs(dirs) do
+      table.insert(items, {
+        idx = i,
+        file = item,
+        text = item,
+      })
+    end
+
+    snacks.picker({
+      confirm = function(picker, item)
+        picker:close()
+        snacks.picker.grep({
+          dirs = { item.file },
+        })
+      end,
+      items = items,
+      format = function(item, _)
+        local file = item.file
+        local ret = {}
+        local a = Snacks.picker.util.align
+        local icon, icon_hl = Snacks.util.icon(file.ft, "directory")
+        ret[#ret + 1] = { a(icon, 3), icon_hl }
+        ret[#ret + 1] = { " " }
+        local path = file:gsub("^" .. vim.pesc(cwd) .. "/", "")
+        ret[#ret + 1] = { a(path, 20), "Directory" }
+
+        return ret
+      end,
+      layout = {
+        preset = "vertical",
+      },
+      title = "Grep in Directory",
+    })
+  end
+
+  if has_fd then
+    local cmd = { "fd", "--type", "directory", "--hidden", "--no-ignore-vcs", "--exclude", ".git" }
+    local dirs = {}
+
+    vim.fn.jobstart(cmd, {
+      on_stdout = function(_, data, _)
+        for _, line in ipairs(data) do
+          if line and line ~= "" then
+            table.insert(dirs, line)
+          end
+        end
+      end,
+      on_exit = function(_, code, _)
+        if code == 0 then
+          show_picker(dirs)
+        else
+          -- Fallback to plenary if fd fails
+          local fallback_dirs = require("plenary.scandir").scan_dir(cwd, {
+            only_dirs = true,
+            respect_gitignore = true,
+          })
+          show_picker(fallback_dirs)
+        end
+      end,
+    })
+  else
+    -- Use plenary if fd is not available
+    local dirs = require("plenary.scandir").scan_dir(cwd, {
+      only_dirs = true,
+      respect_gitignore = true,
+    })
+    show_picker(dirs)
+  end
+end
+
+local search_file_directory = function()
+  local snacks = require("snacks")
+  local has_fd = vim.fn.executable("fd") == 1
+  local cwd = vim.g.initial_cwd
+
+  local function show_picker(dirs)
+    if #dirs == 0 then
+      vim.notify("No directories found", vim.log.levels.WARN)
+      return
+    end
+
+    local items = {}
+    for i, item in ipairs(dirs) do
+      table.insert(items, {
+        idx = i,
+        file = item,
+        text = item,
+      })
+    end
+
+    snacks.picker({
+      confirm = function(picker, item)
+        picker:close()
+        snacks.picker.files({
+          dirs = { item.file },
+        })
+      end,
+      items = items,
+      format = function(item, _)
+        local file = item.file
+        local ret = {}
+        local a = Snacks.picker.util.align
+        local icon, icon_hl = Snacks.util.icon(file.ft, "directory")
+        ret[#ret + 1] = { a(icon, 3), icon_hl }
+        ret[#ret + 1] = { " " }
+        local path = file:gsub("^" .. vim.pesc(cwd) .. "/", "")
+        ret[#ret + 1] = { a(path, 20), "Directory" }
+
+        return ret
+      end,
+      layout = {
+        preset = "vertical",
+      },
+      title = "Search Files in Directory",
+    })
+  end
+
+  if has_fd then
+    local cmd = { "fd", "--type", "directory", "--hidden", "--no-ignore-vcs", "--exclude", ".git" }
+    local dirs = {}
+
+    vim.fn.jobstart(cmd, {
+      on_stdout = function(_, data, _)
+        for _, line in ipairs(data) do
+          if line and line ~= "" then
+            table.insert(dirs, line)
+          end
+        end
+      end,
+      on_exit = function(_, code, _)
+        if code == 0 then
+          show_picker(dirs)
+        else
+          -- Fallback to plenary if fd fails
+          local fallback_dirs = require("plenary.scandir").scan_dir(cwd, {
+            only_dirs = true,
+            respect_gitignore = true,
+          })
+          show_picker(fallback_dirs)
+        end
+      end,
+    })
+  else
+    -- Use plenary if fd is not available
+    local dirs = require("plenary.scandir").scan_dir(cwd, {
+      only_dirs = true,
+      respect_gitignore = true,
+    })
+    show_picker(dirs)
+  end
+end
+
 return {
   "folke/snacks.nvim",
   opts = {
@@ -75,6 +240,7 @@ return {
       end,
     },
     picker = {
+      cwd = vim.g.initial_cwd,
       ui_select = true, -- replace `vim.ui.select` with the snacks picker
       formatters = {
         file = {
@@ -153,7 +319,7 @@ return {
   keys = {
     -- Top Pickers & Explorer
     -- stylua: ignore start
-    { "<leader>,", function() Snacks.picker.buffers(telescpe_nm) end, desc = "Buffers" },
+    -- { "<leader>,", function() Snacks.picker.buffers(telescpe_nm) end, desc = "Buffers" },
     { "<leader>/", function() Snacks.picker.grep(telescope) end, desc = "Grep" },
     { "<leader>:", function() Snacks.picker.command_history(telescope) end, desc = "Command History" },
     { "<leader>N", function() Snacks.picker.notifications(telescope) end, desc = "Notification History" },
@@ -176,6 +342,7 @@ return {
     { "<leader>sp", "<CMD>lua Snacks.picker.spelling( { layout = { preview = false, reverse = false, layout = { backdrop = false, row = 1, width = 0.4, min_width = 80, height = 0.4, border = 'none', box = 'vertical', { win = 'input', height = 1, border = 'single', title = '{title} {live} {flags}', title_pos = 'center' }, { win = 'list', border = 'single' }, { win = 'preview', title = '{preview}', border = 'rounded' }, }, }, on_show = function() vim.cmd.stopinsert() end, })<CR>", desc = "Spelling" },
     { "<leader>sy", function() Snacks.picker.yanky(telescope) end, desc = "Yanks" },
     { "<leader>sf", function() Snacks.picker.files(telescope) end, desc = "Find Files" },
+    { "<leader>sF", search_file_directory, "Search: Directory" },
     { '<leader>s"', function() Snacks.picker.registers(telescope) end, desc = "Registers" },
     { '<leader>s/', function() Snacks.picker.search_history(telescope) end, desc = "Search History" },
     { "<leader>sa", function() Snacks.picker.autocmds(telescope) end, desc = "Autocmds" },

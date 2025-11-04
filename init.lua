@@ -1,3 +1,5 @@
+vim.g.initial_cwd = vim.loop.cwd()
+
 if vim.env.PROF then
   -- example for lazy.nvim
   -- change this to the correct path for your plugin manager
