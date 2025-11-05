@@ -186,31 +186,7 @@ return {
     },
     picker = {
       layout = {
-        cycle = true,
-        --- Use the default layout or vertical if the window is too narrow
-        reverse = true,
-        layout = {
-          box = "horizontal",
-          backdrop = false,
-          width = 0.95,
-          height = 0.95,
-          border = "none",
-          {
-            box = "vertical",
-            { win = "list", title = " Results ", title_pos = "center", border = true },
-            { win = "input", height = 1, border = true, title = "{title} {live} {flags}", title_pos = "center" },
-          },
-          {
-            win = "preview",
-            title = "{preview:Preview}",
-            width = 0.6,
-            border = true,
-            title_pos = "center",
-          },
-        },
-        --   function()
-        --   return vim.o.columns >= 120 and "default" or "vertical"
-        -- end,
+        preset = "telescope",
       },
       ui_select = true, -- replace `vim.ui.select` with the snacks picker
       formatters = {
@@ -308,44 +284,59 @@ return {
       { "<leader>gd", function() Snacks.picker.git_diff() end, desc = "Git Diff (Hunks)" },
       { "<leader>gf", function() Snacks.picker.git_log_file() end, desc = "Git Log File" },
       -- Grep
-      { "<leader>sG", grep_directory, desc = "Grep Open Buffers" },
-      { "<leader>sg", function() Snacks.picker.git_grep() end, desc = "Grep" },
+      { "<leader>sg", function() Snacks.picker.grep() end, desc = "Grep" },
+      { "<leader>sG", function() Snacks.picker.git_grep() end, desc = "Grep Git" },
       { "<leader>sw", function() Snacks.picker.grep_word() end, desc = "Visual selection or word", mode = { "n", "x" } },
-      -- search
-      { "<leader>sr", function() Snacks.picker.recent({on_show = function()vim.cmd.stopinsert()end,}) end, desc = "Recent" },
+      -- Search -- movement based
+      { "<leader>sr", function() Snacks.picker.resume({on_show = function()vim.cmd.stopinsert()end,}) end, desc = "Recent" },
       { "<leader>sP", "<CMD>lua Snacks.picker.projects( { layout = { preview = false, reverse = false, layout = { backdrop = false, row = 1, width = 0.4, min_width = 80, height = 0.4, border = 'none', box = 'vertical', { win = 'input', height = 1, border = 'single', title = '{title} {live} {flags}', title_pos = 'center' }, { win = 'list', border = 'single' }, { win = 'preview', title = '{preview}', border = 'rounded' }, }, }, on_show = function() vim.cmd.stopinsert() end, })<CR>", desc = "Projects" },
       { "<leader>sp", "<CMD>lua Snacks.picker.spelling( { layout = { preview = false, reverse = false, layout = { backdrop = false, row = 1, width = 0.4, min_width = 80, height = 0.4, border = 'none', box = 'vertical', { win = 'input', height = 1, border = 'single', title = '{title} {live} {flags}', title_pos = 'center' }, { win = 'list', border = 'single' }, { win = 'preview', title = '{preview}', border = 'rounded' }, }, }, on_show = function() vim.cmd.stopinsert() end, })<CR>", desc = "Spelling" },
-      { "<leader>sy", function() Snacks.picker.yanky() end, desc = "Yanks" },
-      { "<leader>sf", function() Snacks.picker.git_files() end, desc = "Find Files" },
-      { "<leader>sF", search_file_directory, "Search: Directory" },
-      { '<leader>s"', function() Snacks.picker.registers() end, desc = "Registers" },
+      { "<leader>sf", function() Snacks.picker.files() end, desc = "Find Files" },
+      { "<leader>sF", function() Snacks.picker.git_files() end, desc = "Find Git Files" },
       { '<leader>s/', function() Snacks.picker.search_history() end, desc = "Search History" },
-      { "<leader>sa", function() Snacks.picker.autocmds() end, desc = "Autocmds" },
-      { "<leader>sc", function() Snacks.picker.command_history() end, desc = "Command History" },
-      { "<leader>sC", function() Snacks.picker.commands() end, desc = "Commands" },
       { "<leader>sd", function() Snacks.picker.diagnostics() end, desc = "Diagnostics" },
       { "<leader>sD", function() Snacks.picker.diagnostics_buffer() end, desc = "Buffer Diagnostics" },
-      { "<leader>sh", function() Snacks.picker.help() end, desc = "Help Pages" },
-      { "<leader>sH", function() Snacks.picker.highlights() end, desc = "Highlights" },
       { "<leader>sc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
       { "<leader>sj", "<CMD>lua Snacks.picker.jumps({on_show = function() vim.cmd.stopinsert() end, layout = {preview = true,layout = {box = 'vertical',backdrop = false,row = -1,width = 0,height = 0.33,border = 'top',title = ' {title} {live} {flags}',title_pos = 'left',{ win = 'input', height = 1, border = 'bottom' },{box = 'horizontal',{ win = 'list', border = 'none' },{ win = 'preview', title = '{preview}', width = 0.7, border = 'left' }, },},},})<CR>", desc = "Jumps" },
-      { "<leader>sl", function() Snacks.picker.lsp_config() end, desc = "Location List" },
-      { "<leader>sL", function() Snacks.picker.loclist() end, desc = "Location List" },
       { "<leader>sm", function() Snacks.picker.marks({on_show = function()vim.cmd.stopinsert()end,}) end, desc = "Marks" },
-      { "<leader>sM", function() Snacks.picker.man() end, desc = "Man Pages" },
       { "<leader>sq", function() Snacks.picker.qflist({on_show = function()vim.cmd.stopinsert()end,}) end, desc = "Quickfix List" },
       { "<leader>su", function() Snacks.picker.undo({on_show = function()vim.cmd.stopinsert()end,}) end, desc = "Undo History" },
       { "<leader>ss", function() Snacks.picker.pickers() end, desc = "Pickers" },
-      { "<leader>uC", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
       { "<leader>sb", function() Snacks.picker.buffers({on_show = function()vim.cmd.stopinsert()end,}) end, desc = "Buffers" },
       { "<leader>st", "<CMD>lua Snacks.picker.todo_comments({ on_show = function() vim.cmd.stopinsert() end})<CR>", desc = "Todo" },
-      { "<leader><leader>", function() Snacks.lazygit( { cwd = LazyVim.root.git() }) end, desc = "Lazygit" },
-      { "<leader>sI", function() Snacks.picker.icons() end, desc = "Keymaps" },
       { "h", function() Snacks.picker.buffers({on_show = function()vim.cmd.stopinsert()end,}) end, desc = "Buffers" },
-      -- LSP
+      -- potential mappings to move to f
+      { "<leader>sM", function() Snacks.picker.man() end, desc = "Man Pages" },
+      { "<leader>sh", function() Snacks.picker.help() end, desc = "Help Pages" },
+      { "<leader>sH", function() Snacks.picker.highlights() end, desc = "Highlights" },
+      { "<leader>ff", search_file_directory, "Select Dir to Search" },
+      { "<leader>fg", grep_directory, desc = "Select Dir to Grep" },
+      { "<leader>fr", function() Snacks.picker.recent({on_show = function()vim.cmd.stopinsert()end,}) end, desc = "Recent" },
+      { '<leader>s"', function() Snacks.picker.registers() end, desc = "Registers" },
       { "<leader>sk", function() Snacks.picker.keymaps() end, desc = "Keymaps" },
-      { "<leader>so", function() Snacks.picker.lsp_outgoing_calls() end, desc = "LSP Outgoing calls" },
-      { "<leader>si", function() Snacks.picker.lsp_incoming_calls() end, desc = "LSP Incoming calls" },
+      { "<leader>sc", function() Snacks.picker.command_history() end, desc = "Command History" },
+      { "<leader>sC", function() Snacks.picker.commands() end, desc = "Commands" },
+      { "<leader>sy", function() Snacks.picker.yanky() end, desc = "Yanks" },
+      -- maybe remove, literally never used once
+      -- { "<leader>sL", function() Snacks.picker.loclist() end, desc = "Location List" },
+      { "<leader>sa", function() Snacks.picker.autocmds() end, desc = "Autocmds" },
+      { "<leader>sI", function() Snacks.picker.icons() end, desc = "Keymaps" },
+      -- Random
+      { "<leader>uC", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
+      { "<leader><leader>", function() Snacks.lazygit( { cwd = LazyVim.root.git() }) end, desc = "Lazygit" },
+      -- LSP NOTE: maybe move these to l? idk.  
+      { "<leader>sL", function() Snacks.picker.lsp_config() end, desc = "LSP Config" },
+      { "<leader>slo", function() Snacks.picker.lsp_outgoing_calls() end, desc = "LSP Outgoing calls" },
+      { "<leader>sli", function() Snacks.picker.lsp_incoming_calls() end, desc = "LSP Incoming calls" },
+      { "<leader>sls", function() Snacks.picker.lsp_symbols({
+          layout = {
+            cycle = true,
+            --- Use the default layout or vertical if the window is too narrow
+            preset = function()
+              return vim.o.columns >= 120 and "default" or "vertical"
+            end,
+          },
+        }) end, desc = "LSP Incoming calls" },
       { "gd", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition" },
       { "gD", function() Snacks.picker.lsp_declarations() end, desc = "Goto Declaration" },
       { "gr", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" },
