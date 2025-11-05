@@ -6,6 +6,7 @@ return {
 
     linters_by_ft = {
       sql = { "sqruff", "squawk" },
+      go = { nil },
     },
 
     linters = {

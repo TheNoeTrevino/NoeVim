@@ -1,58 +1,3 @@
-local telescope = {
-  layout = {
-    backdrop = true,
-    reverse = true,
-    layout = {
-      box = "horizontal",
-      backdrop = true,
-      width = 0.95,
-      height = 0.95,
-      border = "none",
-      {
-        box = "vertical",
-        { win = "list", title = " Results ", title_pos = "center", border = "single" },
-        { win = "input", height = 1, border = "single", title = "{title} {live} {flags}", title_pos = "center" },
-      },
-      {
-        win = "preview",
-        title = "{preview:Preview}",
-        width = 0.60,
-        border = "single",
-        title_pos = "center",
-      },
-    },
-  },
-}
-
-local telescpe_nm = {
-  on_show = function()
-    vim.cmd.stopinsert()
-  end,
-  layout = {
-    backdrop = true,
-    reverse = true,
-    layout = {
-      box = "horizontal",
-      backdrop = true,
-      width = 0.9,
-      height = 0.9,
-      border = "none",
-      {
-        box = "vertical",
-        { win = "list", title = " Results ", title_pos = "center", border = "single" },
-        { win = "input", height = 1, border = "single", title = "{title} {live} {flags}", title_pos = "center" },
-      },
-      {
-        win = "preview",
-        title = "{preview:Preview}",
-        width = 0.60,
-        border = "single",
-        title_pos = "center",
-      },
-    },
-  },
-}
-
 -- TODO: extract this lol
 local grep_directory = function()
   local snacks = require("snacks")
@@ -240,7 +185,33 @@ return {
       end,
     },
     picker = {
-      cwd = vim.g.initial_cwd,
+      layout = {
+        cycle = true,
+        --- Use the default layout or vertical if the window is too narrow
+        reverse = true,
+        layout = {
+          box = "horizontal",
+          backdrop = false,
+          width = 0.9,
+          height = 0.9,
+          border = "none",
+          {
+            box = "vertical",
+            { win = "list", title = " Results ", title_pos = "center", border = true },
+            { win = "input", height = 1, border = true, title = "{title} {live} {flags}", title_pos = "center" },
+          },
+          {
+            win = "preview",
+            title = "{preview:Preview}",
+            width = 0.6,
+            border = true,
+            title_pos = "center",
+          },
+        },
+        --   function()
+        --   return vim.o.columns >= 120 and "default" or "vertical"
+        -- end,
+      },
       ui_select = true, -- replace `vim.ui.select` with the snacks picker
       formatters = {
         file = {
@@ -319,59 +290,59 @@ return {
   keys = {
     -- Top Pickers & Explorer
     -- stylua: ignore start
-    -- { "<leader>,", function() Snacks.picker.buffers(telescpe_nm) end, desc = "Buffers" },
-    { "<leader>/", function() Snacks.picker.grep(telescope) end, desc = "Grep" },
-    { "<leader>:", function() Snacks.picker.command_history(telescope) end, desc = "Command History" },
-    { "<leader>N", function() Snacks.picker.notifications(telescope) end, desc = "Notification History" },
+    -- { "<leader>,", function() Snacks.picker.buffers({on_show = function()vim.cmd.stopinsert()end,}) end, desc = "Buffers" },
+    { "<leader>/", function() Snacks.picker.grep() end, desc = "Grep" },
+    { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
+    { "<leader>N", function() Snacks.picker.notifications() end, desc = "Notification History" },
     -- Git
-    { "<leader>gb", function() Snacks.picker.git_branches(telescope) end, desc = "Git Branches" },
-    { "<leader>gl", function() Snacks.picker.git_log(telescope) end, desc = "Git Log" },
-    { "<leader>gL", function() Snacks.picker.git_log_line(telescope) end, desc = "Git Log Line" },
-    { "<leader>gs", function() Snacks.picker.git_status(telescpe_nm) end, desc = "Git Status" },
-    { "H", function() Snacks.picker.git_status(telescpe_nm) end, desc = "Git Status" },
-    { "<leader>gS", function() Snacks.picker.git_stash(telescope) end, desc = "Git Stash" },
-    { "<leader>gd", function() Snacks.picker.git_diff(telescope) end, desc = "Git Diff (Hunks)" },
-    { "<leader>gf", function() Snacks.picker.git_log_file(telescope) end, desc = "Git Log File" },
+    { "<leader>gb", function() Snacks.picker.git_branches() end, desc = "Git Branches" },
+    { "<leader>gl", function() Snacks.picker.git_log() end, desc = "Git Log" },
+    { "<leader>gL", function() Snacks.picker.git_log_line() end, desc = "Git Log Line" },
+    { "<leader>gs", function() Snacks.picker.git_status({on_show = function()vim.cmd.stopinsert()end,}) end, desc = "Git Status" },
+    { "H", function() Snacks.picker.git_status({on_show = function()vim.cmd.stopinsert()end,}) end, desc = "Git Status" },
+    { "<leader>gS", function() Snacks.picker.git_stash() end, desc = "Git Stash" },
+    { "<leader>gd", function() Snacks.picker.git_diff() end, desc = "Git Diff (Hunks)" },
+    { "<leader>gf", function() Snacks.picker.git_log_file() end, desc = "Git Log File" },
     -- Grep
     { "<leader>sG", grep_directory, desc = "Grep Open Buffers" },
-    { "<leader>sg", function() Snacks.picker.git_grep(telescope) end, desc = "Grep" },
-    { "<leader>sw", function() Snacks.picker.grep_word(telescope) end, desc = "Visual selection or word", mode = { "n", "x" } },
+    { "<leader>sg", function() Snacks.picker.git_grep() end, desc = "Grep" },
+    { "<leader>sw", function() Snacks.picker.grep_word() end, desc = "Visual selection or word", mode = { "n", "x" } },
     -- search
-    { "<leader>sr", function() Snacks.picker.recent(telescpe_nm) end, desc = "Recent" },
+    { "<leader>sr", function() Snacks.picker.recent({on_show = function()vim.cmd.stopinsert()end,}) end, desc = "Recent" },
     { "<leader>sP", "<CMD>lua Snacks.picker.projects( { layout = { preview = false, reverse = false, layout = { backdrop = false, row = 1, width = 0.4, min_width = 80, height = 0.4, border = 'none', box = 'vertical', { win = 'input', height = 1, border = 'single', title = '{title} {live} {flags}', title_pos = 'center' }, { win = 'list', border = 'single' }, { win = 'preview', title = '{preview}', border = 'rounded' }, }, }, on_show = function() vim.cmd.stopinsert() end, })<CR>", desc = "Projects" },
     { "<leader>sp", "<CMD>lua Snacks.picker.spelling( { layout = { preview = false, reverse = false, layout = { backdrop = false, row = 1, width = 0.4, min_width = 80, height = 0.4, border = 'none', box = 'vertical', { win = 'input', height = 1, border = 'single', title = '{title} {live} {flags}', title_pos = 'center' }, { win = 'list', border = 'single' }, { win = 'preview', title = '{preview}', border = 'rounded' }, }, }, on_show = function() vim.cmd.stopinsert() end, })<CR>", desc = "Spelling" },
-    { "<leader>sy", function() Snacks.picker.yanky(telescope) end, desc = "Yanks" },
-    { "<leader>sf", function() Snacks.picker.git_files(telescope) end, desc = "Find Files" },
+    { "<leader>sy", function() Snacks.picker.yanky() end, desc = "Yanks" },
+    { "<leader>sf", function() Snacks.picker.git_files() end, desc = "Find Files" },
     { "<leader>sF", search_file_directory, "Search: Directory" },
-    { '<leader>s"', function() Snacks.picker.registers(telescope) end, desc = "Registers" },
-    { '<leader>s/', function() Snacks.picker.search_history(telescope) end, desc = "Search History" },
-    { "<leader>sa", function() Snacks.picker.autocmds(telescope) end, desc = "Autocmds" },
-    { "<leader>sc", function() Snacks.picker.command_history(telescope) end, desc = "Command History" },
-    { "<leader>sC", function() Snacks.picker.commands(telescope) end, desc = "Commands" },
-    { "<leader>sd", function() Snacks.picker.diagnostics(telescope) end, desc = "Diagnostics" },
-    { "<leader>sD", function() Snacks.picker.diagnostics_buffer(telescope) end, desc = "Buffer Diagnostics" },
-    { "<leader>sh", function() Snacks.picker.help(telescope) end, desc = "Help Pages" },
-    { "<leader>sH", function() Snacks.picker.highlights(telescope) end, desc = "Highlights" },
+    { '<leader>s"', function() Snacks.picker.registers() end, desc = "Registers" },
+    { '<leader>s/', function() Snacks.picker.search_history() end, desc = "Search History" },
+    { "<leader>sa", function() Snacks.picker.autocmds() end, desc = "Autocmds" },
+    { "<leader>sc", function() Snacks.picker.command_history() end, desc = "Command History" },
+    { "<leader>sC", function() Snacks.picker.commands() end, desc = "Commands" },
+    { "<leader>sd", function() Snacks.picker.diagnostics() end, desc = "Diagnostics" },
+    { "<leader>sD", function() Snacks.picker.diagnostics_buffer() end, desc = "Buffer Diagnostics" },
+    { "<leader>sh", function() Snacks.picker.help() end, desc = "Help Pages" },
+    { "<leader>sH", function() Snacks.picker.highlights() end, desc = "Highlights" },
     { "<leader>sc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
     { "<leader>sj", "<CMD>lua Snacks.picker.jumps({on_show = function() vim.cmd.stopinsert() end, layout = {preview = true,layout = {box = 'vertical',backdrop = false,row = -1,width = 0,height = 0.33,border = 'top',title = ' {title} {live} {flags}',title_pos = 'left',{ win = 'input', height = 1, border = 'bottom' },{box = 'horizontal',{ win = 'list', border = 'none' },{ win = 'preview', title = '{preview}', width = 0.7, border = 'left' }, },},},})<CR>", desc = "Jumps" },
-    { "<leader>sL", function() Snacks.picker.lsp_config(telescope) end, desc = "Location List" },
-    { "<leader>sl", function() Snacks.picker.loclist(telescope) end, desc = "Location List" },
-    { "<leader>sm", function() Snacks.picker.marks(telescpe_nm) end, desc = "Marks" },
-    { "<leader>sM", function() Snacks.picker.man(telescope) end, desc = "Man Pages" },
-    { "<leader>sq", function() Snacks.picker.qflist(telescpe_nm) end, desc = "Quickfix List" },
-    { "<leader>su", function() Snacks.picker.undo(telescpe_nm) end, desc = "Undo History" },
-    { "<leader>ss", function() Snacks.picker.pickers(telescope) end, desc = "Pickers" },
-    { "<leader>uC", function() Snacks.picker.colorschemes(telescope) end, desc = "Colorschemes" },
-    { "<leader>sb", function() Snacks.picker.buffers(telescpe_nm) end, desc = "Buffers" },
+    { "<leader>sL", function() Snacks.picker.lsp_config() end, desc = "Location List" },
+    { "<leader>sl", function() Snacks.picker.loclist() end, desc = "Location List" },
+    { "<leader>sm", function() Snacks.picker.marks({on_show = function()vim.cmd.stopinsert()end,}) end, desc = "Marks" },
+    { "<leader>sM", function() Snacks.picker.man() end, desc = "Man Pages" },
+    { "<leader>sq", function() Snacks.picker.qflist({on_show = function()vim.cmd.stopinsert()end,}) end, desc = "Quickfix List" },
+    { "<leader>su", function() Snacks.picker.undo({on_show = function()vim.cmd.stopinsert()end,}) end, desc = "Undo History" },
+    { "<leader>ss", function() Snacks.picker.pickers() end, desc = "Pickers" },
+    { "<leader>uC", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
+    { "<leader>sb", function() Snacks.picker.buffers({on_show = function()vim.cmd.stopinsert()end,}) end, desc = "Buffers" },
     { "<leader>st", "<CMD>lua Snacks.picker.todo_comments({ on_show = function() vim.cmd.stopinsert() end})<CR>", desc = "Todo" },
     { "<leader><leader>", function() Snacks.lazygit( { cwd = LazyVim.root.git() }) end, desc = "Lazygit" },
-    { "h", function() Snacks.picker.buffers(telescpe_nm) end, desc = "Buffers" },
+    { "h", function() Snacks.picker.buffers({on_show = function()vim.cmd.stopinsert()end,}) end, desc = "Buffers" },
     -- LSP
-    { "<leader>sk", function() Snacks.picker.keymaps(telescope) end, desc = "Keymaps" },
-    { "gd", function() Snacks.picker.lsp_definitions(telescope) end, desc = "Goto Definition" },
-    { "gD", function() Snacks.picker.lsp_declarations(telescope) end, desc = "Goto Declaration" },
-    { "gr", function() Snacks.picker.lsp_references(telescope) end, nowait = true, desc = "References" },
-    { "gI", function() Snacks.picker.lsp_implementations(telescope) end, desc = "Goto Implementation" },
-    { "gy", function() Snacks.picker.lsp_type_definitions(telescope) end, desc = "Goto T[y]pe Definition" },
+    { "<leader>sk", function() Snacks.picker.keymaps() end, desc = "Keymaps" },
+    { "gd", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition" },
+    { "gD", function() Snacks.picker.lsp_declarations() end, desc = "Goto Declaration" },
+    { "gr", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" },
+    { "gI", function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
+    { "gy", function() Snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
   },
 }
