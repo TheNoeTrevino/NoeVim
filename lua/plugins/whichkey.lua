@@ -25,7 +25,6 @@ return {
       {
         { "<leader>a", "", group = "A.I.", icon = { icon = " ", color = "azure" } },
         mode = { "n", "v" },
-        { "<Tab>", group = "Test" },
         { "<leader>d", group = "Debug", icon = { icon = " ", color = "red" } },
         { "<leader>c", group = "Code" },
         { "<leader>S", group = "TS Surround", icon = { icon = "󰐅 ", color = "azure" }, hidden = true },

@@ -66,13 +66,13 @@ return {
     config = function()
       require("kanagawa").setup({
         compile = false, -- enable compiling the colorscheme
-        undercurl = false, -- enable undercurls
+        undercurl = true, -- enable undercurls
         commentStyle = { italic = false },
         functionStyle = {},
         keywordStyle = { italic = true },
         statementStyle = { bold = true },
         typeStyle = {},
-        transparent = true, -- do not set background color
+        transparent = false, -- do not set background color
         dimInactive = false, -- dim inactive window `:h hl-NormalNC`
         terminalColors = true, -- define vim.g.terminal_color_{0,17}
         colors = { -- add/modify theme and palette colors
@@ -80,8 +80,8 @@ return {
           theme = {
             wave = {
               ui = {
-                -- bg = "#181616",
-                bg = "#000001",
+                bg = "#181616",
+                -- bg = "#000001",
               },
             },
             lotus = {},
