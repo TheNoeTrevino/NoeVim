@@ -373,7 +373,7 @@ return {
       -- Search -- movement based
       { "<leader>sr", function() Snacks.picker.resume(get_config_nm()) end, desc = "Recent" },
       { "<leader>sP", "<CMD>lua Snacks.picker.projects( { layout = { preview = false, reverse = false, layout = { backdrop = true, row = 1, width = 0.4, min_width = 80, height = 0.4, border = 'none', box = 'vertical', { win = 'input', height = 1, border = 'single', title = '{title} {live} {flags}', title_pos = 'center' }, { win = 'list', border = 'single' }, { win = 'preview', title = '{preview}', border = 'rounded' }, }, }, on_show = function() vim.cmd.stopinsert() end, })<CR>", desc = "Projects" },
-      { "<leader>sp", "<CMD>lua Snacks.picker.spelling( { layout = { preview = false, reverse = false, layout = { backdrop = true, row = 1, width = 0.4, min_width = 80, height = 0.4, border = 'none', box = 'vertical', { win = 'input', height = 1, border = 'single', title = '{title} {live} {flags}', title_pos = 'center' }, { win = 'list', border = 'single' }, { win = 'preview', title = '{preview}', border = 'rounded' }, }, }, on_show = function() vim.cmd.stopinsert() end, })<CR>", desc = "Spelling" },
+      { "<leader>sp", "<CMD>lua Snacks.picker.spelling( { layout = { preview = false, reverse = false, layout = { backdrop = false, row = 1, width = 0.4, min_width = 80, height = 0.4, border = 'none', box = 'vertical', { win = 'input', height = 1, border = 'single', title = '{title} {live} {flags}', title_pos = 'center' }, { win = 'list', border = 'single' }, { win = 'preview', title = '{preview}', border = 'rounded' }, }, }, on_show = function() vim.cmd.stopinsert() end, })<CR>", desc = "Spelling" },
       { "<leader>sf", function() Snacks.picker.files(get_config()) end, desc = "Find Files" },
       { "<leader>sF", function() Snacks.picker.git_files(get_config()) end, desc = "Find Git Files" },
       { '<leader>s/', function() Snacks.picker.search_history(get_config()) end, desc = "Search History" },
@@ -414,7 +414,7 @@ return {
       { "<leader>sL", function() Snacks.picker.lsp_config(get_config()) end, desc = "LSP Config" },
       { "<leader>slo", function() Snacks.picker.lsp_outgoing_calls(get_config_vert()) end, desc = "LSP Outgoing calls" },
       { "<leader>sli", function() Snacks.picker.lsp_incoming_calls(get_config_vert()) end, desc = "LSP Incoming calls" },
-      { "<leader>sls", function() Snacks.picker.lsp_symbols(get_config()) end, desc = "LSP Incoming calls" },
+      { "<leader>sls", function() Snacks.picker.lsp_symbols(get_config()) end, desc = "LSP Symbols" },
       { "gd", function() Snacks.picker.lsp_definitions(get_config()) end, desc = "Goto Definition" },
       { "gD", function() Snacks.picker.lsp_declarations(get_config()) end, desc = "Goto Declaration" },
       { "gr", function() Snacks.picker.lsp_references(get_config()) end, nowait = true, desc = "References" },

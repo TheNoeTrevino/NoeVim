@@ -1,3 +1,13 @@
+local get_config_vert = function()
+  return {
+    layout = {
+      cycle = true,
+      --- Use the default layout or vertical if the window is too narrow
+      preset = "vertical",
+    },
+  }
+end
+
 -- Dashboard with snacks.nvim
 return {
   "folke/snacks.nvim",
@@ -29,7 +39,7 @@ return {
       -- stylua: ignore start
         keys = {
           { icon = " ", key = "r", desc = "Reload Last Session", action = function() require("persistence").load() end },
-          { icon = " ", key = "p", desc = "Projects", action =  function() Snacks.picker.projects() end },
+          { icon = " ", key = "p", desc = "Projects", action =  function() Snacks.picker.projects(get_config_vert()) end },
           { icon = "󰆼 ", key = "d", desc = "Dadbod", action = function() vim.cmd("tabnew") vim.cmd("DBUIToggle") vim.cmd("tabonly") end, },
           { icon = " ", key = "s", desc = "Select Session", action = 'require("persistence").select()', },
           { icon = " ", key = "c", desc = "Config", action =  function() Snacks.picker.config() end },
