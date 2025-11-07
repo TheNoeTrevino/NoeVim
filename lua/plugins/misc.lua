@@ -30,7 +30,7 @@ return {
       require("wit").setup({})
     end,
   },
-  { "tpope/vim-fugitive" },
+  { "tpope/vim-fugitive", cmd = { "Git", "G" } },
   {
     "vyfor/cord.nvim",
     event = "VeryLazy",
