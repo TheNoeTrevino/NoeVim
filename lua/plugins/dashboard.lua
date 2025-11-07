@@ -1,6 +1,7 @@
 return {
   "nvimdev/dashboard-nvim",
   priority = 1001,
+  enable = false,
   opts = function()
     local logo = [[
 
@@ -30,28 +31,18 @@ return {
       config = {
         header = vim.split(logo, "\n"),
         center = {
+          { icon = " ", key = "r", desc = " Reload Last Session", action = 'lua require("persistence").load()' },
           {
-            action = 'lua require("persistence").load()',
-            desc = " Reload Last Session",
-            icon = " ",
-            key = "r",
-          },
-          {
+            icon = "󰆼 ",
+            key = "d",
+            desc = " Dadbod",
             action = function()
               vim.cmd("tabnew")
               vim.cmd("DBUIToggle")
               vim.cmd("tabonly")
             end,
-            desc = " Dadbod",
-            icon = "󰆼 ",
-            key = "d",
           },
-          {
-            action = 'require("persistence").select()',
-            desc = " Select Session",
-            icon = " ",
-            key = "s",
-          },
+          { icon = " ", key = "s", desc = " Select Session", action = 'require("persistence").select()' },
           { action = "lua LazyVim.pick()()", desc = " Find File", icon = "󰥨 ", key = "f" },
           {
             action = function()

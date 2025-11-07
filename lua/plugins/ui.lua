@@ -1,10 +1,5 @@
 return {
-  {
-    "LazyVim/LazyVim",
-    opts = {
-      colorscheme = "kanagawa",
-    },
-  },
+  -- { "sainnhe/everforest" },
   -- Extra Colors
   -- Uncomment below to choose a colorscheme
   -- { "loctvl842/monokai-pro.nvim", event = "VeryLazy" },

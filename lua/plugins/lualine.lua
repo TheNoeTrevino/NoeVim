@@ -1,6 +1,6 @@
 return {
   "nvim-lualine/lualine.nvim",
-  event = "UIEnter",
+  event = "VimEnter",
   optional = true,
   config = function()
     local icons = LazyVim.config.icons
@@ -51,6 +51,11 @@ return {
           },
         },
         lualine_x = {
+          {
+            require("noice").api.statusline.mode.get,
+            cond = require("noice").api.statusline.mode.has,
+            color = { fg = "#ff9e64" },
+          },
           {
             "diagnostics",
             symbols = {

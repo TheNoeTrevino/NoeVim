@@ -39,8 +39,8 @@ vim.opt.smartindent = true
 
 vim.o.cmdheight = 0
 
-vim.cmd([[ autocmd RecordingEnter * set cmdheight=1 ]])
-vim.cmd([[ autocmd RecordingLeave * set cmdheight=0 ]])
+-- vim.cmd([[ autocmd RecordingEnter * set cmdheight=1 ]])
+-- vim.cmd([[ autocmd RecordingLeave * set cmdheight=0 ]])
 
 vim.o.winborder = "single"
 

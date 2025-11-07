@@ -11,7 +11,7 @@ return {
   },
   {
     "saghen/blink.cmp",
-    event = "VeryLazy",
+    event = "InsertEnter",
     dependencies = { "rcarriga/cmp-dap", "milanglacier/minuet-ai.nvim", "giuxtaposition/blink-cmp-copilot" },
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config

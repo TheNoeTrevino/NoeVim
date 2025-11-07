@@ -248,7 +248,7 @@ return {
     opts = {
       indent = { enabled = false },
       statuscolumn = { enabled = false },
-      dashboard = { enabled = false },
+      dashboard = { enabled = true },
       scroll = {
         enabled = true,
         animate = {
@@ -352,6 +352,9 @@ return {
       -- stylua: ignore start
       -- { "<leader>,", function() Snacks.picker.buffers({on_show = function()vim.cmd.stopinsert()end,}) end, desc = "Buffers" },
       { "<leader>/", function() Snacks.picker.grep() end, desc = "Grep" },
+      { "<leader>.",  function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
+      { "<leader>S",  function() Snacks.scratch.select() end, desc = "Select Scratch Buffer" },
+      { "<leader>dps", function() Snacks.profiler.scratch() end, desc = "Profiler Scratch Buffer" },
       { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
       { "<leader>N", function() Snacks.picker.notifications() end, desc = "Notification History" },
       -- Git
@@ -402,8 +405,11 @@ return {
       { "<leader>sa", function() Snacks.picker.autocmds(get_config()) end, desc = "Autocmds" },
       { "<leader>sI", function() Snacks.picker.icons(get_config()) end, desc = "Keymaps" },
       -- Random
+      { "<leader>bd", function() Snacks.bufdelete() end, desc = "Delete Buffer", },
       { "<leader>uC", function() Snacks.picker.colorschemes(get_config_colorschemes()) end, desc = "Colorschemes" },
       { "<leader><leader>", function() Snacks.lazygit( { cwd = LazyVim.root.git() }) end, desc = "Lazygit" },
+      { "]]", function() Snacks.words.jump(vim.v.count1) end, desc = "Next Reference", mode = { "n", "t" }, },
+      { "[[", function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference", mode = { "n", "t" }, },
       -- LSP NOTE: maybe move these to l? idk.  also make a vertical layout for these
       { "<leader>sL", function() Snacks.picker.lsp_config(get_config()) end, desc = "LSP Config" },
       { "<leader>slo", function() Snacks.picker.lsp_outgoing_calls(get_config_vert()) end, desc = "LSP Outgoing calls" },

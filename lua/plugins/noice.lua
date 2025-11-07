@@ -1,9 +1,42 @@
 return {
   "folke/noice.nvim",
-  event = "VeryLazy",
+  event = "InsertEnter",
   opts = {
-    cmdline = {
-      view = "cmdline",
+    views = {
+
+      cmdline_popup = {
+        position = {
+          row = "50%",
+          col = "50%",
+        },
+        -- size = {
+        --   width = "auto",
+        --   height = "auto",
+        -- },
+        border = {
+          style = "single",
+          -- text = {
+          --   top_align = "center",
+          -- },
+        },
+      },
+      popupmenu = {
+        position = {
+          row = "50%",
+          col = "50%",
+        },
+        size = {
+          width = "auto",
+          height = "auto",
+        },
+        border = {
+          style = "single",
+          text = {
+            top = " Completion ",
+            top_align = "center",
+          },
+        },
+      },
     },
     lsp = {
       hover = {
@@ -52,20 +85,36 @@ return {
         },
       },
       progress = {
-        enabled = false,
+        enabled = true,
       },
+      -- override = {
+      --   ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+      --   ["vim.lsp.util.stylize_markdown"] = true,
+      --   ["cmp.entry.get_documentation"] = true,
+      -- },
     },
-    -- command line workaround
     routes = {
       {
-        filter = { event = "msg_show", kind = "shell_out" },
-        view = "notify",
-        opts = { level = "info", title = "Terminal" },
+        filter = {
+          event = "lsp",
+          kind = "progress",
+          cond = function(message)
+            local client = vim.tbl_get(message.opts, "progress", "client")
+            return client == "lua_ls"
+          end,
+        },
+        opts = { skip = true },
       },
       {
-        filter = { event = "msg_show", kind = "shell_err" },
-        view = "notify",
-        opts = { level = "error", title = "Stderror" },
+        filter = {
+          event = "msg_show",
+          any = {
+            { find = "%d+L, %d+B" },
+            { find = "; after #%d+" },
+            { find = "; before #%d+" },
+          },
+        },
+        view = "mini",
       },
     },
     presets = {
@@ -73,6 +122,35 @@ return {
       bottom_search = true,
       command_palette = true,
       long_message_to_split = true,
+    },
+  },
+  keys = {
+    { "<leader>sn", false },
+    { "<leader>sna", false },
+    { "<leader>snd", false },
+    { "<leader>snh", false },
+    { "<leader>snl", false },
+    { "<leader>nh", "<cmd>Noice history<cr>", desc = "History" },
+    {
+      "<leader>nl",
+      function()
+        require("noice").cmd("last")
+      end,
+      desc = "Last Message",
+    },
+    {
+      "<leader>nd",
+      function()
+        require("noice").cmd("dismiss")
+      end,
+      desc = "Dismiss All",
+    },
+    {
+      "<leader>nt",
+      function()
+        require("noice").cmd("pick")
+      end,
+      desc = "Noice Picker",
     },
   },
   config = function(_, opts)

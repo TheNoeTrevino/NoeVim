@@ -105,7 +105,7 @@ return {
         { "<leader>8", hidden = true },
         { "<leader>9", hidden = true },
         { "<leader>z", hidden = true },
-        { "<leader>q", hidden = true },
+        -- { "<leader>q", hidden = true },
         { "<leader>.", hidden = true },
         { "<leader>D", hidden = true },
       },

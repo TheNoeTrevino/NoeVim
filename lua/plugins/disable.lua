@@ -6,6 +6,7 @@ return {
   { "venv-selector.nvim", enabled = false },
   { "catppuccin", enabled = false },
   { "omnisharp-extended-lsp.nvim", enabled = false },
-  { "folke/noice.nvim", enabled = false },
+  { "folke/persistence.nvim", enabled = true },
   { "nvim-dap-python", enabled = false },
+  { "nvimdev/dashboard-nvim", enabled = false },
 }
