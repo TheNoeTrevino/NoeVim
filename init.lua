@@ -38,7 +38,7 @@ local colors = {
   bg_search = "#595959",
   bg_selection = "#363646",
   bg_separator = "#1F3442",
-  bg_cmp = "#181616",
+  bg_cmp = "#111111",
 
   -- UI element backgrounds
   bg_conflict_current = "#264033",
