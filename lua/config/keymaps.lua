@@ -163,11 +163,6 @@ map("n", "<leader>dM", ":%s/\\r//")
 
 map({ "n", "x" }, "<leader>ca", "<cmd>Lspsaga code_action<cr>", { noremap = true, silent = true })
 
-map("n", "<leader>up", function()
-  vim.cmd("NoNeckPain")
-  vim.cmd('lua vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#000000", bg = "NONE", bold = true })')
-end)
-
 -- Save
 map("n", "<S-CR>", "<cmd>w<cr>")
 

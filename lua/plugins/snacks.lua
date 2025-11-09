@@ -118,9 +118,7 @@ local grep_directory = function()
 
         return ret
       end,
-      layout = {
-        preset = "vertical",
-      },
+      layout = get_config().layout,
       title = "Grep in Directory",
     })
   end
