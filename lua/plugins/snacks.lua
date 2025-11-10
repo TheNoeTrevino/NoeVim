@@ -406,8 +406,6 @@ return {
       { "<leader>bd", function() Snacks.bufdelete() end, desc = "Delete Buffer", },
       { "<leader>uC", function() Snacks.picker.colorschemes(get_config_colorschemes()) end, desc = "Colorschemes" },
       { "<leader><leader>", function() Snacks.lazygit( { cwd = LazyVim.root.git() }) end, desc = "Lazygit" },
-      { "]]", function() Snacks.words.jump(vim.v.count1) end, desc = "Next Reference", mode = { "n", "t" }, },
-      { "[[", function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference", mode = { "n", "t" }, },
       -- LSP NOTE: maybe move these to l? idk.  also make a vertical layout for these
       { "<leader>sL", function() Snacks.picker.lsp_config(get_config()) end, desc = "LSP Config" },
       { "<leader>slo", function() Snacks.picker.lsp_outgoing_calls(get_config_vert()) end, desc = "LSP Outgoing calls" },
@@ -436,6 +434,8 @@ return {
             -- { "<leader>sS", function() Snacks.picker.lsp_workspace_symbols({ filter = LazyVim.config.kind_filter }) end, desc = "LSP Workspace Symbols", has = "workspace/symbols" },
             { "gai", function() Snacks.picker.lsp_incoming_calls(get_config()) end, desc = "C[a]lls Incoming", has = "callHierarchy/incomingCalls" },
             { "gao", function() Snacks.picker.lsp_outgoing_calls(get_config()) end, desc = "C[a]lls Outgoing", has = "callHierarchy/outgoingCalls" },
+            { "]]", function() Snacks.words.jump(vim.v.count1) end, desc = "Next Reference", mode = { "n", "t" }, },
+            { "[[", function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference", mode = { "n", "t" }, },
           },
         },
       },
