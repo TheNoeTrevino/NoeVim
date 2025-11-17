@@ -351,10 +351,10 @@ return {
       -- { "<leader>,", function() Snacks.picker.buffers({on_show = function()vim.cmd.stopinsert()end,}) end, desc = "Buffers" },
       { "<leader>/", function() Snacks.picker.grep() end, desc = "Grep" },
       { "<leader>.",  function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
-      { "<leader>S",  function() Snacks.scratch.select() end, desc = "Select Scratch Buffer" },
+      { "<leader>s.",  function() Snacks.scratch.select() end, desc = "Select Scratch Buffer" },
       { "<leader>dps", function() Snacks.profiler.scratch() end, desc = "Profiler Scratch Buffer" },
-      { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
-      { "<leader>N", function() Snacks.picker.notifications() end, desc = "Notification History" },
+      { "<leader>:", function() Snacks.picker.command_history(get_config()) end, desc = "Command History" },
+      { "<leader>N", function() Snacks.picker.notifications(get_config()) end, desc = "Notification History" },
       -- Git
       { "<leader>gb", function() Snacks.picker.git_branches(get_config()) end, desc = "Git Branches" },
       { "<leader>gl", function() Snacks.picker.git_log(get_config()) end, desc = "Git Log" },
