@@ -44,7 +44,7 @@ vim.o.cmdheight = 0
 
 vim.o.winborder = "single"
 
-vim.highlight.priorities.semantic_tokens = 205 -- default is 125
+vim.highlight.priorities.semantic_tokens = 195 -- default is 125
 vim.highlight.priorities.treesitter = 200 -- default is 100
 
 vim.o.exrc = true
