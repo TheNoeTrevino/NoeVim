@@ -185,3 +185,7 @@ FOV
 #eatmap
 heatmap/!
 ish
+Treesitter
+Neovim
+Keymaps
+AST

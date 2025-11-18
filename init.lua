@@ -108,11 +108,15 @@ if colorscheme == "kanagawa-wave" or "kanagawa-dragon" then
   h(0, "@keyword.coroutine.typescript", { fg = colors.cyan, italic = true })
   h(0, "@keyword.conditional.tsx", { fg = colors.pink, italic = true })
   h(0, "@keyword.conditional.lua", { fg = colors.pink, italic = true })
+  h(0, "@keyword.conditional.go", { fg = colors.pink, italic = true })
+
   h(0, "@keyword.exception.tsx", { fg = colors.red, bold = true, italic = true })
   h(0, "@type.tsx", { fg = colors.green })
   h(0, "@type.builtin.tsx", { fg = colors.blue_light })
   h(0, "@constructor.tsx", { bold = true })
   h(0, "@keyword.operator.tsx", { fg = colors.yellow, italic = true, bold = true })
+
+  h(0, "@keyword.repeat.go", { fg = colors.cyan, italic = true })
 
   -- python
   h(0, "@keyword.conditional.python", { fg = colors.pink, italic = true })
