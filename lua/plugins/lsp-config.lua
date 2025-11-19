@@ -2,7 +2,7 @@ return {
   "neovim/nvim-lspconfig",
   event = "VeryLazy",
   opts = {
-    inlay_hints = { enabled = false },
+    -- inlay_hints = { enabled = true },
     servers = {
       ["*"] = {
         keys = {
