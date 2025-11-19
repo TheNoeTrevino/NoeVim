@@ -10,6 +10,15 @@ return {
     opts = {},
   },
   {
+    "newtoallofthis123/blink-cmp-fuzzy-path",
+    dependencies = { "saghen/blink.cmp" },
+    opts = {
+      filetypes = { "markdown", "json" },
+      trigger_char = "@",
+      max_results = 5,
+    },
+  },
+  {
     "saghen/blink.cmp",
     event = "InsertEnter",
     dependencies = { "rcarriga/cmp-dap", "milanglacier/minuet-ai.nvim", "giuxtaposition/blink-cmp-copilot" },
@@ -132,7 +141,7 @@ return {
           elseif is_dap_buffer() then
             return { "dap", "snippets", "buffer" }
           else
-            return { "lsp", "path", "snippets", "copilot" } -- "buffer" }
+            return { "lsp", "path", "snippets", "copilot", "fuzzy-path" } -- "buffer" }
           end
         end,
         providers = {
@@ -148,6 +157,11 @@ return {
           lsp = {
             score_offset = 100,
             async = true,
+          },
+          ["fuzzy-path"] = {
+            name = "Fuzzy Path",
+            module = "blink-cmp-fuzzy-path",
+            score_offset = 0,
           },
           dadbod = {
             name = "Dadbod",
