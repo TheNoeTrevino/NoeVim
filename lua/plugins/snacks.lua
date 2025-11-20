@@ -118,7 +118,9 @@ local grep_directory = function()
 
         return ret
       end,
-      layout = get_config().layout,
+      layout = {
+        preset = "vertical",
+      },
       title = "Grep in Directory",
     })
   end
@@ -246,7 +248,7 @@ return {
     opts = {
       indent = { enabled = false },
       image = { enabled = true },
-      statuscolumn = { enabled = false },
+      statuscolumn = { enabled = true },
       dashboard = { enabled = true },
       scroll = {
         enabled = true,
@@ -350,7 +352,6 @@ return {
       -- Top Pickers & Explorer
       -- stylua: ignore start
       -- { "<leader>,", function() Snacks.picker.buffers({on_show = function()vim.cmd.stopinsert()end,}) end, desc = "Buffers" },
-      { "<leader>/", function() Snacks.picker.grep() end, desc = "Grep" },
       { "<leader>.",  function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
       { "<leader>s.",  function() Snacks.scratch.select() end, desc = "Select Scratch Buffer" },
       { "<leader>dps", function() Snacks.profiler.scratch() end, desc = "Profiler Scratch Buffer" },
@@ -382,7 +383,7 @@ return {
       { "<leader>sj", "<CMD>lua Snacks.picker.jumps({on_show = function() vim.cmd.stopinsert() end, layout = {preview = true,layout = {box = 'vertical',backdrop = true,row = -1,width = 0,height = 0.33,border = 'top',title = ' {title} {live} {flags}',title_pos = 'left',{ win = 'input', height = 1, border = 'bottom' },{box = 'horizontal',{ win = 'list', border = 'none' },{ win = 'preview', title = '{preview}', width = 0.7, border = 'left' }, },},},})<CR>", desc = "Jumps" },
       { "<leader>sm", function() Snacks.picker.marks(get_config_nm()) end, desc = "Marks" },
       { "<leader>sq", function() Snacks.picker.qflist(get_config_nm()) end, desc = "Quickfix List" },
-      { "<leader>su", function() Snacks.picker.undo(get_config_undo()) end, desc = "Undo History" },
+      { "<leader>su", function() Snacks.picker.undo({layout="ivy_split"}) end, desc = "Undo History" },
       { "<leader>ss", function() Snacks.picker.pickers(get_config()) end, desc = "Pickers" },
       { "<leader>sb", function() Snacks.picker.buffers(get_config_nm()) end, desc = "Buffers" },
       { "<leader>st", "<CMD>lua Snacks.picker.todo_comments({ on_show = function() vim.cmd.stopinsert() end})<CR>", desc = "Todo" },
