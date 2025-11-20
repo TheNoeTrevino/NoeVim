@@ -17,7 +17,7 @@ vim.g.sonokai_better_performance = 1
 vim.opt.textwidth = 80
 
 vim.opt.listchars = {
-  tab = "> ",
+  tab = "  ",
   trail = " ",
   nbsp = "+",
 }
