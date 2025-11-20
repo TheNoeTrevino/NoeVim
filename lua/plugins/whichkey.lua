@@ -62,13 +62,9 @@ return {
         -- valid colors are: `azure`, `blue`, `cyan`, `green`, `grey`, `orange`, `purple`, `red`, `yellow`
         { "gx", desc = "Open with system app" },
         { "<leader>e", desc = "File Tree", icon = { icon = "󰙅 ", color = "yellow" } },
-        { "<leader>;", desc = "Dropbar", icon = { icon = "󰝪 ", color = "azure" } },
-        { "<leader>0", desc = "Transparency", icon = { icon = " ", color = "azure" }, hidden = true },
-        { "<leader>j", desc = "References", icon = { icon = " ", color = "purple" }, hidden = true },
         { "<leader>?", desc = "Buffer Keymaps", icon = { icon = "  ", color = "azure", hidden = true } },
         { "<leader><leader>", desc = "Lazygit", icon = { icon = " ", color = "azure" } },
         { "<leader>/", desc = "Grep Buffer", icon = { icon = "󰮗 ", color = "azure" } },
-        { "<leader>t", desc = "Tests", icon = { icon = " ", color = "red" }, hidden = false },
 
         { "<leader>gg", desc = "LazyGit", icon = { icon = "󰋣 ", color = "azure" } },
         { "<leader>gf", desc = "LazyGit File History", icon = { icon = "󰋣 ", color = "azure" } },
@@ -78,17 +74,6 @@ return {
         { "<leader>gb", desc = "Branch", icon = { icon = " ", color = "azure" } },
 
         { "<leader>ax", desc = "Clear", icon = { icon = " ", color = "yellow" } },
-
-        -- { "<leader>gl", group = "Golang", icon = { icon = " ", color = "blue" }, hidden = false },
-        -- { "<leader>glj", desc = "Add JSON Tag", icon = { icon = " ", color = "blue" } },
-        -- { "<leader>glJ", desc = "Rm JSON Tag", icon = { icon = " ", color = "blue" } },
-        -- { "<leader>glt", group = "Test", icon = { icon = " ", color = "blue" }, hidden = false },
-        -- { "<leader>glta", desc = "Add Test for Function", icon = { icon = " ", color = "blue" } },
-        -- { "<leader>gltA", desc = "Generate All Tests", icon = { icon = " ", color = "blue" } },
-        -- { "<leader>glg", desc = "Get Package", icon = { icon = " ", color = "blue" } },
-        -- { "<leader>glT", desc = "Go Tidy", icon = { icon = " ", color = "blue" } },
-        -- { "<leader>gls", desc = "Go Sync", icon = { icon = " ", color = "blue" } },
-        -- { "<leader>gle", desc = "Handle Err", icon = { icon = " ", color = "blue" } },
 
         { "<localleader>d", group = "Database", icon = { icon = "󱦹 ", color = "yellow" }, mode = "x" },
 
