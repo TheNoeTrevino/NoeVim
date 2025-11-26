@@ -19,7 +19,7 @@ return {
       width = { min = 20 },
       spacing = 6,
     },
-    delay = 100,
+    delay = 400,
     preset = "modern",
     spec = {
       {

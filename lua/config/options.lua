@@ -14,7 +14,7 @@ vim.g.gruvbox_material_background = "hard"
 vim.g.sonokai_style = "shusia"
 vim.g.sonokai_better_performance = 1
 
-vim.opt.textwidth = 80
+-- vim.opt.textwidth = 80
 
 vim.opt.listchars = {
   tab = "  ",
