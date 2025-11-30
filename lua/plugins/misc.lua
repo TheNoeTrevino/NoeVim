@@ -37,4 +37,13 @@ return {
     build = ":Cord update",
     -- opts = {}
   },
+  {
+    "andythigpen/nvim-coverage",
+    version = "*",
+    config = function()
+      require("coverage").setup({
+        auto_reload = true,
+      })
+    end,
+  },
 }

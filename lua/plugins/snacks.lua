@@ -250,6 +250,7 @@ return {
       image = { enabled = true },
       statuscolumn = { enabled = true },
       dashboard = { enabled = true },
+      scope = { enabled = false },
       scroll = {
         enabled = true,
         animate = {

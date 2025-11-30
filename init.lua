@@ -224,7 +224,9 @@ h(0, "BlinkCmpKindValue", { fg = colors.blue_light })
 h(0, "BlinkCmpKindEvent", { fg = colors.blue_light })
 h(0, "BlinkCmpKindColor", { fg = colors.blue_light })
 h(0, "BlinkCmpKindUnit", { fg = colors.blue_light })
+-- h(0, "Comment", { fg = "#4a4842", bg = nil })
 h(0, "LspInlayHint", { fg = "#54546D", bg = "#1a1a1a" })
+h(0, "LensLine", { fg = "#54546D", bg = "#1a1a1a" })
 
 -- not transparent
 h(0, "BlinkCmpMenu", { bg = colors.bg_cmp })
