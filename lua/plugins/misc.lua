@@ -25,10 +25,8 @@ return {
   -- },
   {
     "aliqyan-21/wit.nvim",
-    event = "VeryLazy",
-    config = function()
-      require("wit").setup({})
-    end,
+    cmd = { "WitSearchVisual", "WitSearchWiki", "WitSearch" },
+    opts = {},
   },
   { "tpope/vim-fugitive", cmd = { "Git", "G" } },
   {
