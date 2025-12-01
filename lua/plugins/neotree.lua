@@ -39,16 +39,6 @@ return {
   keys = function()
     return {
       { "<leader>e", "<cmd>Neotree reveal_force_cwd toggle<cr>", desc = "Explorer NeoTree (Root Dir)", remap = true },
-      {
-        "<leader>E",
-        function()
-          vim.cmd("Neotree position=left git_status selector=false toggle")
-          vim.cmd("split")
-          vim.cmd("Neotree position=left buffers selector=false toggle")
-        end,
-        desc = "Git Status + Buffers Split",
-        remap = true,
-      },
     }
   end,
 }
