@@ -46,4 +46,13 @@ return {
       })
     end,
   },
+  {
+    "AndrewRadev/linediff.vim",
+    event = "UIEnter",
+    config = function()
+      vim.keymap.set("x", "D", function()
+        return vim.fn.mode() == "V" and ":Linediff<cr>" or "D"
+      end, { noremap = true, expr = true })
+    end,
+  },
 }
