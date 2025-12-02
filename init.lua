@@ -318,3 +318,27 @@ vim.cmd(
 --   completion = { trigger = { prefetch_on_insert = false } },
 -- })
 --
+
+-- -- Global config for diagnostics
+-- vim.diagnostic.config({
+--   -- virtual_text = { prefix = "---" },
+--   signs = true,
+--   underline = true,
+--   float = {
+--     source = "always", -- use "always" instead of true
+--     border = "rounded",
+--     format = function(diagnostic)
+--       -- This ensures you always see the source
+--       local s = diagnostic.source or "LSP"
+--       return string.format("[%s] %s", s, diagnostic.message)
+--     end,
+--   },
+-- })
+--
+-- -- Call this to open float for current line with configured options
+-- vim.api.nvim_set_keymap(
+--   "n",
+--   "<leader>jj",
+--   "<cmd>lua vim.diagnostic.open_float(nil, { focus = false })<CR>",
+--   { noremap = true, silent = true }
+-- )

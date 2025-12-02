@@ -46,6 +46,7 @@ return {
         autostart = false,
       },
       markdownlint = {
+        enabled = false,
         mason = false,
         autostart = false,
       },

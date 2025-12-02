@@ -49,3 +49,5 @@ vim.highlight.priorities.treesitter = 100 -- default is 100
 
 vim.o.exrc = true
 vim.o.secure = true
+
+vim.g.lazyvim_rust_diagnostics = "bacon-ls"

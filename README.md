@@ -4,7 +4,7 @@ _Get it?_
 
 ## Installation
 
-```
+``` bash
 git clone https://github.com/TheNoeTrevino/NoeVim.git ~/.config/nvim
 ```
 
