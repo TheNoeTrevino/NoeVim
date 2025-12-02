@@ -21,10 +21,21 @@ return {
             end,
             mode = "n",
           },
-          { "<leader>ca", false, mode = "n" },
+          {
+            "<leader>ca",
+            function()
+              require("tiny-code-action").code_action()
+            end,
+            mode = { "n", "x" },
+          },
         },
       },
       copilot = { enabled = false },
+      marksman = {
+        enabled = true,
+        mason = true,
+        autostart = true,
+      },
       omnisharp = {
         enabled = false,
         mason = false,
