@@ -3,23 +3,23 @@ return {
   opts = {
     base_mappings = {
       -- Toggle the UI open/closed
-      toggle = "<leader>bt",
+      toggle = "<leader>vv",
       -- Add a bookmark to the current stack
-      add = "<leader>ba",
+      add = "<leader>va",
       -- Delete current line's bookmark from the current stack
-      delete = "<leader>bd",
+      delete = "<leader>vd",
       -- Move to the next bookmark in the stack
-      next_bookmark = "<leader>bn",
+      next_bookmark = "<leader>vn",
       -- Move to the previous bookmark in the stack
-      prev_bookmark = "<leader>bp",
+      prev_bookmark = "<leader>vp",
       -- Fuzzy-find all bookmarks
-      search_bookmarks = "<leader>bf",
+      search_bookmarks = "<leader>vf",
       -- Fuzzy-find bookmarks in current stack
-      search_current_bookmarks = "<leader>bc",
+      search_current_bookmarks = "<leader>vc",
       -- Fuzzy find all stacks
-      search_stacks = "<leader>bs",
+      search_stacks = "<leader>vs",
       -- Change line of hovered bookmark
-      change_line = "<leader>bl",
+      change_line = "<leader>vl",
     },
     window_mappings = {
       -- Move the UI cursor down
