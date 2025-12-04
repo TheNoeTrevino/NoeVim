@@ -26,6 +26,7 @@ return {
         { "<leader>a", "", group = "A.I.", icon = { icon = " ", color = "azure" } },
         mode = { "n", "v" },
         { "<leader>d", group = "Debug", icon = { icon = " ", color = "red" } },
+        { "<leader>v", group = "Spelunk", icon = { icon = " ", color = "red" } },
         { "<leader>c", group = "Code" },
         { "<leader>S", group = "TS Surround", icon = { icon = "󰐅 ", color = "azure" }, hidden = true },
         { "<leader>n", group = "Notif/Notes", icon = { icon = "󰵙 ", color = "yellow" }, hidden = false },

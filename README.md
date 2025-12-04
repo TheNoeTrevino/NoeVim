@@ -51,3 +51,20 @@ lspconfig.angularls.setup({
 vim.o.exrc = true
 vim.o.secure = true  
 ```
+
+How to trick mason into using a system install
+
+``` bash
+
+rm -rf ~/.local/share/nvim/mason/packages/lua-language-server
+rm ~/.local/share/nvim/mason/bin/lua-language-server
+
+
+mkdir -p ~/.local/share/nvim/mason/packages/lua-language-server/libexec/bin
+cp /usr/bin/lua-language-server ~/.local/share/nvim/mason/packages/lua-language-server/libexec/bin/
+chmod +x ~/.local/share/nvim/mason/packages/lua-language-server/libexec/bin/lua-language-server
+
+
+ln -s ~/.local/share/nvim/mason/packages/lua-language-server/libexec/bin/lua-language-server \
+      ~/.local/share/nvim/mason/bin/lua-language-server
+```
