@@ -1,4 +1,6 @@
 return {
+  "TheNoeTrevino/no-go.nvim",
+  -- dir = "~/projects/no-go.nvim/",
   opts = {
     fold_imports = true,
     enabled = true,
@@ -12,7 +14,6 @@ return {
       suffix = "   ",
     },
   },
-  dir = "~/projects/no-go.nvim/",
   init = function()
     vim.keymap.set("n", "<leader>ngt", "<cmd>NoGoToggle<cr>", { desc = "NoGoToggle" })
   end,
