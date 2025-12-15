@@ -1,16 +1,8 @@
 return {
-  "nvim-treesitter/nvim-treesitter",
+  "MeanderingProgrammer/treesitter-modules.nvim",
   opts = {
-    refactor = {
-      highlight_definitions = { enable = false },
-      navigation = {
-        enable = true,
-        keymaps = {
-          list_definitions_toc = false,
-          goto_next_usage = "<C-n>",
-          goto_previous_usage = "<C-p>",
-        },
-      },
+    fold = {
+      enable = true,
     },
     incremental_selection = {
       enable = true,
@@ -19,6 +11,9 @@ return {
         node_incremental = "<CR>",
         node_decremental = "<bs>",
         scope_incremental = "<tab>",
+      },
+      indent = {
+        enable = true,
       },
     },
   },
