@@ -56,6 +56,18 @@ return {
         -- stylua: ignore start
         { "<leader>du", function() require("dapui").toggle({}) end, desc = "Dap UI", },
         { "<leader>de", function() require("dapui").eval() end,     desc = "Eval",   mode = { "n", "v" }, },
+        {
+          "<leader>df",
+          function()
+            require('dapui').float_element(nil, {
+              height = math.floor(vim.o.lines / 2),
+              width = math.floor(vim.o.columns / 2),
+              position = 'center',
+              enter = true
+            })
+          end,
+          desc = "Float View"
+        },
       }
     end,
     opts = {
@@ -116,6 +128,7 @@ return {
     -- stylua: ignore
     keys = {
       { "<leader>dPt", function() require('dap-python').test_method() end, desc = "Debug Method", ft = "python" },
+      { "<leader>dPc", function() require('dap-python').test_class() end,  desc = "Debug Class",  ft = "python" },
       { "<leader>dPc", function() require('dap-python').test_class() end,  desc = "Debug Class",  ft = "python" },
     },
     config = function()
