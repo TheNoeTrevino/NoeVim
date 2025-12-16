@@ -55,7 +55,7 @@ return {
       return {
         -- stylua: ignore start
         { "<leader>du", function() require("dapui").toggle({}) end, desc = "Dap UI", },
-        { "<leader>de", function() require("dapui").eval() end, desc = "Eval", mode = { "n", "v" }, },
+        { "<leader>de", function() require("dapui").eval() end,     desc = "Eval",   mode = { "n", "v" }, },
       }
     end,
     opts = {
@@ -63,38 +63,38 @@ return {
         {
           elements = {
             {
-              id = "scopes",
-              size = 0.4,
+              id = "repl",
+              size = 0.15,
             },
             {
-              id = "watches",
-              size = 0.4,
-            },
-            {
-              id = "breakpoints",
-              size = 0.1,
+              id = "console",
+              size = 0.15,
             },
             {
               id = "stacks",
-              size = 0.1,
+              size = 0.35,
+            },
+            {
+              id = "breakpoints",
+              size = 0.35,
             },
           },
           position = "left",
-          size = 50,
+          size = 40,
         },
         {
           elements = {
             {
-              id = "repl",
+              id = "watches",
               size = 0.5,
             },
             {
-              id = "console",
+              id = "scopes",
               size = 0.5,
             },
           },
           position = "bottom",
-          size = 10,
+          size = 12,
         },
       },
     },
@@ -116,7 +116,7 @@ return {
     -- stylua: ignore
     keys = {
       { "<leader>dPt", function() require('dap-python').test_method() end, desc = "Debug Method", ft = "python" },
-      { "<leader>dPc", function() require('dap-python').test_class() end, desc = "Debug Class", ft = "python" },
+      { "<leader>dPc", function() require('dap-python').test_class() end,  desc = "Debug Class",  ft = "python" },
     },
     config = function()
       require("dap-python").setup("debugpy-adapter")
