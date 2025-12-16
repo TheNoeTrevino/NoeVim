@@ -29,10 +29,10 @@ return {
         },
         keys = {
           hide_n = { "q", "hide", mode = "n" }, -- hide the terminal window in normal mode
-          hide_t = { "<c-/>", "hide" }, -- hide the terminal window in terminal mode
-          hide_t = { "<c-_>", "hide" }, -- tmux
-          win_p = { "<c-w>p", "blur" }, -- leave the cli window
-          prompt = { "<c-p>", "prompt" }, -- insert prompt or context
+          hide_t = { "<c-/>", "hide" },         -- hide the terminal window in terminal mode
+          hide_t = { "<c-_>", "hide" },         -- tmux
+          win_p = { "<c-w>p", "blur" },         -- leave the cli window
+          prompt = { "<c-p>", "prompt" },       -- insert prompt or context
 
           nav_left = { "<c-j>", "nav_left", expr = true, desc = "navigate to the left window" },
           nav_down = { "<c-k>", "nav_down", expr = true, desc = "navigate to the below window" },
@@ -57,10 +57,10 @@ return {
         -- window: when run inside a terminal multiplexer, new sessions will be created in a new tab
         -- split: when run inside a terminal multiplexer, new sessions will be created in a new split
         -- NOTE: zellij only supports `terminal`
-        create = "terminal", ---@type "terminal"|"window"|"split"
+        create = "window", ---@type "terminal"|"window"|"split"
         split = {
           vertical = true, -- vertical or horizontal split
-          size = 0.3, -- size of the split (0-1 for percentage)
+          size = 0.3,      -- size of the split (0-1 for percentage)
         },
       },
     },
