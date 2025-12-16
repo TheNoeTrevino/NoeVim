@@ -41,10 +41,9 @@ return {
       map({ "n", "v" }, "<leader>ghr", ":Gitsigns reset_hunk<CR>", "Reset Hunk")
       map("n", "<leader>ghS", gs.stage_buffer, "Stage Buffer")
       map("n", "<leader>ghu", gs.undo_stage_hunk, "Undo Stage Hunk")
-      map("n", "<leader>ghR", gs.reset_buffer, "Reset Buffer")
       map("n", "<leader>ghp", gs.preview_hunk_inline, "Preview Hunk Inline")
       map("n", "<leader>ghb", "<cmd>Gitsigns toggle_current_line_blame<CR>", "Blame Current Line")
-      map("n", "<leader>ghB", function() gs.blame() end, "Blame Buffer")
+      map("n", "hello<leader>ghB", function() gs.blame() end, "Blame Buffer")
       map("n", "<leader>ghd", gs.diffthis, "Diff This")
       map("n", "<leader>ghD", "<cmd>Gitsigns toggle_deleted<CR>", "Toggle Deleted Diff")
       map("n", "<leader>ghl", "<cmd>Gitsigns toggle_linehl<CR>", "Toggle Line hl")
@@ -53,52 +52,6 @@ return {
       map({ "o", "x" }, "ih", "<cmd>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
       end,
     },
-  },
-  {
-    "sindrets/diffview.nvim",
-    event = "VeryLazy",
-    config = function()
-      local actions = require("diffview.actions")
-      require("diffview").setup({
-        keymaps = {
-          disable_defaults = false, -- Disable the default keymaps
-          file_panel = {
-            {
-              "n",
-              "j",
-              actions.close_fold,
-              { desc = "Bring the cursor to the next file entry" },
-            },
-            {
-              "n",
-              "k",
-              actions.next_entry,
-              { desc = "Bring the cursor to the next file entry" },
-            },
-            {
-              "n",
-              "l",
-              actions.prev_entry,
-              { desc = "Bring the cursor to the previous file entry" },
-            },
-            {
-              "n",
-              ";",
-              actions.select_entry,
-              { desc = "Open the diff for the selected entry" },
-            },
-          },
-          file_history_panel = {
-            -- stylua: ignore start
-            { "n", "j", actions.close_fold,   { desc = "Collapse fold" } },
-            { "n", "k", actions.next_entry,   { desc = "Bring the cursor to the next file entry" } },
-            { "n", "l", actions.prev_entry,   { desc = "Bring the cursor to the previous file entry" } },
-            { "n", ";", actions.select_entry, { desc = "Open the diff for the selected entry" } },
-            -- stylua: ignore end
-          },
-        },
-      })
-    end,
   },
   {
     "akinsho/git-conflict.nvim",
