@@ -241,7 +241,7 @@ h(0, "BlinkCmpMenuSelection", { bg = colors.bg_selection })
 h(0, "ISwapSelection", { bg = colors.red_git })
 h(0, "ISwapHighlight", { fg = nil, bg = colors.orange_bright })
 h(0, "TreesitterContext", { fg = nil, bg = nil })
-h(0, "TreesitterContextSeparator", { fg = colors.bg_separator, bg = nil })
+h(0, "TreesitterContextSeparator", { fg = "#101F28", bg = nil })
 
 -- vscode string color
 -- hi(0, "String", { fg = "#CE9178" })
@@ -347,7 +347,7 @@ vim.cmd(
 require("treesitter-context").setup({
   enable = true,            -- Enable this plugin (Can be enabled/disabled later via commands)
   multiwindow = true,       -- Enable multiwindow support.
-  max_lines = 4,            -- How many lines the window should span. Values <= 0 mean no limit.
+  max_lines = 3,            -- How many lines the window should span. Values <= 0 mean no limit.
   min_window_height = 0,    -- Minimum editor window height to enable context. Values <= 0 mean no limit.
   line_numbers = false,
   multiline_threshold = 20, -- Maximum number of lines to show for a single context
