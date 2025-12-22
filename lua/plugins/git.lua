@@ -60,7 +60,7 @@ return {
     config = function()
       require("git-conflict").setup({
         default_mappings = {
-          s = "co",
+          ours = "co",
           theirs = "ct",
           none = "c0",
           both = "cb",

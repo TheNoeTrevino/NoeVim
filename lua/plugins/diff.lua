@@ -8,7 +8,7 @@ return {
       line_insert = "#1B2018",
       line_delete = "#2A151A", -- Line-level deletions
 
-      char_brightness = 1.5, -- Auto-adjust based on your colorscheme
+      char_brightness = 2.0, -- Auto-adjust based on your colorscheme
     },
     -- Override character colors explicitly
     -- highlights = {
