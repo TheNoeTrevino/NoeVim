@@ -14,13 +14,13 @@ return {
           { "gY", false, mode = "n" },
           { "<leader>ca", false, mode = "v" },
           { "K", false, mode = "n" },
-          {
-            "K",
-            function()
-              vim.lsp.buf.hover()
-            end,
-            mode = "n",
-          },
+          -- {
+          --   "K",
+          --   function()
+          --     vim.lsp.buf.hover()
+          --   end,
+          --   mode = "n",
+          -- },
           {
             "<leader>ca",
             function()
