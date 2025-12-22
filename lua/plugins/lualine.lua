@@ -1,3 +1,4 @@
+local hydra = require("hydra.statusline")
 return {
   "nvim-lualine/lualine.nvim",
   event = "VimEnter",
@@ -38,7 +39,20 @@ return {
         },
       },
       sections = {
-        lualine_a = { "mode" },
+        lualine_a = {
+          { "mode" },
+          {
+            function()
+              return hydra.get_name()
+            end,
+            cond = function()
+              return hydra.is_active()
+            end,
+            color = function()
+              return { fg = hydra.get_color() }
+            end,
+          },
+        },
         lualine_b = { "branch" }, --"branch"
         -- stylua: ignore
         lualine_c = {

@@ -32,6 +32,7 @@ return {
         { "<leader>n", group = "Notif/Notes", icon = { icon = "󰵙 ", color = "yellow" }, hidden = false },
         { "<leader>m", group = "Markdown", icon = { icon = "󱦹 ", color = "azure" } },
         { "<leader>g", group = "Git", icon = { icon = "󰊤 ", color = "azure" } },
+        { "<leader>G", group = "Git Hydra", icon = { icon = " ", color = "azure" } },
         { "<leader>gB", group = "Blame", icon = { icon = " ", color = "azure" } },
         { "<leader>gd", group = "Diff", icon = { icon = " ", color = "azure" } },
         { "<leader>q", group = "Quit/session" },

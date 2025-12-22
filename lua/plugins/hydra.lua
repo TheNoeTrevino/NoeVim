@@ -37,7 +37,7 @@ return {
         end,
       },
       mode = { "n", "x" },
-      body = "<leader>o",
+      body = "<leader>G",
       heads = {
         { "<C-K>", "<cmd>Gitsigns next_hunk<cr>", { desc = "next hunk" } },
         { "<C-L>", "<cmd>Gitsigns prev_hunk<cr>", { desc = "prev hunk" } },
