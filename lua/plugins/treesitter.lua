@@ -1,9 +1,9 @@
 return {
   "MeanderingProgrammer/treesitter-modules.nvim",
   opts = {
-    fold = {
-      enable = true,
-    },
+    -- fold = {
+    --   enable = true,
+    -- },
     incremental_selection = {
       enable = true,
       keymaps = {

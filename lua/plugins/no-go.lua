@@ -3,7 +3,7 @@ return {
   -- dir = "~/projects/no-go.nvim/",
   opts = {
     fold_imports = true,
-    enabled = true,
+    enabled = false,
     reveal_on_cursor = true,
     keys = {
       down = "k",
