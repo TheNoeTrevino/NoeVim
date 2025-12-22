@@ -24,7 +24,7 @@ return {
           {
             "<leader>ca",
             function()
-              require("tiny-code-action").code_action()
+              require("tiny-code-action").code_action({})
             end,
             mode = { "n", "x" },
           },
@@ -54,6 +54,7 @@ return {
     diagnostics = {
       float = {
         border = "single",
+        source = true,
       },
     },
   },
