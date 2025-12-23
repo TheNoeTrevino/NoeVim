@@ -22,8 +22,8 @@ require("lazy").setup({
     -- { import = "lazyvim.plugins.extras.lang.typescript" }, -- why is this loading the chrome debugger??
     { import = "lazyvim.plugins.extras.lang.python" },
     { import = "lazyvim.plugins.extras.lang.sql" },
-    { import = "lazyvim.plugins.extras.lang.go" },
     -- { import = "lazyvim.plugins.extras.lang.tailwind" },
+    -- { import = "lazyvim.plugins.extras.lang.go" },
     { import = "lazyvim.plugins.extras.util.dot" },
     -- npm install @angular/language-service --no-save
     -- for icris and other projects that need the version and such
