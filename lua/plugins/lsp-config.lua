@@ -36,11 +36,11 @@ return {
         mason = true,
         autostart = true,
       },
-      omnisharp = {
-        enabled = false,
-        mason = false,
-        autostart = false,
-      },
+      -- omnisharp = {
+      --   enabled = false,
+      --   mason = false,
+      --   autostart = false,
+      -- },
       ruff = {
         mason = false,
         autostart = false,

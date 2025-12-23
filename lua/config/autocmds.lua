@@ -215,3 +215,10 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
   desc = "Enable completion for DAP-REPL filetypes",
 })
+
+vim.api.nvim_create_user_command("Diff", function()
+  -- let code diff do this for us
+  vim.cmd("Gitsigns toggle_word_diff false")
+  vim.cmd("Gitsigns toggle_linehl false")
+  vim.cmd("CodeDiff")
+end, {})

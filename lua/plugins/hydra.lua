@@ -9,7 +9,7 @@ return {
  _<C-L>_: prev hunk   _u_: undo last stage   _p_: preview hunk   _B_: blame show full 
  ^ ^              _S_: stage buffer      ^ ^                 _/_: show base file
  ^
- ^ ^              _<Esc>_: exit
+ ^ ^              _<Esc>_: exit               _C_: commit
 ]]
 
     Hydra({
@@ -26,6 +26,8 @@ return {
           -- vim.cmd("silent! %foldopen!")
           -- vim.bo.modifiable = false
           -- vim.cmd("Gitsigns toggle_linehl true")
+          vim.cmd("Gitsigns toggle_word_diff true")
+          vim.cmd("Gitsigns toggle_linehl true")
         end,
         on_exit = function()
           -- local cursor_pos = vim.api.nvim_win_get_cursor(0)
@@ -34,25 +36,28 @@ return {
           -- vim.cmd("normal zv")
           -- vim.cmd("Gitsigns toggle_linehl false")
           -- vim.cmd("Gitsigns toggle_deleted false")
+          vim.cmd("Gitsigns toggle_word_diff false")
+          vim.cmd("Gitsigns toggle_linehl false")
         end,
       },
       mode = { "n", "x" },
       body = "<leader>G",
       heads = {
-        { "<C-K>", "<cmd>Gitsigns next_hunk<cr>", { desc = "next hunk" } },
-        { "<C-L>", "<cmd>Gitsigns prev_hunk<cr>", { desc = "prev hunk" } },
-        { "s", "<cmd>Gitsigns stage_hunk<CR>", { silent = true, desc = "stage hunk" } },
-        { "u", "<cmd>Gitsigns undo_stage_hunk<CR>", { desc = "undo last stage" } },
-        { "S", "<cmd>Gitsigns stage_buffer<CR>", { desc = "stage buffer" } },
-        { "p", "<cmd>Gitsigns preview_hunk<CR>", { desc = "preview hunk" } },
-        { "d", "<cmd>Gitsigns toggle_deleted<CR>", { nowait = true, desc = "toggle deleted" } },
-        { "b", "<cmd>Gitsigns blame_line<CR>", { desc = "blame" } },
+        { "<C-K>", "<cmd>Gitsigns next_hunk<cr>", { desc = "Next Hunk" } },
+        { "<C-L>", "<cmd>Gitsigns prev_hunk<cr>", { desc = "Prev Hunk" } },
+        { "C", "<cmd>G commit<CR>", { silent = true, desc = "Commit" } },
+        { "s", "<cmd>Gitsigns stage_hunk<CR>", { silent = true, desc = "Stage Hunk" } },
+        { "u", "<cmd>Gitsigns undo_stage_hunk<CR>", { desc = "Undo Last Stage" } },
+        { "S", "<cmd>Gitsigns stage_buffer<CR>", { desc = "Stage Buffer" } },
+        { "p", "<cmd>Gitsigns preview_hunk<CR>", { desc = "Preview Hunk" } },
+        { "d", "<cmd>Gitsigns toggle_deleted<CR>", { nowait = true, desc = "Toggle Deleted" } },
+        { "b", "<cmd>Gitsigns blame_line<CR>", { desc = "Blame" } },
         {
           "B",
           function()
             gitsigns.blame_line({ full = true })
           end,
-          { desc = "blame show full" },
+          { desc = "Blame Show Full" },
         },
         { "/", gitsigns.show, { exit = true, desc = "show base file" } }, -- show the base of the file
         { "<Esc>", nil, { exit = true, nowait = true, desc = "exit" } },
