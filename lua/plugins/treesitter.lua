@@ -1,5 +1,6 @@
 return {
   "MeanderingProgrammer/treesitter-modules.nvim",
+  lazy = true,
   opts = {
     -- fold = {
     --   enable = true,

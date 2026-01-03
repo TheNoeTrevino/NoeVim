@@ -3,6 +3,7 @@ return {
   event = "VeryLazy",
   version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
   build = "make install_jsregexp",
+  lazy = true,
   config = function()
     -- If you forget:
     -- https://www.youtube.com/watch?v=FmHhonPjvvA&ab_channel=Vimjoyer

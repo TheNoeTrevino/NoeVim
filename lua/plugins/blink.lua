@@ -12,6 +12,7 @@ return {
   {
     "newtoallofthis123/blink-cmp-fuzzy-path",
     dependencies = { "saghen/blink.cmp" },
+    lazy = true,
     opts = {
       filetypes = { "markdown", "json" },
       trigger_char = "@",
