@@ -9,4 +9,8 @@ return {
   { "folke/persistence.nvim",      enabled = true },
   -- { "nvim-dap-python", enabled = false },
   { "nvimdev/dashboard-nvim",      enabled = false },
+  {
+    "folke/persistence.nvim",
+      enabled = vim.fn.has("win32") == 0,
+  }
 }

@@ -29,7 +29,7 @@ return {
   --   opts = {},
   -- },
   { "tpope/vim-fugitive", cmd = { "Git", "G" } },
-  { dir = "~/projects/little-book-of-zen.nvim" },
+  -- { dir = "~/projects/little-book-of-zen.nvim" },
   -- {
   --   "vyfor/cord.nvim",
   --   event = "VeryLazy",
