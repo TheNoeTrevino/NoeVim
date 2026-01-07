@@ -23,29 +23,31 @@ return {
   --     })
   --   end,
   -- },
-  {
-    "aliqyan-21/wit.nvim",
-    cmd = { "WitSearchVisual", "WitSearchWiki", "WitSearch" },
-    opts = {},
-  },
+  -- {
+  --   "aliqyan-21/wit.nvim",
+  --   cmd = { "WitSearchVisual", "WitSearchWiki", "WitSearch" },
+  --   opts = {},
+  -- },
   { "tpope/vim-fugitive", cmd = { "Git", "G" } },
-  {
-    "vyfor/cord.nvim",
-    event = "VeryLazy",
-    build = ":Cord update",
-    -- opts = {}
-  },
-  {
-    "andythigpen/nvim-coverage",
-    version = "*",
-    config = function()
-      require("coverage").setup({
-        auto_reload = true,
-      })
-    end,
-  },
+  { dir = "~/projects/little-book-of-zen.nvim" },
+  -- {
+  --   "vyfor/cord.nvim",
+  --   event = "VeryLazy",
+  --   build = ":Cord update",
+  --   -- opts = {}
+  -- },
+  -- {
+  --   "andythigpen/nvim-coverage",
+  --   version = "*",
+  --   config = function()
+  --     require("coverage").setup({
+  --       auto_reload = true,
+  --     })
+  --   end,
+  -- },
   {
     "AndrewRadev/linediff.vim",
+    cmd = "Linediff",
     event = "UIEnter",
     config = function()
       vim.keymap.set("x", "D", function()
