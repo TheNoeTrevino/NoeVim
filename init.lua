@@ -417,5 +417,21 @@ vim.api.nvim_create_autocmd("FileType", {
         redraw(ev.buf)
       end,
     })
+
+require("lspconfig").omnisharp.setup({
+  cmd = { "OmniSharp", "--languageserver", "--hostPID", tostring(vim.fn.getpid()) },
+  on_attach = on_attach, -- your existing on_attach if you have one
+  -- Add this:
+  init_options = {
+    MSBuild = {
+      -- Force OmniSharp to use your .NET SDK
+      UseLegacySdkResolver = false,
+      LoadProjectsOnDemand = false,
+    },
+  },
+  -- You might also need to set this environment variable
+  before_init = function(_, config)
+    config.cmd_env = config.cmd_env or {}
+    config.cmd_env.DOTNET_ROOT = "C:\\Program Files\\dotnet" -- adjust path if needed
   end,
 })

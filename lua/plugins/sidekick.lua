@@ -33,7 +33,6 @@ return {
           hide_t = { "<c-_>", "hide" }, -- tmux
           win_p = { "<c-w>p", "blur" }, -- leave the cli window
           prompt = { "<c-i>", "prompt" }, -- insert prompt or context
-
           nav_left = { "<c-j>", "nav_left", expr = true, desc = "navigate to the left window" },
           nav_down = { "<c-k>", "nav_down", expr = true, desc = "navigate to the below window" },
           nav_up = { "<c-l>", "nav_up", expr = true, desc = "navigate to the above window" },
@@ -57,7 +56,7 @@ return {
       ---@class sidekick.cli.Mux
       mux = {
         backend = "tmux",
-        enabled = true,
+        enabled = false,
         -- terminal: new sessions will be created for each CLI tool and shown in a Neovim terminal
         -- window: when run inside a terminal multiplexer, new sessions will be created in a new tab
         -- split: when run inside a terminal multiplexer, new sessions will be created in a new split
