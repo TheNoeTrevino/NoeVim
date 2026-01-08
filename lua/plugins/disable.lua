@@ -9,23 +9,31 @@ return {
   { "folke/persistence.nvim", enabled = true },
   { "nvimdev/dashboard-nvim", enabled = false },
   {
-    "folke/persistence.nvim",
-    enabled = vim.fn.has("win32") == 0,
-  },
-  {
-    "folke/ts-comments.nvim",
-    enabled = vim.fn.has("win32") == 0,
-  },
-  {
-    "tpope/vim-dadbod",
-    enabled = vim.fn.has("win32") == 0,
-  },
-  {
-    "folke/tokyonight.nvim",
+    "folke/todo-comments.nvim",
     enabled = true,
   },
   {
-    "nvim-dap-python",
+    "EvWilson/spelunk.nvim",
+    enabled = vim.fn.has("win32") == 0,
+  },
+  {
+    "nvimtools/hydra.nvim",
+    enabled = vim.fn.has("win32") == 0,
+  },
+  {
+    "mfussenegger/nvim-dap",
+    enabled = vim.fn.has("win32") == 0,
+  },
+  {
+    "rcarriga/nvim-dap-ui",
+    enabled = vim.fn.has("win32") == 0,
+  },
+  {
+    "mfussenegger/nvim-dap-python",
+    enabled = vim.fn.has("win32") == 0,
+  },
+  {
+    "mason-nvim-dap.nvim",
     enabled = vim.fn.has("win32") == 0,
   },
 }

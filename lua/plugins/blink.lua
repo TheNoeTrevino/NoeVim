@@ -22,7 +22,7 @@ return {
   {
     "saghen/blink.cmp",
     event = "InsertEnter",
-    dependencies = { "rcarriga/cmp-dap", "milanglacier/minuet-ai.nvim", "giuxtaposition/blink-cmp-copilot" },
+    -- dependencies = { "rcarriga/cmp-dap", "milanglacier/minuet-ai.nvim", "giuxtaposition/blink-cmp-copilot" },
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
@@ -141,8 +141,8 @@ return {
           local sql_filetypes = { mysql = true, sql = true }
           if sql_filetypes[vim.bo.filetype] ~= nil then
             return { "dadbod", "snippets", "buffer" }
-          elseif is_dap_buffer() then
-            return { "dap", "snippets", "buffer" }
+          -- elseif is_dap_buffer() then
+          --   return { "dap", "snippets", "buffer" }
           else
             return { "lsp", "path", "snippets", "copilot", "fuzzy-path" } -- "buffer" }
           end
@@ -171,7 +171,7 @@ return {
             module = "vim_dadbod_completion.blink",
             score_offset = 50,
           },
-          dap = { name = "dap", module = "blink.compat.source", score_offset = 200 },
+          -- dap = { name = "dap", module = "blink.compat.source", score_offset = 200,  },
           copilot = {
             name = "copilot",
             module = "blink-cmp-copilot",
