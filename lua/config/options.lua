@@ -53,3 +53,10 @@ vim.o.exrc = true
 vim.o.secure = true
 
 vim.g.lazyvim_rust_diagnostics = "bacon-ls"
+
+vim.filetype.add({
+  extension = {
+    razor = "razor",
+    cshtml = "razor",
+  },
+})
