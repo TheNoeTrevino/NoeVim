@@ -253,6 +253,7 @@ local boost = {
 
 -- update certain tokens to use a highlight of a higher priority
 vim.api.nvim_create_autocmd("LspTokenUpdate", {
+  pattern = "go",
   callback = function(args)
     --- @type SemanticToken
     local token = args.data.token
