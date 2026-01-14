@@ -4,7 +4,9 @@ return {
   event = "LazyFile",
   opts = {
     highlight = {
+      multiline = false,
       keyword = "fg",
+      after = "",
     },
     -- HOORAY: hello
     keywords = {
