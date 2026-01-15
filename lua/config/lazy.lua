@@ -30,6 +30,7 @@ require("lazy").setup({
     -- or just do save-dev usually
     -- { import = "lazyvim.plugins.extras.lang.angular" },
     { import = "lazyvim.plugins.extras.lang.json" },
+    -- { import = "lazyvim.plugins.extras.lang.dotnet" },
     -- Formatting
     { import = "lazyvim.plugins.extras.formatting.black" },
     { import = "lazyvim.plugins.extras.formatting.prettier" },
