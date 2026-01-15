@@ -28,6 +28,11 @@ vim.keymap.del("t", "<c-_>")
 vim.keymap.del("n", "<c-_>")
 vim.keymap.del("n", "L")
 vim.keymap.del("n", "<c-k>")
+vim.keymap.del("n", "<leader>bb")
+vim.keymap.del("n", "<leader>bD")
+vim.keymap.del("n", "<leader>bd")
+vim.keymap.del("n", "<leader>bo")
+-- vim.keymap.del("n", "<c-p>")
 
 local map = LazyVim.safe_keymap_set
 
@@ -262,8 +267,8 @@ map("n", "<leader>wT", "<C-w>T", { desc = "Split Into Tab" })
 
 map("n", "<leader>we", "<C-w>=", { desc = "Equalize" })
 
-map("n", "<c-n>", "<cmd>bn<cr>")
-map("n", "<c-p>", "<cmd>bp<cr>")
+-- map("n", "<c-n>", "<cmd>bn<cr>")
+-- map("n", "<c-p>", "<cmd>bp<cr>")
 
 -------------------------------------------------------------------------------
 --                           Jumplist Section
