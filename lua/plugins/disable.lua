@@ -6,15 +6,25 @@ return {
   { "venv-selector.nvim", enabled = false },
   { "catppuccin", enabled = false },
   { "omnisharp-extended-lsp.nvim", enabled = false },
-  { "folke/persistence.nvim", enabled = true },
-  -- { "nvim-dap-python", enabled = false },
   { "nvimdev/dashboard-nvim", enabled = false },
   {
     "folke/persistence.nvim",
     enabled = vim.fn.has("win32") == 0,
   },
   {
-    "folke/todo-comments.nvim",
+    "folke/ts-comments.nvim",
+    enabled = vim.fn.has("win32") == 0,
+  },
+  {
+    "tpope/vim-dadbod",
+    enabled = vim.fn.has("win32") == 0,
+  },
+  {
+    "folke/tokyonight.nvim",
     enabled = true,
+  },
+  {
+    "nvim-dap-python",
+    enabled = vim.fn.has("win32") == 0,
   },
 }

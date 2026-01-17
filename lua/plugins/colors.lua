@@ -19,14 +19,4 @@ return {
       },
     },
   },
-  {
-    "catgoose/nvim-colorizer.lua",
-    event = "BufReadPre",
-    ft = { "css", "scss", "html", "lua", "ts" },
-    config = function()
-      require("colorizer").setup({
-        user_default_options = { mode = "virtualtext" },
-      })
-    end,
-  },
 }
