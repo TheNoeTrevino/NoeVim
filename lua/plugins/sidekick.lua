@@ -1,3 +1,10 @@
+local ui = vim.api.nvim_list_uis()[1]
+local total_width = ui.width
+local total_height = ui.height
+
+local win_width = math.floor(total_width * 0.33)
+local win_height = math.floor(total_height * 0.8)
+
 return {
   "folke/sidekick.nvim",
   cmd = "Sidekick",
@@ -15,24 +22,18 @@ return {
         wo = {}, ---@type vim.wo
         bo = {}, ---@type vim.bo
         layout = "right", ---@type "float"|"left"|"bottom"|"top"|"right"
-        --- Options used when layout is "float"
-        ---@type vim.api.keyset.win_config
-        float = {
-          width = 0.9,
-          height = 0.9,
-        },
         -- Options used when layout is "left"|"bottom"|"top"|"right"
         ---@type vim.api.keyset.win_config
         split = {
-          width = 80,
+          width = win_width,
           height = 20,
         },
         keys = {
           hide_n = { "q", "hide", mode = "n" }, -- hide the terminal window in normal mode
-          hide_t = { "<c-/>", "hide" },         -- hide the terminal window in terminal mode
-          hide_t = { "<c-_>", "hide" },         -- tmux
-          win_p = { "<c-w>p", "blur" },         -- leave the cli window
-          prompt = { "<c-p>", "prompt" },       -- insert prompt or context
+          -- hide_t = { "<c-/>", "hide" }, -- hide the terminal window in terminal mode
+          hide_t = { "<c-_>", "hide" }, -- tmux
+          win_p = { "<c-w>p", "blur" }, -- leave the cli window
+          prompt = { "<c-p>", "prompt" }, -- insert prompt or context
 
           nav_left = { "<c-j>", "nav_left", expr = true, desc = "navigate to the left window" },
           nav_down = { "<c-k>", "nav_down", expr = true, desc = "navigate to the below window" },
@@ -59,7 +60,7 @@ return {
         create = "terminal", ---@type "terminal"|"window"|"split"
         split = {
           vertical = true, -- vertical or horizontal split
-          size = 0.3,      -- size of the split (0-1 for percentage)
+          size = 0.3, -- size of the split (0-1 for percentage)
         },
       },
     },
