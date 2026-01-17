@@ -111,13 +111,13 @@ map("v", "<A-k>", ":m '>+1<cr>gv=gv", { desc = "Move Down" })
 
 -- TMUX
 map("n", "<c-_>", function()
-  require("sidekick.cli").toggle("claude")
-end, { desc = "Claude" })
+  require("sidekick.cli").toggle("opencode")
+end, { desc = "Opencode" })
 
 -- idk man, windows
 map("n", "", function()
-  require("sidekick.cli").toggle("claude")
-end, { desc = "Claude" })
+  require("sidekick.cli").toggle("opencode")
+end, { desc = "Opencode" })
 
 map({ "n", "t" }, "<c-\\>", function()
   Snacks.terminal(nil, { cwd = LazyVim.root() })
