@@ -212,3 +212,6 @@ whitelisting
 paso
 cli
 scannable
+nvim's
+luassert
+gitignored
