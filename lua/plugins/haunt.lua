@@ -4,16 +4,26 @@ return {
   config = function()
     require("haunt").setup({
       picker_keys = {
-        delete = "d",
-        edit_annotation = "a",
+        delete = {
+          key = "d",
+          mode = { "n" },
+        },
+        edit_annotation = {
+          key = "a",
+          mode = { "n" },
+        },
       },
     })
   end,
   init = function()
     local map = vim.keymap.set
-    map("n", "hm", function()
+    map("n", "ht", function()
       require("haunt.api").toggle()
     end, { desc = "Toggle bookmark" })
+
+    map("n", "hd", function()
+      require("haunt.api").delete()
+    end, { desc = "Delete bookmark" })
 
     map("n", "hn", function()
       require("haunt.api").next()

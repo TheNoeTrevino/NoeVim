@@ -3,27 +3,26 @@ local total_width = ui.width
 local total_height = ui.height
 
 local win_width = math.floor(total_width * 0.33)
-local win_height = math.floor(total_height * 0.8)
+local haunt = require("haunt.sidekick")
 
 return {
   "folke/sidekick.nvim",
   cmd = "Sidekick",
+  ---@class sidekick.Config
   opts = {
-    ---@class sidekick.Config
     nes = { enabled = true },
     cli = {
+      prompts = {
+        haunt_all = function()
+          return haunt.get_locations()
+        end,
+        haunt_buffer = function()
+          return haunt.get_locations({ current_buffer = true })
+        end,
+      },
       watch = true, -- notify Neovim of file changes done by AI CLI tools
       ---@class sidekick.win.Opts
       win = {
-        --- This is run when a new terminal is created, before starting it.
-        --- Here you can change window options `terminal.opts`.
-        ---@param terminal sidekick.cli.Terminal
-        config = function(terminal) end,
-        wo = {}, ---@type vim.wo
-        bo = {}, ---@type vim.bo
-        layout = "right", ---@type "float"|"left"|"bottom"|"top"|"right"
-        -- Options used when layout is "left"|"bottom"|"top"|"right"
-        ---@type vim.api.keyset.win_config
         split = {
           width = win_width,
           height = 20,
@@ -33,7 +32,7 @@ return {
           -- hide_t = { "<c-/>", "hide" }, -- hide the terminal window in terminal mode
           hide_t = { "<c-_>", "hide" }, -- tmux
           win_p = { "<c-w>p", "blur" }, -- leave the cli window
-          prompt = { "<c-p>", "prompt" }, -- insert prompt or context
+          prompt = { "<c-i>", "prompt" }, -- insert prompt or context
 
           nav_left = { "<c-j>", "nav_left", expr = true, desc = "navigate to the left window" },
           nav_down = { "<c-k>", "nav_down", expr = true, desc = "navigate to the below window" },
@@ -50,7 +49,6 @@ return {
         },
       },
       ---@class sidekick.cli.Mux
-      ---@field backend? "tmux"|"zellij" Multiplexer backend to persist CLI sessions
       mux = {
         backend = "tmux",
         enabled = true,
