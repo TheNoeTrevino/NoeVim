@@ -99,7 +99,7 @@ return {
       completion = {
         trigger = {
           show_on_backspace = true,
-          show_on_insert = true,
+          show_on_insert = false,
           show_on_backspace_in_keyword = true,
         },
         list = {
