@@ -436,11 +436,19 @@ return {
           frecency = false, -- frecency bonus
           history_bonus = false, -- give more weight to chronological order
         },
+        actions = {
+          sidekick_send = function(...)
+            return require("sidekick.cli.picker.snacks").send(...)
+          end,
+        },
         win = {
           -- input window
           input = {
             keys = {
-              -- NOTE: done
+              ["<c-a>"] = {
+                "sidekick_send",
+                mode = { "n", "i" },
+              },
               ["<S-Tab>"] = { "select_and_prev", mode = { "i", "n" } },
               ["<Tab>"] = { "select_and_next", mode = { "i", "n" } },
               ["<c-f>"] = { "toggle_follow", mode = { "i", "n" } },
@@ -449,7 +457,6 @@ return {
               ["I"] = { "toggle_ignore", mode = { "n" } },
               ["H"] = { "toggle_hidden", mode = { "n" } },
               ["<c-m>"] = { "toggle_maximize", mode = { "i", "n" } },
-              ["<c-a>"] = { "select_all", mode = { "n", "i" } },
               ["<c-g>"] = { "toggle_live", mode = { "i", "n" } }, -- pretty cool, can add two arguments to the grep
               ["/"] = "toggle_focus",
               ["<Esc>"] = "cancel",
