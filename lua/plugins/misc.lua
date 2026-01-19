@@ -55,4 +55,5 @@ return {
       end, { noremap = true, expr = true })
     end,
   },
+  { "nvim-mini/mini.doc", version = "*", opts = {}, lazy = true },
 }

@@ -504,7 +504,7 @@ return {
         { "<leader>gl",       function() Snacks.picker.git_log(get_config()) end,                                   desc = "Git Log" },
         { "<leader>gL",       function() Snacks.picker.git_log_line(get_config()) end,                              desc = "Git Log Line" },
         { "<leader>gs",       function() Snacks.picker.git_status(get_config_nm()) end,                             desc = "Git Status" },
-        { "<leader>H",                function() Snacks.picker.git_status(get_config_nm()) end,                             desc = "Git Status" },
+        { "H",                function() Snacks.picker.git_status(get_config_nm()) end,                             desc = "Git Status" },
         { "<leader>gS",       function() Snacks.picker.git_stash(get_config_nm()) end,                              desc = "Git Stash" },
         { "<leader>gd",       function() Snacks.picker.git_diff() end,                                              desc = "Git Diff (Hunks)" },
         { "<leader>gf",       function() Snacks.picker.git_log_file() end,                                          desc = "Git Log File" },
@@ -529,7 +529,7 @@ return {
         { "<leader>ss",       function() Snacks.picker.pickers(get_config()) end,                                   desc = "Pickers" },
         { "<leader>sb",       function() Snacks.picker.buffers(get_config_nm()) end,                                desc = "Buffers" },
         { "<leader>st",       function()Snacks.picker.todo_comments(get_config_nm())end,                            desc = "Todo" },
-        { "<leader>h",                function() Snacks.picker.buffers(get_config_nm()) end,                                desc = "Buffers" },
+        { "h",                function() Snacks.picker.buffers(get_config_nm()) end,                                desc = "Buffers" },
         -- potential mappings to move to f
         { "<leader>sM",       function() Snacks.picker.man(get_config()) end,                                       desc = "Man Pages" },
         { "<leader>sh",       function() Snacks.picker.help(get_config()) end,                                      desc = "Help Pages" },
