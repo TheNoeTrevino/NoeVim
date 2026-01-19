@@ -17,41 +17,41 @@ return {
   end,
   init = function()
     local map = vim.keymap.set
-    map("n", "ht", function()
-      require("haunt.api").toggle()
-    end, { desc = "Toggle bookmark" })
+    map("n", "mt", function()
+      require("haunt.api").toggle_annotation()
+    end, { desc = "Toggle annotation" })
 
-    map("n", "hd", function()
+    map("n", "mT", function()
+      require("haunt.api").toggle_all_lines()
+    end, { desc = "Toggle all annotations" })
+
+    map("n", "md", function()
       require("haunt.api").delete()
     end, { desc = "Delete bookmark" })
 
-    map("n", "hn", function()
+    map("n", "mn", function()
       require("haunt.api").next()
     end, { desc = "Next bookmark" })
 
-    map("n", "ha", function()
+    map("n", "ma", function()
       require("haunt.api").annotate()
     end, { desc = "Next bookmark" })
 
-    map("n", "hl", function()
+    map("n", "ml", function()
       require("haunt.picker").show()
     end, { desc = "Next bookmark" })
 
     -- move
-    map("n", "hp", function()
+    map("n", "mp", function()
       require("haunt.api").prev()
     end, { desc = "Previous bookmark" })
 
-    map("n", "ha", function()
+    map("n", "ma", function()
       require("haunt.api").annotate()
     end, { desc = "Annotate bookmark" })
 
     -- clear
-    map("n", "hc", function()
-      require("haunt.api").clear()
-    end, { desc = "Clear bookmarks in file" })
-
-    map("n", "hC", function()
+    map("n", "mC", function()
       require("haunt.api").clear_all()
     end, { desc = "Clear all bookmarks" })
   end,
