@@ -1,58 +1,57 @@
+local haunt = require("haunt.api")
+local haunt_picker = require("haunt.picker")
 return {
   dir = "~/projects/haunt.nvim/",
-
-  config = function()
-    require("haunt").setup({
-      picker_keys = {
-        delete = {
-          key = "d",
-          mode = { "n" },
-        },
-        edit_annotation = {
-          key = "a",
-          mode = { "n" },
-        },
+  opts = {
+    picker_keys = {
+      delete = {
+        key = "d",
+        mode = { "n" },
       },
-    })
-  end,
+      edit_annotation = {
+        key = "a",
+        mode = { "n" },
+      },
+    },
+  },
   init = function()
     local map = vim.keymap.set
     map("n", "mt", function()
-      require("haunt.api").toggle_annotation()
+      haunt.toggle_annotation()
     end, { desc = "Toggle annotation" })
 
     map("n", "mT", function()
-      require("haunt.api").toggle_all_lines()
+      haunt.toggle_all_lines()
     end, { desc = "Toggle all annotations" })
 
     map("n", "md", function()
-      require("haunt.api").delete()
+      haunt.delete()
     end, { desc = "Delete bookmark" })
 
     map("n", "mn", function()
-      require("haunt.api").next()
+      haunt.next()
     end, { desc = "Next bookmark" })
 
     map("n", "ma", function()
-      require("haunt.api").annotate()
+      haunt.annotate()
     end, { desc = "Next bookmark" })
 
     map("n", "ml", function()
-      require("haunt.picker").show()
+      haunt_picker.show()
     end, { desc = "Next bookmark" })
 
     -- move
     map("n", "mp", function()
-      require("haunt.api").prev()
+      haunt.prev()
     end, { desc = "Previous bookmark" })
 
     map("n", "ma", function()
-      require("haunt.api").annotate()
+      haunt.annotate()
     end, { desc = "Annotate bookmark" })
 
     -- clear
     map("n", "mC", function()
-      require("haunt.api").clear_all()
+      haunt.clear_all()
     end, { desc = "Clear all bookmarks" })
   end,
 }
