@@ -35,10 +35,11 @@ return {
     formatters_by_ft = {
       -- ["java"] = { "google-java-format" },
       ["java"] = { "prettier" },
-      ["xml"] = { "xmlformat" },
+      ["tsx"] = { "prettier" },
       ["htmlangular"] = { "prettier" },
+      ["typescript"] = { "prettier" },
+      ["xml"] = { "xmlformat" },
       ["cs"] = { "csharpier" },
-      ["typescript"] = { "biome" },
       ["sql"] = { "sqruff" },
       ["markdown"] = { "markdown-toc" },
       ["markdown.mdx"] = { "markdown-toc" },
