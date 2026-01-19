@@ -18,6 +18,7 @@ return {
     ---@module 'roslyn.config'
     opts = {
       -- your configuration comes here; leave empty for default settings
+      -- filewatching = 'off',
     },
   },
   { "jlcrochet/vim-razor" },

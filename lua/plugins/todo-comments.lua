@@ -22,6 +22,12 @@ return {
         alt = { "IMP", "BAD", "Improve", "IMPROVE" }, -- a set of other keywords that all map to this FIX keywords
         -- signs = false, -- configure signs for some keywords individually
       },
+      AI = {
+        icon = "󰚩 ", -- icon used for the sign, and in search results
+        color = "improve", -- can be a hex color, or a named color (see below)
+        alt = { "CLAUDE", "AI" }, -- a set of other keywords that all map to this FIX keywords
+        -- signs = false, -- configure signs for some keywords individually
+      },
       TODO = { icon = " ", color = "warning", alt = { "Todo" } },
       HACK = { icon = " ", color = "warning" },
       WARN = { icon = " ", color = "warning", alt = { "WARNING", "XXX", "Warn" } },
@@ -45,6 +51,7 @@ return {
     -- BETTER:
     colors = {
       error = { "#DA4B4A" },
+      ai = { nil },
       case = { "#a64a26" },
       warning = { "#FBBF24" },
       info = { "#07BAD8" },
