@@ -1,7 +1,6 @@
-local haunt = require("haunt.api")
-local haunt_picker = require("haunt.picker")
 return {
-  dir = "~/projects/haunt.nvim/",
+  "TheNoeTrevino/haunt.nvim",
+  -- dir = "~/projects/haunt.nvim/",
   opts = {
     picker_keys = {
       delete = {
@@ -15,6 +14,8 @@ return {
     },
   },
   init = function()
+    local haunt = require("haunt.api")
+    local haunt_picker = require("haunt.picker")
     local map = vim.keymap.set
     map("n", "mt", function()
       haunt.toggle_annotation()
