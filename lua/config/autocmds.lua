@@ -76,6 +76,13 @@ vim.api.nvim_create_autocmd("FileType", {
   desc = "Enable completion for DAP-REPL filetypes",
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "dbui",
+  callback = function()
+    vim.keymap.set("n", "<C-J>", "", { buffer = true })
+  end,
+})
+
 -- AUtocmd to boost certain LSP semantic token highlight priority
 -- readonly is boosted so show constants
 ---@class SemanticTokenModifiers

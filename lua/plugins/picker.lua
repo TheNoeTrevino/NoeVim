@@ -377,36 +377,6 @@ return {
   {
     "folke/snacks.nvim",
     opts = {
-      indent = { enabled = false },
-      image = { enabled = true },
-      statuscolumn = { enabled = false },
-      dashboard = { enabled = true },
-      scope = { enabled = false },
-      ---@class snacks.lazygit.Config: snacks.terminal.Opts
-      ---@field args? string[]
-      ---@field theme? snacks.lazygit.Theme
-      lazygit = {
-        win = {
-          style = "lazygit",
-          width = 0,
-          height = 0,
-        },
-      },
-      scroll = {
-        enabled = true,
-        animate = {
-          duration = { step = 15, total = 80 },
-          easing = "linear",
-        },
-        filter = function(buf)
-          return vim.g.snacks_scroll ~= false and vim.b[buf].snacks_scroll ~= false
-        end,
-      },
-      scratch = {
-        ft = function()
-          return "markdown"
-        end,
-      },
       picker = {
         layout = {
           preset = "telescope",
