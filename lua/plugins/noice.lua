@@ -2,8 +2,10 @@ return {
   "folke/noice.nvim",
   event = "InsertEnter",
   opts = {
+    cmdline = {
+      view = "cmdline",
+    },
     views = {
-
       cmdline_popup = {
         position = {
           row = "50%",
