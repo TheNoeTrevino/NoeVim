@@ -46,7 +46,7 @@ return {
       ["htmlangular"] = { "prettier" },
       ["typescript"] = { "prettier" },
       ["xml"] = { "xmlformat" },
-      ["cs"] = { "csharpier" },
+      ["cs"] = {},
       ["sql"] = { "sqruff" },
       ["markdown"] = { "markdown-toc" },
       ["markdown.mdx"] = { "markdown-toc" },
