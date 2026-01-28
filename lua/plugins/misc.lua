@@ -36,7 +36,7 @@ return {
   --   build = ":Cord update",
   --   -- opts = {}
   -- },
-  -- {
+  -- j{
   --   "andythigpen/nvim-coverage",
   --   version = "*",
   --   config = function()
@@ -56,4 +56,11 @@ return {
     end,
   },
   { "nvim-mini/mini.doc", version = "*", opts = {}, lazy = true },
+  {
+    "chentoast/marks.nvim",
+    event = "VeryLazy",
+    opts = {
+      builtin_marks = { ".", "<", ">", "[", "]", "'", "^" },
+    },
+  },
 }

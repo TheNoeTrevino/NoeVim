@@ -57,6 +57,7 @@ return {
           },
           custom = {
             todo = { raw = "[-]", rendered = "󰅐 ", highlight = "RenderMarkdownTodo" },
+            huh = { raw = "[?]", rendered = " ", highlight = "RenderMarkdownTodo" },
           },
           heading = {
             sign = false,
