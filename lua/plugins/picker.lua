@@ -1,3 +1,78 @@
+local explorer_config = function()
+  return
+  ---@type snacks.picker.explorer.Config
+  {
+    layout = { preset = "sidebar", preview = true },
+    -- to show the explorer to the right, add the below to
+    -- your config under `opts.picker.sources.explorer`
+    -- layout = { layout = { position = "right" } },
+    formatters = {
+      file = { filename_only = true },
+      severity = { pos = "right" },
+    },
+    matcher = { sort_empty = false, fuzzy = false },
+    config = function(opts)
+      return require("snacks.picker.source.explorer").setup(opts)
+    end,
+    win = {
+      list = {
+        keys = {
+          ["<BS>"] = "explorer_up",
+          ["."] = "explorer_focus",
+          ["s"] = { "edit_split", mode = { "n" } },
+          ["v"] = { "edit_vsplit", mode = { "n" } },
+          ["<c-u>"] = { "preview_scroll_up", mode = { "i", "n" } },
+          ["<c-d>"] = { "preview_scroll_down", mode = { "i", "n" } },
+          ["P"] = "toggle_preview",
+          ["f"] = "focus_preview",
+          ["<Esc>"] = "close",
+          ["q"] = "close",
+          ["/"] = "toggle_focus",
+          ["a"] = "explorer_add",
+          ["d"] = "explorer_del",
+          ["r"] = "explorer_rename",
+          ["c"] = "explorer_copy",
+          ["m"] = "explorer_move",
+          ["o"] = "explorer_open",
+          ["y"] = { "explorer_yank", mode = { "n", "x" } },
+          ["p"] = "explorer_paste",
+          ["u"] = "explorer_update",
+          ["H"] = "toggle_hidden",
+          ["I"] = "toggle_ignore",
+          ["?"] = "toggle_help_list",
+          ["<c-q>"] = { "qflist", mode = { "i", "n" } },
+          ["]g"] = "explorer_git_next",
+          ["[g"] = "explorer_git_prev",
+          ["]d"] = "explorer_diagnostic_next",
+          ["[d"] = "explorer_diagnostic_prev",
+          ["k"] = "list_down",
+          ["l"] = "list_up",
+          ["j"] = "explorer_close", -- close directory (like neotree j)
+          [";"] = { "confirm", mode = { "n" } },
+        },
+      },
+      -- input window
+      input = {
+        keys = {
+          ["<Esc>"] = "close",
+          ["<c-u>"] = { "preview_scroll_up", mode = { "i", "n" } },
+          ["<c-d>"] = { "preview_scroll_down", mode = { "i", "n" } },
+          ["/"] = "toggle_focus",
+        },
+      },
+      -- preview window
+      preview = {
+        keys = {
+          ["<Esc>"] = "close",
+          ["q"] = "close",
+          ["<c-u>"] = { "preview_scroll_up", mode = { "i", "n" } },
+          ["<c-d>"] = { "preview_scroll_down", mode = { "i", "n" } },
+          ["f"] = "focus_input",
+        },
+      },
+    },
+  }
+end
 local get_config = function()
   return {
     layout = {
@@ -376,6 +451,7 @@ end
 return {
   {
     "folke/snacks.nvim",
+    ---@type snacks.Config
     opts = {
       picker = {
         layout = {
@@ -472,6 +548,7 @@ return {
         -- stylua: ignore start
         -- { "<leader>,", function() Snacks.picker.buffers({on_show = function()vim.cmd.stopinsert()end,}) end, desc = "Buffers" },
         { "<leader>.",        function() Snacks.scratch() end,                                                      desc = "Toggle Scratch Buffer" },
+        { "<leader>e",        function() Snacks.picker.explorer(explorer_config()) end,                             desc = "Explorer" },
         { "<leader>s.",       function() Snacks.scratch.select() end,                                               desc = "Select Scratch Buffer" },
         { "<leader>dps",      function() Snacks.profiler.scratch() end,                                             desc = "Profiler Scratch Buffer" },
         { "<leader>:",        function() Snacks.picker.command_history(get_config()) end,                           desc = "Command History" },
