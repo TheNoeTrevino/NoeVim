@@ -33,7 +33,7 @@ local colors = {
 
   -- Background variations
   bg_subtle = "#202030",
-  bg_visual = "#525251",
+  bg_visual = "#424241",
   bg_visual_alt = "#353534",
   bg_search = "#595959",
   bg_selection = "#363646",
