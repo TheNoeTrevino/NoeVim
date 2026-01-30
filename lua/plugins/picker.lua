@@ -1,8 +1,7 @@
 local explorer_config = function()
-  return
-  ---@type snacks.picker.explorer.Config
-  {
+  return {
     layout = { preset = "sidebar", preview = true },
+    jump = { close = true },
     -- to show the explorer to the right, add the below to
     -- your config under `opts.picker.sources.explorer`
     -- layout = { layout = { position = "right" } },
