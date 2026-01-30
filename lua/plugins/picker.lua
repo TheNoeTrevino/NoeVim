@@ -111,6 +111,10 @@ local get_config = function()
   }
 end
 
+local config_get_symbols = function()
+  return { layout = { preset = "vscode", preview = "main" } }
+end
+
 local get_spelling = function()
   return {
     layout = {
@@ -580,7 +584,7 @@ return {
         { "<leader>sm",       function() Snacks.picker.marks(get_config_nm()) end,                                  desc = "Marks" },
         { "<leader>sq",       function() Snacks.picker.qflist(get_config_nm()) end,                                 desc = "Quickfix List" },
         { "<leader>su",       function() Snacks.picker.undo({ layout = "ivy_split" }) end,                          desc = "Undo History" },
-        { "<leader>ss",       function() Snacks.picker.pickers(get_config()) end,                                   desc = "Pickers" },
+        { "<leader>s?",       function() Snacks.picker.pickers(get_config()) end,                                   desc = "Pickers" },
         { "<leader>sb",       function() Snacks.picker.buffers(get_config_nm()) end,                                desc = "Buffers" },
         { "<leader>st",       function()Snacks.picker.todo_comments(get_config_nm())end,                            desc = "Todo" },
         { "h",                function() Snacks.picker.buffers(get_config_nm()) end,                                desc = "Buffers" },
@@ -608,7 +612,8 @@ return {
         { "<leader>sL",       function() Snacks.picker.lsp_config(get_config()) end,                                desc = "LSP Config" },
         { "<leader>slo",      function() Snacks.picker.lsp_outgoing_calls(get_config_vert()) end,                   desc = "LSP Outgoing calls" },
         { "<leader>sli",      function() Snacks.picker.lsp_incoming_calls(get_config_vert()) end,                   desc = "LSP Incoming calls" },
-        { "<leader>sls",      function() Snacks.picker.lsp_symbols(get_config()) end,                               desc = "LSP Symbols" },
+        -- { "<leader>sls",      function() Snacks.picker.lsp_symbols(config_get_symbols()) end,                       desc = "LSP Symbols" },
+        -- { "<leader>slS",      function() Snacks.picker.lsp_workspace_symbols(config_get_symbols()) end,             desc = "LSP Symbols" },
         { "gd",               function() Snacks.picker.lsp_definitions(get_config()) end,                           desc = "Goto Definition" },
         { "gD",               function() Snacks.picker.lsp_declarations(get_config()) end,                          desc = "Goto Declaration" },
         { "gr",               function() Snacks.picker.lsp_references(get_config()) end,             nowait = true, desc = "References" },
