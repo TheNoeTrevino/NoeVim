@@ -111,12 +111,12 @@ map("v", "<A-k>", ":m '>+1<cr>gv=gv", { desc = "Move Down" })
 
 -- TMUX
 map("n", "<c-_>", function()
-  require("sidekick.cli").toggle("opencode")
+  require("sidekick.cli").toggle()
 end, { desc = "Opencode" })
 
 -- idk man, windows
 map("n", "", function()
-  require("sidekick.cli").toggle("opencode")
+  require("sidekick.cli").toggle()
 end, { desc = "Opencode" })
 
 map({ "n", "t" }, "<c-\\>", function()

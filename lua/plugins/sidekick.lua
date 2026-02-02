@@ -41,11 +41,14 @@ return {
         },
       },
       tools = {
-        ["qwen2.5-coder:7b"] = {
-          cmd = { "aider", "--model", "ollama/qwen2.5-coder:7b" },
+        ["qwen2.5-coder:7b "] = {
+          cmd = { "ollama", "run", "qwen2.5-coder:7b" },
         },
-        ["qwen2.5-coder:32b"] = {
-          cmd = { "aider", "--model", "ollama/qwen2.5-coder:32b" },
+        ["qwen3:8b "] = {
+          cmd = { "ollama", "run", "qwen3:8b" },
+        },
+        ["deepseek-coder:6.7b"] = {
+          cmd = { "ollama", "run", "deepseek-coder:6.7b" },
         },
       },
       ---@class sidekick.cli.Mux
