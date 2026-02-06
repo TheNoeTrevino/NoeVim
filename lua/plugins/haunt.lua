@@ -1,23 +1,8 @@
 return {
-  -- "TheNoeTrevino/haunt.nvim",
-  dir = "~/projects/haunt/haunt.nvim/",
+  "TheNoeTrevino/haunt.nvim",
+  -- dir = "~/projects/haunt/haunt.nvim/",
   ---@class HauntConfig
   opts = {
-    annotation_input = {
-      provider = "auto",
-      position = "cursor_below",
-      width = 45,
-      minheight = 6,
-      maxheight = 12,
-      save_keys = {
-        { key = "<CR>", mode = { "n", "i" } },
-      },
-      quit_keys = {
-        { key = "<c-s>", mode = { "i" } },
-        { key = "q", mode = { "n" } },
-        { key = "<Esc>", mode = { "n" } },
-      },
-    },
     picker = "auto",
     sign = "󱙝",
     sign_hl = "DiagnosticInfo",
