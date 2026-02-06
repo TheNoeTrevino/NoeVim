@@ -1,6 +1,6 @@
 local explorer_config = function()
   return {
-    layout = { preset = "sidebar", preview = true },
+    layout = { preset = "sidebar", preview = false },
     jump = { close = true },
     -- to show the explorer to the right, add the below to
     -- your config under `opts.picker.sources.explorer`
