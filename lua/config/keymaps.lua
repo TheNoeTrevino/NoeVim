@@ -98,6 +98,12 @@ map("i", "<A-k>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move Down" })
 map("v", "<A-l>", ":m '<-2<cr>gv=gv", { desc = "Move Up" })
 map("v", "<A-k>", ":m '>+1<cr>gv=gv", { desc = "Move Down" })
 
+-- Windows
+map("n", "<c-j>", "<c-w>h", { desc = "Move Left" })
+map("n", "<c-k>", "<c-w>j", { desc = "Move Down" })
+map("n", "<c-l>", "<c-w>k", { desc = "Move Up" })
+map("n", "<c-;>", "<c-w>l", { desc = "Move Right" })
+
 -- -- Terminal Mappings
 -- map("i", "<C-j>", function()
 --   vim.cmd.stopinsert()
