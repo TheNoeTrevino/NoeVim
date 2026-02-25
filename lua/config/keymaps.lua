@@ -37,6 +37,46 @@ vim.keymap.del("n", "<leader>bo")
 local map = LazyVim.safe_keymap_set
 
 -------------------------------------------------------------------------------
+--                          Surround Section
+-------------------------------------------------------------------------------
+
+vim.g.nvim_surround_no_normal_mappings = true
+
+map("i", "<C-g>s", "<Plug>(nvim-surround-insert)", {
+  desc = "Add a surrounding pair around the cursor (insert mode)",
+})
+map("i", "<C-g>S", "<Plug>(nvim-surround-insert-line)", {
+  desc = "Add a surrounding pair around the cursor, on new lines (insert mode)",
+})
+map("n", "ys", "<Plug>(nvim-surround-normal)", {
+  desc = "Add a surrounding pair around a motion (normal mode)",
+})
+map("n", "yss", "<Plug>(nvim-surround-normal-cur)", {
+  desc = "Add a surrounding pair around the current line (normal mode)",
+})
+map("n", "yS", "<Plug>(nvim-surround-normal-line)", {
+  desc = "Add a surrounding pair around a motion, on new lines (normal mode)",
+})
+map("n", "ySS", "<Plug>(nvim-surround-normal-cur-line)", {
+  desc = "Add a surrounding pair around the current line, on new lines (normal mode)",
+})
+map("x", "S", "<Plug>(nvim-surround-visual)", {
+  desc = "Add a surrounding pair around a visual selection",
+})
+map("x", "gS", "<Plug>(nvim-surround-visual-line)", {
+  desc = "Add a surrounding pair around a visual selection, on new lines",
+})
+map("n", "ds", "<Plug>(nvim-surround-delete)", {
+  desc = "Delete a surrounding pair",
+})
+map("n", "cs", "<Plug>(nvim-surround-change)", {
+  desc = "Change a surrounding pair",
+})
+map("n", "cS", "<Plug>(nvim-surround-change-line)", {
+  desc = "Change a surrounding pair, putting replacements on new lines",
+})
+
+-------------------------------------------------------------------------------
 --                          Treesitter Navigation Section
 -------------------------------------------------------------------------------
 
