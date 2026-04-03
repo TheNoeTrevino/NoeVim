@@ -582,7 +582,6 @@ return {
         { "<leader>sj",       function () Snacks.picker.jumps(get_jumplist())end,                                   desc = "Jumps" },
         { "<leader>sm",       function() Snacks.picker.marks(get_config_nm()) end,                                  desc = "Marks" },
         { "<leader>sq",       function() Snacks.picker.qflist(get_config_nm()) end,                                 desc = "Quickfix List" },
-        { "<leader>su",       function() Snacks.picker.undo({ layout = "ivy_split" }) end,                          desc = "Undo History" },
         { "<leader>s?",       function() Snacks.picker.pickers(get_config()) end,                                   desc = "Pickers" },
         { "<leader>sb",       function() Snacks.picker.buffers(get_config_nm()) end,                                desc = "Buffers" },
         { "<leader>st",       function()Snacks.picker.todo_comments(get_config_nm())end,                            desc = "Todo" },
@@ -619,12 +618,18 @@ return {
         { "gI",               function() Snacks.picker.lsp_implementations(get_config()) end,                       desc = "Goto Implementation" },
         { "gy",               function() Snacks.picker.lsp_type_definitions(get_config()) end,                      desc = "Goto T[y]pe Definition" },
       }
-      
+
       -- Add <leader>e for snacks explorer only on Windows
       if is_windows then
-        table.insert(keys, { "<leader>e", function() Snacks.picker.explorer(explorer_config()) end, desc = "Explorer" })
+        table.insert(keys, {
+          "<leader>e",
+          function()
+            Snacks.picker.explorer(explorer_config())
+          end,
+          desc = "Explorer",
+        })
       end
-      
+
       return keys
     end,
   },
