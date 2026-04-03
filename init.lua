@@ -358,3 +358,5 @@ require("treesitter-context").setup({
   zindex = 20, -- The Z-index of the context window
   on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
 })
+
+vim.cmd("packadd nvim.undotree")
