@@ -50,6 +50,9 @@ return {
         ["deepseek-coder:6.7b"] = {
           cmd = { "ollama", "run", "deepseek-coder:6.7b" },
         },
+        ["claude"] = {
+          cmd = { "claude", "--dangerously-skip-permissions" },
+        },
       },
       ---@class sidekick.cli.Mux
       mux = {
