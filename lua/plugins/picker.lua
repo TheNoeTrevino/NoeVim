@@ -81,8 +81,8 @@ local get_config = function()
       layout = {
         box = "horizontal",
         backdrop = true,
-        width = 0,
-        height = 0,
+        -- width = 0,
+        -- height = 0,
         border = "none",
         {
           box = "vertical",
@@ -459,6 +459,9 @@ return {
       picker = {
         layout = {
           preset = "telescope",
+          layout = {
+            backdrop = true,
+          },
         },
         ui_select = true, -- replace `vim.ui.select` with the snacks picker
         formatters = {
@@ -573,7 +576,7 @@ return {
         { "<leader>sr",       function() Snacks.picker.resume(get_config_nm()) end,                                 desc = "Recent" },
         { "<leader>sP",       function () Snacks.picker.projects(get_spelling()) end,                               desc = "Projects" },
         { "<leader>sp",       function () Snacks.picker.spelling(get_spelling()) end,                               desc = "Spelling" },
-        { "<leader>sf",       function() Snacks.picker.files(get_config()) end,                                     desc = "Find Files" },
+        -- { "<leader>sf",       function() Snacks.picker.files(get_config()) end,                                     desc = "Find Files" },
         { "<leader>sF",       function() Snacks.picker.git_files(get_config()) end,                                 desc = "Find Git Files" },
         { '<leader>s/',       function() Snacks.picker.search_history(get_config()) end,                            desc = "Search History" },
         { "<leader>sd",       function() Snacks.picker.diagnostics(get_config()) end,                               desc = "Diagnostics" },
