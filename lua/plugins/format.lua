@@ -13,16 +13,20 @@ return {
           local ft = vim.bo[ctx.buf].filetype
           return vim.tbl_contains(supported, ft)
         end,
-        cwd = function(self, ctx)
-          return require("conform.util").root_file({
-            ".prettierrc",
-            ".prettierrc.json",
-            ".prettierrc.js",
-            "prettier.config.js",
-            "package.json",
-          })(self, ctx)
-        end,
+        -- cwd = require("conform.util").root_file({
+        --   ".prettierrc",
+        --   ".prettierrc.json",
+        --   ".prettierrc.js",
+        --   "prettier.config.js",
+        --   "package.json",
+        -- }),
         -- Dont forget to npm install prettier and the java plugin
+        cwd = function(self, ctx)
+          local found = vim.fs.find({ "frontend" }, { upward = true, path = ctx.dirname })[1]
+          if found then
+            return found
+          end
+        end,
         append_args = { "--config", ".prettierrc.json" },
       },
       ["markdown-toc"] = {
