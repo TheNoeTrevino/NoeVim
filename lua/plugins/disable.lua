@@ -13,14 +13,6 @@ return {
     enabled = true,
   },
   {
-    "EvWilson/spelunk.nvim",
-    enabled = vim.fn.has("win32") == 0,
-  },
-  {
-    "nvimtools/hydra.nvim",
-    enabled = vim.fn.has("win32") == 0,
-  },
-  {
     "mfussenegger/nvim-dap",
     enabled = vim.fn.has("win32") == 0,
   },

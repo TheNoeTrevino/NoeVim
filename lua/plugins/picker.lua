@@ -549,7 +549,6 @@ return {
       -- TODO: hes adding more pickers and i want access to all of them. Can we
       -- start to populate f with  some of the strange keymaps here? keeping files
       -- and grep for s?
-      local is_windows = vim.loop.os_uname().sysname == "Windows_NT"
       local keys = {
         -- Top Pickers & Explorer
         -- stylua: ignore start
@@ -621,18 +620,6 @@ return {
         { "gI",               function() Snacks.picker.lsp_implementations(get_config()) end,                       desc = "Goto Implementation" },
         { "gy",               function() Snacks.picker.lsp_type_definitions(get_config()) end,                      desc = "Goto T[y]pe Definition" },
       }
-
-      -- Add <leader>e for snacks explorer only on Windows
-      if is_windows then
-        table.insert(keys, {
-          "<leader>e",
-          function()
-            Snacks.picker.explorer(explorer_config())
-          end,
-          desc = "Explorer",
-        })
-      end
-
       return keys
     end,
   },

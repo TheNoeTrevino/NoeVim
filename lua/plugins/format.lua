@@ -8,6 +8,10 @@ return {
       prettier = {
         require_cwd = true,
         condition = function(_, ctx)
+          local cwd = vim.fn.getcwd()
+          if string.find(cwd, "careview", 1, true) == nil then
+            return false
+          end
           local supported =
             { "javascript", "typescript", "css", "html", "htmlangular", "json", "java", "typescriptreact" }
           local ft = vim.bo[ctx.buf].filetype
@@ -46,7 +50,7 @@ return {
       ["htmlangular"] = { "prettier" },
       ["typescript"] = { "prettier" },
       ["xml"] = { "xmlformat" },
-      ["cs"] = {},
+      ["cs"] = { "csharpier" },
       ["sql"] = { "sqruff" },
       ["markdown"] = { "markdown-toc" },
       ["markdown.mdx"] = { "markdown-toc" },
