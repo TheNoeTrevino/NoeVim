@@ -5,7 +5,6 @@ return {
     indent = { enabled = false },
     image = { enabled = true },
     statuscolumn = { enabled = false },
-    dashboard = { enabled = true },
     scope = { enabled = false },
     lazygit = {
       win = {

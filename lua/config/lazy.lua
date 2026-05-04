@@ -42,8 +42,25 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.ui.treesitter-context" },
     { import = "plugins" },
   },
+  defaults = {
+    lazy = true,
+  },
   checker = {
     enabled = true,
+  },
+  performance = {
+    rtp = {
+      disabled_plugins = {
+        "gzip",
+        "matchit",
+        "matchparen",
+        "netrwPlugin",
+        "tarPlugin",
+        "tohtml",
+        "tutor",
+        "zipPlugin",
+      },
+    },
   },
   ui = {
     title = " NoeVim ",

@@ -47,6 +47,8 @@ vim.o.winborder = "single"
 vim.highlight.priorities.semantic_tokens = 95 -- default is 125
 vim.highlight.priorities.treesitter = 100 -- default is 100
 
+vim.opt.shortmess:remove("I")
+
 vim.o.exrc = true
 vim.o.secure = true
 

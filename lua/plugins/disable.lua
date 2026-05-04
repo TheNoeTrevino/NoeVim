@@ -6,6 +6,7 @@ return {
   { "venv-selector.nvim", enabled = false },
   { "catppuccin", enabled = false },
   { "omnisharp-extended-lsp.nvim", enabled = false },
+  { "folke/persistence.nvim", enabled = true },
   { "nvimdev/dashboard-nvim", enabled = false },
   {
     "folke/persistence.nvim",

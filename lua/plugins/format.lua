@@ -1,6 +1,7 @@
 return {
   "stevearc/conform.nvim",
   optional = true,
+  event = "BufWritePre",
   opts = {
     formatters = {
       sqruff = {},
@@ -12,13 +13,15 @@ return {
           local ft = vim.bo[ctx.buf].filetype
           return vim.tbl_contains(supported, ft)
         end,
-        cwd = require("conform.util").root_file({
-          ".prettierrc",
-          ".prettierrc.json",
-          ".prettierrc.js",
-          "prettier.config.js",
-          "package.json",
-        }),
+        cwd = function(self, ctx)
+          return require("conform.util").root_file({
+            ".prettierrc",
+            ".prettierrc.json",
+            ".prettierrc.js",
+            "prettier.config.js",
+            "package.json",
+          })(self, ctx)
+        end,
         -- Dont forget to npm install prettier and the java plugin
         append_args = { "--config", ".prettierrc.json" },
       },
