@@ -15,6 +15,7 @@ return {
   -- omnisharp in the lspconfig
   {
     "seblyng/roslyn.nvim",
+    lazy = false,
     ---@module 'roslyn.config'
     opts = {
       -- your configuration comes here; leave empty for default settings
