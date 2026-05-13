@@ -1,7 +1,7 @@
 return {
-  "TheNoeTrevino/haunt.nvim",
+  -- "TheNoeTrevino/haunt.nvim",
   branch = "nightly",
-  -- dir = "~/projects/haunt/haunt.nvim/",
+  dir = "~/projects/haunt/haunt.nvim/",
   ---@class HauntConfig
   opts = {
     picker = "auto",
@@ -11,7 +11,7 @@ return {
     annotation_prefix = " 󰆉 ",
     line_hl = nil,
     virt_text_pos = "eol",
-    data_dir = nil,
+    data_dir = "~/.haunt",
     picker_keys = {
       delete = { key = "d", mode = { "n" } },
       edit_annotation = { key = "a", mode = { "n" } },
