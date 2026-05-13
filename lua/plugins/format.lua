@@ -5,6 +5,12 @@ return {
   opts = {
     formatters = {
       sqruff = {},
+      csharpier = {
+        condition = function(_, _)
+          local cwd = vim.fn.getcwd():gsub("\\", "/")
+          return not vim.endswith(cwd, "/projects/cast")
+        end,
+      },
       prettier = {
         require_cwd = true,
         condition = function(_, ctx)
