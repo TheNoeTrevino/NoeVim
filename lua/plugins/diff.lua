@@ -2,7 +2,6 @@ return {
   -- "esmuellert/codediff.nvim",
   "TheNoeTrevino/codediff.nvim",
   branch = "feature-review-UI",
-  -- dir = "~/projects/codediff.nvim",
   dependencies = { "MunifTanjim/nui.nvim" },
   cmd = "CodeDiff",
   opts = {
