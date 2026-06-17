@@ -118,6 +118,9 @@ if colorscheme == "kanagawa-wave" or "kanagawa-dragon" then
 
   h(0, "@keyword.repeat.go", { fg = colors.cyan, italic = true })
 
+  -- angular
+  vim.api.nvim_set_hl(0, "@variable.angular", { fg = colors.cyan, italic = true })
+
   -- python
   h(0, "@keyword.conditional.python", { fg = colors.pink, italic = true })
   h(0, "@keyword.conditional.python", { fg = colors.pink, italic = true })
