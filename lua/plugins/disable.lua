@@ -28,4 +28,9 @@ return {
     "nvim-dap-python",
     enabled = vim.fn.has("win32") == 0,
   },
+
+  {
+    "iamcco/markdown-preview.nvim",
+    enable = false, -- I don't use this much and it has a lot of dependencies, so I'm disabling it for now
+  },
 }
