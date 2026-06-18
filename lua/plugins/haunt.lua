@@ -1,7 +1,7 @@
 return {
-  -- "TheNoeTrevino/haunt.nvim",
+  "TheNoeTrevino/haunt.nvim",
   branch = "nightly",
-  dir = "~/projects/haunt/haunt.nvim/",
+  -- dir = "~/projects/haunt/haunt.nvim/",
   ---@class HauntConfig
   opts = {
     picker = "auto",
