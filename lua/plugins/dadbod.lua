@@ -1,6 +1,7 @@
 return {
   "thenoetrevino/vim-dadbod-ui",
-  dir = "~/projects/vim-dadbod-ui",
+  branch = "feat/connection-groups",
+  -- dir = "~/projects/vim-dadbod-ui",
   cmd = { "DBUI", "DBUIToggle", "DBUIAddConnection", "DBUIFindBuffer" },
   dependencies = "vim-dadbod",
   keys = {
