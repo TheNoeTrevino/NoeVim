@@ -358,10 +358,7 @@ map(
 map("n", "<localleader>u", "<cmd>DBUIToggle<CR>", { desc = "Toggle Database" })
 map("n", "<localleader>f", "<cmd>DBUIFindBuffer<CR>", { desc = "Find Buffer" })
 
-map("n", "<localleader>d", function()
-  vim.cmd("tabnew")
-  vim.cmd("Dbee open")
-end, { desc = "Find Buffer" })
+map("n", "<localleader>d", "<cmd>DBUIFindBuffer<CR>", { desc = "Find Buffer" })
 
 -------------------------------------------------------------------------------
 --                           Markdown Section

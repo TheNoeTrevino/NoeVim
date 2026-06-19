@@ -39,14 +39,6 @@ end, {})
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "sql",
   callback = function()
-    vim.keymap.set("v", "<CR>", "<Plug>(DBUI_ExecuteQuery)", { buffer = true, desc = "Execute SQL" })
-    vim.keymap.set(
-      "v",
-      "<leader>E",
-      "<Plug>(DBUI_EditBindParameters)|",
-      { buffer = true, desc = "Edit Parameters SQL" }
-    )
-
     vim.bo.expandtab = true
     vim.bo.shiftwidth = 4
     vim.bo.tabstop = 4
