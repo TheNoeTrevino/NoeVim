@@ -131,12 +131,12 @@ map("o", "l", "<Up>", { desc = "Up", silent = true })
 map({ "n", "x", "o" }, ";", "<Right>", { desc = "Left", silent = true })
 
 -- Move Lines
-map("n", "<A-l>", "<cmd>m .-2<cr>==", { desc = "Move Up" })
-map("i", "<A-l>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move Up" })
-map("n", "<A-k>", "<cmd>m .+1<cr>==", { desc = "Move Down" })
-map("i", "<A-k>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move Down" })
-map("v", "<A-l>", ":m '<-2<cr>gv=gv", { desc = "Move Up" })
-map("v", "<A-k>", ":m '>+1<cr>gv=gv", { desc = "Move Down" })
+map("n", "<C-S-l>", "<cmd>m .-2<cr>==", { desc = "Move Up" })
+map("i", "<C-S-l>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move Up" })
+map("n", "<C-S-k>", "<cmd>m .+1<cr>==", { desc = "Move Down" })
+map("i", "<C-S-k>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move Down" })
+map("v", "<C-S-l>", ":m '<-2<cr>gv=gv", { desc = "Move Up" })
+map("v", "<C-S-k>", ":m '>+1<cr>gv=gv", { desc = "Move Down" })
 
 -- Windows
 map("n", "<c-j>", "<c-w>h", { desc = "Move Left" })
