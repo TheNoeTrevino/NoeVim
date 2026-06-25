@@ -1,5 +1,6 @@
 -- Autocmds are automatically loaded on the VeryLazy event
--- Default autocmds that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/autocmds.lua
+-- Vendored LazyVim default autocmds (loaded first, mirrors LazyVim load order).
+require("config.lazyvim-autocmds")
 -- Add any additional autocmds here
 
 -- save buffers in markdown when leaving then
