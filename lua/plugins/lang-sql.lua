@@ -103,7 +103,10 @@ return {
     optional = true,
     opts = {
       sources = {
-        default = { "dadbod" },
+        -- NOTE: do NOT set `default` here. blink.lua's `sources.default` is a
+        -- function that already enables dadbod for sql/mysql filetypes. Setting
+        -- `default = { "dadbod" }` would override (replace) that function during
+        -- lazy's opts merge, leaving dadbod as the ONLY source in every buffer.
         providers = {
           dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
         },
