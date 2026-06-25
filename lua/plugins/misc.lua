@@ -29,17 +29,5 @@ return {
       zindex = 20, -- The Z-index of the context window
       on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
     },
-    {
-      "2kabhishek/seeker.nvim",
-      dependencies = { "folke/snacks.nvim" },
-      cmd = { "Seeker" },
-      keys = {
-        { "<leader>sf", ":Seeker files<CR>", desc = "Seek Files" },
-        -- { "<leader>ff", ":Seeker git_files<CR>", desc = "Seek Git Files" },
-        { "<leader>sg", ":Seeker grep<CR>", desc = "Seek Grep" },
-        -- { "<leader>fw", ":Seeker grep_word<CR>", desc = "Seek Grep Word" },
-      },
-      opts = {}, -- Required unless you call seeker.setup() manually, add your configs here
-    },
   },
 }
