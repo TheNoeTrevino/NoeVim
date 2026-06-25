@@ -192,6 +192,7 @@ return {
       highlight = { enable = true },
       folds = { enable = true },
       ensure_installed = {
+        "angular",
         "bash",
         "c",
         "diff",
@@ -271,8 +272,8 @@ return {
           local function enabled(feat, query)
             local f = opts[feat] or {}
             return f.enable ~= false
-              and not (type(f.disable) == "table" and vim.tbl_contains(f.disable, lang))
-              and TSUtil.have(ft, query)
+                and not (type(f.disable) == "table" and vim.tbl_contains(f.disable, lang))
+                and TSUtil.have(ft, query)
           end
 
           -- highlighting
