@@ -1,5 +1,7 @@
--- Options are automatically loaded before lazy.nvim startup
--- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
+-- Vendored LazyVim default options (loaded first, mirrors LazyVim load order: defaults
+-- then user). The user overrides below win. Sets vim.g.mapleader etc.
+require("config.lazyvim-options")
+
 -- Add any additional options here
 vim.g.moonflyItalics = false
 
