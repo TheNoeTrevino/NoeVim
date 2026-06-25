@@ -1,40 +1,16 @@
--- Remove LazyVim Mappings
-vim.keymap.del("n", "<leader>`")
-vim.keymap.del("n", "<leader>|")
-vim.keymap.del("n", "<leader>-")
-vim.keymap.del("n", "<leader>L")
-vim.keymap.del("n", "<leader>l")
-vim.keymap.del("n", "<leader>K")
--- vim.keymap.del("n", "<leader>snt")
-vim.keymap.del("n", "<leader><Tab>[")
-vim.keymap.del("n", "<leader><Tab>]")
-vim.keymap.del("n", "<leader><Tab>d")
-vim.keymap.del("n", "<leader><Tab>l")
-vim.keymap.del("n", "<leader><Tab>o")
-vim.keymap.del("n", "<leader><Tab>f")
-vim.keymap.del("n", "<leader><Tab><tab>")
-vim.keymap.del("i", ",")
-vim.keymap.del("i", ".")
-vim.keymap.del("i", ";")
-vim.keymap.del("n", "<leader>fn")
-vim.keymap.del("n", "<leader>ft")
-vim.keymap.del("n", "<leader>xl")
-vim.keymap.del("n", "<leader>xq")
-vim.keymap.del("n", "<leader>fT")
-vim.keymap.del("n", "<leader>uD")
-vim.keymap.del("t", "<c-/>")
-vim.keymap.del("n", "<c-/>")
-vim.keymap.del("t", "<c-_>")
-vim.keymap.del("n", "<c-_>")
-vim.keymap.del("n", "L")
-vim.keymap.del("n", "<c-k>")
-vim.keymap.del("n", "<leader>bb")
-vim.keymap.del("n", "<leader>bD")
-vim.keymap.del("n", "<leader>bd")
-vim.keymap.del("n", "<leader>bo")
--- vim.keymap.del("n", "<c-p>")
+-- Vendored LazyVim default keymaps (with the ones this file used to `vim.keymap.del`
+-- already excluded). Loaded first so the user mappings below still override them,
+-- exactly as when LazyVim installed its defaults ahead of this file.
+require("config.lazyvim-keymaps")
 
-local map = LazyVim.safe_keymap_set
+-- The only surviving del: <leader>bd is a lazy `keys` handler from picker.lua
+-- (Snacks.bufdelete), not a LazyVim config default, so it still exists and must be
+-- removed here to match prior behavior. The other ~28 dels targeted LazyVim config
+-- defaults that we now simply don't create.
+pcall(vim.keymap.del, "n", "<leader>bd")
+
+local Util = require("util")
+local map = Util.safe_keymap_set
 
 -------------------------------------------------------------------------------
 --                          Surround Section
@@ -166,13 +142,13 @@ map("n", "", function()
 end, { desc = "Opencode" })
 
 map({ "n", "t" }, "<c-\\>", function()
-  Snacks.terminal(nil, { cwd = LazyVim.root() })
+  Snacks.terminal(nil, { cwd = Util.root() })
 end, { desc = "Terminal (Root Dir)" })
 
 map({ "i", "n", "s" }, "<esc>", function()
   vim.cmd("noh")
   -- require("copilot.suggestion").dismiss()
-  LazyVim.cmp.actions.snippet_stop()
+  Util.cmp.actions.snippet_stop()
   -- vim.cmd("Sidekick nes clear")
   return "<esc>"
 end, { expr = true, desc = "Escape and Clear hlsearch" })
