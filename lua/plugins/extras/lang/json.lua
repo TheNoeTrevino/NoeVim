@@ -1,0 +1,43 @@
+-- Vendored from LazyVim (lazyvim/plugins/extras/lang/json.lua) with `LazyVim` aliased to our
+-- local util. none-ls specs are optional+absent (lazy skips them); `recommended` is unused
+-- (extras are imported explicitly, no :LazyExtras UI).
+local LazyVim = require("util")
+return {
+  -- add json to treesitter
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = { ensure_installed = { "json5" } },
+  },
+
+  -- yaml schema support
+  {
+    "b0o/SchemaStore.nvim",
+    lazy = true,
+    version = false, -- last release is way too old
+  },
+
+  -- correctly setup lspconfig
+  {
+    "neovim/nvim-lspconfig",
+    opts = {
+      -- make sure mason installs the server
+      servers = {
+        jsonls = {
+          -- lazy-load schemastore when needed
+          before_init = function(_, new_config)
+            new_config.settings.json.schemas = new_config.settings.json.schemas or {}
+            vim.list_extend(new_config.settings.json.schemas, require("schemastore").json.schemas())
+          end,
+          settings = {
+            json = {
+              format = {
+                enable = true,
+              },
+              validate = { enable = true },
+            },
+          },
+        },
+      },
+    },
+  },
+}

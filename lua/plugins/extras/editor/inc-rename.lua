@@ -1,0 +1,46 @@
+-- Vendored from LazyVim (lazyvim/plugins/extras/editor/inc-rename.lua) with `LazyVim` aliased to our
+-- local util. none-ls specs are optional+absent (lazy skips them); `recommended` is unused
+-- (extras are imported explicitly, no :LazyExtras UI).
+local LazyVim = require("util")
+return {
+
+  -- Rename with cmdpreview
+  desc = "Incremental LSP renaming based on Neovim's command-preview feature",
+  {
+    "smjonas/inc-rename.nvim",
+    cmd = "IncRename",
+    opts = {},
+  },
+
+  -- LSP Keymaps
+  {
+    "neovim/nvim-lspconfig",
+    opts = {
+      servers = {
+        ["*"] = {
+          keys = {
+            {
+              "<leader>cr",
+              function()
+                local inc_rename = require("inc_rename")
+                return ":" .. inc_rename.config.cmd_name .. " " .. vim.fn.expand("<cword>")
+              end,
+              expr = true,
+              desc = "Rename (inc-rename.nvim)",
+              has = "rename",
+            },
+          },
+        },
+      },
+    },
+  },
+
+  --- Noice integration
+  {
+    "folke/noice.nvim",
+    optional = true,
+    opts = {
+      presets = { inc_rename = true },
+    },
+  },
+}
