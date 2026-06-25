@@ -25,7 +25,7 @@ return {
 
       -- Custom preset configuration
       preset = {
-        -- Folded in from the LazyVim base dashboard (was LazyVim.pick); backs
+        -- Folded in from the Util base dashboard (was Util.pick); backs
         -- Snacks.dashboard.pick(...). Uses the vendored require("util") picker.
         pick = function(cmd, opts)
           return require("util").pick(cmd, opts)()

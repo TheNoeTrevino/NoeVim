@@ -1,8 +1,8 @@
--- Vendored from LazyVim (lazyvim/plugins/extras/lang/typescript/init.lua) with `LazyVim` aliased
+-- Vendored from the LazyVim distro (lazyvim/plugins/extras/lang/typescript/init.lua) with `Util` aliased
 -- to our local util. none-ls/recommended unused as elsewhere.
-local LazyVim = require("util")
+local Util = require("util")
 
--- Upstream used LazyVim.config.register_defaults("ts_lsp", ...) to let users swap the TS
+-- Upstream used Util.config.register_defaults("ts_lsp", ...) to let users swap the TS
 -- server via vim.g.lazyvim_ts_lsp. We vendor only the default (vtsls), hardcoded.
 
 return {

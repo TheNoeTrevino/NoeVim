@@ -1,8 +1,8 @@
--- Local replacement for the `LazyVim` global utility module.
+-- Local replacement for the `Util` global utility module.
 -- Vendored from LazyVim so the config no longer depends on the LazyVim distro.
 -- Submodules (root, pick, cmp, config) load lazily via the metatable below.
 -- Generic helpers (warn/error/info/norm) proxy to lazy.core.util, which ships
--- with lazy.nvim and survives the LazyVim removal.
+-- with lazy.nvim and survives the Util removal.
 local LazyUtil = require("lazy.core.util")
 
 local M = {}
@@ -138,26 +138,6 @@ function M.get_pkg_path(pkg, path, opts)
     end)
   end
   return ret
-end
-
--- Whether an extra is enabled. Adapted from LazyVim's has_extra to our `plugins.extras.*`
--- import naming (we don't use lazyvim.json). Used by lang extras to gate optional wiring.
----@param extra string e.g. "formatting.prettier"
-function M.has_extra(extra)
-  local modname = "plugins.extras." .. extra
-  local LazyConfig = require("lazy.core.config")
-  if vim.tbl_contains(LazyConfig.spec.modules, modname) then
-    return true
-  end
-  local spec = LazyConfig.options.spec
-  if type(spec) == "table" then
-    for _, s in ipairs(spec) do
-      if type(s) == "table" and s.import == modname then
-        return true
-      end
-    end
-  end
-  return false
 end
 
 -- Set a keymap unless a lazy.nvim `keys` handler already owns the lhs.

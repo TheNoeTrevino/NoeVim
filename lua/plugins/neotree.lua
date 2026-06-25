@@ -2,7 +2,7 @@
 -- vendored from LazyVim's editor.neo-tree extra) plus the personal overrides.
 -- Both entries target the same repo; lazy.nvim deep-merges opts and concatenates
 -- keys, so the override entry (last) wins on conflicts.
-local LazyVim = require("util")
+local Util = require("util")
 return {
   -- Base spec
   {
@@ -12,7 +12,7 @@ return {
       {
         "<leader>fe",
         function()
-          require("neo-tree.command").execute({ toggle = true, dir = LazyVim.root() })
+          require("neo-tree.command").execute({ toggle = true, dir = Util.root() })
         end,
         desc = "Explorer NeoTree (Root Dir)",
       },

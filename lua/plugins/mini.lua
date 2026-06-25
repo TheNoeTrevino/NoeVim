@@ -1,8 +1,8 @@
 -- mini.ai + mini.icons
--- Standalone specs migrated off LazyVim. These previously relied entirely on
--- LazyVim's bundled specs (pure inherit). All LazyVim.* helpers are inlined.
+-- Standalone specs migrated off Util. These previously relied entirely on
+-- LazyVim's bundled specs (pure inherit). All Util.* helpers are inlined.
 
--- taken from MiniExtra.gen_ai_spec.buffer (was LazyVim.mini.ai_buffer)
+-- taken from MiniExtra.gen_ai_spec.buffer (was Util.mini.ai_buffer)
 local function ai_buffer(ai_type)
   local start_line, end_line = 1, vim.fn.line("$")
   if ai_type == "i" then
@@ -19,7 +19,7 @@ local function ai_buffer(ai_type)
   return { from = { line = start_line, col = 1 }, to = { line = end_line, col = to_col } }
 end
 
--- register all text objects with which-key (was LazyVim.mini.ai_whichkey)
+-- register all text objects with which-key (was Util.mini.ai_whichkey)
 ---@param opts table
 local function ai_whichkey(opts)
   local objects = {
@@ -80,7 +80,7 @@ local function ai_whichkey(opts)
   require("which-key").add(ret, { notify = false })
 end
 
--- Run `fn` once `name` is loaded (inlined LazyVim.on_load). If the plugin is
+-- Run `fn` once `name` is loaded (inlined Util.on_load). If the plugin is
 -- already loaded we run immediately, otherwise we wait for lazy.nvim's
 -- `User LazyLoad` event for that plugin.
 local function on_load(name, fn)

@@ -1,7 +1,7 @@
 -- Vendored verbatim from LazyVim (lazyvim/config/autocmds.lua).
 -- Loaded from config/autocmds.lua. Group names keep the `lazyvim_` prefix so the
 -- snapshot diff stays clean during migration; rename in the later trim pass.
--- No LazyVim.* coupling here.
+-- No Util.* coupling here.
 
 local function augroup(name)
   return vim.api.nvim_create_augroup("lazyvim_" .. name, { clear = true })

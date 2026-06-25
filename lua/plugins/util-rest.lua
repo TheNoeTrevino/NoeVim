@@ -1,7 +1,7 @@
--- Vendored from LazyVim (lazyvim/plugins/extras/util/rest.lua) with `LazyVim` aliased to our
+-- Vendored from the LazyVim distro (lazyvim/plugins/extras/util/rest.lua) with `Util` aliased to our
 -- local util. none-ls specs are optional+absent (lazy skips them); `recommended` is unused
--- (extras are imported explicitly, no :LazyExtras UI).
-local LazyVim = require("util")
+-- (now a flat spec in lua/plugins/).
+local Util = require("util")
 vim.filetype.add({
   extension = {
     ["http"] = "http",

@@ -1,7 +1,7 @@
--- Vendored from LazyVim (lazyvim/plugins/extras/lang/rust.lua) with `LazyVim` aliased to our
+-- Vendored from the LazyVim distro (lazyvim/plugins/extras/lang/rust.lua) with `Util` aliased to our
 -- local util. none-ls specs are optional+absent (lazy skips them); `recommended` is unused
--- (extras are imported explicitly, no :LazyExtras UI).
-local LazyVim = require("util")
+-- (now a flat spec in lua/plugins/).
+local Util = require("util")
 
 local diagnostics = vim.g.lazyvim_rust_diagnostics or "rust-analyzer"
 
@@ -97,7 +97,7 @@ return {
       },
     },
     config = function(_, opts)
-      if LazyVim.has("mason.nvim") then
+      if Util.has("mason.nvim") then
         local codelldb = vim.fn.exepath("codelldb")
         local codelldb_lib_ext = io.popen("uname"):read("*l") == "Linux" and ".so" or ".dylib"
         local library_path = vim.fn.expand("$MASON/opt/lldb/lib/liblldb" .. codelldb_lib_ext)
@@ -107,7 +107,7 @@ return {
       end
       vim.g.rustaceanvim = vim.tbl_deep_extend("keep", vim.g.rustaceanvim or {}, opts or {})
       if vim.fn.executable("rust-analyzer") == 0 then
-        LazyVim.error(
+        Util.error(
           "**rust-analyzer** not found in PATH, please install it.\nhttps://rust-analyzer.github.io/",
           { title = "rustaceanvim" }
         )

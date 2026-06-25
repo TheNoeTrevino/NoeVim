@@ -1,7 +1,7 @@
--- Vendored from LazyVim (lazyvim/plugins/extras/test/core.lua) with `LazyVim` aliased to our
+-- Vendored from the LazyVim distro (lazyvim/plugins/extras/test/core.lua) with `Util` aliased to our
 -- local util. none-ls specs are optional+absent (lazy skips them); `recommended` is unused
--- (extras are imported explicitly, no :LazyExtras UI).
-local LazyVim = require("util")
+-- (now a flat spec in lua/plugins/).
+local Util = require("util")
 return {
   desc = "Neotest support. Requires language specific adapters to be configured. (see lang extras)",
   {
@@ -24,7 +24,7 @@ return {
       output = { open_on_run = true },
       quickfix = {
         open = function()
-          if LazyVim.has("trouble.nvim") then
+          if Util.has("trouble.nvim") then
             require("trouble").open({ mode = "quickfix", focus = false })
           else
             vim.cmd("copen")
@@ -44,7 +44,7 @@ return {
         },
       }, neotest_ns)
 
-      if LazyVim.has("trouble.nvim") then
+      if Util.has("trouble.nvim") then
         opts.consumers = opts.consumers or {}
         -- Refresh and auto close trouble after running tests
         ---@type neotest.Consumer

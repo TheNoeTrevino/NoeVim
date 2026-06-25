@@ -62,7 +62,7 @@ return {
   -- },
   {
     "rebelot/kanagawa.nvim",
-    -- Active colorscheme: load at startup (LazyVim used to apply it via colorscheme opt).
+    -- Active colorscheme: load at startup (Util used to apply it via colorscheme opt).
     lazy = false,
     priority = 1000,
     config = function()

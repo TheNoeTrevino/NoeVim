@@ -1,6 +1,6 @@
--- Vendored from LazyVim (lazyvim/config/options.lua). Loaded FIRST by config/options.lua
+-- Vendored from the LazyVim distro (lazyvim/config/options.lua). Loaded FIRST by config/options.lua
 -- so the user's own options below still override these (mirrors LazyVim's load order:
--- lazyvim defaults, then user). LazyVim couplings rewritten to our local util:
+-- lazyvim defaults, then user). Util couplings rewritten to our local util:
 --   formatexpr  -> v:lua.require'util.format'.formatexpr()
 --   statuscolumn -> v:lua.require'util'.statuscolumn()  (Snacks-backed)
 vim.g.mapleader = " "

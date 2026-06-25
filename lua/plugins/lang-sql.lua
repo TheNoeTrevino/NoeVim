@@ -1,7 +1,7 @@
--- Vendored from LazyVim (lazyvim/plugins/extras/lang/sql.lua) with `LazyVim` aliased to our
+-- Vendored from the LazyVim distro (lazyvim/plugins/extras/lang/sql.lua) with `Util` aliased to our
 -- local util. none-ls specs are optional+absent (lazy skips them); `recommended` is unused
--- (extras are imported explicitly, no :LazyExtras UI).
-local LazyVim = require("util")
+-- (now a flat spec in lua/plugins/).
+local Util = require("util")
 
 local sql_ft = { "sql", "mysql", "plsql" }
 
@@ -24,7 +24,7 @@ return {
       vim.api.nvim_create_autocmd("FileType", {
         pattern = sql_ft,
         callback = function()
-          if LazyVim.has("nvim-cmp") then
+          if Util.has("nvim-cmp") then
             local cmp = require("cmp")
 
             -- global sources

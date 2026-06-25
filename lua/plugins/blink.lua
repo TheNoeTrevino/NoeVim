@@ -32,7 +32,7 @@ return {
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
-      -- folded in from the LazyVim luasnip extra (blink.cmp integration)
+      -- folded in from the Util luasnip extra (blink.cmp integration)
       snippets = {
         preset = "luasnip",
       },
@@ -105,8 +105,8 @@ return {
         -- set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
         -- adjusts spacing to ensure icons are aligned
         nerd_font_variant = "mono",
-        -- folded in from the LazyVim blink "add icons" fragment
-        -- (was LazyVim.config.icons.kinds)
+        -- folded in from the Util blink "add icons" fragment
+        -- (was Util.config.icons.kinds)
         kind_icons = require("util").config.icons.kinds,
       },
       completion = {
@@ -266,10 +266,10 @@ return {
     },
     ---@param opts blink.cmp.Config
     config = function(_, opts)
-      -- Folded in from the LazyVim blink base `config`: override symbol kinds
+      -- Folded in from the Util blink base `config`: override symbol kinds
       -- for providers that declare a custom `kind` (e.g. the copilot source's
       -- `kind = "Copilot"`). Registers the kind with blink and rewrites each
-      -- item's icon. Was `LazyVim.config.icons.kinds`.
+      -- item's icon. Was `Util.config.icons.kinds`.
       local kind_icons = require("util").config.icons.kinds
       for _, provider in pairs(opts.sources.providers or {}) do
         ---@cast provider blink.cmp.SourceProviderConfig|{kind?:string}

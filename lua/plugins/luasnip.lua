@@ -1,7 +1,7 @@
 -- LuaSnip. Single source of truth: the base spec (originally vendored from
 -- LazyVim's coding.luasnip extra: friendly-snippets, cmp/blink integration,
 -- snippet actions) plus the personal setup and custom snippets.
-local LazyVim = require("util")
+local Util = require("util")
 return {
   -- disable builtin snippet support
   { "garymjr/nvim-snippets", optional = true, enabled = false },
@@ -10,7 +10,7 @@ return {
   {
     "L3MON4D3/LuaSnip",
     lazy = true,
-    build = (not LazyVim.is_win())
+    build = (not Util.is_win())
         and "echo 'NOTE: jsregexp is optional, so not a big deal if it fails to build'; make install_jsregexp"
       or nil,
     dependencies = {
@@ -32,7 +32,7 @@ return {
   {
     "L3MON4D3/LuaSnip",
     opts = function()
-      LazyVim.cmp.actions.snippet_forward = function()
+      Util.cmp.actions.snippet_forward = function()
         if require("luasnip").jumpable(1) then
           vim.schedule(function()
             require("luasnip").jump(1)
@@ -40,7 +40,7 @@ return {
           return true
         end
       end
-      LazyVim.cmp.actions.snippet_stop = function()
+      Util.cmp.actions.snippet_stop = function()
         if require("luasnip").expand_or_jumpable() then -- or just jumpable(1) is fine?
           require("luasnip").unlink_current()
           return true

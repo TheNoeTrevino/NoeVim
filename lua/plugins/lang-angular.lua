@@ -1,9 +1,9 @@
--- Vendored from LazyVim (lazyvim/plugins/extras/lang/angular.lua) with `LazyVim` aliased to our
+-- Vendored from the LazyVim distro (lazyvim/plugins/extras/lang/angular.lua) with `Util` aliased to our
 -- local util. none-ls specs are optional+absent (lazy skips them); `recommended` is unused
--- (extras are imported explicitly, no :LazyExtras UI).
+-- (now a flat spec in lua/plugins/).
 -- Setup: npm install @angular/language-service --no-save
 -- (use --save-dev in projects that need a pinned version).
-local LazyVim = require("util")
+local Util = require("util")
 return {
   {
     "nvim-treesitter",
@@ -44,10 +44,10 @@ return {
   {
     "neovim/nvim-lspconfig",
     opts = function(_, opts)
-      LazyVim.extend(opts.servers.vtsls, "settings.vtsls.tsserver.globalPlugins", {
+      Util.extend(opts.servers.vtsls, "settings.vtsls.tsserver.globalPlugins", {
         {
           name = "@angular/language-server",
-          location = LazyVim.get_pkg_path("angular-language-server", "/node_modules/@angular/language-server"),
+          location = Util.get_pkg_path("angular-language-server", "/node_modules/@angular/language-server"),
           enableForWorkspaceTypeScriptVersions = false,
         },
       })

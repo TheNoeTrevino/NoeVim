@@ -7,7 +7,7 @@
 local Util = require("util")
 
 -- Local re-implementation of the bits of `lazyvim.util.treesitter` and
--- `LazyVim.set_default` that the base config relied on, with the LazyVim.*
+-- `Util.set_default` that the base config relied on, with the Util.*
 -- coupling stripped out.
 local TSUtil = {}
 

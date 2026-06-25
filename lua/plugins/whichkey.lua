@@ -21,10 +21,10 @@ return {
     },
     delay = 400,
     preset = "modern",
-    -- base LazyVim defaults (deprecated path handled in config below)
+    -- base Util defaults (deprecated path handled in config below)
     defaults = {},
     spec = {
-      -- folded-in LazyVim base groups (user fragment below wins on conflicts)
+      -- folded-in Util base groups (user fragment below wins on conflicts)
       {
         mode = { "n", "x" },
         { "<leader><tab>", group = "tabs" },

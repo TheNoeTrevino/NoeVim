@@ -1,6 +1,6 @@
--- Vendored from LazyVim (lazyvim/plugins/extras/lang/typescript/vtsls.lua) with `LazyVim` aliased
+-- Vendored from the LazyVim distro (lazyvim/plugins/extras/lang/typescript/vtsls.lua) with `Util` aliased
 -- to our local util. none-ls/recommended unused as elsewhere.
-local LazyVim = require("util")
+local Util = require("util")
 return {
   -- correctly setup lspconfig
   {
@@ -52,7 +52,7 @@ return {
               function()
                 local win = vim.api.nvim_get_current_win()
                 local params = vim.lsp.util.make_position_params(win, "utf-16")
-                LazyVim.lsp.execute({
+                Util.lsp.execute({
                   command = "typescript.goToSourceDefinition",
                   arguments = { params.textDocument.uri, params.position },
                   open = true,
@@ -63,7 +63,7 @@ return {
             {
               "gR",
               function()
-                LazyVim.lsp.execute({
+                Util.lsp.execute({
                   command = "typescript.findAllFileReferences",
                   arguments = { vim.uri_from_bufnr(0) },
                   open = true,
@@ -73,18 +73,18 @@ return {
             },
             {
               "<leader>cM",
-              LazyVim.lsp.action["source.addMissingImports.ts"],
+              Util.lsp.action["source.addMissingImports.ts"],
               desc = "Add missing imports",
             },
             {
               "<leader>cD",
-              LazyVim.lsp.action["source.fixAll.ts"],
+              Util.lsp.action["source.fixAll.ts"],
               desc = "Fix all diagnostics",
             },
             {
               "<leader>cV",
               function()
-                LazyVim.lsp.execute({
+                Util.lsp.execute({
                   title = "Select TypeScript Version",
                   filter = "vtsls",
                   command = "typescript.selectTypeScriptVersion",

@@ -1,7 +1,7 @@
--- Vendored from LazyVim (lazyvim/util/lsp.lua). LSP helpers used by lsp-config:
+-- Vendored from the LazyVim distro (lazyvim/util/lsp.lua). LSP helpers used by lsp-config:
 -- formatter (registered with the format subsystem), format, action, execute, code_actions.
--- `LazyVim` is aliased to our local util so LazyVim.merge/opts/dedup resolve here.
-local LazyVim = require("util")
+-- `Util` is aliased to our local util so Util.merge/opts/dedup resolve here.
+local Util = require("util")
 
 ---@class lazyvim.util.lsp
 local M = {}
@@ -18,10 +18,10 @@ function M.formatter(opts)
     primary = true,
     priority = 1,
     format = function(buf)
-      M.format(LazyVim.merge({}, filter, { bufnr = buf }))
+      M.format(Util.merge({}, filter, { bufnr = buf }))
     end,
     sources = function(buf)
-      local clients = vim.lsp.get_clients(LazyVim.merge({}, filter, { bufnr = buf }))
+      local clients = vim.lsp.get_clients(Util.merge({}, filter, { bufnr = buf }))
       ---@param client vim.lsp.Client
       local ret = vim.tbl_filter(function(client)
         return client:supports_method("textDocument/formatting")
@@ -33,14 +33,14 @@ function M.formatter(opts)
       end, ret)
     end,
   }
-  return LazyVim.merge(ret, opts) --[[@as LazyFormatter]]
+  return Util.merge(ret, opts) --[[@as LazyFormatter]]
 end
 
 ---@alias lsp.Client.format {timeout_ms?: number, format_options?: table} | vim.lsp.get_clients.Filter
 
 ---@param opts? lsp.Client.format
 function M.format(opts)
-  opts = vim.tbl_deep_extend("force", {}, opts or {}, LazyVim.opts("nvim-lspconfig").format or {})
+  opts = vim.tbl_deep_extend("force", {}, opts or {}, Util.opts("nvim-lspconfig").format or {})
   local ok, conform = pcall(require, "conform")
   -- use conform for formatting with LSP when available,
   -- since it has better format diffing
@@ -81,7 +81,7 @@ function M.execute(opts)
   local buf = vim.api.nvim_get_current_buf()
 
   ---@cast filter vim.lsp.get_clients.Filter
-  local client = vim.lsp.get_clients(LazyVim.merge({}, filter, { bufnr = buf }))[1]
+  local client = vim.lsp.get_clients(Util.merge({}, filter, { bufnr = buf }))[1]
 
   local params = {
     command = opts.command,
@@ -112,7 +112,7 @@ function M.code_actions(filter)
       vim.list_extend(ret, vim.tbl_get(reg, "registerOptions", "codeActionKinds") or {})
     end
   end
-  return LazyVim.dedup(ret)
+  return Util.dedup(ret)
 end
 
 return M

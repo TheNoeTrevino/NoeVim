@@ -11,7 +11,7 @@ end
 return {
   "folke/snacks.nvim",
   -- Self-sufficient now that LazyVim core no longer provides the base Snacks spec.
-  -- (LazyVim loaded snacks at startup with priority 1000 and restored vim.notify for noice.)
+  -- (Util loaded snacks at startup with priority 1000 and restored vim.notify for noice.)
   priority = 1000,
   lazy = false,
   config = function(_, opts)

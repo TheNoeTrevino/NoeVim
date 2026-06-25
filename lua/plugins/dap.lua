@@ -2,7 +2,7 @@
 -- dap.core extra: mason-nvim-dap, signs, vscode launch.json, virtual text) plus the
 -- personal java configs, keymaps, dap-ui layout and dap-python wiring. Entries target
 -- the same repos; lazy.nvim merges them, with the personal entries (last) winning.
-local LazyVim = require("util")
+local Util = require("util")
 
 ---@param config {type?:string, args?:string[]|fun():string[]?}
 local function get_args(config)
@@ -60,13 +60,13 @@ return {
 
     config = function()
       -- load mason-nvim-dap here, after all adapters have been setup
-      if LazyVim.has("mason-nvim-dap.nvim") then
-        require("mason-nvim-dap").setup(LazyVim.opts("mason-nvim-dap.nvim"))
+      if Util.has("mason-nvim-dap.nvim") then
+        require("mason-nvim-dap").setup(Util.opts("mason-nvim-dap.nvim"))
       end
 
       vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
 
-      for name, sign in pairs(LazyVim.config.icons.dap) do
+      for name, sign in pairs(Util.config.icons.dap) do
         sign = type(sign) == "table" and sign or { sign }
         vim.fn.sign_define(
           "Dap" .. name,

@@ -1,26 +1,18 @@
--- THE home of the entire format subsystem. Migrated off the LazyVim distro:
---   * lazyvim/util/format.lua   -> the engine below (register/resolve/format/...)
---   * lazyvim/plugins/formatting -> the conform.nvim spec below
---   * LazyVim.format.setup()     -> M.setup() (autoformat autocmd + commands), on VeryLazy
---   * the <leader>cf/cF/uf/uF keymaps that used to live in config/lazyvim-keymaps.lua
---   * formatexpr (was set by LazyVim's options.lua to v:lua.LazyVim.format.formatexpr())
---   * the LSP formatter registration (lsp-config.lua now registers into THIS engine)
+-- THE home of the entire format subsystem (self-contained; derived from the LazyVim
+-- distro's lazyvim/util/format.lua engine + lazyvim/plugins/formatting spec):
+--   * the engine below: register/resolve/format/...
+--   * the conform.nvim spec below
+--   * M.setup(): autoformat autocmd + <leader>cf/cF/uf/uF commands, wired on VeryLazy
+--   * formatexpr and the LSP formatter registration (lsp-config.lua registers into THIS engine)
 --
 -- The engine is exposed as the `util.format` module via package.loaded (set at spec
 -- collection time, before anything reads it), so `Util.format.*` (the util metatable
--- proxy) and `v:lua.require'util.format'.formatexpr()` keep resolving to this one table.
---
--- Coexistence with LazyVim (still installed until cut-the-cord): LazyVim's config.init
--- still calls LazyVim.format.setup() on VeryLazy, creating its own `LazyFormat` autocmd.
--- But its formatter registry stays EMPTY -- our spec replaces formatting.lua's init/config
--- (so conform is never registered there) and lsp-config registers the LSP formatter into
--- THIS engine -- so LazyVim's autocmd resolves to no formatters and is a silent no-op.
--- It disappears entirely when the LazyVim import is removed.
+-- proxy) and `v:lua.require'util.format'.formatexpr()` resolve to this one table.
 
 local Util = require("util")
 
 -- ===========================================================================
--- Format engine (vendored from lazyvim/util/format.lua; LazyVim.* -> Util.*)
+-- Format engine (vendored from lazyvim/util/format.lua; Util.* -> Util.*)
 -- ===========================================================================
 ---@class util.format
 ---@overload fun(opts?: {force?:boolean})
@@ -273,7 +265,7 @@ return {
       lsp_format = "fallback", -- not recommended to change
     },
     formatters_by_ft = {
-      -- base (LazyVim formatting.lua)
+      -- base (Util formatting.lua)
         lua = { "stylua" },
         fish = { "fish_indent" },
         sh = { "shfmt" },
@@ -289,7 +281,7 @@ return {
         ["markdown.mdx"] = { "markdown-toc" },
       },
       formatters = {
-        -- base (LazyVim formatting.lua)
+        -- base (Util formatting.lua)
         injected = { options = { ignore_errors = true } },
         -- user
         sqruff = {},

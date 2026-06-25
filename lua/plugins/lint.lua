@@ -1,5 +1,5 @@
 -- Self-sufficient nvim-lint spec. The config function (debounced lint runner) is
--- vendored from LazyVim's lazyvim/plugins/linting.lua; LazyVim.warn -> util.warn.
+-- vendored from LazyVim's lazyvim/plugins/linting.lua; Util.warn -> util.warn.
 -- User's linters/linters_by_ft fold in on top of the base (fish), user winning.
 return {
   "mfussenegger/nvim-lint",
@@ -84,7 +84,7 @@ return {
       },
     },
   },
-  -- Vendored from LazyVim lazyvim/plugins/linting.lua (config), LazyVim.warn -> util.warn.
+  -- Vendored from LazyVim lazyvim/plugins/linting.lua (config), Util.warn -> util.warn.
   config = function(_, opts)
     local M = {}
 

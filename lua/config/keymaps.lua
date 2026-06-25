@@ -1,11 +1,11 @@
--- Vendored LazyVim default keymaps (with the ones this file used to `vim.keymap.del`
+-- Vendored Util default keymaps (with the ones this file used to `vim.keymap.del`
 -- already excluded). Loaded first so the user mappings below still override them,
--- exactly as when LazyVim installed its defaults ahead of this file.
-require("config.lazyvim-keymaps")
+-- exactly as when Util installed its defaults ahead of this file.
+require("config.defaults.keymaps")
 
 -- The only surviving del: <leader>bd is a lazy `keys` handler from picker.lua
--- (Snacks.bufdelete), not a LazyVim config default, so it still exists and must be
--- removed here to match prior behavior. The other ~28 dels targeted LazyVim config
+-- (Snacks.bufdelete), not a Util config default, so it still exists and must be
+-- removed here to match prior behavior. The other ~28 dels targeted Util config
 -- defaults that we now simply don't create.
 pcall(vim.keymap.del, "n", "<leader>bd")
 

@@ -1,6 +1,6 @@
--- Vendored LazyVim default options (loaded first, mirrors LazyVim load order: defaults
+-- Vendored Util default options (loaded first, mirrors Util load order: defaults
 -- then user). The user overrides below win. Sets vim.g.mapleader etc.
-require("config.lazyvim-options")
+require("config.defaults.options")
 
 -- Add any additional options here
 vim.g.moonflyItalics = false

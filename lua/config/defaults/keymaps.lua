@@ -1,12 +1,12 @@
--- Vendored from LazyVim (lazyvim/config/keymaps.lua), with the mappings that
+-- Vendored from the LazyVim distro (lazyvim/config/keymaps.lua), with the mappings that
 -- config/keymaps.lua used to `vim.keymap.del` already removed (so we never create
 -- them in the first place). Loaded at the TOP of config/keymaps.lua so the user's
--- own mappings still override these, exactly as when LazyVim loaded first.
+-- own mappings still override these, exactly as when Util loaded first.
 --
 -- Replacements vs upstream:
---   LazyVim.root / LazyVim.root.git -> require("util").root
---   LazyVim.cmp.actions.snippet_stop -> require("util").cmp...
---   LazyVim.format (<leader>cf/cF/uf/uF) -> moved to lua/plugins/format.lua
+--   Util.root / Util.root.git -> require("util").root
+--   Util.cmp.actions.snippet_stop -> require("util").cmp...
+--   Util.format (<leader>cf/cF/uf/uF) -> moved to lua/plugins/format.lua
 --
 -- Removed (were deleted by config/keymaps.lua): <leader>` | - L l K, all
 -- <leader><tab>* , i",.;" undo-breaks, <leader>fn ft fT xl xq uD, <c-/> <c-_>,
@@ -159,7 +159,7 @@ map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit All" })
 map("n", "<leader>ui", vim.show_pos, { desc = "Inspect Pos" })
 map("n", "<leader>uI", function() vim.treesitter.inspect_tree() vim.api.nvim_input("I") end, { desc = "Inspect Tree" })
 
--- (LazyVim Changelog <leader>L removed)
+-- (Util Changelog <leader>L removed)
 
 -- floating terminal (<leader>fT/ft and <c-/>/<c-_> removed: user redefines <c-_>)
 

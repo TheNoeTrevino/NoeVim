@@ -188,7 +188,7 @@ return {
     opts = {},
 
     -- config = function()
-    --   local map = LazyVim.safe_keymap_set
+    --   local map = Util.safe_keymap_set
     --   -- Tags
     --   map("n", "<leader>glj", "<cmd>GoTagAdd json<cr>", { desc = "Add JSON Tag" })
     --   map("n", "<leader>glJ", "<cmd>GoTagRm json<cr>", { desc = "Rm JSON Tag" })

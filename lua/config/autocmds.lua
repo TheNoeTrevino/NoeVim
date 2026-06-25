@@ -1,6 +1,6 @@
 -- Autocmds are automatically loaded on the VeryLazy event
--- Vendored LazyVim default autocmds (loaded first, mirrors LazyVim load order).
-require("config.lazyvim-autocmds")
+-- Vendored Util default autocmds (loaded first, mirrors Util load order).
+require("config.defaults.autocmds")
 -- Add any additional autocmds here
 
 -- save buffers in markdown when leaving then

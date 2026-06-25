@@ -1,7 +1,7 @@
--- Vendored from LazyVim (lazyvim/plugins/extras/lang/tailwind.lua) with `LazyVim` aliased to our
+-- Vendored from the LazyVim distro (lazyvim/plugins/extras/lang/tailwind.lua) with `Util` aliased to our
 -- local util. none-ls specs are optional+absent (lazy skips them); `recommended` is unused
--- (extras are imported explicitly, no :LazyExtras UI).
-local LazyVim = require("util")
+-- (now a flat spec in lua/plugins/).
+local Util = require("util")
 return {
   {
     "neovim/nvim-lspconfig",
@@ -56,7 +56,7 @@ return {
       { "roobert/tailwindcss-colorizer-cmp.nvim", opts = {} },
     },
     opts = function(_, opts)
-      -- original LazyVim kind icon formatter
+      -- original Util kind icon formatter
       local format_kinds = opts.formatting.format
       opts.formatting.format = function(entry, item)
         format_kinds(entry, item) -- add icons

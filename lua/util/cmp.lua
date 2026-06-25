@@ -1,4 +1,4 @@
--- Vendored from LazyVim (lazyvim/util/cmp.lua), trimmed to the snippet actions
+-- Vendored from the LazyVim distro (lazyvim/util/cmp.lua), trimmed to the snippet actions
 -- this config uses (Util.cmp.actions.snippet_stop in <esc> mapping).
 local M = {}
 

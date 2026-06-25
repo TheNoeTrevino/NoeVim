@@ -1,7 +1,7 @@
--- Vendored from LazyVim (lazyvim/plugins/extras/lang/java.lua) with `LazyVim` aliased to our
+-- Vendored from the LazyVim distro (lazyvim/plugins/extras/lang/java.lua) with `Util` aliased to our
 -- local util. none-ls specs are optional+absent (lazy skips them); `recommended` is unused
--- (extras are imported explicitly, no :LazyExtras UI).
-local LazyVim = require("util")
+-- (now a flat spec in lua/plugins/).
+local Util = require("util")
 -- This is the same as in lspconfig.configs.jdtls, but avoids
 -- needing to require that when this module loads.
 local java_filetypes = { "java" }
@@ -76,7 +76,7 @@ return {
     ft = java_filetypes,
     opts = function()
       local cmd = { vim.fn.exepath("jdtls") }
-      if LazyVim.has("mason.nvim") then
+      if Util.has("mason.nvim") then
         local lombok_jar = vim.fn.expand("$MASON/share/jdtls/lombok.jar")
         table.insert(cmd, string.format("--jvm-arg=-javaagent:%s", lombok_jar))
       end
@@ -137,9 +137,9 @@ return {
       -- Find the extra bundles that should be passed on the jdtls command-line
       -- if nvim-dap is enabled with java debug/test.
       local bundles = {} ---@type string[]
-      if LazyVim.has("mason.nvim") then
+      if Util.has("mason.nvim") then
         local mason_registry = require("mason-registry")
-        if opts.dap and LazyVim.has("nvim-dap") and mason_registry.is_installed("java-debug-adapter") then
+        if opts.dap and Util.has("nvim-dap") and mason_registry.is_installed("java-debug-adapter") then
           bundles = vim.fn.glob("$MASON/share/java-debug-adapter/com.microsoft.java.debug.plugin-*jar", false, true)
           -- java-test also depends on java-debug-adapter.
           if opts.test and mason_registry.is_installed("java-test") then
@@ -159,7 +159,7 @@ return {
           },
           settings = opts.settings,
           -- enable CMP capabilities
-          capabilities = LazyVim.has("blink.cmp") and require("blink.cmp").get_lsp_capabilities() or LazyVim.has(
+          capabilities = Util.has("blink.cmp") and require("blink.cmp").get_lsp_capabilities() or Util.has(
             "cmp-nvim-lsp"
           ) and require("cmp_nvim_lsp").default_capabilities() or nil,
         }, opts.jdtls)
@@ -220,9 +220,9 @@ return {
               },
             })
 
-            if LazyVim.has("mason.nvim") then
+            if Util.has("mason.nvim") then
               local mason_registry = require("mason-registry")
-              if opts.dap and LazyVim.has("nvim-dap") and mason_registry.is_installed("java-debug-adapter") then
+              if opts.dap and Util.has("nvim-dap") and mason_registry.is_installed("java-debug-adapter") then
                 -- custom init for Java debugger
                 require("jdtls").setup_dap(opts.dap)
                 if opts.dap_main then

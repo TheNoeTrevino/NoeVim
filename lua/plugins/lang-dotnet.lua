@@ -1,7 +1,7 @@
--- Vendored from LazyVim (lazyvim/plugins/extras/lang/dotnet.lua) with `LazyVim` aliased to our
+-- Vendored from the LazyVim distro (lazyvim/plugins/extras/lang/dotnet.lua) with `Util` aliased to our
 -- local util. none-ls specs are optional+absent (lazy skips them); `recommended` is unused
--- (extras are imported explicitly, no :LazyExtras UI).
-local LazyVim = require("util")
+-- (now a flat spec in lua/plugins/).
+local Util = require("util")
 return {
   { "Hoffs/omnisharp-extended-lsp.nvim", lazy = true },
   {
@@ -46,7 +46,7 @@ return {
           keys = {
             {
               "gd",
-              LazyVim.has("telescope.nvim") and function()
+              Util.has("telescope.nvim") and function()
                 require("omnisharp_extended").telescope_lsp_definitions()
               end or function()
                 require("omnisharp_extended").lsp_definitions()

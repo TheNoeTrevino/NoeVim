@@ -14,11 +14,11 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- Cut-the-cord bootstrap (replaces lazyvim.config.init() now that LazyVim is gone):
---  * expose our util as the global `LazyVim` (safety net for any lingering global refs)
+-- Bootstrap (replaces the LazyVim distro's lazyvim.config.init()):
+--  * expose our util module as the global `Util` (used unqualified by many specs)
 --  * load options before plugins (mapleader must be set before lazy maps <leader> keys)
 --  * register the LazyFile event (BufReadPost/BufNewFile/BufWritePre) used by many specs
-_G.LazyVim = require("util")
+_G.Util = require("util")
 require("config.options")
 do
   local Event = require("lazy.core.handler.event")
@@ -69,7 +69,7 @@ require("lazy").setup({
   },
 })
 
--- Load keymaps + autocmds on VeryLazy (LazyVim used to do this from its setup()).
+-- Load keymaps + autocmds on VeryLazy (Util used to do this from its setup()).
 -- Deferred so plugins (Snacks, which-key, etc.) are available when our mappings reference them.
 vim.api.nvim_create_autocmd("User", {
   pattern = "VeryLazy",

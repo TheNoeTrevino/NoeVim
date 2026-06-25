@@ -1,4 +1,4 @@
--- Vendored from LazyVim (lazyvim/util/pick.lua), with the snacks picker
+-- Vendored from the LazyVim distro (lazyvim/util/pick.lua), with the snacks picker
 -- registration folded in (previously provided by the snacks_picker extra).
 local Util = require("util")
 
