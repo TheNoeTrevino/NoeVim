@@ -2,6 +2,7 @@ return {
   "folke/flash.nvim",
   event = "VeryLazy",
   vscode = true,
+  ---@type Flash.Config
   opts = {
     modes = {
       -- `f`, `F`, `t`, `T`, `;` and `,` motions
