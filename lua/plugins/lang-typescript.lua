@@ -6,7 +6,7 @@ local LazyVim = require("util")
 -- server via vim.g.lazyvim_ts_lsp. We vendor only the default (vtsls), hardcoded.
 
 return {
-  { import = "plugins.extras.lang.typescript.vtsls" },
+  -- vtsls server config lives in lang-typescript-vtsls.lua (auto-loaded).
 
   -- correctly setup lspconfig
   {

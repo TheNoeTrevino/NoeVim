@@ -28,39 +28,17 @@ end
 
 require("lazy").setup({
   spec = {
-    -- Base-opts seeds, processed FIRST so the lang extras' opts FUNCTIONS (which index
+    -- Base-opts seeds, processed FIRST so the lang specs' opts FUNCTIONS (which index
     -- opts.formatters / opts.formatters_by_ft / opts.linters_by_ft directly) always find a
-    -- table to write into. LazyVim used to guarantee this by loading its core formatting/
-    -- linting specs before extras; our real base lives in plugins/format.lua + plugins/lint.lua
-    -- (imported last via { import = "plugins" } so the user's opts still win on conflicts).
+    -- table to write into. The real base lives in plugins/format.lua + plugins/lint.lua.
     { "stevearc/conform.nvim", opts = { formatters = {}, formatters_by_ft = {} } },
     { "mfussenegger/nvim-lint", opts = { linters_by_ft = {} } },
-    -- Extras: vendored from LazyVim into lua/plugins/extras/ (no longer lazyvim.plugins.*).
-    -- These used to come from both this list and lazyvim.json (:LazyExtras); now unified here.
-    -- Lang
-    { import = "plugins.extras.lang.java" },
-    { import = "plugins.extras.lang.typescript" }, -- vtsls; dap block installs js-debug-adapter
-    { import = "plugins.extras.lang.python" },
-    { import = "plugins.extras.lang.sql" },
-    { import = "plugins.extras.lang.tailwind" },
-    -- angular: npm install @angular/language-service --no-save (save-dev for projects needing the version)
-    { import = "plugins.extras.lang.angular" },
-    { import = "plugins.extras.lang.json" },
-    { import = "plugins.extras.lang.docker" },
-    { import = "plugins.extras.lang.dotnet" },
-    { import = "plugins.extras.lang.rust" },
-    { import = "plugins.extras.lang.toml" },
-    -- Formatting
-    { import = "plugins.extras.formatting.black" },
-    { import = "plugins.extras.formatting.prettier" },
-    -- Editor / Util
-    { import = "plugins.extras.editor.inc-rename" },
-    { import = "plugins.extras.editor.dial" },
-    { import = "plugins.extras.util.dot" },
-    { import = "plugins.extras.util.rest" },
-    -- Test / DAP / Coding / UI
-    { import = "plugins.extras.test.core" },
-    { import = "plugins.extras.ui.treesitter-context" },
+    -- mason.nvim ensure_installed: some lang specs mutate this list via an opts function
+    -- (table.insert), which now alphabetically precedes mason.lua. Seed an empty list so
+    -- those inserts always find a table. opts_extend in mason.lua concatenates the rest.
+    { "mason-org/mason.nvim", opts = { ensure_installed = {} } },
+    -- Everything else is a flat file under lua/plugins/ (one file per plugin/topic),
+    -- auto-discovered by this single import (lazy.nvim does not recurse into subdirs).
     { import = "plugins" },
   },
   defaults = {

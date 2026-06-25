@@ -1,6 +1,8 @@
 -- Vendored from LazyVim (lazyvim/plugins/extras/lang/angular.lua) with `LazyVim` aliased to our
 -- local util. none-ls specs are optional+absent (lazy skips them); `recommended` is unused
 -- (extras are imported explicitly, no :LazyExtras UI).
+-- Setup: npm install @angular/language-service --no-save
+-- (use --save-dev in projects that need a pinned version).
 local LazyVim = require("util")
 return {
   {
@@ -18,8 +20,7 @@ return {
     end,
   },
 
-  -- angularls depends on typescript
-  { import = "plugins.extras.lang.typescript" },
+  -- angularls depends on typescript, which is always loaded (lang-typescript.lua).
 
   -- LSP Servers
   {
@@ -57,10 +58,9 @@ return {
   {
     "conform.nvim",
     opts = function(_, opts)
-      if LazyVim.has_extra("formatting.prettier") then
-        opts.formatters_by_ft = opts.formatters_by_ft or {}
-        opts.formatters_by_ft.htmlangular = { "prettier" }
-      end
+      -- prettier is always part of this config (formatting-prettier.lua).
+      opts.formatters_by_ft = opts.formatters_by_ft or {}
+      opts.formatters_by_ft.htmlangular = { "prettier" }
     end,
   },
 }

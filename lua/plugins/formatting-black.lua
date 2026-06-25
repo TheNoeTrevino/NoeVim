@@ -5,9 +5,8 @@ local LazyVim = require("util")
 return {
   {
     "mason-org/mason.nvim",
-    opts = function(_, opts)
-      table.insert(opts.ensure_installed, "black")
-    end,
+    -- table form composes with mason's opts_extend = { "ensure_installed" }.
+    opts = { ensure_installed = { "black" } },
   },
   {
     "nvimtools/none-ls.nvim",
