@@ -308,8 +308,11 @@ return {
 
             ISwapSelection = { bg = c.red_git },
             ISwapHighlight = { bg = c.orange_bright },
-            TreesitterContext = {},
-            TreesitterContextSeparator = { fg = "#101F28" },
+            -- No background so the sticky context blends with the code below.
+            -- (Must be explicit "none": kanagawa deep-merges overrides, so an empty
+            -- table would leave kanagawa's default TreesitterContext background.)
+            TreesitterContext = { bg = "none" },
+            TreesitterContextSeparator = { fg = "#101F28", bg = "none" },
 
             -- Cursor
             Cursor = { fg = "NONE", bg = c.white },
