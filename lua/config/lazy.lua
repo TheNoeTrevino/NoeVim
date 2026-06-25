@@ -14,7 +14,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- Bootstrap (replaces the LazyVim distro's lazyvim.config.init()):
+-- Bootstrap:
 --  * expose our util module as the global `Util` (used unqualified by many specs)
 --  * load options before plugins (mapleader must be set before lazy maps <leader> keys)
 --  * register the LazyFile event (BufReadPost/BufNewFile/BufWritePre) used by many specs

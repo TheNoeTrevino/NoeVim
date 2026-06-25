@@ -1,6 +1,5 @@
--- Vendored icon + kind_filter tables from LazyVim (lazyvim/config/init.lua).
--- Accessed as `Util.config.icons` (lualine, blink kind_icons) etc.
--- NOTE: re-vendored byte-exact from source (nerd-font glyphs preserved).
+-- Icon + kind_filter tables. Accessed as `Util.config.icons` (lualine, blink kind icons,
+-- symbols filters, etc.).
 local M = {}
 
 M.icons = {

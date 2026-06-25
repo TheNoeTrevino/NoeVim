@@ -1,8 +1,6 @@
--- mini.ai + mini.icons
--- Standalone specs migrated off Util. These previously relied entirely on
--- LazyVim's bundled specs (pure inherit). All Util.* helpers are inlined.
+-- mini.ai + mini.icons. All helpers are inlined (no external util dependency).
 
--- taken from MiniExtra.gen_ai_spec.buffer (was Util.mini.ai_buffer)
+-- taken from MiniExtra.gen_ai_spec.buffer
 local function ai_buffer(ai_type)
   local start_line, end_line = 1, vim.fn.line("$")
   if ai_type == "i" then

@@ -1,6 +1,5 @@
--- Self-sufficient nvim-lint spec. The config function (debounced lint runner) is
--- vendored from LazyVim's lazyvim/plugins/linting.lua; Util.warn -> util.warn.
--- User's linters/linters_by_ft fold in on top of the base (fish), user winning.
+-- nvim-lint: debounced lint runner (see the config function below). Personal
+-- linters/linters_by_ft fold in on top of the base (fish), the personal ones winning.
 return {
   "mfussenegger/nvim-lint",
   event = "LazyFile",
@@ -9,7 +8,7 @@ return {
     events = { "BufWritePost", "BufReadPost", "InsertLeave", "BufEnter", "TextChanged", "TextChangedI" },
 
     linters_by_ft = {
-      -- base (from LazyVim linting.lua)
+      -- base
       fish = { "fish" },
       -- user
       sql = { "sqruff", "squawk" },
@@ -84,7 +83,7 @@ return {
       },
     },
   },
-  -- Vendored from LazyVim lazyvim/plugins/linting.lua (config), Util.warn -> util.warn.
+  -- Debounced lint runner: lints on the events below, skipping when the buffer can't be modified.
   config = function(_, opts)
     local M = {}
 

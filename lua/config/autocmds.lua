@@ -1,5 +1,4 @@
--- Autocmds are automatically loaded on the VeryLazy event
--- Vendored LazyVim default autocmds (loaded first, mirrors LazyVim load order).
+-- Loaded on the VeryLazy event. Load the default autocmds first, then the personal ones.
 require("config.defaults.autocmds")
 -- Add any additional autocmds here
 

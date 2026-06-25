@@ -1,5 +1,4 @@
--- Go language support. Single source of truth: the LSP/treesitter/mason/dap/neotest
--- stack (originally vendored from LazyVim's lang.go extra) plus the gopher.nvim spec.
+-- Go language support: the LSP/treesitter/mason/dap/neotest stack plus the gopher.nvim spec.
 return {
   {
     "nvim-treesitter/nvim-treesitter",

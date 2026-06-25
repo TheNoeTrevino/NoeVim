@@ -1,5 +1,4 @@
--- THE home of the entire format subsystem (self-contained; derived from the LazyVim
--- distro's lazyvim/util/format.lua engine + lazyvim/plugins/formatting spec):
+-- THE home of the entire format subsystem (self-contained):
 --   * the engine below: register/resolve/format/...
 --   * the conform.nvim spec below
 --   * M.setup(): autoformat autocmd + <leader>cf/cF/uf/uF commands, wired on VeryLazy
@@ -12,7 +11,7 @@
 local Util = require("util")
 
 -- ===========================================================================
--- Format engine (vendored from lazyvim/util/format.lua; Util.* -> Util.*)
+-- Format engine
 -- ===========================================================================
 ---@class util.format
 ---@overload fun(opts?: {force?:boolean})
@@ -159,8 +158,7 @@ function M.format(opts)
 end
 
 function M.setup()
-  -- Autoformat autocmd. Own augroup ("format") so it coexists with LazyVim's leftover
-  -- (empty, no-op) "LazyFormat" autocmd while the distro is still installed.
+  -- Autoformat autocmd. Own augroup ("format").
   vim.api.nvim_create_autocmd("BufWritePre", {
     group = vim.api.nvim_create_augroup("format", { clear = true }),
     callback = function(event)
@@ -196,8 +194,8 @@ function M.snacks_toggle(buf)
 end
 
 -- ===========================================================================
--- conform.nvim plugin spec (re-derived from lazyvim/plugins/formatting.lua,
--- base opts merged with the user's formatters/formatters_by_ft, user winning)
+-- conform.nvim plugin spec (base opts merged with the personal
+-- formatters/formatters_by_ft, the personal ones winning)
 -- ===========================================================================
 return {
   "stevearc/conform.nvim",
@@ -224,8 +222,8 @@ return {
     },
   },
   init = function()
-    -- Wire the engine up on VeryLazy (matches LazyVim's timing): autoformat autocmd +
-    -- commands, the conform formatter, formatexpr, and the autoformat toggles.
+    -- Wire the engine up on VeryLazy: autoformat autocmd + commands, the conform
+    -- formatter, formatexpr, and the autoformat toggles.
     Util.on_very_lazy(function()
       M.setup()
 
@@ -252,10 +250,9 @@ return {
     end)
   end,
   -- A TABLE (not a function): lazy DEEP-MERGES it with the conform opts contributed by the
-  -- lang/prettier extras (which import before us). A function that returned a full table
-  -- would REPLACE those instead, wiping the extras' formatters_by_ft. This table also
-  -- carries the base (lua/fish/sh, default_format_opts, injected) so it still stands alone
-  -- once LazyVim's formatting.lua is gone at cut-the-cord.
+  -- lang/prettier files (which load before us). A function that returned a full table
+  -- would REPLACE those instead, wiping their formatters_by_ft. This table also carries
+  -- the base (lua/fish/sh, default_format_opts, injected) so it still stands alone.
   ---@type conform.setupOpts
   opts = {
     default_format_opts = {
@@ -265,7 +262,7 @@ return {
       lsp_format = "fallback", -- not recommended to change
     },
     formatters_by_ft = {
-      -- base (Util formatting.lua)
+      -- base
         lua = { "stylua" },
         fish = { "fish_indent" },
         sh = { "shfmt" },
@@ -281,7 +278,7 @@ return {
         ["markdown.mdx"] = { "markdown-toc" },
       },
       formatters = {
-        -- base (Util formatting.lua)
+        -- base
         injected = { options = { ignore_errors = true } },
         -- user
         sqruff = {},

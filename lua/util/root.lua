@@ -1,5 +1,4 @@
--- Vendored from the LazyVim distro (lazyvim/util/root.lua), trimmed to what this config uses:
--- root detection by LSP / .git+lua / cwd. Exposes `Util.root()` and `Util.root.git()`.
+-- Root detection by LSP / .git+lua / cwd. Exposes `Util.root()` and `Util.root.git()`.
 local Util = require("util")
 
 ---@class util.root

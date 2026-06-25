@@ -1,5 +1,4 @@
--- Neo-tree file explorer. Single source of truth: the base spec (originally
--- vendored from LazyVim's editor.neo-tree extra) plus the personal overrides.
+-- Neo-tree file explorer. One file: the base spec plus the personal overrides.
 -- Both entries target the same repo; lazy.nvim deep-merges opts and concatenates
 -- keys, so the override entry (last) wins on conflicts.
 local Util = require("util")

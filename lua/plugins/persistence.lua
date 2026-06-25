@@ -1,6 +1,4 @@
--- Vendored from LazyVim core (lazyvim/plugins/util.lua). persistence is enabled in
--- disable.lua (non-win32); this carries its base spec (keys + event) now that the
--- LazyVim core import is gone.
+-- Session persistence (auto-restore). Enabled/gated in disable.lua (non-win32).
 return {
   "folke/persistence.nvim",
   event = "BufReadPre",

@@ -133,7 +133,7 @@ return {
   },
   -- stylua: ignore
   keys = {
-    -- suppress LazyVim's base noice keys; drop once lazyvim core import is removed
+    -- suppress the base noice keys
     { "<leader>sn", false },
     { "<leader>sna", false },
     { "<leader>snd", false },

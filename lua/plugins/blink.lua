@@ -122,7 +122,7 @@ return {
           },
         },
         accept = {
-          -- experimental auto-brackets support (folded in from LazyVim base)
+          -- experimental auto-brackets support
           auto_brackets = {
             enabled = true,
           },
@@ -250,7 +250,7 @@ return {
           end,
         },
         ["<C-e>"] = { "hide", "fallback" },
-        ["<C-y>"] = { "select_and_accept" }, -- folded in from LazyVim base
+        ["<C-y>"] = { "select_and_accept" },
         ["<S-Tab>"] = { "snippet_backward", "fallback" },
 
         ["<Up>"] = { "select_prev", "fallback" },

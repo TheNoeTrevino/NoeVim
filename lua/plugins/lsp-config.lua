@@ -1,9 +1,7 @@
--- nvim-lspconfig: vendored LSP setup machinery from LazyVim (lazyvim/plugins/lsp/init.lua).
--- The user's overrides (servers/diagnostics/keys disables) are the SECOND spec below and
--- win via lazy's opts merge + opts_extend("servers.*.keys").
---
--- The LSP formatter is registered into our own format engine (`Util.format`, which lives
--- in lua/plugins/format.lua). Everything routes through our local `util`.
+-- nvim-lspconfig: the LSP setup machinery. The personal overrides (servers/diagnostics/
+-- keys disables) are the SECOND spec below and win via lazy's opts merge +
+-- opts_extend("servers.*.keys"). The LSP formatter registers into our own format engine
+-- (Util.format, in lua/plugins/format.lua).
 local Util = require("util")
 
 return {
@@ -69,8 +67,8 @@ return {
           },
           -- LSP Server Settings
           -- Sets the default configuration for an LSP client (or all clients if the special name "*" is used).
-          ---@alias lazyvim.lsp.Config vim.lsp.Config|{mason?:boolean, enabled?:boolean, keys?:LazyKeysLspSpec[]}
-          ---@type table<string, lazyvim.lsp.Config|boolean>
+          ---@alias lsp.Config vim.lsp.Config|{mason?:boolean, enabled?:boolean, keys?:LazyKeysLspSpec[]}
+          ---@type table<string, lsp.Config|boolean>
           servers = {
             -- configuration for all lsp servers
             ["*"] = {
@@ -255,7 +253,7 @@ return {
             return false
           end
           local sopts = opts.servers[server]
-          sopts = sopts == true and {} or (not sopts) and { enabled = false } or sopts --[[@as lazyvim.lsp.Config]]
+          sopts = sopts == true and {} or (not sopts) and { enabled = false } or sopts --[[@as lsp.Config]]
   
           if sopts.enabled == false then
             mason_exclude[#mason_exclude + 1] = server

@@ -1,6 +1,5 @@
--- LuaSnip. Single source of truth: the base spec (originally vendored from
--- LazyVim's coding.luasnip extra: friendly-snippets, cmp/blink integration,
--- snippet actions) plus the personal setup and custom snippets.
+-- LuaSnip. One file for everything: friendly-snippets, cmp/blink integration and
+-- snippet actions, plus the personal setup and custom snippets.
 local Util = require("util")
 return {
   -- disable builtin snippet support

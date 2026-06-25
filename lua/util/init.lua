@@ -1,8 +1,5 @@
--- Local replacement for the `Util` global utility module.
--- Vendored from LazyVim so the config no longer depends on the LazyVim distro.
--- Submodules (root, pick, cmp, config) load lazily via the metatable below.
--- Generic helpers (warn/error/info/norm) proxy to lazy.core.util, which ships
--- with lazy.nvim and survives the Util removal.
+-- The `Util` global utility module. Submodules (root, pick, cmp, config) load lazily via
+-- the metatable below. Generic helpers (warn/error/info/norm) proxy to lazy.core.util.
 local LazyUtil = require("lazy.core.util")
 
 local M = {}
@@ -31,7 +28,7 @@ function M.has(plugin)
   return M.get_plugin(plugin) ~= nil
 end
 
--- Resolved (merged) opts for a plugin spec. Vendored from LazyVim util.
+-- Resolved (merged) opts for a plugin spec.
 ---@param name string
 function M.opts(name)
   local plugin = M.get_plugin(name)
@@ -41,7 +38,7 @@ function M.opts(name)
   return require("lazy.core.plugin").values(plugin, "opts", false)
 end
 
--- Dedup a list, preserving order. Vendored from LazyVim util.
+-- Dedup a list, preserving order.
 function M.dedup(list)
   local ret, seen = {}, {}
   for _, v in ipairs(list) do
@@ -53,7 +50,7 @@ function M.dedup(list)
   return ret
 end
 
--- Run fn on the VeryLazy user event. Vendored from LazyVim util.
+-- Run fn on the VeryLazy user event.
 function M.on_very_lazy(fn)
   vim.api.nvim_create_autocmd("User", {
     pattern = "VeryLazy",
@@ -65,7 +62,7 @@ end
 
 -- Set a local option to `value` only if it hasn't been overridden away from the
 -- global default (so we never clobber a user/plugin choice). Returns whether set.
--- Lean stand-in for LazyVim's set_default.
+-- Lean stand-in for set_default.
 ---@param option string
 ---@param value any
 ---@return boolean was_set
@@ -79,18 +76,17 @@ function M.set_default(option, value)
   return false
 end
 
--- Deprecation warning. Vendored (simplified) from LazyVim util.
+-- Deprecation warning.
 function M.deprecate(old, new)
   M.warn(("`%s` is deprecated. Please use `%s` instead"):format(old, new), { title = "config", once = true })
 end
 
 -- Statuscolumn (used by the `statuscolumn` option). Delegates to Snacks when loaded.
--- Vendored from LazyVim util.
 function M.statuscolumn()
   return package.loaded.snacks and require("snacks.statuscolumn").get() or ""
 end
 
--- Memoize a function on its (inspected) arguments. Vendored from LazyVim util.
+-- Memoize a function on its (inspected) arguments.
 local cache = {} ---@type table<(fun()), table<string, any>>
 function M.memoize(fn)
   return function(...)
@@ -103,7 +99,7 @@ function M.memoize(fn)
   end
 end
 
--- list_extend into a nested key (dotted path) of a table. Vendored from LazyVim util.
+-- list_extend into a nested key (dotted path) of a table.
 function M.extend(t, key, values)
   local keys = vim.split(key, ".", { plain = true })
   for i = 1, #keys do
@@ -117,7 +113,7 @@ function M.extend(t, key, values)
   return vim.list_extend(t, values)
 end
 
--- Resolve a path inside a Mason package install dir. Vendored from LazyVim util.
+-- Resolve a path inside a Mason package install dir.
 function M.get_pkg_path(pkg, path, opts)
   pcall(require, "mason") -- make sure Mason is loaded. Will fail when generating docs
   local root = vim.env.MASON or (vim.fn.stdpath("data") .. "/mason")

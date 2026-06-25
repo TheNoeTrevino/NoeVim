@@ -1,6 +1,4 @@
--- Self-sufficient mason spec, vendored verbatim from LazyVim's lazyvim/plugins/lsp/init.lua
--- (the mason.nvim entry). No Util.* coupling. opts_extend keeps ensure_installed
--- mergeable so language extras can append tools.
+-- mason.nvim. opts_extend keeps ensure_installed mergeable so the language files can append tools.
 return {
   "mason-org/mason.nvim",
   cmd = "Mason",

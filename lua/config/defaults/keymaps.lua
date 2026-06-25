@@ -1,12 +1,5 @@
--- Vendored from the LazyVim distro (lazyvim/config/keymaps.lua), with the mappings that
--- config/keymaps.lua used to `vim.keymap.del` already removed (so we never create
--- them in the first place). Loaded at the TOP of config/keymaps.lua so the user's
--- own mappings still override these, exactly as when Util loaded first.
---
--- Replacements vs upstream:
---   Util.root / Util.root.git -> require("util").root
---   Util.cmp.actions.snippet_stop -> require("util").cmp...
---   Util.format (<leader>cf/cF/uf/uF) -> moved to lua/plugins/format.lua
+-- Default keymaps, loaded at the TOP of config/keymaps.lua so the personal mappings there
+-- override these. (Mappings the personal config used to delete are simply omitted here.)
 --
 -- Removed (were deleted by config/keymaps.lua): <leader>` | - L l K, all
 -- <leader><tab>* , i",.;" undo-breaks, <leader>fn ft fT xl xq uD, <c-/> <c-_>,

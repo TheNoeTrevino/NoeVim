@@ -1,5 +1,4 @@
--- Vendored LazyVim default options (loaded first, mirrors LazyVim load order: defaults
--- then user). The user overrides below win. Sets vim.g.mapleader etc.
+-- Load the default options first (so the overrides below win), then the personal ones.
 require("config.defaults.options")
 
 -- Add any additional options here

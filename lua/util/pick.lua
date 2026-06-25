@@ -1,5 +1,4 @@
--- Vendored from the LazyVim distro (lazyvim/util/pick.lua), with the snacks picker
--- registration folded in (previously provided by the snacks_picker extra).
+-- Picker abstraction, with the snacks picker registered as the backend.
 local Util = require("util")
 
 ---@class util.pick
@@ -59,7 +58,7 @@ function M.config_files()
   return M.wrap("files", { cwd = vim.fn.stdpath("config") })
 end
 
--- The snacks picker (was: lazyvim/plugins/extras/editor/snacks_picker.lua).
+-- The snacks picker backend.
 -- Assigned directly rather than via M.register so it's set even when this module
 -- is first required after VimEnter (register() early-returns post-startup).
 M.picker = {

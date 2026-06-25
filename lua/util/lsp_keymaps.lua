@@ -1,5 +1,4 @@
--- Vendored from the LazyVim distro (lazyvim/plugins/lsp/keymaps.lua). Sets LSP keymaps with
--- has/enabled gating via Snacks.keymap. `Util` aliased to our util.
+-- LSP keymaps, with has/enabled gating via Snacks.keymap.
 local Util = require("util")
 
 local M = {}
@@ -14,7 +13,7 @@ M._keys = {}
 ---@return LazyKeysLspSpec[]
 function M.get()
   Util.warn({
-    'Adding LSP keymaps via `require("lazyvim.plugins.lsp.keymaps").get()` is deprecated.',
+    'Adding LSP keymaps via `require("util.lsp_keymaps").get()` is deprecated.',
     "Please set keymaps via the `keys` field in the LSP server config.",
     [[
 ```lua

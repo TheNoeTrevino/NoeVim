@@ -1,7 +1,6 @@
--- Vendored from the LazyVim distro (lazyvim/config/options.lua). Loaded FIRST by config/options.lua
--- so the user's own options below still override these (mirrors LazyVim's load order:
--- lazyvim defaults, then user). Util couplings rewritten to our local util:
---   formatexpr  -> v:lua.require'util.format'.formatexpr()
+-- Default options, loaded FIRST by config/options.lua so the personal options there
+-- override these. Notable wiring:
+--   formatexpr   -> v:lua.require'util.format'.formatexpr()
 --   statuscolumn -> v:lua.require'util'.statuscolumn()  (Snacks-backed)
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"

@@ -1,10 +1,7 @@
--- Vendored verbatim from LazyVim (lazyvim/config/autocmds.lua).
--- Loaded from config/autocmds.lua. Group names keep the `lazyvim_` prefix so the
--- snapshot diff stays clean during migration; rename in the later trim pass.
--- No Util.* coupling here.
+-- Default autocmds, loaded from config/autocmds.lua.
 
 local function augroup(name)
-  return vim.api.nvim_create_augroup("lazyvim_" .. name, { clear = true })
+  return vim.api.nvim_create_augroup("noevim_" .. name, { clear = true })
 end
 
 -- Check if we need to reload the file when it changed
@@ -41,10 +38,10 @@ vim.api.nvim_create_autocmd("BufReadPost", {
   callback = function(event)
     local exclude = { "gitcommit" }
     local buf = event.buf
-    if vim.tbl_contains(exclude, vim.bo[buf].filetype) or vim.b[buf].lazyvim_last_loc then
+    if vim.tbl_contains(exclude, vim.bo[buf].filetype) or vim.b[buf].noevim_last_loc then
       return
     end
-    vim.b[buf].lazyvim_last_loc = true
+    vim.b[buf].noevim_last_loc = true
     local mark = vim.api.nvim_buf_get_mark(buf, '"')
     local lcount = vim.api.nvim_buf_line_count(buf)
     if mark[1] > 0 and mark[1] <= lcount then

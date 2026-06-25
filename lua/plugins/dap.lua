@@ -1,7 +1,6 @@
--- DAP. Single source of truth: the base spec (originally vendored from LazyVim's
--- dap.core extra: mason-nvim-dap, signs, vscode launch.json, virtual text) plus the
--- personal java configs, keymaps, dap-ui layout and dap-python wiring. Entries target
--- the same repos; lazy.nvim merges them, with the personal entries (last) winning.
+-- DAP. One file: the base spec (mason-nvim-dap, signs, vscode launch.json, virtual text)
+-- plus the personal java configs, keymaps, dap-ui layout and dap-python wiring. Entries
+-- target the same repos; lazy.nvim merges them, with the personal entries (last) winning.
 local Util = require("util")
 
 ---@param config {type?:string, args?:string[]|fun():string[]?}

@@ -1,9 +1,8 @@
--- Vendored from the LazyVim distro (lazyvim/util/lsp.lua). LSP helpers used by lsp-config:
--- formatter (registered with the format subsystem), format, action, execute, code_actions.
--- `Util` is aliased to our local util so Util.merge/opts/dedup resolve here.
+-- LSP helpers used by lsp-config: formatter (registered with the format subsystem),
+-- format, action, execute, code_actions.
 local Util = require("util")
 
----@class lazyvim.util.lsp
+---@class util.lsp
 local M = {}
 
 ---@param opts? LazyFormatter| {filter?: (string|vim.lsp.get_clients.Filter)}

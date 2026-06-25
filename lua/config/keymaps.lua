@@ -1,12 +1,9 @@
--- Vendored LazyVim default keymaps (with the ones this file used to `vim.keymap.del`
--- already excluded). Loaded first so the user mappings below still override them,
--- exactly as when Util installed its defaults ahead of this file.
+-- Load the default keymaps first (so the personal mappings below override them), then
+-- the personal ones.
 require("config.defaults.keymaps")
 
--- The only surviving del: <leader>bd is a lazy `keys` handler from picker.lua
--- (Snacks.bufdelete), not a Util config default, so it still exists and must be
--- removed here to match prior behavior. The other ~28 dels targeted Util config
--- defaults that we now simply don't create.
+-- <leader>bd is a lazy `keys` handler from picker.lua (Snacks.bufdelete), not one of the
+-- defaults above, so delete it here.
 pcall(vim.keymap.del, "n", "<leader>bd")
 
 local Util = require("util")

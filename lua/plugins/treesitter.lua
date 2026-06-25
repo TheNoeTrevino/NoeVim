@@ -1,14 +1,10 @@
--- Treesitter specs, re-derived from LazyVim's base so this config no longer
--- depends on the LazyVim distro. The `nvim-treesitter`, `-textobjects` and
--- `nvim-ts-autotag` entries below carry LazyVim's base opts and load timing;
--- the original `treesitter-modules.nvim` override (with the user's
--- incremental_selection keymaps) is kept at the bottom.
+-- Treesitter: the nvim-treesitter, -textobjects and nvim-ts-autotag specs, plus the
+-- treesitter-modules.nvim override (with the incremental_selection keymaps) at the bottom.
 
 local Util = require("util")
 
--- Local re-implementation of the bits of `lazyvim.util.treesitter` and
--- `Util.set_default` that the base config relied on, with the Util.*
--- coupling stripped out.
+-- Local helpers the treesitter specs below rely on (incremental-selection support
+-- and an option default-setter).
 local TSUtil = {}
 
 TSUtil._installed = nil ---@type table<string,boolean>?
