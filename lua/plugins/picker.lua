@@ -669,6 +669,25 @@ return {
     end,
   },
   {
+    "2kabhishek/seeker.nvim",
+    dependencies = { "folke/snacks.nvim" },
+    cmd = { "Seeker" },
+    keys = {
+      { "<leader>sf", ":Seeker files<CR>", desc = "Seek Files" },
+      -- { "<leader>ff", ":Seeker git_files<CR>", desc = "Seek Git Files" },
+      { "<leader>sg", ":Seeker grep<CR>", desc = "Seek Grep" },
+      -- { "<leader>fw", ":Seeker grep_word<CR>", desc = "Seek Grep Word" },
+    },
+    opts = {
+      -- Forward a full-screen layout to the snacks pickers Seeker opens (sf/sg).
+      -- Reuses get_config() but forces width/height to 0 (the h/H full-screen look),
+      -- while keeping insert mode so you can type to filter right away.
+      picker_opts = vim.tbl_deep_extend("force", get_config(), {
+        layout = { layout = { width = 0, height = 0 } },
+      }),
+    },
+  },
+  {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
