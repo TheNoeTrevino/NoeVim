@@ -42,7 +42,6 @@ require("lazy").setup({
     { import = "plugins.extras.lang.typescript" }, -- vtsls; dap block installs js-debug-adapter
     { import = "plugins.extras.lang.python" },
     { import = "plugins.extras.lang.sql" },
-    { import = "plugins.extras.lang.go" },
     { import = "plugins.extras.lang.tailwind" },
     -- angular: npm install @angular/language-service --no-save (save-dev for projects needing the version)
     { import = "plugins.extras.lang.angular" },
@@ -55,15 +54,12 @@ require("lazy").setup({
     { import = "plugins.extras.formatting.black" },
     { import = "plugins.extras.formatting.prettier" },
     -- Editor / Util
-    { import = "plugins.extras.editor.neo-tree" },
     { import = "plugins.extras.editor.inc-rename" },
     { import = "plugins.extras.editor.dial" },
     { import = "plugins.extras.util.dot" },
     { import = "plugins.extras.util.rest" },
     -- Test / DAP / Coding / UI
     { import = "plugins.extras.test.core" },
-    { import = "plugins.extras.dap.core" },
-    { import = "plugins.extras.coding.luasnip" },
     { import = "plugins.extras.ui.treesitter-context" },
     { import = "plugins" },
   },
