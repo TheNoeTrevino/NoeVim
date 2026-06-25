@@ -1,6 +1,7 @@
+-- Guard against an absent UI (headless load, or spec evaluated before the UI
+-- attaches): fall back to a sane width instead of indexing a nil ui entry.
 local ui = vim.api.nvim_list_uis()[1]
-local total_width = ui.width
-local total_height = ui.height
+local total_width = ui and ui.width or 120
 
 local win_width = math.floor(total_width * 0.33)
 local haunt = require("haunt.sidekick")
