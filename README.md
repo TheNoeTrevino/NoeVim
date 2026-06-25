@@ -4,7 +4,7 @@ _Get it?_
 
 ## Installation
 
-``` bash
+```bash
 git clone https://github.com/TheNoeTrevino/NoeVim.git ~/.config/nvim
 ```
 
@@ -35,9 +35,9 @@ Arch config. [See that here](https://github.com/TheNoeTrevino/dotfiles)
 ### LSP NOTES
 
 If you want to set a specific working directory for you lsps, you can do
-something like this: 
+something like this:
 
-``` lua
+```lua
 local lspconfig = require('lspconfig')
 
 lspconfig.angularls.setup({
@@ -47,14 +47,14 @@ lspconfig.angularls.setup({
 })
 ```
 
-``` lua
+```lua
 vim.o.exrc = true
-vim.o.secure = true  
+vim.o.secure = true
 ```
 
 How to trick mason into using a system install
 
-``` bash
+```bash
 
 rm -rf ~/.local/share/nvim/mason/packages/lua-language-server
 rm ~/.local/share/nvim/mason/bin/lua-language-server
