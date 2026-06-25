@@ -1,4 +1,4 @@
--- Vendored Util default options (loaded first, mirrors Util load order: defaults
+-- Vendored LazyVim default options (loaded first, mirrors LazyVim load order: defaults
 -- then user). The user overrides below win. Sets vim.g.mapleader etc.
 require("config.defaults.options")
 
@@ -55,3 +55,7 @@ vim.o.exrc = true
 vim.o.secure = true
 
 vim.g.lazyvim_rust_diagnostics = "bacon-ls"
+
+-- Highlight only the line number of the cursor line.
+vim.opt.cursorline = true
+vim.opt.cursorlineopt = "number"

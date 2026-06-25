@@ -1,5 +1,5 @@
 -- Autocmds are automatically loaded on the VeryLazy event
--- Vendored Util default autocmds (loaded first, mirrors Util load order).
+-- Vendored LazyVim default autocmds (loaded first, mirrors LazyVim load order).
 require("config.defaults.autocmds")
 -- Add any additional autocmds here
 
@@ -150,3 +150,46 @@ vim.api.nvim_create_autocmd("LspTokenUpdate", {
     end
   end,
 })
+
+-- In the `cast` project, ignore whitespace in gitsigns diffs.
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function()
+    if vim.fn.getcwd():match("projects[/\\]cast$") then
+      local ok, gitsigns = pcall(require, "gitsigns")
+      if ok then
+        gitsigns.setup({ diff_opts = { ignore_whitespace = true } })
+      end
+    end
+  end,
+})
+
+-- dbout (vim-dadbod-ui query output): render `---` separator runs as a solid rule.
+do
+  local ns = vim.api.nvim_create_namespace("dbout_rule")
+  local function redraw(buf)
+    vim.api.nvim_buf_clear_namespace(buf, ns, 0, -1)
+    for i, line in ipairs(vim.api.nvim_buf_get_lines(buf, 0, -1, false)) do
+      if line:match("^[%-%s]+$") and line:find("%-%-%-") then -- separator line only
+        for s, e in line:gmatch("()%-+()") do
+          vim.api.nvim_buf_set_extmark(buf, ns, i - 1, s - 1, {
+            virt_text = { { ("─"):rep(e - s), "Comment" } },
+            virt_text_pos = "overlay",
+          })
+        end
+      end
+    end
+  end
+
+  vim.api.nvim_create_autocmd("FileType", {
+    pattern = "dbout",
+    callback = function(ev)
+      redraw(ev.buf)
+      vim.api.nvim_create_autocmd({ "TextChanged", "BufWinEnter" }, {
+        buffer = ev.buf,
+        callback = function()
+          redraw(ev.buf)
+        end,
+      })
+    end,
+  })
+end
