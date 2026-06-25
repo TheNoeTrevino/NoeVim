@@ -21,11 +21,21 @@ return {
   },
   {
     "saghen/blink.cmp",
+    version = "*",
     event = "InsertEnter",
-    dependencies = { "rcarriga/cmp-dap", "milanglacier/minuet-ai.nvim", "giuxtaposition/blink-cmp-copilot" },
+    dependencies = {
+      "rafamadriz/friendly-snippets",
+      "rcarriga/cmp-dap",
+      "milanglacier/minuet-ai.nvim",
+      "giuxtaposition/blink-cmp-copilot",
+    },
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
+      -- folded in from the LazyVim luasnip extra (blink.cmp integration)
+      snippets = {
+        preset = "luasnip",
+      },
       cmdline = {
         enabled = true,
         keymap = {
@@ -95,6 +105,9 @@ return {
         -- set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
         -- adjusts spacing to ensure icons are aligned
         nerd_font_variant = "mono",
+        -- folded in from the LazyVim blink "add icons" fragment
+        -- (was LazyVim.config.icons.kinds)
+        kind_icons = require("util").config.icons.kinds,
       },
       completion = {
         trigger = {
@@ -108,7 +121,12 @@ return {
             auto_insert = false,
           },
         },
-        accept = {},
+        accept = {
+          -- experimental auto-brackets support (folded in from LazyVim base)
+          auto_brackets = {
+            enabled = true,
+          },
+        },
         menu = {
           winhighlight = "Normal:BlinkCmpMenu,FloatBorder:BlinkCmpMenuBorder,CursorLine:BlinkCmpMenuSelection,Search:None",
           border = "single",
@@ -232,6 +250,7 @@ return {
           end,
         },
         ["<C-e>"] = { "hide", "fallback" },
+        ["<C-y>"] = { "select_and_accept" }, -- folded in from LazyVim base
         ["<S-Tab>"] = { "snippet_backward", "fallback" },
 
         ["<Up>"] = { "select_prev", "fallback" },
@@ -245,5 +264,42 @@ return {
         ["<C-d>"] = { "scroll_documentation_down", "fallback" },
       },
     },
+    ---@param opts blink.cmp.Config
+    config = function(_, opts)
+      -- Folded in from the LazyVim blink base `config`: override symbol kinds
+      -- for providers that declare a custom `kind` (e.g. the copilot source's
+      -- `kind = "Copilot"`). Registers the kind with blink and rewrites each
+      -- item's icon. Was `LazyVim.config.icons.kinds`.
+      local kind_icons = require("util").config.icons.kinds
+      for _, provider in pairs(opts.sources.providers or {}) do
+        ---@cast provider blink.cmp.SourceProviderConfig|{kind?:string}
+        if provider.kind then
+          local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
+          local kind_idx = #CompletionItemKind + 1
+
+          CompletionItemKind[kind_idx] = provider.kind
+          ---@diagnostic disable-next-line: no-unknown
+          CompletionItemKind[provider.kind] = kind_idx
+
+          ---@type fun(ctx: blink.cmp.Context, items: blink.cmp.CompletionItem[]): blink.cmp.CompletionItem[]
+          local transform_items = provider.transform_items
+          ---@param ctx blink.cmp.Context
+          ---@param items blink.cmp.CompletionItem[]
+          provider.transform_items = function(ctx, items)
+            items = transform_items and transform_items(ctx, items) or items
+            for _, item in ipairs(items) do
+              item.kind = kind_idx or item.kind
+              item.kind_icon = kind_icons[item.kind_name] or item.kind_icon or nil
+            end
+            return items
+          end
+
+          -- Unset custom prop to pass blink.cmp validation
+          provider.kind = nil
+        end
+      end
+
+      require("blink.cmp").setup(opts)
+    end,
   },
 }
