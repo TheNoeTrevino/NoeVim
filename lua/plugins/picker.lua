@@ -492,6 +492,35 @@ return {
           sidekick_send = function(...)
             return require("sidekick.cli.picker.snacks").send(...)
           end,
+          ---@param p snacks.Picker
+          toggle_cwd = function(p)
+            local root = require("util").root({ buf = p.input.filter.current_buf, normalize = true })
+            local cwd = vim.fs.normalize((vim.uv or vim.loop).cwd() or ".")
+            local current = p:cwd()
+            p:set_cwd(current == root and cwd or root)
+            p:find()
+          end,
+          trouble_open = function(...)
+            return require("trouble.sources.snacks").actions.trouble_open.action(...)
+          end,
+          flash = function(picker)
+            require("flash").jump({
+              pattern = "^",
+              label = { after = { 0, 0 } },
+              search = {
+                mode = "search",
+                exclude = {
+                  function(win)
+                    return vim.bo[vim.api.nvim_win_get_buf(win)].filetype ~= "snacks_picker_list"
+                  end,
+                },
+              },
+              action = function(match)
+                local idx = picker.list:row2idx(match.pos[1])
+                picker.list:_move(idx, true, true)
+              end,
+            })
+          end,
         },
         win = {
           -- input window
@@ -510,6 +539,9 @@ return {
               ["H"] = { "toggle_hidden", mode = { "n" } },
               ["<c-m>"] = { "toggle_maximize", mode = { "i", "n" } },
               ["<c-g>"] = { "toggle_live", mode = { "i", "n" } }, -- pretty cool, can add two arguments to the grep
+              ["<a-c>"] = { "toggle_cwd", mode = { "n", "i" } },
+              ["<a-s>"] = { "flash", mode = { "n", "i" } },
+              ["<a-t>"] = { "trouble_open", mode = { "n", "i" } },
               ["/"] = "toggle_focus",
               ["<Esc>"] = "cancel",
               ["<c-u>"] = { "preview_scroll_up", mode = { "i", "n" } },
@@ -608,7 +640,7 @@ return {
         -- Random
         { "<leader>bd",       function() Snacks.bufdelete() end,                                                    desc = "Delete Buffer", },
         { "<leader>uC",       function() Snacks.picker.colorschemes(get_config_colorschemes()) end,                 desc = "Colorschemes" },
-        { "<leader><leader>", function() Snacks.lazygit({ cwd = LazyVim.root.git() }) end,                          desc = "Lazygit" },
+        { "<leader><leader>", function() Snacks.lazygit({ cwd = require("util").root.git() }) end,                  desc = "Lazygit" },
         -- LSP NOTE: maybe move these to l? idk.  also make a vertical layout for these
         { "<leader>sL",       function() Snacks.picker.lsp_config(get_config()) end,                                desc = "LSP Config" },
         { "<leader>slo",      function() Snacks.picker.lsp_outgoing_calls(get_config_vert()) end,                   desc = "LSP Outgoing calls" },
@@ -647,8 +679,8 @@ return {
             { "gr",  function() Snacks.picker.lsp_references(get_config()) end,       nowait = true,                  desc = "References" },
             { "gI",  function() Snacks.picker.lsp_implementations(get_config()) end,  desc = "Goto Implementation" },
             { "gy",  function() Snacks.picker.lsp_type_definitions(get_config()) end, desc = "Goto T[y]pe Definition" },
-            -- { "<leader>ss", function() Snacks.picker.lsp_symbols({ filter = LazyVim.config.kind_filter }) end, desc = "LSP Symbols", has = "documentSymbol" },
-            -- { "<leader>sS", function() Snacks.picker.lsp_workspace_symbols({ filter = LazyVim.config.kind_filter }) end, desc = "LSP Workspace Symbols", has = "workspace/symbols" },
+            -- { "<leader>ss", function() Snacks.picker.lsp_symbols({ filter = require("util").config.kind_filter }) end, desc = "LSP Symbols", has = "documentSymbol" },
+            -- { "<leader>sS", function() Snacks.picker.lsp_workspace_symbols({ filter = require("util").config.kind_filter }) end, desc = "LSP Workspace Symbols", has = "workspace/symbols" },
             { "gai", function() Snacks.picker.lsp_incoming_calls(get_config()) end,   desc = "C[a]lls Incoming",      has = "callHierarchy/incomingCalls" },
             { "gao", function() Snacks.picker.lsp_outgoing_calls(get_config()) end,   desc = "C[a]lls Outgoing",      has = "callHierarchy/outgoingCalls" },
             { "]]",  function() Snacks.words.jump(vim.v.count1) end,                  desc = "Next Reference",        mode = { "n", "t" }, },

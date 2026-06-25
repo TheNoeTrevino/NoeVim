@@ -43,7 +43,7 @@ return {
             end,
           },
           { icon = " ", key = "s", desc = " Select Session", action = 'require("persistence").select()' },
-          { action = "lua LazyVim.pick()()", desc = " Find File", icon = "󰥨 ", key = "f" },
+          { action = 'lua require("util").pick()()', desc = " Find File", icon = "󰥨 ", key = "f" },
           {
             action = function()
               Snacks.picker.files({ dirs = { "~/notes" } })
@@ -77,7 +77,7 @@ return {
             key = "k",
           },
           {
-            action = "lua LazyVim.pick.config_files()()",
+            action = 'lua require("util").pick.config_files()()',
             desc = " Open Config",
             icon = " ",
             key = "c",

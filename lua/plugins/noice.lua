@@ -41,6 +41,11 @@ return {
       },
     },
     lsp = {
+      override = {
+        ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+        ["vim.lsp.util.stylize_markdown"] = true,
+        ["cmp.entry.get_documentation"] = true,
+      },
       hover = {
         enabled = true,
         silent = false, -- set to true to not show a message if hover is not available
@@ -126,12 +131,18 @@ return {
       long_message_to_split = true,
     },
   },
+  -- stylua: ignore
   keys = {
+    -- suppress LazyVim's base noice keys; drop once lazyvim core import is removed
     { "<leader>sn", false },
     { "<leader>sna", false },
     { "<leader>snd", false },
     { "<leader>snh", false },
     { "<leader>snl", false },
+    { "<S-Enter>", function() require("noice").redirect(vim.fn.getcmdline()) end, mode = "c", desc = "Redirect Cmdline" },
+    { "<leader>snt", function() require("noice").cmd("pick") end, desc = "Noice Picker (Telescope/FzfLua)" },
+    { "<c-f>", function() if not require("noice.lsp").scroll(4) then return "<c-f>" end end, silent = true, expr = true, desc = "Scroll Forward", mode = {"i", "n", "s"} },
+    { "<c-b>", function() if not require("noice.lsp").scroll(-4) then return "<c-b>" end end, silent = true, expr = true, desc = "Scroll Backward", mode = {"i", "n", "s"}},
     { "<leader>nh", "<cmd>Noice history<cr>", desc = "History" },
     {
       "<leader>nl",

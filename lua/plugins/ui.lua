@@ -62,7 +62,9 @@ return {
   -- },
   {
     "rebelot/kanagawa.nvim",
-    event = "VeryLazy",
+    -- Active colorscheme: load at startup (LazyVim used to apply it via colorscheme opt).
+    lazy = false,
+    priority = 1000,
     config = function()
       require("kanagawa").setup({
         transparent = false, -- do not set background color
@@ -99,6 +101,7 @@ return {
           -- light = "lotus",
         },
       })
+      vim.cmd.colorscheme("kanagawa")
     end,
   },
   -- { "nvzone/volt",    lazy = true },

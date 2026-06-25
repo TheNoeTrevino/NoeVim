@@ -1,9 +1,9 @@
 return {
   "nvim-lualine/lualine.nvim",
   event = "VimEnter",
-  optional = true,
+  dependencies = { "nvim-mini/mini.icons", "nvim-tree/nvim-web-devicons" },
   config = function()
-    local icons = LazyVim.config.icons
+    local icons = require("util").config.icons
     require("lualine").setup({
       options = {
         icons_enabled = true,
