@@ -67,8 +67,10 @@ local function ai_whichkey(opts)
   mappings.goto_right = nil
 
   for name, prefix in pairs(mappings) do
-    name = name:gsub("^around_", ""):gsub("^inside_", "")
-    ret[#ret + 1] = { prefix, group = name }
+    -- separate local: loop variables are implicitly const on Lua 5.4+ (reassigning
+    -- `name` errors there, though LuaJIT allows it).
+    local group = name:gsub("^around_", ""):gsub("^inside_", "")
+    ret[#ret + 1] = { prefix, group = group }
     for _, obj in ipairs(objects) do
       local desc = obj.desc
       if prefix:sub(1, 1) == "i" then
