@@ -83,8 +83,15 @@ return {
         end,
 
         -- How to find the project name for a given root dir.
+        -- Keyed by <parent>-<basename> rather than basename alone: git worktrees
+        -- all share the same basename (e.g. "backend"), so basename-only keying
+        -- made every worktree collide on one jdtls workspace and corrupt each
+        -- other's index when switching trees.
         project_name = function(root_dir)
-          return root_dir and vim.fs.basename(root_dir)
+          if not root_dir then
+            return nil
+          end
+          return vim.fn.fnamemodify(root_dir, ":h:t") .. "-" .. vim.fs.basename(root_dir)
         end,
 
         -- Where are the config and workspace dirs for a project?
