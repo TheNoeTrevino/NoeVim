@@ -1,7 +1,3 @@
--- Vendored from the LazyVim distro (lazyvim/plugins/extras/lang/json.lua) with `Util` aliased to our
--- local util. none-ls specs are optional+absent (lazy skips them); `recommended` is unused
--- (now a flat spec in lua/plugins/).
-local Util = require("util")
 return {
   -- add json to treesitter
   {

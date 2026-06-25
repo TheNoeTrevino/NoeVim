@@ -1,6 +1,3 @@
--- Vendored from the LazyVim distro (lazyvim/plugins/extras/lang/angular.lua) with `Util` aliased to our
--- local util. none-ls specs are optional+absent (lazy skips them); `recommended` is unused
--- (now a flat spec in lua/plugins/).
 -- Setup: npm install @angular/language-service --no-save
 -- (use --save-dev in projects that need a pinned version).
 local Util = require("util")
@@ -19,8 +16,6 @@ return {
       })
     end,
   },
-
-  -- angularls depends on typescript, which is always loaded (lang-typescript.lua).
 
   -- LSP Servers
   {
@@ -44,6 +39,10 @@ return {
   {
     "neovim/nvim-lspconfig",
     opts = function(_, opts)
+      -- vtsls is defined in lang-typescript-vtsls.lua, which may merge after this
+      -- fragment depending on load order; ensure the table exists before extending.
+      opts.servers = opts.servers or {}
+      opts.servers.vtsls = opts.servers.vtsls or {}
       Util.extend(opts.servers.vtsls, "settings.vtsls.tsserver.globalPlugins", {
         {
           name = "@angular/language-server",

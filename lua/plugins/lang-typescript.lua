@@ -1,5 +1,3 @@
--- Vendored from the LazyVim distro (lazyvim/plugins/extras/lang/typescript/init.lua) with `Util` aliased
--- to our local util. none-ls/recommended unused as elsewhere.
 local Util = require("util")
 
 -- Upstream used Util.config.register_defaults("ts_lsp", ...) to let users swap the TS

@@ -1,6 +1,3 @@
--- Vendored from the LazyVim distro (lazyvim/plugins/extras/test/core.lua) with `Util` aliased to our
--- local util. none-ls specs are optional+absent (lazy skips them); `recommended` is unused
--- (now a flat spec in lua/plugins/).
 local Util = require("util")
 return {
   desc = "Neotest support. Requires language specific adapters to be configured. (see lang extras)",

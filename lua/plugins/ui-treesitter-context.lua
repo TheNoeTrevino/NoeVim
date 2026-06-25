@@ -1,7 +1,3 @@
--- Vendored from the LazyVim distro (lazyvim/plugins/extras/ui/treesitter-context.lua) with `Util` aliased to our
--- local util. none-ls specs are optional+absent (lazy skips them); `recommended` is unused
--- (now a flat spec in lua/plugins/).
-local Util = require("util")
 -- Show context of the current function
 return {
   "nvim-treesitter/nvim-treesitter-context",

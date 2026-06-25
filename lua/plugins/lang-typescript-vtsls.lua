@@ -1,5 +1,3 @@
--- Vendored from the LazyVim distro (lazyvim/plugins/extras/lang/typescript/vtsls.lua) with `Util` aliased
--- to our local util. none-ls/recommended unused as elsewhere.
 local Util = require("util")
 return {
   -- correctly setup lspconfig
