@@ -16,7 +16,14 @@ return {
     },
     { "<CR>", "<Plug>(DBUI_ExecuteQuery)", mode = "v", ft = "sql", remap = true, desc = "Execute SQL" },
     -- Normal mode only: the plugin doesn't define a visual <Plug> for this. Already the default, kept for the description.
-    { "<leader>E", "<Plug>(DBUI_EditBindParameters)", mode = "n", ft = "sql", remap = true, desc = "Edit Parameters SQL" },
+    {
+      "<leader>E",
+      "<Plug>(DBUI_EditBindParameters)",
+      mode = "n",
+      ft = "sql",
+      remap = true,
+      desc = "Edit Parameters SQL",
+    },
   },
   init = function()
     local data_path = vim.fn.stdpath("data")
