@@ -325,7 +325,7 @@ end, { desc = "Toggle Formating and Diagnotics (Buffer)" })
 map(
   "n",
   "<localleader>,",
-  "<cmd>tabnew<cr><cmd>Tabby rename_tab Database<cr><cmd>DBUIToggle<CR>",
+  "<cmd>tabnew<cr><cmd>Tabby rename_tab dadbod<cr><cmd>DBUIToggle<CR>",
   { desc = "Open Database" }
 )
 map("n", "<localleader>u", "<cmd>DBUIToggle<CR>", { desc = "Toggle Database" })
