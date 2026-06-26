@@ -17,6 +17,7 @@ return {
       "prettier",
       "roslyn-language-server",
       "stylua",
+      "sqruff",
       "shfmt",
       "vtsls",
     },
