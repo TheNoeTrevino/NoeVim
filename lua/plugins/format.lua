@@ -276,6 +276,7 @@ return {
       ["sql"] = { "sqruff" },
       ["markdown"] = { "markdown-toc" },
       ["markdown.mdx"] = { "markdown-toc" },
+      ["http"] = { "kulala-fmt" },
     },
     formatters = {
       -- base
