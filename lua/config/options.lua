@@ -58,3 +58,9 @@ vim.g.lazyvim_rust_diagnostics = "bacon-ls"
 -- Highlight only the line number of the cursor line.
 vim.opt.cursorline = true
 vim.opt.cursorlineopt = "number"
+
+vim.filetype.add({
+  extension = {
+    mustache = "html",
+  },
+})
