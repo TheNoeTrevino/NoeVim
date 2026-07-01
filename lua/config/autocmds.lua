@@ -165,46 +165,46 @@ vim.api.nvim_create_autocmd("VimEnter", {
 -- dbout (vim-dadbod-ui query output): render the dashed separator lines as a
 -- solid box-drawing rule. Works for both psql/mysql (which use `+`/`|` joints,
 -- e.g. `---------+----------+`) and SQL Server's sqlcmd (pure dashes + spaces).
-do
-  local ns = vim.api.nvim_create_namespace("dbout_rule")
-  -- Map ASCII table glyphs to their box-drawing equivalents (spaces untouched).
-  local glyph = { ["-"] = "─", ["+"] = "┼", ["|"] = "│" }
-
-  local function redraw(buf)
-    vim.api.nvim_buf_clear_namespace(buf, ns, 0, -1)
-    for i, line in ipairs(vim.api.nvim_buf_get_lines(buf, 0, -1, false)) do
-      -- A separator line contains only dashes, spaces, and +/| joints, plus at
-      -- least one run of dashes (so blank/padding lines are skipped).
-      if line:match("^[%-%+|%s]+$") and line:find("%-%-%-") then
-        -- Horizontal rule: redraw the whole line with box-drawing crossings.
-        local rule = (line:gsub("[%-%+|]", glyph))
-        vim.api.nvim_buf_set_extmark(buf, ns, i - 1, 0, {
-          virt_text = { { rule, "Comment" } },
-          virt_text_pos = "overlay",
-        })
-      else
-        -- Header/data row: turn each ASCII column separator `|` into `│` so it
-        -- lines up with the `┼` crossings on the rule lines.
-        for col in line:gmatch("()|") do
-          vim.api.nvim_buf_set_extmark(buf, ns, i - 1, col - 1, {
-            virt_text = { { "│", "Comment" } },
-            virt_text_pos = "overlay",
-          })
-        end
-      end
-    end
-  end
-
-  vim.api.nvim_create_autocmd("FileType", {
-    pattern = "dbout",
-    callback = function(ev)
-      redraw(ev.buf)
-      vim.api.nvim_create_autocmd({ "TextChanged", "BufWinEnter" }, {
-        buffer = ev.buf,
-        callback = function()
-          redraw(ev.buf)
-        end,
-      })
-    end,
-  })
-end
+-- do
+--   local ns = vim.api.nvim_create_namespace("dbout_rule")
+--   -- Map ASCII table glyphs to their box-drawing equivalents (spaces untouched).
+--   local glyph = { ["-"] = "─", ["+"] = "┼", ["|"] = "│" }
+--
+--   local function redraw(buf)
+--     vim.api.nvim_buf_clear_namespace(buf, ns, 0, -1)
+--     for i, line in ipairs(vim.api.nvim_buf_get_lines(buf, 0, -1, false)) do
+--       -- A separator line contains only dashes, spaces, and +/| joints, plus at
+--       -- least one run of dashes (so blank/padding lines are skipped).
+--       if line:match("^[%-%+|%s]+$") and line:find("%-%-%-") then
+--         -- Horizontal rule: redraw the whole line with box-drawing crossings.
+--         local rule = (line:gsub("[%-%+|]", glyph))
+--         vim.api.nvim_buf_set_extmark(buf, ns, i - 1, 0, {
+--           virt_text = { { rule, "Comment" } },
+--           virt_text_pos = "overlay",
+--         })
+--       else
+--         -- Header/data row: turn each ASCII column separator `|` into `│` so it
+--         -- lines up with the `┼` crossings on the rule lines.
+--         for col in line:gmatch("()|") do
+--           vim.api.nvim_buf_set_extmark(buf, ns, i - 1, col - 1, {
+--             virt_text = { { "│", "Comment" } },
+--             virt_text_pos = "overlay",
+--           })
+--         end
+--       end
+--     end
+--   end
+--
+--   vim.api.nvim_create_autocmd("FileType", {
+--     pattern = "dbout",
+--     callback = function(ev)
+--       redraw(ev.buf)
+--       vim.api.nvim_create_autocmd({ "TextChanged", "BufWinEnter" }, {
+--         buffer = ev.buf,
+--         callback = function()
+--           redraw(ev.buf)
+--         end,
+--       })
+--     end,
+--   })
+-- end

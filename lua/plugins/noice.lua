@@ -123,6 +123,20 @@ return {
         },
         view = "mini",
       },
+      {
+        -- vim-dadbod echoes "DB: Running query..." and "DB: Query '...' finished
+        -- in 0.0XXs" on every run; dadbod-ui.nvim shows that timing inline (winbar
+        -- + ghost text), so drop the redundant command-line echoes.
+        filter = {
+          event = "msg_show",
+          any = {
+            { find = "^DB: Running query" },
+            { find = "^DB: Query .* finished in" },
+            { find = "^DB: Query .* aborted after" },
+          },
+        },
+        opts = { skip = true },
+      },
     },
     presets = {
       lsp_doc_border = true,

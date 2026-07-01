@@ -1,47 +1,85 @@
+-- dadbod-ui.nvim — full configuration reference.
+-- Every option below maps to a key in the plugin's `config.lua` defaults.
+-- Values shown are the plugin defaults unless a trailing comment says otherwise
+-- (a few are set to your preferences, with the default noted).
 return {
-  "thenoetrevino/vim-dadbod-ui",
+  -- "thenoetrevino/vim-dadbod-ui",
   -- branch = "feat/connection-groups",
-  dir = "~/projects/vim-dadbod-ui",
+  dir = "~/projects/dadbod-ui.nvim/",
   cmd = { "DBUI", "DBUIToggle", "DBUIAddConnection", "DBUIFindBuffer" },
   dependencies = "vim-dadbod",
   keys = {
-    { "<leader>D", "<cmd>DBUIToggle<CR>", desc = "Toggle DBUI" },
     {
-      "<leader>A",
-      "<Plug>(DBUI_ExplainAnalyzeQuery)",
-      mode = { "n", "x" },
-      ft = "sql",
-      remap = true,
-      desc = "Explain Analyze",
+      "<leader>D",
+      function()
+        require("dadbod-ui").toggle()
+      end,
+      desc = "Toggle DBUI",
     },
-    { "<CR>", "<Plug>(DBUI_ExecuteQuery)", mode = "v", ft = "sql", remap = true, desc = "Execute SQL" },
-    -- Normal mode only: the plugin doesn't define a visual <Plug> for this. Already the default, kept for the description.
+
+    -- Execute SQL — selection (visual) and whole buffer (normal).
+    -- Replaces <Plug>(DBUI_ExecuteQuery). No `remap` needed for Lua functions.
     {
-      "<leader>E",
-      "<Plug>(DBUI_EditBindParameters)",
+      "<CR>",
+      function()
+        require("dadbod-ui").execute_selection()
+      end,
+      mode = "x",
+      ft = "sql",
+      desc = "Execute SQL (selection)",
+    },
+    {
+      "<leader>S",
+      function()
+        require("dadbod-ui").execute_query()
+      end,
       mode = "n",
       ft = "sql",
-      remap = true,
-      desc = "Edit Parameters SQL",
+      desc = "Execute SQL (buffer)",
     },
   },
-  init = function()
-    local data_path = vim.fn.stdpath("data")
-
-    vim.g.db_ui_auto_execute_table_helpers = 1
-    -- Recognize BOTH colon params (:name) and Postgres positional params ($1, $2, ...)
-    -- as bind parameters. Vim regex: :\w\+\|\$\d\+ (default is just ':\w\+').
-    vim.g.db_ui_bind_param_pattern = ":\\w\\+\\|\\$\\d\\+"
-    vim.g.db_ui_save_location = data_path .. "/dadbod_ui"
-    vim.g.db_ui_show_database_icon = true
-    vim.g.db_ui_tmp_query_location = data_path .. "/dadbod_ui/tmp"
-    vim.g.db_ui_use_nerd_fonts = true
-    vim.g.db_ui_use_nvim_notify = true
-
-    -- NOTE: The default behavior of auto-execution of queries on save is disabled
-    -- this is useful when you have a big query that you don't want to run every time
-    -- you save the file running those queries can crash neovim to run use the
-    -- default keymap: <leader>S
-    vim.g.db_ui_execute_on_save = false
+  config = function(_, opts)
+    require("dadbod-ui").setup(opts)
   end,
+  ---@type DadbodUI.Config
+  opts = {
+    save_location = "~/.local/share/db_ui",
+    tmp_query_location = "",
+    table_helpers = {},
+    default_query = 'SELECT * from "{table}" LIMIT 200;',
+    execute_on_save = false,
+    auto_execute_table_helpers = false,
+    env_variable_url = "DBUI_URL",
+    env_variable_name = "DBUI_NAME",
+    dotenv_variable_prefix = "DB_UI_",
+    disable_progress_bar = false,
+    notification_width = 40,
+    winwidth = 40,
+    win_position = "left",
+    show_help = true,
+    show_database_icon = true,
+    use_nerd_fonts = true,
+    ---@type table  icon overrides (see dadbod-ui.icons)
+    icons = {},
+    use_postgres_views = true,
+    hide_schemas = {},
+    bind_param_pattern = ":\\w\\+",
+    drawer_sections = { "new_query", "buffers", "saved_queries", "schemas" },
+    expand_groups = true,
+    dbout_list_sort = "asc",
+    force_echo_notifications = false,
+    disable_info_notifications = false,
+    use_nvim_notify = false,
+    is_oracle_legacy = false,
+    debug = false,
+    disable_mappings = false,
+    disable_mappings_dbui = false,
+    disable_mappings_dbout = false,
+    disable_mappings_sql = false,
+    disable_mappings_javascript = false,
+    ---@type DadbodUI.BufferNameGenerator|nil  custom buffer name generator
+    buffer_name_generator = nil,
+    ---@type DadbodUI.TableNameSorter|nil  custom table-list sorter
+    table_name_sorter = nil,
+  },
 }
