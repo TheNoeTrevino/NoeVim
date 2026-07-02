@@ -328,10 +328,6 @@ map(
   "<cmd>tabnew<cr><cmd>Tabby rename_tab dadbod<cr><cmd>DBUIToggle<CR>",
   { desc = "Open Database" }
 )
-map("n", "<localleader>u", "<cmd>DBUIToggle<CR>", { desc = "Toggle Database" })
-map("n", "<localleader>f", "<cmd>DBUIFindBuffer<CR>", { desc = "Find Buffer" })
-
-map("n", "<localleader>d", "<cmd>DBUIFindBuffer<CR>", { desc = "Find Buffer" })
 
 -------------------------------------------------------------------------------
 --                           Markdown Section

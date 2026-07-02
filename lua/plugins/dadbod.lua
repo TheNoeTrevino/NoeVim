@@ -2,41 +2,24 @@
 -- Every option below maps to a key in the plugin's `config.lua` defaults.
 -- Values shown are the plugin defaults unless a trailing comment says otherwise
 -- (a few are set to your preferences, with the default noted).
+local prefix = "<localleader>d"
 return {
-  -- "thenoetrevino/vim-dadbod-ui",
+  -- "thenoetrevino/dadbod-ui.nvim",
   -- branch = "feat/connection-groups",
   dir = "~/projects/dadbod-ui.nvim/",
   cmd = { "DBUI", "DBUIToggle", "DBUIAddConnection", "DBUIFindBuffer" },
   dependencies = "vim-dadbod",
   keys = {
-    {
-      "<leader>D",
-      function()
-        require("dadbod-ui").toggle()
-      end,
-      desc = "Toggle DBUI",
-    },
-
-    -- Execute SQL — selection (visual) and whole buffer (normal).
-    -- Replaces <Plug>(DBUI_ExecuteQuery). No `remap` needed for Lua functions.
-    {
-      "<CR>",
-      function()
-        require("dadbod-ui").execute_selection()
-      end,
-      mode = "x",
-      ft = "sql",
-      desc = "Execute SQL (selection)",
-    },
-    {
-      "<leader>S",
-      function()
-        require("dadbod-ui").execute_query()
-      end,
-      mode = "n",
-      ft = "sql",
-      desc = "Execute SQL (buffer)",
-    },
+    -- stylua: ignore start
+    { prefix .. "d", function() require("dadbod-ui.api").toggle() end, desc = "Toggle DBUI" },
+    { prefix .. "o", function() require("dadbod-ui.api").open() end, desc = "Open DBUI" },
+    { prefix .. "f", function() require("dadbod-ui.api").find_buffer() end, desc = "DBUI find buffer" },
+    { prefix .. "a", function() require("dadbod-ui.api").add_connection() end, desc = "DBUI add connection" },
+    { prefix .. "i", function() require("dadbod-ui.api").last_query_info() end, desc = "DBUI last query info" },
+    { prefix .. "e", function() require("dadbod-ui").execute_query() end, mode = "n", ft = "sql", desc = "Execute SQL (buffer)", },
+    { prefix .. "s", function() require("dadbod-ui").switch_buffer() end, mode = "n", ft = "sql", desc = "Switch the current buffer's DB", },
+    { "<CR>", function() require("dadbod-ui").execute_selection() end, mode = "x", ft = "sql", desc = "Execute SQL (selection)", },
+    -- stylua: ignore end
   },
   config = function(_, opts)
     require("dadbod-ui").setup(opts)
