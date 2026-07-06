@@ -322,12 +322,11 @@ end, { desc = "Toggle Formating and Diagnotics (Buffer)" })
 --                           Database Section
 -------------------------------------------------------------------------------
 
-map(
-  "n",
-  "<localleader>,",
-  "<cmd>tabnew<cr><cmd>Tabby rename_tab dadbod<cr><cmd>DBUIToggle<CR>",
-  { desc = "Open Database" }
-)
+map("n", "<localleader>,", function()
+  vim.cmd("tabnew")
+  vim.cmd("Tabby rename_tab dadbod")
+  require("dadbod-ui.api").open()
+end, { desc = "Open Database" })
 
 -------------------------------------------------------------------------------
 --                           Markdown Section
