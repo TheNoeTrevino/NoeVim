@@ -29,7 +29,7 @@ end
 local function open_dadbod()
   vim.cmd("tabnew")
   vim.cmd("TabRename dadbod")
-  vim.cmd("DBUIToggle")
+  require("dadbod-ui.api").open()
 end
 
 -- Dashboard with snacks.nvim

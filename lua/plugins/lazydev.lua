@@ -6,6 +6,15 @@ return {
     ft = "lua",
     cmd = "LazyDev",
     opts = {
+      -- Disable in workspaces that manage lua_ls themselves via .luarc.json
+      -- (e.g. standalone plugin repos); lazydev otherwise injects
+      -- workspace.ignoreDir = { "/lua" }, hiding the project's own modules.
+      enabled = function(root_dir)
+        if vim.g.lazydev_enabled ~= nil then
+          return vim.g.lazydev_enabled
+        end
+        return not vim.uv.fs_stat(root_dir .. "/.luarc.json")
+      end,
       library = {
         { path = "${3rd}/luv/library", words = { "vim%.uv" } },
         { path = "snacks.nvim", words = { "Snacks" } },
