@@ -13,6 +13,5 @@ return {
   -- Windows-incompatible plugins: enabled everywhere except win32.
   { "folke/persistence.nvim", enabled = vim.fn.has("win32") == 0 },
   { "folke/ts-comments.nvim", enabled = vim.fn.has("win32") == 0 },
-  { "tpope/vim-dadbod", enabled = vim.fn.has("win32") == 0 },
   { "nvim-dap-python", enabled = vim.fn.has("win32") == 0 },
 }
