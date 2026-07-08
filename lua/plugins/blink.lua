@@ -22,11 +22,10 @@ return {
   {
     "saghen/blink.cmp",
     version = "*",
-    event = "InsertEnter",
+    event = { "InsertEnter", "CmdlineEnter" },
     dependencies = {
       "rafamadriz/friendly-snippets",
       "rcarriga/cmp-dap",
-      "milanglacier/minuet-ai.nvim",
       "giuxtaposition/blink-cmp-copilot",
     },
     ---@module 'blink.cmp'
