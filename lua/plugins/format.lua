@@ -273,7 +273,7 @@ return {
       ["typescript"] = { "prettier" },
       ["xml"] = { "xmlformat" },
       ["cs"] = { "csharpier" },
-      ["sql"] = { "sqruff" },
+      ["sql"] = { "sqfluff" },
       ["markdown"] = { "markdown-toc" },
       ["markdown.mdx"] = { "markdown-toc" },
       ["http"] = { "kulala-fmt" },
