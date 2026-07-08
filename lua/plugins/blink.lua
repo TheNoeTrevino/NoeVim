@@ -111,12 +111,12 @@ return {
       completion = {
         trigger = {
           show_on_backspace = true,
-          show_on_insert = false,
+          show_on_insert = true,
           show_on_backspace_in_keyword = true,
         },
         list = {
           selection = {
-            preselect = true,
+            preselect = false,
             auto_insert = false,
           },
         },
@@ -145,7 +145,7 @@ return {
         ghost_text = {
           enabled = true,
           show_with_selection = true,
-          show_without_selection = true,
+          show_without_selection = false,
           show_with_menu = true,
           show_without_menu = true,
         },
@@ -165,29 +165,7 @@ return {
           end
         end,
         providers = {
-          minuet = {
-            name = "minuet",
-            module = "minuet.blink",
-            async = true,
-            -- Should match minuet.config.request_timeout * 1000,
-            -- since minuet.config.request_timeout is in seconds
-            timeout_ms = 3000,
-            score_offset = 50, -- Gives minuet higher priority among suggestions
-          },
-          lsp = {
-            score_offset = 100,
-            async = true,
-          },
-          ["fuzzy-path"] = {
-            name = "Fuzzy Path",
-            module = "blink-cmp-fuzzy-path",
-            score_offset = 0,
-          },
-          dadbod = {
-            name = "Dadbod",
-            module = "vim_dadbod_completion.blink",
-            score_offset = 50,
-          },
+          -- Show in this order
           dap = { name = "dap", module = "blink.compat.source", score_offset = 200 },
           copilot = {
             name = "copilot",
@@ -195,6 +173,20 @@ return {
             kind = "Copilot",
             score_offset = 150,
             async = true,
+          },
+          lsp = {
+            score_offset = 100,
+            async = true,
+          },
+          dadbod = {
+            name = "Dadbod",
+            module = "vim_dadbod_completion.blink",
+            score_offset = 50,
+          },
+          ["fuzzy-path"] = {
+            name = "Fuzzy Path",
+            module = "blink-cmp-fuzzy-path",
+            score_offset = 0,
           },
         },
       },
