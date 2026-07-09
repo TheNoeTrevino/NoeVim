@@ -24,6 +24,7 @@ return {
   ---@type snacks.Config
   opts = {
     bigfile = { enabled = true },
+    explorer = { enabled = false },
     quickfile = { enabled = true },
     input = { enabled = true },
     notifier = { enabled = true },
