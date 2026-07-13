@@ -150,6 +150,39 @@ vim.api.nvim_create_autocmd("LspTokenUpdate", {
   end,
 })
 
+-- Razor: HTML treesitter is injected over the C# regions and its captures
+-- (@string.html=99, @nospell.html=100) outrank Roslyn semantic tokens (95, see
+-- options.lua), so C# identifiers inside html attribute strings render as
+-- strings. Re-highlight every semantic token above the treesitter priority so
+-- the C# color wins. NOTE: LspTokenUpdate is fired with `buf` and no pattern, so
+-- an autocmd `pattern` matches the FILENAME, not the filetype -- match by
+-- filetype in the callback instead.
+local RAZOR_TOKEN_PRIORITY = 128 -- above treesitter's default max of 100
+vim.api.nvim_create_autocmd("LspTokenUpdate", {
+  callback = function(args)
+    if vim.bo[args.buf].filetype ~= "razor" then
+      return
+    end
+    local token = args.data.token
+    vim.lsp.semantic_tokens.highlight_token(
+      token,
+      args.buf,
+      args.data.client_id,
+      "@lsp.type." .. token.type,
+      { priority = RAZOR_TOKEN_PRIORITY }
+    )
+    for modifier in pairs(token.modifiers or {}) do
+      vim.lsp.semantic_tokens.highlight_token(
+        token,
+        args.buf,
+        args.data.client_id,
+        "@lsp.typemod." .. token.type .. "." .. modifier,
+        { priority = RAZOR_TOKEN_PRIORITY }
+      )
+    end
+  end,
+})
+
 -- In the `cast` project, ignore whitespace in gitsigns diffs.
 vim.api.nvim_create_autocmd("VimEnter", {
   callback = function()
@@ -208,3 +241,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
 --     end,
 --   })
 -- end
+
+vim.api.nvim_create_user_command("LspStatus", function()
+  vim.cmd("checkhealth vim.lsp")
+end, {})
