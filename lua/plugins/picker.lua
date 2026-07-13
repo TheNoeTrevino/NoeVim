@@ -1,77 +1,3 @@
-local explorer_config = function()
-  return {
-    layout = { preset = "sidebar", preview = false },
-    jump = { close = true },
-    -- to show the explorer to the right, add the below to
-    -- your config under `opts.picker.sources.explorer`
-    -- layout = { layout = { position = "right" } },
-    formatters = {
-      file = { filename_only = true },
-      severity = { pos = "right" },
-    },
-    matcher = { sort_empty = false, fuzzy = false },
-    config = function(opts)
-      return require("snacks.picker.source.explorer").setup(opts)
-    end,
-    win = {
-      list = {
-        keys = {
-          ["<BS>"] = "explorer_up",
-          ["."] = "explorer_focus",
-          ["s"] = { "edit_split", mode = { "n" } },
-          ["v"] = { "edit_vsplit", mode = { "n" } },
-          ["<c-u>"] = { "preview_scroll_up", mode = { "i", "n" } },
-          ["<c-d>"] = { "preview_scroll_down", mode = { "i", "n" } },
-          ["P"] = "toggle_preview",
-          ["f"] = "focus_preview",
-          ["<Esc>"] = "close",
-          ["q"] = "close",
-          ["/"] = "toggle_focus",
-          ["a"] = "explorer_add",
-          ["d"] = "explorer_del",
-          ["r"] = "explorer_rename",
-          ["c"] = "explorer_copy",
-          ["m"] = "explorer_move",
-          ["o"] = "explorer_open",
-          ["y"] = { "explorer_yank", mode = { "n", "x" } },
-          ["p"] = "explorer_paste",
-          ["u"] = "explorer_update",
-          ["H"] = "toggle_hidden",
-          ["I"] = "toggle_ignore",
-          ["?"] = "toggle_help_list",
-          ["<c-q>"] = { "qflist", mode = { "i", "n" } },
-          ["]g"] = "explorer_git_next",
-          ["[g"] = "explorer_git_prev",
-          ["]d"] = "explorer_diagnostic_next",
-          ["[d"] = "explorer_diagnostic_prev",
-          ["k"] = "list_down",
-          ["l"] = "list_up",
-          ["j"] = "explorer_close", -- close directory (like neotree j)
-          [";"] = { "confirm", mode = { "n" } },
-        },
-      },
-      -- input window
-      input = {
-        keys = {
-          ["<Esc>"] = "close",
-          ["<c-u>"] = { "preview_scroll_up", mode = { "i", "n" } },
-          ["<c-d>"] = { "preview_scroll_down", mode = { "i", "n" } },
-          ["/"] = "toggle_focus",
-        },
-      },
-      -- preview window
-      preview = {
-        keys = {
-          ["<Esc>"] = "close",
-          ["q"] = "close",
-          ["<c-u>"] = { "preview_scroll_up", mode = { "i", "n" } },
-          ["<c-d>"] = { "preview_scroll_down", mode = { "i", "n" } },
-          ["f"] = "focus_input",
-        },
-      },
-    },
-  }
-end
 local get_config = function()
   return {
     layout = {
@@ -111,7 +37,25 @@ local get_config = function()
 end
 
 local config_get_symbols = function()
-  return { layout = { preset = "vscode", preview = "main" } }
+  -- Custom layout instead of `preset = "vscode"`: snacks discards a preset
+  -- entirely whenever the custom layout has children (see picker/config/init.lua
+  -- ~L224), so tweaking a preset in place never took. Input + list stacked on
+  -- the left, preview panel on the right. Every window gets a real border.
+  return {
+    layout = {
+      layout = {
+        backdrop = false,
+        width = 0.6,
+        min_width = 80,
+        height = 0.8,
+        border = "none",
+        box = "vertical",
+        { win = "input", height = 1, border = "single", title = "{title} {live} {flags}", title_pos = "center" },
+        { win = "list", border = "single" },
+        { win = "preview", title = "{preview}", border = "single" },
+      },
+    },
+  }
 end
 
 local get_spelling = function()
@@ -138,31 +82,7 @@ local get_spelling = function()
   }
 end
 
-local get_dir_select = function()
-  return {
-    layout = {
-      preview = false,
-      reverse = false,
-      layout = {
-        backdrop = true,
-        row = 1,
-        width = 0.4,
-        min_width = 80,
-        height = 0.4,
-        border = "none",
-        box = "vertical",
-        { win = "input", height = 1, border = "single", title = "{title} {live} {flags}", title_pos = "center" },
-        { win = "list", border = "single" },
-        { win = "preview", title = "{preview}", border = "rounded" },
-      },
-    },
-    on_show = function()
-      vim.cmd.stopinsert()
-    end,
-  }
-end
-
-local get_jumplist = function()
+local get_jumplist_config = function()
   return {
     on_show = function()
       vim.cmd.stopinsert()
@@ -451,6 +371,68 @@ local search_file_directory = function()
   end
 end
 
+-- Custom picker over the *tag stack* (`:tags` / <C-t>). Unlike Snacks.picker.tags
+-- (which browses the ctags `tags` file), this shows the per-window history of tag
+-- jumps you've actually taken. Each entry's `from` is where the cursor was when
+-- you made that jump -- the same position <C-t> would pop you back to. Selecting
+-- an entry jumps there and syncs the tag stack index so <C-t>/<C-]> stay coherent.
+local tagstack_picker = function()
+  local stack = vim.fn.gettagstack()
+  local tags = stack.items or {}
+  if #tags == 0 then
+    vim.notify("Tag stack is empty", vim.log.levels.INFO)
+    return
+  end
+
+  local items = {}
+  -- reverse: most recent jump on top. `rank` counts up from 1 = most recent,
+  -- so you can see how deep in the traversal each entry sits at a glance.
+  local rank = 0
+  for i = #tags, 1, -1 do
+    rank = rank + 1
+    local tag = tags[i]
+    local from = tag.from -- { bufnr, lnum, col, off }
+    local bufnr = from[1]
+    local name = vim.api.nvim_buf_is_valid(bufnr) and vim.api.nvim_buf_get_name(bufnr) or ""
+    items[#items + 1] = {
+      idx = i, -- 1-based index into the real tag stack
+      rank = rank, -- 1 = most recent jump
+      tag = tag.tagname,
+      text = tag.tagname .. " " .. name, -- what the matcher searches on
+      file = name,
+      current = i == stack.curidx, -- where <C-t>/<C-]> currently point
+      pos = { from[2], math.max((from[3] or 1) - 1, 0) }, -- {row (1-based), col (0-based)}
+    }
+  end
+
+  Snacks.picker({
+    items = items,
+    format = function(item)
+      local a = Snacks.picker.util.align
+      local ret = {}
+      ret[#ret + 1] = { item.current and "▶ " or "  ", "SnacksPickerSpecial" }
+      ret[#ret + 1] = { a("#" .. item.rank, 4), "Number" } -- 1 = most recent
+      ret[#ret + 1] = { " " }
+      ret[#ret + 1] = { a(item.tag, 30), "Function" }
+      ret[#ret + 1] = { " " }
+      ret[#ret + 1] = { vim.fn.fnamemodify(item.file, ":~:."), "Directory" }
+      ret[#ret + 1] = { ":" .. item.pos[1], "Number" }
+      return ret
+    end,
+    confirm = function(picker, item)
+      picker:close()
+      if not item or item.file == "" then
+        return
+      end
+      -- move the real tag-stack pointer to the chosen entry, then jump there
+      vim.fn.settagstack(vim.fn.winnr(), { curidx = item.idx }, "r")
+      vim.cmd("edit " .. vim.fn.fnameescape(item.file))
+      pcall(vim.api.nvim_win_set_cursor, 0, item.pos)
+    end,
+    title = "Tag Stack",
+  })
+end
+
 return {
   {
     "folke/snacks.nvim",
@@ -592,12 +574,12 @@ return {
         { "<leader>:",        function() Snacks.picker.command_history(get_config()) end,                           desc = "Command History" },
         { "<leader>N",        function() Snacks.picker.notifications(get_config()) end,                             desc = "Notification History" },
         -- Git
-        { "<leader>gb",       function() Snacks.picker.git_branches(get_config()) end,                              desc = "Git Branches" },
-        { "<leader>gl",       function() Snacks.picker.git_log(get_config()) end,                                   desc = "Git Log" },
-        { "<leader>gL",       function() Snacks.picker.git_log_line(get_config()) end,                              desc = "Git Log Line" },
-        { "<leader>gs",       function() Snacks.picker.git_status(get_config_nm()) end,                             desc = "Git Status" },
-        { "H",                function() Snacks.picker.git_status(get_config_nm()) end,                             desc = "Git Status" },
-        { "<leader>gS",       function() Snacks.picker.git_stash(get_config_nm()) end,                              desc = "Git Stash" },
+        { "<leader>gb",       function() Snacks.picker.git_branches(get_config()) end,                              desc = "Search Git Branches" },
+        { "<leader>gl",       function() Snacks.picker.git_log(get_config()) end,                                   desc = "Search Git Log" },
+        { "<leader>gL",       function() Snacks.picker.git_log_line(get_config()) end,                              desc = "Search Git Log Line" },
+        { "<leader>gs",       function() Snacks.picker.git_status(get_config_nm()) end,                             desc = "Search Git Status" },
+        { "H",                function() Snacks.picker.git_status(get_config_nm()) end,                             desc = "Search Git Status" },
+        { "<leader>gS",       function() Snacks.picker.git_stash(get_config_nm()) end,                              desc = "Search Git Stash" },
         { "<leader>gd",       function() Snacks.picker.git_diff() end,                                              desc = "Git Diff (Hunks)" },
         { "<leader>gf",       function() Snacks.picker.git_log_file() end,                                          desc = "Git Log File" },
         -- Grep
@@ -606,20 +588,22 @@ return {
         { "<leader>sw",       function() Snacks.picker.grep_word(get_config()) end,                                 desc = "Visual selection or word", mode = { "n", "x" } },
         -- Search -- movement based
         { "<leader>sr",       function() Snacks.picker.resume(get_config_nm()) end,                                 desc = "Recent" },
-        { "<leader>sP",       function () Snacks.picker.projects(get_spelling()) end,                               desc = "Projects" },
-        { "<leader>sp",       function () Snacks.picker.spelling(get_spelling()) end,                               desc = "Spelling" },
-        -- { "<leader>sf",       function() Snacks.picker.files(get_config()) end,                                     desc = "Find Files" },
+        { "<leader>sP",       function() Snacks.picker.projects(get_spelling()) end,                                desc = "Projects" },
+        { "<leader>sp",       function() Snacks.picker.spelling(get_spelling()) end,                                desc = "Spelling" },
         { "<leader>sF",       function() Snacks.picker.git_files(get_config()) end,                                 desc = "Find Git Files" },
         { '<leader>s/',       function() Snacks.picker.search_history(get_config()) end,                            desc = "Search History" },
         { "<leader>sd",       function() Snacks.picker.diagnostics(get_config()) end,                               desc = "Diagnostics" },
         { "<leader>sD",       function() Snacks.picker.diagnostics_buffer(get_config()) end,                        desc = "Buffer Diagnostics" },
         { "<leader>sc",       function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end,               desc = "Find Config File" },
-        { "<leader>sj",       function () Snacks.picker.jumps(get_jumplist())end,                                   desc = "Jumps" },
+        { "<leader>sC",       function() Snacks.picker.lazy() end,                                                  desc = "Find Config File" },
+        { "<leader>sj",       function() Snacks.picker.jumps(get_jumplist_config())end,                             desc = "Jumps" },
         { "<leader>sm",       function() Snacks.picker.marks(get_config_nm()) end,                                  desc = "Marks" },
         { "<leader>sq",       function() Snacks.picker.qflist(get_config_nm()) end,                                 desc = "Quickfix List" },
         { "<leader>s?",       function() Snacks.picker.pickers(get_config()) end,                                   desc = "Pickers" },
         { "<leader>sb",       function() Snacks.picker.buffers(get_config_nm()) end,                                desc = "Buffers" },
-        { "<leader>st",       function()Snacks.picker.todo_comments(get_config_nm())end,                            desc = "Todo" },
+        { "<leader>sB",       function() Snacks.picker.grep_buffers(get_config()) end,                              desc = "Buffers" },
+        { "<leader>sT",       function() Snacks.picker.todo_comments(get_config())end,                              desc = "Todo Comments" },
+        { "<leader>st",       tagstack_picker,                                                                      desc = "Tag Stack (history)" },
         { "h",                function() Snacks.picker.buffers(get_config_nm()) end,                                desc = "Buffers" },
         -- potential mappings to move to f
         { "<leader>sM",       function() Snacks.picker.man(get_config()) end,                                       desc = "Man Pages" },
@@ -633,6 +617,8 @@ return {
         { "<leader>sc",       function() Snacks.picker.command_history(get_config()) end,                           desc = "Command History" },
         { "<leader>sC",       function() Snacks.picker.commands(get_config()) end,                                  desc = "Commands" },
         { "<leader>sy",       function() Snacks.picker.yanky(get_config()) end,                                     desc = "Yanks" },
+        { "<leader>ss",       function() Snacks.picker.smart(get_config()) end,                                     desc = "Yanks" },
+        { "<leader>su",       function() Snacks.picker.undo(get_config()) end,                                      desc = "Undo" },
         -- maybe remove, literally never used once
         -- { "<leader>sL", function() Snacks.picker.loclist() end, desc = "Location List" },
         { "<leader>sa",       function() Snacks.picker.autocmds(get_config()) end,                                  desc = "Autocmds" },
@@ -645,25 +631,14 @@ return {
         { "<leader>sL",       function() Snacks.picker.lsp_config(get_config()) end,                                desc = "LSP Config" },
         { "<leader>slo",      function() Snacks.picker.lsp_outgoing_calls(get_config_vert()) end,                   desc = "LSP Outgoing calls" },
         { "<leader>sli",      function() Snacks.picker.lsp_incoming_calls(get_config_vert()) end,                   desc = "LSP Incoming calls" },
-        -- { "<leader>sls",      function() Snacks.picker.lsp_symbols(config_get_symbols()) end,                       desc = "LSP Symbols" },
-        -- { "<leader>slS",      function() Snacks.picker.lsp_workspace_symbols(config_get_symbols()) end,             desc = "LSP Symbols" },
+        { "<leader>sls",      function() Snacks.picker.lsp_symbols(config_get_symbols()) end,                       desc = "LSP Symbols" },
+        { "<leader>slS",      function() Snacks.picker.lsp_workspace_symbols(config_get_symbols()) end,             desc = "LSP Symbols" },
         { "gd",               function() Snacks.picker.lsp_definitions(get_config()) end,                           desc = "Goto Definition" },
         { "gD",               function() Snacks.picker.lsp_declarations(get_config()) end,                          desc = "Goto Declaration" },
         { "gr",               function() Snacks.picker.lsp_references(get_config()) end,             nowait = true, desc = "References" },
         { "gI",               function() Snacks.picker.lsp_implementations(get_config()) end,                       desc = "Goto Implementation" },
         { "gy",               function() Snacks.picker.lsp_type_definitions(get_config()) end,                      desc = "Goto T[y]pe Definition" },
       }
-
-      -- Add <leader>e for snacks explorer only on Windows
-      if is_windows then
-        table.insert(keys, {
-          "<leader>e",
-          function()
-            Snacks.picker.explorer(explorer_config())
-          end,
-          desc = "Explorer",
-        })
-      end
 
       return keys
     end,
@@ -698,8 +673,6 @@ return {
             { "gr",  function() Snacks.picker.lsp_references(get_config()) end,       nowait = true,                  desc = "References" },
             { "gI",  function() Snacks.picker.lsp_implementations(get_config()) end,  desc = "Goto Implementation" },
             { "gy",  function() Snacks.picker.lsp_type_definitions(get_config()) end, desc = "Goto T[y]pe Definition" },
-            -- { "<leader>ss", function() Snacks.picker.lsp_symbols({ filter = require("util").config.kind_filter }) end, desc = "LSP Symbols", has = "documentSymbol" },
-            -- { "<leader>sS", function() Snacks.picker.lsp_workspace_symbols({ filter = require("util").config.kind_filter }) end, desc = "LSP Workspace Symbols", has = "workspace/symbols" },
             { "gai", function() Snacks.picker.lsp_incoming_calls(get_config()) end,   desc = "C[a]lls Incoming",      has = "callHierarchy/incomingCalls" },
             { "gao", function() Snacks.picker.lsp_outgoing_calls(get_config()) end,   desc = "C[a]lls Outgoing",      has = "callHierarchy/outgoingCalls" },
             { "]]",  function() Snacks.words.jump(vim.v.count1) end,                  desc = "Next Reference",        mode = { "n", "t" }, },

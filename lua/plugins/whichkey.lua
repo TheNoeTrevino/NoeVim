@@ -80,6 +80,7 @@ return {
         { "<leader>x", group = "Diagnostics", icon = { icon = "󰓙 ", color = "azure" } },
         { "<leader>mf", group = "Folds", icon = { icon = "" } },
         { "[", group = "Prev" },
+        { "<leader>sl", group = "LSP Searchs" },
         { "]", group = "Next" },
         { "g", group = "Goto" },
         { "gs", group = "Surround" },
