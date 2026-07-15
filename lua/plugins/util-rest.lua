@@ -29,8 +29,15 @@ vim.api.nvim_create_autocmd("FileType", {
 -- Uses reveal_force_cwd so Neo-tree doesn't prompt "File not in cwd?" when
 -- the store lives outside the current project root.
 local function browse_saved_requests()
-  local path = vim.fn.expand("~/.local/share/kulala")
-  vim.fn.mkdir(path, "p")
+  -- Prefer a `rest/` dir at the project root; fall back to the kulala store.
+  local root_rest = vim.fs.joinpath(vim.fn.getcwd(), "rest")
+  local path
+  if vim.fn.isdirectory(root_rest) == 1 then
+    path = root_rest
+  else
+    path = vim.fn.expand("~/.local/share/kulala")
+    vim.fn.mkdir(path, "p")
+  end
 
   vim.cmd("tabnew")
   -- Scope this tab's cwd to the store so git and cwd-relative tools work here
