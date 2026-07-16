@@ -528,6 +528,8 @@ return {
               ["<Esc>"] = "cancel",
               ["<c-u>"] = { "preview_scroll_up", mode = { "i", "n" } },
               ["<c-d>"] = { "preview_scroll_down", mode = { "i", "n" } },
+              ["<PageUp>"] = { "preview_scroll_up", mode = { "i", "n" } },
+              ["<PageDown>"] = { "preview_scroll_down", mode = { "i", "n" } },
               ["<c-q>"] = { "qflist", mode = { "i", "n" } },
               ["<c-n>"] = { "history_forward", mode = { "i", "n" } },
               ["<c-p>"] = { "history_back", mode = { "i", "n" } },
