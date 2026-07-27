@@ -1,10 +1,14 @@
--- Makefile tooling.
+-- Makefile tooling: treesitter grammar + make-ls + checkmake linting.
 --
--- autotools_ls is a documentation layer, not a semantic one: hover + completion
--- for make built-ins (.PHONY, $(realpath ...), automatic variables) and document
--- symbols for targets. No go-to-definition on targets. checkmake is the linter
--- that actually finds problems (minphony, phonydeclared, maxbodylength,
--- timestampexpanded).
+-- make-ls (github.com/owenrumney/make-ls) is a real Makefile server: hover on
+-- targets/variables/automatic-variables, completion, go-to-definition,
+-- find-references, document symbols. checkmake covers linting on top
+-- (minphony, phonydeclared, maxbodylength, timestampexpanded).
+--
+-- Not autotools_ls: despite nvim-lspconfig listing `make` in its filetypes, it's
+-- an *autoconf* server (tree_sitter_autoconf grammar, AC_*-macro-only schema),
+-- so on a Makefile it attaches and returns nothing -- measured, 0 hovers and 0
+-- completions.
 --
 -- Nothing here touches indentation: Neovim's builtin ftplugin/make.vim already
 -- sets `noexpandtab softtabstop=0 shiftwidth=0`, which is the rule that matters
@@ -17,6 +21,26 @@ return {
   {
     "mason.nvim",
     opts = { ensure_installed = { "checkmake" } },
+  },
+  {
+    "neovim/nvim-lspconfig",
+    opts = {
+      servers = {
+        -- Not in mason or the nvim-lspconfig registry, so the whole config is
+        -- supplied here and `mason = false` keeps lsp-config.lua from trying to
+        -- look it up. Install with:
+        --   go install github.com/owenrumney/make-ls/cmd/make-ls@latest
+        -- Speaks plain stdio, no flags. Going through opts.servers (rather than
+        -- a bare vim.lsp.start autocmd) means it picks up the shared capabilities
+        -- and the `*` keymap overrides from lsp-config.lua.
+        make_ls = {
+          cmd = { "make-ls" },
+          filetypes = { "make" },
+          root_markers = { "Makefile", "makefile", "GNUmakefile", ".git" },
+          mason = false,
+        },
+      },
+    },
   },
   {
     "mfussenegger/nvim-lint",
@@ -38,17 +62,6 @@ return {
         checkmake = {
           args = { "--format={{.LineNumber}}:{{.Rule}}:{{.Violation}}" },
         },
-      },
-    },
-  },
-  {
-    "neovim/nvim-lspconfig",
-    opts = {
-      servers = {
-        -- Installed by mason-lspconfig (package: autotools-language-server).
-        -- Attaches to make/automake/config filetypes; roots on Makefile,
-        -- configure.ac, Makefile.am, or *.mk.
-        autotools_ls = {},
       },
     },
   },
