@@ -131,9 +131,6 @@ return {
   -- Personal overrides: float window, custom mappings, skip on Windows.
   {
     "nvim-neo-tree/neo-tree.nvim",
-    cond = function()
-      return vim.loop.os_uname().sysname ~= "Windows_NT"
-    end,
     opts = {
       popup_border_style = "single",
       source_selector = {

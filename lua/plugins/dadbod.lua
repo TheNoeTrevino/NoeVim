@@ -5,7 +5,7 @@
 local prefix = "<localleader>d"
 return {
   -- "thenoetrevino/dadbod-ui.nvim",
-  -- branch = "feat/connection-groups",
+  -- branch = "bugfix/splitting-when-opening-buffer-same-conn",
   dir = "~/projects/dadbod-ui.nvim/",
   lazy = false,
   dependencies = "tpope/vim-dadbod",

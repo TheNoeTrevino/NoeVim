@@ -4,8 +4,23 @@ return {
   cmd = "Mason",
   keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
   build = ":MasonUpdate",
+  -- roslyn.nvim resolves its server binary via $MASON (see roslyn/utils.lua
+  -- get_mason_path). It ft-loads on .cs before mason (cmd-lazy) runs setup(), so
+  -- export $MASON at startup to match install_root_dir below; otherwise roslyn
+  -- falls back to the default mason path and can't find the moved binary.
+  init = function()
+    if vim.fn.has("win32") == 1 then
+      vim.env.MASON = "C:/mason"
+    end
+  end,
   opts_extend = { "ensure_installed" },
   opts = {
+    -- Windows-only: the default mason root (~/AppData/Local/nvim-data/mason) makes
+    -- roslyn's BuildHost-net472 exe path 270 chars, over MAX_PATH (260). CreateProcess
+    -- then fails with "file not found" (Win32 err 2) even though the exe exists, so
+    -- legacy .NET Framework projects silently fail to load and give no completions.
+    -- A short root keeps the full path under the limit. nil = mason default on Linux/macOS.
+    install_root_dir = vim.fn.has("win32") == 1 and "C:/mason" or nil,
     ensure_installed = {
       "black",
       "csharpier",

@@ -282,7 +282,25 @@ return {
       -- base
       injected = { options = { ignore_errors = true } },
       -- user
-      sqruff = {},
+      -- The builtin requires a `.sqlfluff`/`pyproject.toml` upward of the buffer as
+      -- cwd, which dadbod-ui query buffers (~/.local/share/db_ui) never have. The
+      -- dialect comes from the buffer's dadbod url when there is one; note the CLI
+      -- flag beats any project `.sqlfluff` dialect.
+      sqlfluff = {
+        require_cwd = false,
+        args = function(_, ctx)
+          local dialect = "ansi"
+          local db = vim.b[ctx.buf].db
+          if type(db) == "string" then
+            if db:find("^sqlserver") then
+              dialect = "tsql"
+            elseif db:find("^postgres") then
+              dialect = "postgres"
+            end
+          end
+          return { "format", "--dialect=" .. dialect, "-" }
+        end,
+      },
       prettier = {
         require_cwd = true,
         condition = function(_, ctx)
