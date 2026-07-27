@@ -311,6 +311,23 @@ return {
           return args
         end,
       },
+      prettier = {
+        require_cwd = true,
+        condition = function(_, ctx)
+          local supported =
+            { "javascript", "typescript", "css", "html", "htmlangular", "json", "java", "typescriptreact" }
+          local ft = vim.bo[ctx.buf].filetype
+          return vim.tbl_contains(supported, ft)
+        end,
+        -- Dont forget to npm install prettier and the java plugin
+        cwd = function(self, ctx)
+          local found = vim.fs.find({ "frontend" }, { upward = true, path = ctx.dirname })[1]
+          if found then
+            return found
+          end
+          return { "format", "--dialect=" .. dialect, "-" }
+        end,
+      },
       -- Dont forget to npm install prettier and the java plugin in frontend/.
       -- Inside one of those projects, run from `frontend/` and point --config at its
       -- .prettierrc.json (relative to that cwd); anywhere else fall back to conform's
