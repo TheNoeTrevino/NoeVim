@@ -87,4 +87,5 @@ return {
       }):map("<leader>uG")
     end,
   },
+  { "akinsho/git-conflict.nvim", event = "LazyFile", version = "*", config = true },
 }
