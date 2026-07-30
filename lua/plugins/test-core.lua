@@ -1,4 +1,8 @@
 local Util = require("util")
+
+--- Position types neotest itself understands. See neotest.types.PositionType.
+local known_position_types = { dir = true, file = true, namespace = true, test = true }
+
 return {
   desc = "Neotest support. Requires language specific adapters to be configured. (see lang extras)",
   {
@@ -99,6 +103,29 @@ return {
           end
         end
         opts.adapters = adapters
+      end
+
+      -- neotest's status consumer keys signs and virtual text off pos.type, but only
+      -- knows its own four position types. Adapters may invent their own -- neotest-vstest
+      -- emits "parameterized" for xunit [Theory] / nunit [TestCase] groups -- which raises
+      -- "E155: Unknown sign: neotest_parameterized" and then nil-indexes the virtual-text
+      -- icon table. Relabel unknown types as namespaces, which is what they behave like.
+      for _, adapter in ipairs(opts.adapters or {}) do
+        local discover_positions = adapter.discover_positions
+        if discover_positions then
+          adapter.discover_positions = function(...)
+            local tree = discover_positions(...)
+            if tree then
+              for _, node in tree:iter_nodes() do
+                local pos = node:data()
+                if not known_position_types[pos.type] then
+                  pos.type = "namespace"
+                end
+              end
+            end
+            return tree
+          end
+        end
       end
 
       require("neotest").setup(opts)

@@ -44,9 +44,20 @@ return {
     opts = function()
       local dap = require("dap")
       if not dap.adapters["netcoredbg"] then
+        -- Fall back to mason's bin dir when netcoredbg is not yet on PATH. exepath() is
+        -- evaluated once, when this spec loads, so a mid-session :MasonInstall would
+        -- otherwise leave the command empty until the next restart.
+        local function netcoredbg_path()
+          local on_path = vim.fn.exepath("netcoredbg")
+          if on_path ~= "" then
+            return on_path
+          end
+          return vim.fn.stdpath("data") .. "/mason/bin/netcoredbg"
+        end
+
         require("dap").adapters["netcoredbg"] = {
           type = "executable",
-          command = vim.fn.exepath("netcoredbg"),
+          command = netcoredbg_path(),
           args = { "--interpreter=vscode" },
           options = {
             detached = false,
