@@ -159,7 +159,7 @@ return {
           if sql_filetypes[vim.bo.filetype] ~= nil then
             return { "dadbod", "snippets", "buffer" }
           elseif is_dap_buffer() then
-            return { "dap", "snippets", "buffer" }
+            return { "dap", "lsp", "snippets", "buffer" }
           else
             return { "lsp", "path", "snippets", "copilot", "fuzzy-path" } -- "buffer" }
           end
