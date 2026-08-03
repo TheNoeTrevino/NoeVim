@@ -44,4 +44,21 @@ return {
       },
     },
   },
+
+  -- Track the tex-fmt binary with Mason so it's installed alongside the config.
+  {
+    "mason-org/mason.nvim",
+    opts = { ensure_installed = { "tex-fmt" } },
+  },
+
+  -- Format LaTeX with tex-fmt (conform ships the formatter definition).
+  {
+    "stevearc/conform.nvim",
+    optional = true,
+    ---@param opts ConformOpts
+    opts = function(_, opts)
+      opts.formatters_by_ft = opts.formatters_by_ft or {}
+      opts.formatters_by_ft["tex"] = { "tex-fmt" }
+    end,
+  },
 }
