@@ -197,6 +197,22 @@ end
 -- conform.nvim plugin spec (base opts merged with the personal
 -- formatters/formatters_by_ft, the personal ones winning)
 -- ===========================================================================
+
+-- The java projects here (icris/rap/wheel-project) keep their ONLY prettier config --
+-- and the prettier-plugin-java it pulls in -- in the sibling `frontend/` workspace, so
+-- it is never an ancestor of a backend buffer and prettier can't discover it on its
+-- own. Find that workspace so prettier can be run from inside it instead.
+---@param dirname string
+---@return string? frontend the nearest upward `frontend/` holding a .prettierrc.json
+local function prettier_frontend(dirname)
+  local opts = { upward = true, path = dirname, type = "directory", limit = math.huge }
+  for _, dir in ipairs(vim.fs.find({ "frontend" }, opts)) do
+    if vim.uv.fs_stat(dir .. "/.prettierrc.json") then
+      return dir
+    end
+  end
+end
+
 return {
   "stevearc/conform.nvim",
   dependencies = { "mason.nvim" },
@@ -301,22 +317,18 @@ return {
           return { "format", "--dialect=" .. dialect, "-" }
         end,
       },
+      -- Dont forget to npm install prettier and the java plugin in frontend/.
+      -- Inside one of those projects, run from `frontend/` and point --config at its
+      -- .prettierrc.json (relative to that cwd); anywhere else fall back to conform's
+      -- own discovery and add nothing. The `java` filetype rides on this too -- see
+      -- the condition in formatting-prettier.lua.
       prettier = {
-        require_cwd = true,
-        condition = function(_, ctx)
-          local supported =
-            { "javascript", "typescript", "css", "html", "htmlangular", "json", "java", "typescriptreact" }
-          local ft = vim.bo[ctx.buf].filetype
-          return vim.tbl_contains(supported, ft)
-        end,
-        -- Dont forget to npm install prettier and the java plugin
         cwd = function(self, ctx)
-          local found = vim.fs.find({ "frontend" }, { upward = true, path = ctx.dirname })[1]
-          if found then
-            return found
-          end
+          return prettier_frontend(ctx.dirname) or require("conform.formatters.prettier").cwd(self, ctx)
         end,
-        append_args = { "--config", ".prettierrc.json" },
+        append_args = function(_, ctx)
+          return prettier_frontend(ctx.dirname) and { "--config", ".prettierrc.json" } or {}
+        end,
       },
       ["markdown-toc"] = {
         condition = function(_, ctx)

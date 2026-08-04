@@ -71,11 +71,20 @@ return {
       end
 
       opts.formatters = opts.formatters or {}
-      opts.formatters.prettier = {
-        condition = function(_, ctx)
+      -- "keep", not a plain assignment: lazy runs opts FUNCTIONS after merging the opts
+      -- TABLES, so assigning here would wipe the prettier override format.lua
+      -- contributes (its cwd/append_args). Only fill in what it doesn't set.
+      opts.formatters.prettier = vim.tbl_deep_extend("keep", opts.formatters.prettier or {}, {
+        condition = function(self, ctx)
+          -- prettier can't infer a parser for .java on its own (the plugin lives in a
+          -- project's frontend/), so has_parser always says no. Defer to cwd instead:
+          -- java is formattable exactly where format.lua found a config to run under.
+          if vim.bo[ctx.buf].filetype == "java" then
+            return self.cwd ~= nil and self.cwd(self, ctx) ~= nil
+          end
           return M.has_parser(ctx) and (vim.g.lazyvim_prettier_needs_config ~= true or M.has_config(ctx))
         end,
-      }
+      })
     end,
   },
 
