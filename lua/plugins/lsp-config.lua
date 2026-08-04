@@ -4,6 +4,17 @@
 -- (Util.format, in lua/plugins/format.lua).
 local Util = require("util")
 
+---@alias lsp.Config vim.lsp.Config|{mason?:boolean, enabled?:boolean, keys?:LazyKeysLspSpec[]}
+
+---@class PluginLspOpts
+---@field diagnostics vim.diagnostic.Opts
+---@field inlay_hints {enabled:boolean, exclude:string[]}
+---@field codelens {enabled:boolean}
+---@field folds {enabled:boolean}
+---@field format {formatting_options?:table, timeout_ms?:number}
+---@field servers table<string, lsp.Config|boolean>
+---@field setup table<string, fun(server:string, opts: vim.lsp.Config):boolean?>
+
 return {
   -- vendored base spec
   {
@@ -14,72 +25,73 @@ return {
       { "mason-org/mason-lspconfig.nvim", config = function() end },
     },
     opts_extend = { "servers.*.keys" },
-    opts = function()
-      ---@class PluginLspOpts
-      local ret = {
-        -- options for vim.diagnostic.config()
-        ---@type vim.diagnostic.Opts
-        diagnostics = {
-          underline = true,
-          update_in_insert = false,
-          virtual_text = {
-            spacing = 4,
-            source = "if_many",
-            prefix = "●",
-            -- this will set set the prefix to a function that returns the diagnostics icon based on the severity
-            -- prefix = "icons",
+    -- NOTE: keep this a plain table, never `opts = function() ... end`. A function-form opts
+    -- REPLACES whatever earlier spec fragments merged in (lazy/core/plugin.lua:_values), and
+    -- fragments merge in alphabetical file order -- so every spec sorting before this file
+    -- (editor-*, go.lua, lang-*, lazydev) would be silently dropped, servers and all.
+    ---@type PluginLspOpts
+    opts = {
+      -- options for vim.diagnostic.config()
+      diagnostics = {
+        underline = true,
+        update_in_insert = false,
+        virtual_text = {
+          spacing = 4,
+          source = "if_many",
+          prefix = "●",
+          -- this will set set the prefix to a function that returns the diagnostics icon based on the severity
+          -- prefix = "icons",
+        },
+        severity_sort = true,
+        signs = {
+          text = {
+            [vim.diagnostic.severity.ERROR] = Util.config.icons.diagnostics.Error,
+            [vim.diagnostic.severity.WARN] = Util.config.icons.diagnostics.Warn,
+            [vim.diagnostic.severity.HINT] = Util.config.icons.diagnostics.Hint,
+            [vim.diagnostic.severity.INFO] = Util.config.icons.diagnostics.Info,
           },
-          severity_sort = true,
-          signs = {
-            text = {
-              [vim.diagnostic.severity.ERROR] = Util.config.icons.diagnostics.Error,
-              [vim.diagnostic.severity.WARN] = Util.config.icons.diagnostics.Warn,
-              [vim.diagnostic.severity.HINT] = Util.config.icons.diagnostics.Hint,
-              [vim.diagnostic.severity.INFO] = Util.config.icons.diagnostics.Info,
-            },
-          },
         },
-        -- Enable this to enable the builtin LSP inlay hints on Neovim.
-        -- Be aware that you also will need to properly configure your LSP server to
-        -- provide the inlay hints.
-        inlay_hints = {
-          enabled = true,
-          exclude = { "vue" }, -- filetypes for which you don't want to enable inlay hints
-        },
-        -- Enable this to enable the builtin LSP code lenses on Neovim.
-        -- Be aware that you also will need to properly configure your LSP server to
-        -- provide the code lenses.
-        codelens = {
-          enabled = false,
-        },
-        -- Enable this to enable the builtin LSP folding on Neovim.
-        -- Be aware that you also will need to properly configure your LSP server to
-        -- provide the folds.
-        folds = {
-          enabled = true,
-        },
-        -- options for vim.lsp.buf.format
-        -- `bufnr` and `filter` is handled by the Util formatter,
-        -- but can be also overridden when specified
-        format = {
-          formatting_options = nil,
-          timeout_ms = nil,
-        },
-        -- LSP Server Settings
-        -- Sets the default configuration for an LSP client (or all clients if the special name "*" is used).
-        ---@alias lsp.Config vim.lsp.Config|{mason?:boolean, enabled?:boolean, keys?:LazyKeysLspSpec[]}
-        ---@type table<string, lsp.Config|boolean>
-        servers = {
-          -- configuration for all lsp servers
-          ["*"] = {
-            capabilities = {
-              workspace = {
-                fileOperations = {
-                  didRename = true,
-                  willRename = true,
-                },
+      },
+      -- Enable this to enable the builtin LSP inlay hints on Neovim.
+      -- Be aware that you also will need to properly configure your LSP server to
+      -- provide the inlay hints.
+      inlay_hints = {
+        enabled = true,
+        exclude = { "vue" }, -- filetypes for which you don't want to enable inlay hints
+      },
+      -- Enable this to enable the builtin LSP code lenses on Neovim.
+      -- Be aware that you also will need to properly configure your LSP server to
+      -- provide the code lenses.
+      codelens = {
+        enabled = false,
+      },
+      -- Enable this to enable the builtin LSP folding on Neovim.
+      -- Be aware that you also will need to properly configure your LSP server to
+      -- provide the folds.
+      folds = {
+        enabled = true,
+      },
+      -- options for vim.lsp.buf.format
+      -- `bufnr` and `filter` is handled by the Util formatter,
+      -- but can be also overridden when specified
+      format = {
+        formatting_options = nil,
+        timeout_ms = nil,
+      },
+      -- LSP Server Settings
+      -- Sets the default configuration for an LSP client (or all clients if the special name "*" is used).
+      ---@type table<string, lsp.Config|boolean>
+      servers = {
+        -- configuration for all lsp servers
+        ["*"] = {
+          capabilities = {
+            workspace = {
+              fileOperations = {
+                didRename = true,
+                willRename = true,
               },
             },
+          },
               -- stylua: ignore
               keys = {
                 { "<leader>cl", function() Snacks.picker.lsp_config() end, desc = "Lsp Info" },
@@ -117,55 +129,53 @@ return {
                   end
                 },
               },
-          },
-          stylua = { enabled = false },
-          lua_ls = {
-            -- mason = false, -- set to false if you don't want this server to be installed with mason
-            -- Use this to add any additional keymaps
-            -- for specific lsp servers
-            -- ---@type LazyKeysSpec[]
-            -- keys = {},
-            settings = {
-              Lua = {
-                workspace = {
-                  checkThirdParty = false,
-                },
-                codeLens = {
-                  enable = true,
-                },
-                completion = {
-                  callSnippet = "Replace",
-                },
-                doc = {
-                  privateName = { "^_" },
-                },
-                hint = {
-                  enable = true,
-                  setType = false,
-                  paramType = true,
-                  paramName = "Disable",
-                  semicolon = "Disable",
-                  arrayIndex = "Disable",
-                },
+        },
+        stylua = { enabled = false },
+        lua_ls = {
+          -- mason = false, -- set to false if you don't want this server to be installed with mason
+          -- Use this to add any additional keymaps
+          -- for specific lsp servers
+          -- ---@type LazyKeysSpec[]
+          -- keys = {},
+          settings = {
+            Lua = {
+              workspace = {
+                checkThirdParty = false,
+              },
+              codeLens = {
+                enable = true,
+              },
+              completion = {
+                callSnippet = "Replace",
+              },
+              doc = {
+                privateName = { "^_" },
+              },
+              hint = {
+                enable = true,
+                setType = false,
+                paramType = true,
+                paramName = "Disable",
+                semicolon = "Disable",
+                arrayIndex = "Disable",
               },
             },
           },
         },
-        -- you can do any additional lsp server setup here
-        -- return true if you don't want this server to be setup with lspconfig
-        ---@type table<string, fun(server:string, opts: vim.lsp.Config):boolean?>
-        setup = {
-          -- example to setup with typescript.nvim
-          -- tsserver = function(_, opts)
-          --   require("typescript").setup({ server = opts })
-          --   return true
-          -- end,
-          -- Specify * to use this function as a fallback for any server
-          -- ["*"] = function(server, opts) end,
-        },
-      }
-      return ret
-    end,
+      },
+      -- you can do any additional lsp server setup here
+      -- return true if you don't want this server to be setup with lspconfig
+      ---@type table<string, fun(server:string, opts: vim.lsp.Config):boolean?>
+      setup = {
+        -- example to setup with typescript.nvim
+        -- tsserver = function(_, opts)
+        --   require("typescript").setup({ server = opts })
+        --   return true
+        -- end,
+        -- Specify * to use this function as a fallback for any server
+        -- ["*"] = function(server, opts) end,
+      },
+    },
     ---@param opts PluginLspOpts
     config = function(_, opts)
       -- setup autoformat
