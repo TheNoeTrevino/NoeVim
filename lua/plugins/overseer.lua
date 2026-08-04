@@ -39,6 +39,11 @@ return {
         },
       },
     },
+    -- Templates must be registered after setup, hence the explicit config.
+    config = function(_, opts)
+      require("overseer").setup(opts)
+      require("util.gradle").register_overseer_templates()
+    end,
     -- stylua: ignore
     keys = {
       { "<leader>ow", function() vim.cmd("OverseerToggle!") end, desc = "Toggle", },
