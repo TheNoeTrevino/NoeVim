@@ -47,9 +47,12 @@ return {
     opts = {
       server = {
         on_attach = function(_, bufnr)
-          vim.keymap.set("n", "<leader>cR", function()
+          -- RustLsp codeAction is a superset of the generic code action, so it takes over
+          -- <leader>ca here instead of <leader>cR -- that was shadowing "Rename File"
+          -- (lsp-rename.lua) in every rust buffer.
+          vim.keymap.set("n", "<leader>ca", function()
             vim.cmd.RustLsp("codeAction")
-          end, { desc = "Code Action", buffer = bufnr })
+          end, { desc = "Code Action (Rust)", buffer = bufnr })
           vim.keymap.set("n", "<leader>dr", function()
             vim.cmd.RustLsp("debuggables")
           end, { desc = "Rust Debuggables", buffer = bufnr })

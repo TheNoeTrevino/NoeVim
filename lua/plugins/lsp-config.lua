@@ -94,8 +94,7 @@ return {
                 { "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "x" }, has = "codeAction" },
                 { "<leader>cc", vim.lsp.codelens.run, desc = "Run Codelens", mode = { "n", "x" }, has = "codeLens" },
                 { "<leader>cC", vim.lsp.codelens.refresh, desc = "Refresh & Display Codelens", mode = { "n" }, has = "codeLens" },
-                { "<leader>cR", function() Snacks.rename.rename_file() end, desc = "Rename File", mode ={"n"}, has = { "workspace/didRenameFiles", "workspace/willRenameFiles" } },
-                { "<leader>cr", vim.lsp.buf.rename, desc = "Rename", has = "rename" },
+                -- Rename lives in lsp-rename.lua: <leader>cr (symbol) and <leader>cR (file).
                 { "<leader>cA", Util.lsp.action.source, desc = "Source Action", has = "codeAction" },
                 { "]]", function() Snacks.words.jump(vim.v.count1) end, has = "documentHighlight",
                   desc = "Next Reference", enabled = function() return Snacks.words.is_enabled() end },

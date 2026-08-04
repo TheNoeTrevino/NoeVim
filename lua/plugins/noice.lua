@@ -1,6 +1,9 @@
 return {
   "folke/noice.nvim",
-  event = "InsertEnter",
+  -- VeryLazy, not InsertEnter: noice replaces the cmdline by attaching as a UI at setup, so
+  -- until it loads every `:` prompt (IncRename included) is the plain built-in cmdline. With
+  -- InsertEnter, that meant noice's cmdline did nothing until the first time you typed.
+  event = "VeryLazy",
   opts = {
     cmdline = {
       view = "cmdline",
