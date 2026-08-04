@@ -1,5 +1,5 @@
 -- LSP helpers used by lsp-config: formatter (registered with the format subsystem),
--- format, action, execute, code_actions.
+-- format, action, execute, code_actions, restart.
 local Util = require("util")
 
 ---@class util.lsp
@@ -112,6 +112,46 @@ function M.code_actions(filter)
     end
   end
   return Util.dedup(ret)
+end
+
+-- Restart the clients attached to the current buffer -- the native equivalent of
+-- lspconfig's :LspRestart, driven by `:help lsp.faq`: stop the clients, then reload
+-- the buffer so they reattach. No vim.lsp.enable() needed, the config that enabled
+-- them in the first place is still registered.
+function M.restart()
+  local buf = vim.api.nvim_get_current_buf()
+  local clients = vim.lsp.get_clients({ bufnr = buf })
+  if #clients == 0 then
+    vim.notify("No LSP clients attached to this buffer", vim.log.levels.WARN)
+    return
+  end
+
+  -- client:stop(), not vim.lsp.stop_client() -- the FAQ still shows the latter, but it's
+  -- deprecated as of 0.12.
+  for _, client in ipairs(clients) do
+    client:stop()
+  end
+
+  -- Write first: `:edit` refuses a modified buffer, and forcing it would drop the
+  -- changes. Only for real files -- :update throws on a nameless or special buffer.
+  if vim.bo[buf].modified and vim.bo[buf].buftype == "" and vim.api.nvim_buf_get_name(buf) ~= "" then
+    vim.cmd("noautocmd update")
+  end
+
+  local names = vim.tbl_map(function(client)
+    return client.name
+  end, clients)
+
+  -- The reload has to wait for the clients to actually exit, otherwise they're still
+  -- in get_clients() when the fresh buffer asks for an attach and nothing restarts.
+  vim.defer_fn(function()
+    if vim.api.nvim_buf_is_valid(buf) then
+      vim.api.nvim_buf_call(buf, function()
+        vim.cmd.edit()
+      end)
+    end
+    vim.notify("Restarted: " .. table.concat(names, ", "), vim.log.levels.INFO, { title = "LSP" })
+  end, 1000)
 end
 
 return M

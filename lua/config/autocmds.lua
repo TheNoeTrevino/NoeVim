@@ -245,3 +245,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
 vim.api.nvim_create_user_command("LspStatus", function()
   vim.cmd("checkhealth vim.lsp")
 end, {})
+
+vim.api.nvim_create_user_command("LspRestart", function()
+  require("util.lsp").restart()
+end, { desc = "Restart the LSP clients attached to this buffer" })
