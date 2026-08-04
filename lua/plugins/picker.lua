@@ -650,9 +650,21 @@ return {
     dependencies = { "folke/snacks.nvim" },
     cmd = { "Seeker" },
     keys = {
-      { "<leader>sf", ":Seeker files<CR>", desc = "Seek Files" },
+      {
+        "<leader>sf",
+        function()
+          vim.cmd("Seeker files")
+        end,
+        desc = "Seek Files",
+      },
       -- { "<leader>ff", ":Seeker git_files<CR>", desc = "Seek Git Files" },
-      { "<leader>sg", ":Seeker grep<CR>", desc = "Seek Grep" },
+      {
+        "<leader>sg",
+        function()
+          vim.cmd("Seeker grep")
+        end,
+        desc = "Seek Grep",
+      },
       -- { "<leader>fw", ":Seeker grep_word<CR>", desc = "Seek Grep Word" },
     },
     opts = {
