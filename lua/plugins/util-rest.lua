@@ -59,7 +59,7 @@ return {
     keys = {
         -- stylua: ignore start
       { "<leader>r", "", desc = "+Rest" },
-      { "<leader>rb", function() browse_saved_requests() end,             desc = "Browse saved requests" },
+      { "<leader>rw", function() browse_saved_requests() end,              desc = "Open REST Workspace" },
       { "<leader>r.", function() require("kulala").scratchpad() end,       desc = "Open scratchpad" },
       { "<leader>rc", function() require("kulala").copy() end,             desc = "Copy as cURL",    ft = "http" },
       { "<leader>rC", function() require("kulala").from_curl() end,        desc = "Paste from curl", ft = "http" },
