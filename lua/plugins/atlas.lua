@@ -1,5 +1,7 @@
 return {
-  "emrearmagan/atlas.nvim",
+  -- "emrearmagan/atlas.nvim",
+
+  dir = "~/projects/atlas.nvim/",
   dependencies = {
     "MeanderingProgrammer/render-markdown.nvim", -- optional but recommended
     "esmuellert/codediff.nvim", -- optional (PullRequest diff)
@@ -11,18 +13,39 @@ return {
       function()
         vim.cmd("AtlasIssues")
       end,
-      desc = "Seek Files",
+      desc = "Atlas Issues",
     },
     {
       "<leader>Ap",
       function()
         vim.cmd("AtlasPulls")
       end,
-      desc = "Seek Files",
+      desc = "Atlas Pulls",
     },
   },
+  ---@type AtlasConfig
   opts = {
+    keymaps = {
+      -- jkl; layout: k = down, l = up
+      ui = {
+        next_item = "k",
+        previous_item = "l",
+      },
+      pulls = {
+        -- `;` is "right" in jkl;, replacing the default `l` alias (which would
+        -- otherwise shadow previous_item)
+        review = { open_file = { ";", "<CR>" } },
+      },
+    },
     pulls = {
+
+      repo_config = {
+        -- what the review feature uses as a workspace for diffs
+        paths = {
+          ["ssglimited/icris"] = "~/projects/icris/icris.git",
+          ["ssglimited/nmcris"] = "~/projects/nmcris/nmcris.git",
+        },
+      },
       providers = {
         bitbucket = {
           user = vim.env.BITBUCKET_USER,
@@ -119,37 +142,4 @@ return {
       },
     },
   },
-  config = function(_, opts)
-    require("atlas").setup(opts)
-
-    -- atlas hardcodes j = down / k = up for list navigation (not exposed in the
-    -- keymaps config). Shift to a jkl; layout: k = down, l = up. These register()
-    -- fns run on every open/refresh, so wrap them to re-apply after the plugin.
-    local nav_by_module = {
-      ["atlas.ui.keymaps"] = "atlas.ui.navigation",
-      ["atlas.pulls.ui.panel.pr.keymaps"] = "atlas.pulls.ui.panel.pr.navigation",
-      ["atlas.pulls.ui.panel.repo.keymaps"] = "atlas.pulls.ui.panel.repo.navigation",
-      ["atlas.issues.ui.panel.issue.keymaps"] = "atlas.issues.ui.panel.issue.navigation",
-    }
-
-    for mod_name, nav_name in pairs(nav_by_module) do
-      local mod = require(mod_name)
-      local orig = mod.register
-      mod.register = function(buf, ...)
-        local ret = orig(buf, ...)
-        if type(buf) == "number" and vim.api.nvim_buf_is_valid(buf) then
-          local nav = require(nav_name)
-          local mapopts = { buffer = buf, nowait = true, silent = true }
-          vim.keymap.set("n", "k", function()
-            nav.move_cursor("down")
-          end, mapopts)
-          vim.keymap.set("n", "l", function()
-            nav.move_cursor("up")
-          end, mapopts)
-          pcall(vim.keymap.del, "n", "j", { buffer = buf })
-        end
-        return ret
-      end
-    end
-  end,
 }
