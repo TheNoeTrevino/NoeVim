@@ -68,3 +68,13 @@ chmod +x ~/.local/share/nvim/mason/packages/lua-language-server/libexec/bin/lua-
 ln -s ~/.local/share/nvim/mason/packages/lua-language-server/libexec/bin/lua-language-server \
       ~/.local/share/nvim/mason/bin/lua-language-server
 ```
+
+### Setting up firefox debugger
+
+set these in the `about:config` page in firefox:
+
+```lua
+devtools.debugger.remote-enabled    = true
+devtools.chrome.enabled             = true
+devtools.debugger.prompt-connection = false
+```
