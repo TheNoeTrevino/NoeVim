@@ -2,6 +2,10 @@
 require("config.defaults.autocmds")
 -- Add any additional autocmds here
 
+-- CSS class navigation in markup: underlines class names a stylesheet actually
+-- declares, plus `K` for the rule. `gd` is wired separately in plugins/picker.lua.
+require("util").css.setup()
+
 -- save buffers in markdown when leaving then
 vim.api.nvim_create_autocmd("FileType", { pattern = "markdown", command = "set awa" })
 
