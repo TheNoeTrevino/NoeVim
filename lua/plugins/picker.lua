@@ -197,6 +197,18 @@ local get_config_vert = function()
   }
 end
 
+-- `gd` tries CSS class definitions before the LSP. Nothing in the LSP stack
+-- resolves a class name in a template (see util/css.lua), and the util bails the
+-- instant the cursor isn't on one, so this is a pure prefix on the normal jump.
+local goto_definition = function()
+  local lsp = function()
+    Snacks.picker.lsp_definitions(get_config())
+  end
+  if not require("util").css.goto_definition(vim.tbl_extend("force", get_config(), { fallback = lsp })) then
+    lsp()
+  end
+end
+
 -- TODO: extract this lol
 local grep_directory = function()
   local snacks = require("snacks")
@@ -659,7 +671,7 @@ return {
         { "<leader>sli",      function() Snacks.picker.lsp_incoming_calls(get_config_vert()) end,                   desc = "LSP Incoming calls" },
         { "<leader>sls",      function() Snacks.picker.lsp_symbols(config_get_symbols()) end,                       desc = "LSP Symbols" },
         { "<leader>slS",      function() Snacks.picker.lsp_workspace_symbols(config_get_symbols()) end,             desc = "LSP Symbols" },
-        { "gd",               function() Snacks.picker.lsp_definitions(get_config()) end,                           desc = "Goto Definition" },
+        { "gd",               goto_definition,                                                                      desc = "Goto Definition" },
         { "gD",               function() Snacks.picker.lsp_declarations(get_config()) end,                          desc = "Goto Declaration" },
         { "gr",               function() Snacks.picker.lsp_references(get_config()) end,             nowait = true, desc = "References" },
         { "gI",               function() Snacks.picker.lsp_implementations(get_config()) end,                       desc = "Goto Implementation" },
@@ -707,7 +719,7 @@ return {
         ["*"] = {
           -- stylua: ignore
           keys = {
-            { "gd",  function() Snacks.picker.lsp_definitions(get_config()) end,      desc = "Goto Definition",       has = "definition" },
+            { "gd",  goto_definition,                                                 desc = "Goto Definition",       has = "definition" },
             { "gr",  function() Snacks.picker.lsp_references(get_config()) end,       nowait = true,                  desc = "References" },
             { "gI",  function() Snacks.picker.lsp_implementations(get_config()) end,  desc = "Goto Implementation" },
             { "gy",  function() Snacks.picker.lsp_type_definitions(get_config()) end, desc = "Goto T[y]pe Definition" },

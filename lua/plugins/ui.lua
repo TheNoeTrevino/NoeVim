@@ -240,7 +240,7 @@ return {
             NeoTreeCursorLine = { bg = c.bg_subtle },
 
             NormalFloat = { bg = "none" },
-            FloatBorder = { fg = c.gray_medium },
+            FloatBorder = { fg = c.gray_medium, bg = "none" },
             CursorLineNr = { fg = c.yellow_cursor, bg = c.bg_subtle },
             FloatTitle = { fg = c.dracula_orange },
 
