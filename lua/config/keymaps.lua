@@ -139,7 +139,7 @@ map("v", "h0", ":<c-u>HSRmHighlight<CR>", {
   desc = "No Highlight",
 })
 
-map("n", "su", "<cmd>Undotree<cr>", { noremap = true, desc = "Undotree" })
+map("n", "<leader>U", "<cmd>Undotree<cr>", { noremap = true, desc = "Undotree" })
 
 -- Add ctrl backspace
 map("i", "<C-BS>", "<ESC>cb")
