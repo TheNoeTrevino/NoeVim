@@ -300,6 +300,7 @@ return {
 
             LspInlayHint = { fg = "#54546D", bg = "#1a1a1a" },
             LensLine = { fg = "#54546D", bg = "#1a1a1a" },
+            LspReferenceText = { underline = true, bg = "#49443C" },
 
             -- not transparent
             BlinkCmpMenu = { bg = c.bg_cmp },
