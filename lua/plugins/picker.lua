@@ -36,6 +36,23 @@ local get_config = function()
   }
 end
 
+-- Drop locations already seen in this picker run. In an angular project both angularls and
+-- vtsls answer definition/reference requests for a .ts buffer, and they answer identically, so
+-- every hit is listed twice. Snacks can't collapse them: the `done` table in the lsp source's
+-- get_locations is declared inside the per-client response handler, so it only ever dedups
+-- within one client's results (and only when `unique_lines` is set, which also drops distinct
+-- references sharing a line). ctx.meta is fresh per finder run, so nothing leaks between opens.
+---@type snacks.picker.transform
+local unique_location = function(item, ctx)
+  local pos = item.pos or {}
+  local key = table.concat({ item.file or item.text or "", pos[1] or 0, pos[2] or 0 }, ":")
+  ctx.meta.locations = ctx.meta.locations or {}
+  if ctx.meta.locations[key] then
+    return false
+  end
+  ctx.meta.locations[key] = true
+end
+
 local config_get_symbols = function()
   -- Custom layout instead of `preset = "vscode"`: snacks discards a preset
   -- entirely whenever the custom layout has children (see picker/config/init.lua
@@ -454,7 +471,14 @@ return {
           },
         },
         prompt = " ",
-        sources = {},
+        sources = {
+          -- Every picker that merges locations from all of the buffer's clients.
+          lsp_definitions = { transform = unique_location },
+          lsp_references = { transform = unique_location },
+          lsp_declarations = { transform = unique_location },
+          lsp_implementations = { transform = unique_location },
+          lsp_type_definitions = { transform = unique_location },
+        },
         focus = "input",
         ---@class snacks.picker.matcher.Config
         matcher = {
@@ -616,7 +640,7 @@ return {
         { "<leader>sk",       function() Snacks.picker.keymaps(get_config()) end,                                   desc = "Keymaps" },
         { "<leader>sK",       function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end,               desc = "Find Config File" },
         -- { "<leader>sC",       function() Snacks.picker.lazy() end,                                                  desc = "Find Config File" },
-        { "<leader>sc",       function() Snacks.picker.command_history(get_config()) end,                           desc = "Nvim Config" },
+        { "<leader>sc",       function() Snacks.picker.command_history(get_config()) end,                           desc = "Command History" },
         { "<leader>sC",       function() Snacks.picker.commands(get_config()) end,                                  desc = "Commands" },
         { "<leader>sy",       function() Snacks.picker.yanky(get_config()) end,                                     desc = "Yanks" },
         { "<leader>ss",       function() Snacks.picker.smart(get_config()) end,                                     desc = "Yanks" },
