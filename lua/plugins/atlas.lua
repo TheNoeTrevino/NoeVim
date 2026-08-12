@@ -31,18 +31,18 @@ return {
         next_item = "k",
         previous_item = "l",
       },
+      -- `;` is "right" in jkl;, replacing the default `l` alias (which would
+      -- otherwise shadow previous_item)
       pulls = {
-        diff = {
-          lsp = {
-            enabled = true,
-          },
-        },
-        -- `;` is "right" in jkl;, replacing the default `l` alias (which would
-        -- otherwise shadow previous_item)
         review = { open_file = { ";", "<CR>" } },
       },
     },
     pulls = {
+      diff = {
+        lsp = {
+          enabled = true,
+        },
+      },
 
       repo_config = {
         -- what the review feature uses as a workspace for diffs
@@ -52,6 +52,28 @@ return {
         },
       },
       providers = {
+        ---@type AtlasGitHubConfig
+        github = {
+          -- auth comes from the `gh` CLI (`gh auth login`) -- no user/token here
+          cache_ttl = 300,
+
+          ---@type AtlasGitHubViewConfig[]
+          views = {
+            { name = "My Open", key = "m", layout = "compact", search = "is:open is:pr author:@me" },
+            { name = "Assigned", key = "g", layout = "compact", search = "is:pr assignee:@me archived:false" },
+            { name = "Reviewing", key = "G", layout = "compact", search = "is:pr review-requested:@me archived:false" },
+          },
+
+          bookmarks = {
+            key = "S", -- default
+            label = "Search", -- default
+            items = {
+              ["Drafts"] = "is:pr is:draft author:@me",
+              ["Recently merged"] = "is:pr is:merged author:@me sort:updated-desc",
+            },
+          },
+        },
+        ---@type AtlasBitbucketConfig
         bitbucket = {
           user = vim.env.BITBUCKET_USER,
           token = vim.env.BITBUCKET_TOKEN,
@@ -141,6 +163,39 @@ return {
               ["Backlog"] = "project = ICRIS AND statusCategory != Done AND (sprint IS EMPTY OR sprint NOT IN openSprints()) ORDER BY Rank ASC",
               ["Next sprint"] = "project = ICRIS AND sprint in futureSprints() ORDER BY Rank ASC",
               ["My open"] = "assignee = currentUser() AND statusCategory != Done ORDER BY updated DESC",
+            },
+          },
+        },
+        github = {
+          cache_ttl = 300,
+          ---@type AtlasGitHubIssuesViewConfig[]
+          views = {
+            {
+              name = "Assigned",
+              key = "1",
+              layout = "plain",
+              search = "assignee:@me is:open",
+            },
+            {
+              name = "Created",
+              key = "2",
+              layout = "compact",
+              search = "author:@me is:open",
+            },
+            {
+              name = "Mentions",
+              key = "3",
+              layout = "plain",
+              search = "mentions:@me is:open",
+            },
+          },
+
+          bookmarks = {
+            key = "S", -- default
+            label = "Search", -- default
+            items = {
+              ["Bugs"] = "is:issue is:open label:bug",
+              ["Recently closed"] = "is:issue is:closed author:@me sort:updated-desc",
             },
           },
         },
