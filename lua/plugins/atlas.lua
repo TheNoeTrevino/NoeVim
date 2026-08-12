@@ -26,15 +26,82 @@ return {
   ---@type AtlasConfig
   opts = {
     keymaps = {
-      -- jkl; layout: k = down, l = up
       ui = {
         next_item = "k",
         previous_item = "l",
+        first_item = "gg",
+        last_item = "G",
+        submit = "<C-s>",
+        help = "g?", -- { "g?", "<leader>?" } would add aliases
+        close = "q", -- false would disable it
+        toggle_panel = "p",
+        toggle_fold = "za",
+        toggle_all_folds = "zA",
+        previous_panel_tab = "<S-Tab>",
+        next_panel_tab = "<Tab>",
+        open_notifications = "N",
+        notifications_mark_read = "r",
+        notifications_mark_done = "d",
+        notifications_refresh = "R",
+        toggle_subscription = "gS",
+        refresh = "r",
+        refresh_view = "R",
+        open_actions = "A",
+        open_in_browser = "gx",
+        copy_id = "y",
+        copy_url = "Y",
+        show_details = "gk",
+        search = "?",
       },
-      -- `;` is "right" in jkl;, replacing the default `l` alias (which would
-      -- otherwise shadow previous_item)
+      issues = {
+        transition_issue = "gs",
+        change_assignee = "ga",
+        change_reporter = "gr",
+        edit_issue = "ge",
+        create_issue = "c",
+      },
       pulls = {
-        review = { open_file = { ";", "<CR>" } },
+        open_diff = "gd",
+        checkout = "gc",
+        edit_title = "T",
+        review = {
+          open_file = { ";", "<CR>" },
+          toggle_approval = "ga",
+          request_changes = "gr",
+          submit_review = "gs",
+          explorer = {
+            focus_file = "<CR>",
+            open_file = ";",
+            next_file = { "]f", "<Tab>" },
+            previous_file = { "[f", "<S-Tab>" },
+            toggle_grouping = "T",
+            toggle_file_reviewed = "-",
+            toggle_commits = "gC",
+          },
+          diff = {
+            toggle_layout = "t",
+            toggle_compact = "u",
+            next_hunk = "]h",
+            previous_hunk = "[h",
+            toggle_review_panel = "gR",
+            next_comment = "]c",
+            previous_comment = "[c",
+            next_note = "]n",
+            previous_note = "[n",
+            add_comment = "c",
+            submit_comment = "C",
+            edit_comment = "e",
+            delete = "dd",
+            add_note = "<leader>n",
+            add_task = "T",
+            toggle_resolved = "x",
+          },
+        },
+        filters = {
+          open = "gpo",
+          merged = "gpm",
+          declined = "gpd",
+        },
       },
     },
     pulls = {
