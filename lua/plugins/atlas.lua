@@ -32,6 +32,11 @@ return {
         previous_item = "l",
       },
       pulls = {
+        diff = {
+          lsp = {
+            enabled = true,
+          },
+        },
         -- `;` is "right" in jkl;, replacing the default `l` alias (which would
         -- otherwise shadow previous_item)
         review = { open_file = { ";", "<CR>" } },
