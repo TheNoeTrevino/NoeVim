@@ -31,7 +31,7 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        fsautocomplete = {},
+        -- fsautocomplete = {},
         -- Disabled: replaced by roslyn.nvim (see csharp.lua). Running OmniSharp
         -- alongside Roslyn causes duplicate diagnostics/completions on .cs.
         omnisharp = { enabled = false },
