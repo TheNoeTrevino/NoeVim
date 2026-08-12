@@ -1,8 +1,15 @@
 return {
-  "TheNoeTrevino/haunt.nvim",
-  branch = "nightly",
-  -- dir = "~/projects/haunt/haunt.nvim/",
+  -- "TheNoeTrevino/haunt.nvim",
+  -- branch = "nightly",
+  dir = "~/projects/haunt/haunt.nvim/",
   ---@class HauntConfig
+  ---
+  ---
+  ---
+  ---
+  ---
+  ---
+  ---
   opts = {
     picker = "auto",
     sign = "󱙝",
@@ -41,6 +48,14 @@ return {
 
     map("n", prefix .. "C", function()
       require("haunt.api").clear_all()
+    end, { desc = "Delete all bookmarks" })
+
+    map("n", prefix .. "q", function()
+      require("haunt.api").to_quickfix({ current_buffer = true })
+    end, { desc = "Delete all bookmarks" })
+
+    map("n", prefix .. "Q", function()
+      require("haunt.api").to_quickfix({ current_buffer = false })
     end, { desc = "Delete all bookmarks" })
 
     -- move
