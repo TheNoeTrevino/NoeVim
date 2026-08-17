@@ -1,0 +1,17 @@
+[sqlfluff]
+# Migrations in this repo target SQL Server (NMCRISCTA, gisdata_108).
+# Without this, sqlfluff defaults to the ansi dialect and reports T-SQL
+# constructs (GO, USE, CREATE OR ALTER, [brackets]) as unparsable [PRS].
+dialect = tsql
+max_line_length = 120
+
+# CP02 is disabled on purpose. The schema uses mixed-case Hungarian-ish names
+# (iActivityNum, rSurveyAcres, sPerfOrgName) alongside UPPER_SNAKE object names
+# (VW_ACTIVITIES_SURVEYS), so no single capitalisation policy fits. More
+# importantly, a view's output column names take the case written in the query,
+# and the published ArcGIS feature layers key off those exact field names --
+# letting a linter lowercase them would silently break the GIS viewer.
+exclude_rules = capitalisation.identifiers
+
+[sqlfluff:rules:capitalisation.keywords]
+capitalisation_policy = upper

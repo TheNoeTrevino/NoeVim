@@ -670,7 +670,7 @@ return {
         { "<leader>slo",      function() Snacks.picker.lsp_outgoing_calls(get_config_vert()) end,                   desc = "LSP Outgoing calls" },
         { "<leader>sli",      function() Snacks.picker.lsp_incoming_calls(get_config_vert()) end,                   desc = "LSP Incoming calls" },
         { "<leader>sls",      function() Snacks.picker.lsp_symbols(config_get_symbols()) end,                       desc = "LSP Symbols" },
-        { "<leader>slS",      function() Snacks.picker.lsp_workspace_symbols(config_get_symbols()) end,             desc = "LSP Symbols" },
+        { "<leader>slS",      function() Snacks.picker.lsp_workspace_symbols(config_get_symbols()) end,             desc = "LSP Symbols WS" },
         { "gd",               goto_definition,                                                                      desc = "Goto Definition" },
         { "gD",               function() Snacks.picker.lsp_declarations(get_config()) end,                          desc = "Goto Declaration" },
         { "gr",               function() Snacks.picker.lsp_references(get_config()) end,             nowait = true, desc = "References" },

@@ -233,36 +233,9 @@ return {
                   require("jdtls.dap").setup_dap_main_class_configs(opts.dap_main)
                 end
 
-                -- Java Test require Java debugger to work
-                if opts.test and mason_registry.is_installed("java-test") then
-                  -- custom keymaps for Java test runner (not yet compatible with neotest)
-                  wk.add({
-                    {
-                      mode = "n",
-                      buffer = args.buf,
-                      { "<leader>t", group = "test" },
-                      {
-                        "<leader>tt",
-                        function()
-                          require("jdtls.dap").test_class({
-                            config_overrides = type(opts.test) ~= "boolean" and opts.test.config_overrides or nil,
-                          })
-                        end,
-                        desc = "Run All Test",
-                      },
-                      {
-                        "<leader>tr",
-                        function()
-                          require("jdtls.dap").test_nearest_method({
-                            config_overrides = type(opts.test) ~= "boolean" and opts.test.config_overrides or nil,
-                          })
-                        end,
-                        desc = "Run Nearest Test",
-                      },
-                      { "<leader>tT", require("jdtls.dap").pick_test, desc = "Run Test" },
-                    },
-                  })
-                end
+                -- opts.test only controls whether the java-test bundles are handed to jdtls
+                -- (done above). The <leader>t* keymaps that used to live here are gone:
+                -- neotest-java owns that prefix now, and buffer-local jdtls maps shadowed it.
               end
             end
 
@@ -276,6 +249,63 @@ return {
 
       -- Avoid race condition by calling attach the first time, since the autocmd won't fire.
       attach_jdtls()
+    end,
+  },
+
+  -- Test discovery/running. The module returned by neotest-java is already a fully built
+  -- adapter (its __call only rebuilds it with different options), so it is registered with an
+  -- empty config table -- test-core.lua's loader passes those straight through untouched.
+  -- Defaults already cover this repo: *Tests/*IT/*Spec classnames, gradle kotlin DSL, junit5.
+  {
+    "nvim-neotest/neotest",
+    optional = true,
+    -- nvim-jdtls is deliberately not a dependency here. neotest-java never requires it, it only
+    -- looks for a running client via vim.lsp.get_clients({ name = "jdtls" }), which the ft
+    -- trigger on the jdtls spec above already provides in java buffers. Listing it would make
+    -- lazy.nvim load it whenever neotest loads, so opening the summary in a Go or TS repo would
+    -- run attach_jdtls() against a non-java buffer and spawn a JVM for a project with no java.
+    dependencies = {
+      "rcasia/neotest-java",
+    },
+    opts = function(_, opts)
+      local adapter = require("neotest-java")
+
+      -- neotest-java's root_finder wants .git and a build file in the same directory, else the
+      -- nearest build file searching *upward*, else .git alone. This repo has gradle under
+      -- backend/ and .git at the top, so starting nvim at the repo root hits the last case and
+      -- roots everything there. That is not cosmetic: the gradle build tool resolves its build
+      -- dir as <root>/bin, so it reads the empty repo-root bin/ instead of backend/bin/, where
+      -- the classes and junit-reports actually are. Prefer a descendant holding the build file.
+      -- root_finder itself is injectable only as __call's second argument, which test-core's
+      -- loader never passes, so the override goes on the adapter.
+      local function has_build_file(dir)
+        for _, name in ipairs({ "settings.gradle", "settings.gradle.kts", "pom.xml" }) do
+          if vim.uv.fs_stat(dir .. "/" .. name) then
+            return true
+          end
+        end
+        return false
+      end
+
+      local upstream_root = adapter.root
+      adapter.root = function(dir)
+        local root = upstream_root(dir)
+        if not root or has_build_file(root) then
+          return root
+        end
+        -- Immediate children only. A recursive search would walk frontend/node_modules, and a
+        -- build file further down than this is a layout worth rooting nvim inside of anyway.
+        -- First match wins, so a repo with sibling JVM projects still needs nvim opened in one.
+        for name, entry_type in vim.fs.dir(root) do
+          if entry_type == "directory" and has_build_file(root .. "/" .. name) then
+            return root .. "/" .. name
+          end
+        end
+        return root
+      end
+
+      opts.adapters = opts.adapters or {}
+      table.insert(opts.adapters, adapter)
     end,
   },
 }

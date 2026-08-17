@@ -75,8 +75,9 @@ return {
           { icon = "󱣻 ", key = "R", desc = "Kulala", action = function() browse_saved_requests() end, },
           { icon = " ", key = "s", desc = "Select Session", action = 'require("persistence").select()', },
           { icon = " ", key = "c", desc = "Config", action =  function() Snacks.picker.config() end },
-          { icon = " ", key = "I", desc = "Atlas Issues", action = function() vim.cmd("AtlasIssues") end },
-          { icon = " ", key = "P", desc = "Atlas Pulls", action = function() vim.cmd("AtlasPulls") end },
+          { icon = " ", key = "I", desc = "Atlas Issues", action = function() vim.cmd("Atlas issues") end },
+          { icon = " ", key = "P", desc = "Atlas Pulls", action = function() vim.cmd("Atlas pulls") end },
+          { icon = "󰒲 ", key = "L", desc = "Lazy", action = function() vim.cmd("Lazy") end },
           { icon = "󰩈 ", key = "q", desc = "Quit", action = ":qa" },
         },
         -- stylua: ignore end

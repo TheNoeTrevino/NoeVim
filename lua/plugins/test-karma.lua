@@ -44,15 +44,22 @@ return {
           return
         end
 
-        local path = args.tree:data().path
+        local pos = args.tree:data()
+        local path = pos.path
         local root = project_root(path)
+        -- Falling through to the upstream spec would run jest's hardcoded `npm run test:ci`
+        -- from its own cwd, which is not this project and usually not even a test command.
+        -- Nothing sensible to run, so run nothing.
         if not root then
-          return spec
+          return
         end
 
         local command = { "npx", "ng", "test", "--watch=false", "--browsers=ChromeHeadless" }
-        -- A whole-suite run has no single file to narrow to, and pos.path is a directory there.
-        if not args.suite then
+        -- Narrow to the position, unless it is a directory -- there is no single file to name,
+        -- and for the project root itself the relative path is empty, which --include rejects.
+        -- Keyed off pos.type rather than args.suite: neotest only sets suite for an explicit
+        -- run.run({ suite = true }), and <leader>tT passes a path instead (run.lua:26).
+        if pos.type ~= "dir" then
           table.insert(command, "--include=" .. path:sub(#root + 2))
         end
 

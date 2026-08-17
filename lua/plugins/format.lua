@@ -289,7 +289,7 @@ return {
       ["typescript"] = { "prettier" },
       ["xml"] = { "xmlformat" },
       ["cs"] = { "csharpier" },
-      ["sql"] = { "sqruff" },
+      ["sql"] = { "sqlfluff" },
       ["markdown"] = { "markdown-toc" },
       ["markdown.mdx"] = { "markdown-toc" },
       ["http"] = { "kulala-fmt" },
@@ -300,21 +300,15 @@ return {
       -- user
       -- The builtin requires a `.sqlfluff`/`pyproject.toml` upward of the buffer as
       -- cwd, which dadbod-ui query buffers (~/.local/share/db_ui) never have. The
-      -- dialect comes from the buffer's dadbod url when there is one; note the CLI
-      -- flag beats any project `.sqlfluff` dialect.
+      -- dialect comes from `util.sql`, shared with the sqlfluff LINTER in lint.lua so
+      -- the two can never disagree -- see the header there for why it is always passed.
       sqlfluff = {
         require_cwd = false,
         args = function(_, ctx)
-          local dialect = "ansi"
-          local db = vim.b[ctx.buf].db
-          if type(db) == "string" then
-            if db:find("^sqlserver") then
-              dialect = "tsql"
-            elseif db:find("^postgres") then
-              dialect = "postgres"
-            end
-          end
-          return { "format", "--dialect=" .. dialect, "-" }
+          local args = { "format" }
+          vim.list_extend(args, Util.sql.flags(ctx.buf))
+          table.insert(args, "-")
+          return args
         end,
       },
       -- Dont forget to npm install prettier and the java plugin in frontend/.

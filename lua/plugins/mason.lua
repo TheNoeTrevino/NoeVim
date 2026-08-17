@@ -33,7 +33,6 @@ return {
       "roslyn-language-server",
       "kulala-fmt",
       "stylua",
-      "sqruff",
       "shfmt",
       "vtsls",
     },

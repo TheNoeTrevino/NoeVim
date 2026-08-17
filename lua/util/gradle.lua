@@ -112,7 +112,7 @@ local function build_templates(root)
     local label, args, tags = spec[1], spec[2], spec[3]
     table.insert(templates, {
       name = "gradle " .. label,
-      desc = "source icris.sh && " .. DEFAULT_ENV .. " ./gradlew " .. args,
+      desc = args,
       tags = resolve_tags(tags),
       priority = 50 + i,
       builder = function()

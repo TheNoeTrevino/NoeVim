@@ -120,7 +120,21 @@ return {
   -- Linters & formatters
   {
     "mason-org/mason.nvim",
-    opts = { ensure_installed = { "sqruff" } },
+    opts = { ensure_installed = { "sqlfluff" } },
+  },
+  {
+    "neovim/nvim-lspconfig",
+    opts = {
+      servers = {
+        -- Disabled: replaced by sqlfluff (lint.lua + format.lua). sqruff ships an LSP
+        -- mode and mason-lspconfig's `automatic_enable` starts it for any sqruff package
+        -- still installed, which duplicates every sqlfluff diagnostic -- sqruff is a
+        -- reimplementation of sqlfluff and reports the same rule codes (LT01, ...).
+        -- Dropping sqruff from ensure_installed is NOT enough; the key below is what
+        -- lands it in lsp-config.lua's `mason_exclude`.
+        sqruff = { enabled = false },
+      },
+    },
   },
   {
     "mfussenegger/nvim-lint",
@@ -128,7 +142,11 @@ return {
     opts = function(_, opts)
       for _, ft in ipairs(sql_ft) do
         opts.linters_by_ft[ft] = opts.linters_by_ft[ft] or {}
-        table.insert(opts.linters_by_ft[ft], "sqruff")
+        -- lint.lua's opts TABLE already lists sqlfluff for `sql`; appending blindly would
+        -- run it twice on every sql buffer.
+        if not vim.tbl_contains(opts.linters_by_ft[ft], "sqlfluff") then
+          table.insert(opts.linters_by_ft[ft], "sqlfluff")
+        end
       end
     end,
   },
@@ -136,10 +154,16 @@ return {
     "stevearc/conform.nvim",
     optional = true,
     opts = function(_, opts)
-      opts.formatters.sqlfluff = {}
+      -- NOTE: do NOT touch `opts.formatters.sqlfluff` here. This opts function runs
+      -- AFTER lazy's table merge, so assigning it would REPLACE format.lua's sqlfluff
+      -- entry (require_cwd = false + the dadbod dialect args) with the builtin, which
+      -- demands a `.sqlfluff`/`pyproject.toml` root and fails with "Root directory not
+      -- found" in dadbod-ui query buffers. Formatter tweaks belong in format.lua.
       for _, ft in ipairs(sql_ft) do
         opts.formatters_by_ft[ft] = opts.formatters_by_ft[ft] or {}
-        table.insert(opts.formatters_by_ft[ft], "sqruff")
+        if not vim.tbl_contains(opts.formatters_by_ft[ft], "sqlfluff") then
+          table.insert(opts.formatters_by_ft[ft], "sqlfluff")
+        end
       end
     end,
   },

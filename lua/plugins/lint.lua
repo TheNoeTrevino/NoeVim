@@ -11,13 +11,32 @@ return {
       -- base
       fish = { "fish" },
       -- user
-      sql = { "sqruff" },
+      -- mysql/plsql get sqlfluff from lang-sql.lua, which owns the sql filetype list.
+      sql = { "sqlfluff" },
       go = { nil },
       markdown = { nil },
     },
 
     linters = {
-      sqruff = {},
+      -- The builtin passes no `--dialect`, so sqlfluff bails with "User Error: No
+      -- dialect was specified" on stderr -- a stream nvim-lint never reads, making the
+      -- linter a silent no-op. Build the argv from `util.sql`, the same resolver the
+      -- sqlfluff FORMATTER uses in format.lua.
+      --
+      -- `dynamic_args` is our own convention, applied by the `wrap_linter` hook in the
+      -- config function below. nvim-lint's native `args` can hold functions, but each
+      -- returns exactly one string, so an argument can never be OMITTED -- and sqlfluff
+      -- needs that: passing `--exclude-rules=` when a `--config` file is in play wipes
+      -- the exclusions that file declares.
+      sqlfluff = {
+        ---@param buf number
+        dynamic_args = function(buf)
+          local args = { "lint", "--format=json" }
+          vim.list_extend(args, require("util").sql.flags(buf))
+          table.insert(args, "-")
+          return args
+        end,
+      },
       -- squawk = {
       --   cmd = "squawk",
       --   stdin = false,
@@ -143,7 +162,19 @@ return {
 
       -- Run linters.
       if #names > 0 then
-        lint.try_lint(names)
+        lint.try_lint(names, {
+          -- Let a linter build its whole argv per run via `dynamic_args` (see sqlfluff in
+          -- opts.linters). nvim-lint evaluates native `args` element-by-element, one
+          -- string each, so the list length is fixed at config time; sqlfluff needs to
+          -- add and drop flags per buffer. `linter` is already a deepcopy here, so
+          -- mutating it cannot leak into the next run.
+          wrap_linter = function(linter)
+            if type(linter) == "table" and type(linter.dynamic_args) == "function" then
+              linter.args = linter.dynamic_args(vim.api.nvim_get_current_buf())
+            end
+            return linter
+          end,
+        })
       end
     end
 

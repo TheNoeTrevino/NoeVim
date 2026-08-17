@@ -1,6 +1,7 @@
 return {
-  -- "emrearmagan/atlas.nvim",
-
+  -- "emrearmagan/atlas.nvim"
+  -- -- "TheNoeTrevino/atlas.nvim",
+  -- -- branch = "feature-57/lsp-attached-pull-requests",
   dir = "~/projects/atlas.nvim/",
   dependencies = {
     "MeanderingProgrammer/render-markdown.nvim", -- optional but recommended
@@ -64,19 +65,22 @@ return {
         open_diff = "gd",
         checkout = "gc",
         edit_title = "T",
+        edit_description = "D",
         review = {
           open_file = { ";", "<CR>" },
-          toggle_approval = "ga",
-          request_changes = "gr",
-          submit_review = "gs",
+          toggle_approval = "Ga",
+          request_changes = "Gr",
+          submit_review = "Gs",
           explorer = {
             focus_file = "<CR>",
             open_file = ";",
             next_file = { "]f", "<Tab>" },
             previous_file = { "[f", "<S-Tab>" },
+            next_unreviewed_file = "]u",
+            previous_unreviewed_file = "[u",
             toggle_grouping = "T",
             toggle_file_reviewed = "-",
-            toggle_commits = "gC",
+            toggle_commits = "GC",
           },
           diff = {
             toggle_layout = "t",
@@ -84,6 +88,7 @@ return {
             next_hunk = "]h",
             previous_hunk = "[h",
             toggle_review_panel = "gR",
+            toggle_comments = "gH",
             next_comment = "]c",
             previous_comment = "[c",
             next_note = "]n",

@@ -91,7 +91,18 @@ return {
     opts = {
       adapters = {
         ["neotest-vstest"] = {
-          -- Here we can set options for neotest-vstest
+          -- Defaults to true, which means "no solution found upward" escalates to scanning the
+          -- entire tree below cwd for one. The built-in filter only skips dotfile dirs, so that
+          -- picks up vendored solutions in repos with no .NET in them -- lz4 ships one under
+          -- frontend/node_modules -- and then `dotnet build` runs against it, which both fails
+          -- and parks root() long enough for its shared `solution` upvalue to be raced to nil.
+          -- Upward discovery still finds the solution in any repo opened at or below its root.
+          --
+          -- Do NOT reach for discovery_directory_filter here instead: the adapter feeds it to
+          -- two call sites with opposite polarity. root() uses `not filter(dir)`, so true means
+          -- ignore, but filter_dir returns it verbatim (init.lua:193) where neotest reads true
+          -- as descend (lib/file/find.lua:53). One function cannot satisfy both.
+          broad_recursive_discovery = false,
         },
       },
     },
