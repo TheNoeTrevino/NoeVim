@@ -462,6 +462,192 @@ local tagstack_picker = function()
   })
 end
 
+-- Type hierarchy ("who extends this" / "what does this extend"). Snacks ships call
+-- hierarchy but has no typeHierarchy source at all, so the LSP round-trip is hand-rolled
+-- here. Two bits come from the same private module snacks' own lsp sources use:
+-- `add_loc` stashes the client's offset_encoding on the item so Snacks.picker.util can
+-- fix the column later (computing pos by hand is wrong for any non-ASCII identifier),
+-- and `get_clients` filters to clients that actually answer the method.
+--
+-- `depth` 1 gives a flat list of direct sub/supertypes (the call-hierarchy pickers'
+-- behavior); anything higher walks the graph and renders it as a tree with the type
+-- under the cursor as the root.
+local MAX_HIERARCHY_NODES = 500
+
+-- lsp_symbol drops the tree indent whenever `workspace` is set, and drops the filename
+-- when it isn't (see snacks picker/format.lua). A hierarchy wants both, so this is that
+-- formatter's body with the two branches merged.
+---@param item snacks.picker.Item
+---@param picker snacks.Picker
+local hierarchy_format = function(item, picker)
+  local ret = {} ---@type snacks.picker.Highlight[]
+  vim.list_extend(ret, Snacks.picker.format.tree(item, picker))
+  local kind = item.kind or "Unknown" ---@type string
+  kind = picker.opts.icons.kinds[kind] and kind or "Unknown"
+  ret[#ret + 1] = { picker.opts.icons.kinds[kind], "SnacksPickerIcon" .. kind }
+  ret[#ret + 1] = { " " }
+  Snacks.picker.highlight.format(item, vim.trim((item.name or ""):gsub("\r?\n", " ")), ret)
+  local offset = Snacks.picker.highlight.offset(ret, { char_idx = true })
+  ret[#ret + 1] = { Snacks.picker.util.align(" ", math.max(50 - offset, 1)) }
+  vim.list_extend(ret, Snacks.picker.format.filename(item, picker))
+  return ret
+end
+
+---@param kind "subtypes"|"supertypes"
+---@param depth integer 1 = direct sub/supertypes only, >1 = recursive tree
+---@param picker_opts? table
+local type_hierarchy = function(kind, depth, picker_opts)
+  local LSP = require("snacks.picker.source.lsp")
+  local buf = vim.api.nvim_get_current_buf()
+  local win = vim.api.nvim_get_current_win()
+  local tree = depth > 1
+
+  local clients = LSP.get_clients(buf, "textDocument/prepareTypeHierarchy")
+  if #clients == 0 then
+    vim.notify("No LSP client supports type hierarchy", vim.log.levels.WARN)
+    return
+  end
+
+  -- Keyed by location, so the same type answered by two clients collapses (in a .ts
+  -- buffer both vtsls and angularls reply, identically -- same reason unique_location
+  -- exists above), and so a diamond in the graph can't send the walk in circles.
+  local seen = {} ---@type table<string, boolean>
+  local function key(res)
+    local range = res.selectionRange or res.range or {}
+    local start = range.start or {}
+    return table.concat({ res.uri or "", start.line or 0, start.character or 0 }, ":")
+  end
+
+  ---@type { res: table, client: vim.lsp.Client, children: table[] }[]
+  local roots = {}
+  local nodes, pending, children_found = 0, 0, 0
+
+  local show, request
+
+  ---@param node table
+  ---@param level integer
+  local function expand(node, level)
+    if level >= depth or nodes >= MAX_HIERARCHY_NODES then
+      return
+    end
+    request(node.client, "typeHierarchy/" .. kind, { item = node.res }, function(result)
+      for _, res in ipairs(result) do
+        if not seen[key(res)] and nodes < MAX_HIERARCHY_NODES then
+          seen[key(res)] = true
+          nodes = nodes + 1
+          children_found = children_found + 1
+          local child = { res = res, client = node.client, children = {} }
+          node.children[#node.children + 1] = child
+          expand(child, level + 1)
+        end
+      end
+    end)
+  end
+
+  -- Every in-flight request holds a slot in `pending`; the walk is done when it drains.
+  -- Children are queued from inside the parent's handler, before that handler releases
+  -- its own slot, so the counter can't hit zero mid-walk.
+  function request(client, method, params, handler)
+    pending = pending + 1
+    local function settle()
+      pending = pending - 1
+      if pending == 0 then
+        vim.schedule(show)
+      end
+    end
+    local ok = client:request(method, params, function(err, result)
+      if not err then
+        handler(result or {})
+      end
+      settle()
+    end, buf)
+    if not ok then
+      settle()
+    end
+  end
+
+  function show()
+    local items = {} ---@type snacks.picker.finder.Item[]
+    local root = { text = "", root = true } ---@type snacks.picker.finder.Item
+
+    ---@param node table
+    ---@param parent snacks.picker.finder.Item
+    local function add(node, parent)
+      local res = node.res
+      local item = {
+        name = res.name,
+        kind = LSP.symbol_kind(res.kind),
+        detail = res.detail,
+        parent = parent,
+        tree = tree,
+        item = res,
+      } ---@type snacks.picker.finder.Item
+      LSP.add_loc(item, { uri = res.uri, range = res.selectionRange or res.range }, node.client)
+      item.text = table.concat({ item.kind, res.name, item.file or "" }, " ")
+      items[#items + 1] = item
+      for i, child in ipairs(node.children) do
+        child.last = i == #node.children
+        add(child, item)
+      end
+      item.last = node.last
+      return item
+    end
+
+    for _, node in ipairs(roots) do
+      if tree then
+        -- keep the type under the cursor as the tree's root for context
+        node.last = true
+        add(node, root)
+      else
+        for i, child in ipairs(node.children) do
+          child.last = i == #node.children
+          add(child, root)
+        end
+      end
+    end
+
+    if children_found == 0 then
+      vim.notify("No " .. kind .. " found", vim.log.levels.INFO)
+      return
+    end
+
+    Snacks.picker(vim.tbl_deep_extend("force", picker_opts or {}, {
+      items = items,
+      title = kind:sub(1, 1):upper() .. kind:sub(2),
+      format = tree and hierarchy_format or "lsp_symbol",
+      workspace = true, -- lsp_symbol only shows the filename column when this is set
+      -- keep_parents keeps ancestors visible while filtering; sort=false keeps the
+      -- walk order intact so the tree stays a tree. Same pair lsp_symbols uses.
+      matcher = tree and { keep_parents = true, sort = false } or nil,
+      auto_confirm = not tree,
+      jump = { tagstack = true, reuse_win = true },
+    }))
+  end
+
+  pending = 1 -- sentinel: hold the counter open while the prepare requests go out
+  for _, client in ipairs(clients) do
+    request(
+      client,
+      "textDocument/prepareTypeHierarchy",
+      vim.lsp.util.make_position_params(win, client.offset_encoding),
+      function(result)
+        for _, res in ipairs(result) do
+          if not seen[key(res)] then
+            seen[key(res)] = true
+            local node = { res = res, client = client, children = {} }
+            roots[#roots + 1] = node
+            expand(node, 0)
+          end
+        end
+      end
+    )
+  end
+  pending = pending - 1
+  if pending == 0 then
+    vim.schedule(show)
+  end
+end
+
 return {
   {
     "folke/snacks.nvim",
@@ -669,6 +855,8 @@ return {
         { "<leader>sL",       function() Snacks.picker.lsp_config(get_config()) end,                                desc = "LSP Config" },
         { "<leader>slo",      function() Snacks.picker.lsp_outgoing_calls(get_config_vert()) end,                   desc = "LSP Outgoing calls" },
         { "<leader>sli",      function() Snacks.picker.lsp_incoming_calls(get_config_vert()) end,                   desc = "LSP Incoming calls" },
+        { "<leader>slt",      function() type_hierarchy("subtypes", 5, get_config_vert()) end,                      desc = "LSP Subtypes (tree)" },
+        { "<leader>slT",      function() type_hierarchy("supertypes", 5, get_config_vert()) end,                    desc = "LSP Supertypes (tree)" },
         { "<leader>sls",      function() Snacks.picker.lsp_symbols(config_get_symbols()) end,                       desc = "LSP Symbols" },
         { "<leader>slS",      function() Snacks.picker.lsp_workspace_symbols(config_get_symbols()) end,             desc = "LSP Symbols WS" },
         { "gd",               goto_definition,                                                                      desc = "Goto Definition" },
@@ -676,6 +864,8 @@ return {
         { "gr",               function() Snacks.picker.lsp_references(get_config()) end,             nowait = true, desc = "References" },
         { "gI",               function() Snacks.picker.lsp_implementations(get_config()) end,                       desc = "Goto Implementation" },
         { "gy",               function() Snacks.picker.lsp_type_definitions(get_config()) end,                      desc = "Goto T[y]pe Definition" },
+        { "ghs",              function() type_hierarchy("subtypes", 1, get_config()) end,                           desc = "Sub types (who extends this)" },
+        { "ghS",              function() type_hierarchy("supertypes", 1, get_config()) end,                         desc = "Super types" },
       }
 
       return keys
@@ -693,7 +883,6 @@ return {
         end,
         desc = "Seek Files",
       },
-      -- { "<leader>ff", ":Seeker git_files<CR>", desc = "Seek Git Files" },
       {
         "<leader>sg",
         function()
@@ -701,7 +890,6 @@ return {
         end,
         desc = "Seek Grep",
       },
-      -- { "<leader>fw", ":Seeker grep_word<CR>", desc = "Seek Grep Word" },
     },
     opts = {
       -- Forward a full-screen layout to the snacks pickers Seeker opens (sf/sg).
@@ -725,6 +913,8 @@ return {
             { "gy",  function() Snacks.picker.lsp_type_definitions(get_config()) end, desc = "Goto T[y]pe Definition" },
             { "gai", function() Snacks.picker.lsp_incoming_calls(get_config()) end,   desc = "C[a]lls Incoming",      has = "callHierarchy/incomingCalls" },
             { "gao", function() Snacks.picker.lsp_outgoing_calls(get_config()) end,   desc = "C[a]lls Outgoing",      has = "callHierarchy/outgoingCalls" },
+            { "ghs", function() type_hierarchy("subtypes", 1, get_config()) end,      desc = "Sub types",             has = "prepareTypeHierarchy" },
+            { "ghS", function() type_hierarchy("supertypes", 1, get_config()) end,    desc = "Super types",           has = "prepareTypeHierarchy" },
             { "]]",  function() Snacks.words.jump(vim.v.count1) end,                  desc = "Next Reference",        mode = { "n", "t" }, },
             { "[[",  function() Snacks.words.jump(-vim.v.count1) end,                 desc = "Prev Reference",        mode = { "n", "t" }, },
           },
