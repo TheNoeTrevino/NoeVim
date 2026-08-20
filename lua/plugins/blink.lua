@@ -40,13 +40,6 @@ return {
         keymap = {
           preset = "super-tab",
 
-          ["<C-Space>"] = {
-            function(cmp)
-              cmp.show({
-                providers = { "snippets" },
-              })
-            end,
-          },
           ["<C-e>"] = { "hide", "fallback" },
 
           ["<Tab>"] = {
@@ -214,13 +207,6 @@ return {
           function(cmp)
             cmp.show({
               providers = { "lsp" },
-            })
-          end,
-        },
-        ["<C-Space>"] = {
-          function(cmp)
-            cmp.show({
-              providers = { "copilot" },
             })
           end,
         },
