@@ -1,5 +1,135 @@
 -- nvim-lint: debounced lint runner (see the config function below). Personal
 -- linters/linters_by_ft fold in on top of the base (fish), the personal ones winning.
+
+-- `dynamic_args` and `dynamic_cwd` are our own convention, not nvim-lint's: neither
+-- field exists on lint.Linter. `wrap_linter` (in the config function below) reads
+-- them off a deep copy right before a linter runs and writes the result into the
+-- real `args`/`cwd` fields nvim-lint understands.
+---@alias MyLintArgList (string|fun():string)[]
+
+---@class MyLintDynamicFields
+---@field dynamic_args? fun(buf: number): MyLintArgList
+---@field dynamic_cwd? fun(buf: number): string
+---@field prepend_args? string[]
+---@field condition? fun(ctx: {filename: string, dirname: string}): boolean
+
+-- Entries here are partial overrides merged into an existing builtin (sqlfluff,
+-- golangcilint), so lint.Linter's required `name`/`cmd`/`parser` don't apply --
+-- this does NOT extend lint.Linter, every field is optional on purpose.
+---@class MyLintLinterOverride: MyLintDynamicFields
+---@field name? string
+---@field cmd? string
+---@field args? MyLintArgList
+---@field cwd? string
+---@field parser? lint.Parser|lint.parse
+
+-- A real lint.Linter (as read out of nvim-lint's own registry at runtime) plus
+-- our custom fields -- used only for the `---@cast`s below, where the value
+-- genuinely is a complete Linter already, unlike the override table above.
+---@class MyLintAugmentedLinter: lint.Linter, MyLintDynamicFields
+
+---@type table<string, MyLintLinterOverride>
+local linter_overrides = {
+  -- The builtin passes no `--dialect`, so sqlfluff bails with "User Error: No
+  -- dialect was specified" on stderr -- a stream nvim-lint never reads, making the
+  -- linter a silent no-op. Build the argv from `util.sql`, the same resolver the
+  -- sqlfluff FORMATTER uses in format.lua.
+  --
+  -- nvim-lint's native `args` can hold functions, but each returns exactly one
+  -- string, so an argument can never be OMITTED -- and sqlfluff needs that: passing
+  -- `--exclude-rules=` when a `--config` file is in play wipes the exclusions that
+  -- file declares.
+  sqlfluff = {
+    ---@param buf number
+    dynamic_args = function(buf)
+      local args = { "lint", "--format=json" }
+      vim.list_extend(args, require("util").sql.flags(buf))
+      table.insert(args, "-")
+      return args
+    end,
+  },
+  -- golangci-lint has no `cwd` option of its own in nvim-lint's builtin linter
+  -- (its `cwd` field must be a plain string, fixed at plugin-setup time), and
+  -- nvim-lint falls back to `vim.fn.getcwd()` when nothing overrides it. In a
+  -- multi-module repo (e.g. a Go service nested under a monorepo root with no
+  -- go.mod of its own) that's wrong the moment the editor's cwd isn't the Go
+  -- module's directory: golangci-lint then can't resolve the module and every
+  -- internal import fails to typecheck. Walk up from the buffer to the nearest
+  -- go.mod and run there instead.
+  golangcilint = {
+    ---@param buf number
+    dynamic_cwd = function(buf)
+      local bufname = vim.api.nvim_buf_get_name(buf)
+      local found = vim.fs.find("go.mod", { upward = true, path = vim.fn.fnamemodify(bufname, ":h") })
+      local go_mod = found[1]
+      return go_mod and vim.fn.fnamemodify(go_mod, ":h") or vim.fn.getcwd()
+    end,
+  },
+  -- squawk = {
+  --   cmd = "squawk",
+  --   stdin = false,
+  --   args = {
+  --     "--reporter",
+  --     "Json",
+  --     vim.api.nvim_buf_get_name(0),
+  --   },
+  --   stream = "stdout",
+  --   ignore_exitcode = true,
+  --
+  --   parser = function(output, bufnr)
+  --     local ok, decoded = pcall(vim.json.decode, output)
+  --
+  --     if not ok or type(decoded) ~= "table" then
+  --       print("Something went wrong with the json decoding. squak lint config")
+  --       return {}
+  --     end
+  --
+  --     local diagnostics = {}
+  --
+  --     for _, item in ipairs(decoded) do
+  --       table.insert(diagnostics, {
+  --         bufnr = bufnr,
+  --         lnum = (item.line or 1),
+  --         col = (item.column or 1),
+  --         end_lnum = (item.line or 1),
+  --         end_col = item.column or 1,
+  --         severity = vim.diagnostic.severity.WARN,
+  --         source = "squawk",
+  --         message = "Problem: "
+  --           .. item.message
+  --           .. (type(item.rule_name) == "string" and (" [" .. item.rule_name .. "]") or "")
+  --           .. (type(item.help) == "string" and ("\n" .. "Solution: " .. item.help) or ""),
+  --       })
+  --     end
+  --
+  --     return diagnostics
+  --   end,
+  --
+  --   condition = function(ctx)
+  --     if not ctx.filename or vim.loop.fs_stat(ctx.filename) == nil then
+  --       -- File doesn't exist, skip linting
+  --       return false
+  --     end
+  --     -- if a file has the annotation @migration, the file will be treated
+  --     -- as a migration file
+  --     local is_migration = ctx.filename:match("backend/migrations/.*%.sql$") ~= nil
+  --       or ctx.filename:match("migration")
+  --
+  --     if not is_migration then
+  --       local content = vim.fn.readfile(ctx.filename) -- here
+  --       for _, line in ipairs(content) do
+  --         if line:match("%-%-@migration") then
+  --           return true
+  --         end
+  --       end
+  --       return false
+  --     end
+  --
+  --     return true
+  --   end,
+  -- },
+}
+
 return {
   "mfussenegger/nvim-lint",
   event = "LazyFile",
@@ -13,94 +143,10 @@ return {
       -- user
       -- mysql/plsql get sqlfluff from lang-sql.lua, which owns the sql filetype list.
       sql = { "sqlfluff" },
-      go = { nil },
       markdown = { nil },
     },
 
-    linters = {
-      -- The builtin passes no `--dialect`, so sqlfluff bails with "User Error: No
-      -- dialect was specified" on stderr -- a stream nvim-lint never reads, making the
-      -- linter a silent no-op. Build the argv from `util.sql`, the same resolver the
-      -- sqlfluff FORMATTER uses in format.lua.
-      --
-      -- `dynamic_args` is our own convention, applied by the `wrap_linter` hook in the
-      -- config function below. nvim-lint's native `args` can hold functions, but each
-      -- returns exactly one string, so an argument can never be OMITTED -- and sqlfluff
-      -- needs that: passing `--exclude-rules=` when a `--config` file is in play wipes
-      -- the exclusions that file declares.
-      sqlfluff = {
-        ---@param buf number
-        dynamic_args = function(buf)
-          local args = { "lint", "--format=json" }
-          vim.list_extend(args, require("util").sql.flags(buf))
-          table.insert(args, "-")
-          return args
-        end,
-      },
-      -- squawk = {
-      --   cmd = "squawk",
-      --   stdin = false,
-      --   args = {
-      --     "--reporter",
-      --     "Json",
-      --     vim.api.nvim_buf_get_name(0),
-      --   },
-      --   stream = "stdout",
-      --   ignore_exitcode = true,
-      --
-      --   parser = function(output, bufnr)
-      --     local ok, decoded = pcall(vim.json.decode, output)
-      --
-      --     if not ok or type(decoded) ~= "table" then
-      --       print("Something went wrong with the json decoding. squak lint config")
-      --       return {}
-      --     end
-      --
-      --     local diagnostics = {}
-      --
-      --     for _, item in ipairs(decoded) do
-      --       table.insert(diagnostics, {
-      --         bufnr = bufnr,
-      --         lnum = (item.line or 1),
-      --         col = (item.column or 1),
-      --         end_lnum = (item.line or 1),
-      --         end_col = item.column or 1,
-      --         severity = vim.diagnostic.severity.WARN,
-      --         source = "squawk",
-      --         message = "Problem: "
-      --           .. item.message
-      --           .. (type(item.rule_name) == "string" and (" [" .. item.rule_name .. "]") or "")
-      --           .. (type(item.help) == "string" and ("\n" .. "Solution: " .. item.help) or ""),
-      --       })
-      --     end
-      --
-      --     return diagnostics
-      --   end,
-      --
-      --   condition = function(ctx)
-      --     if not ctx.filename or vim.loop.fs_stat(ctx.filename) == nil then
-      --       -- File doesn't exist, skip linting
-      --       return false
-      --     end
-      --     -- if a file has the annotation @migration, the file will be treated
-      --     -- as a migration file
-      --     local is_migration = ctx.filename:match("backend/migrations/.*%.sql$") ~= nil
-      --       or ctx.filename:match("migration")
-      --
-      --     if not is_migration then
-      --       local content = vim.fn.readfile(ctx.filename) -- here
-      --       for _, line in ipairs(content) do
-      --         if line:match("%-%-@migration") then
-      --           return true
-      --         end
-      --       end
-      --       return false
-      --     end
-      --
-      --     return true
-      --   end,
-      -- },
-    },
+    linters = linter_overrides,
   },
   -- Debounced lint runner: lints on the events below, skipping when the buffer can't be modified.
   config = function(_, opts)
@@ -108,8 +154,13 @@ return {
 
     local lint = require("lint")
     for name, linter in pairs(opts.linters) do
-      if type(linter) == "table" and type(lint.linters[name]) == "table" then
-        lint.linters[name] = vim.tbl_deep_extend("force", lint.linters[name], linter)
+      -- `lint.linters[name]` can be a factory function as well as a table (per
+      -- nvim-lint's own type), so it's read into a local first: lua_ls narrows a
+      -- `type(x) == "table"` check reliably on a local, not on a repeated field
+      -- access.
+      local existing = lint.linters[name]
+      if type(linter) == "table" and type(existing) == "table" then
+        lint.linters[name] = vim.tbl_deep_extend("force", existing, linter)
         if type(linter.prepend_args) == "table" then
           lint.linters[name].args = lint.linters[name].args or {}
           vim.list_extend(lint.linters[name].args, linter.prepend_args)
@@ -121,7 +172,9 @@ return {
     lint.linters_by_ft = opts.linters_by_ft
 
     function M.debounce(ms, fn)
-      local timer = vim.uv.new_timer()
+      -- new_timer() is typed nilable; assert it once so `timer:start`/`timer:stop`
+      -- below don't need their own nil checks.
+      local timer = assert(vim.uv.new_timer())
       return function(...)
         local argv = { ... }
         timer:start(ms, 0, function()
@@ -156,21 +209,32 @@ return {
         local linter = lint.linters[name]
         if not linter then
           require("util").warn("Linter not found: " .. name, { title = "nvim-lint" })
+          return false
         end
-        return linter and not (type(linter) == "table" and linter.condition and not linter.condition(ctx))
+        if type(linter) ~= "table" then
+          return true
+        end
+        ---@cast linter MyLintAugmentedLinter
+        return not (linter.condition and not linter.condition(ctx))
       end, names)
 
       -- Run linters.
       if #names > 0 then
         lint.try_lint(names, {
-          -- Let a linter build its whole argv per run via `dynamic_args` (see sqlfluff in
-          -- opts.linters). nvim-lint evaluates native `args` element-by-element, one
-          -- string each, so the list length is fixed at config time; sqlfluff needs to
-          -- add and drop flags per buffer. `linter` is already a deepcopy here, so
-          -- mutating it cannot leak into the next run.
+          -- Let a linter build its whole argv per run via `dynamic_args`, or its run
+          -- directory via `dynamic_cwd` (see sqlfluff and golangcilint above).
+          -- nvim-lint evaluates native `args` element-by-element, one string each,
+          -- so the list length is fixed at config time, and its `cwd` must be a
+          -- plain string set at plugin-setup time -- neither can react to which
+          -- buffer is being linted on its own. `linter` is already a deepcopy here,
+          -- so mutating it cannot leak into the next run.
           wrap_linter = function(linter)
-            if type(linter) == "table" and type(linter.dynamic_args) == "function" then
+            ---@cast linter MyLintAugmentedLinter
+            if type(linter.dynamic_args) == "function" then
               linter.args = linter.dynamic_args(vim.api.nvim_get_current_buf())
+            end
+            if type(linter.dynamic_cwd) == "function" then
+              linter.cwd = linter.dynamic_cwd(vim.api.nvim_get_current_buf())
             end
             return linter
           end,
