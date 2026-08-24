@@ -200,11 +200,13 @@ end
 -- `gd` tries CSS class definitions before the LSP. Nothing in the LSP stack
 -- resolves a class name in a template (see util/css.lua), and the util bails the
 -- instant the cursor isn't on one, so this is a pure prefix on the normal jump.
-local goto_definition = function()
+---@param opts? snacks.picker.Config extra picker config, e.g. `{ confirm = "vsplit" }` for `gV`
+local goto_definition = function(opts)
+  opts = vim.tbl_deep_extend("force", get_config(), opts or {})
   local lsp = function()
-    Snacks.picker.lsp_definitions(get_config())
+    Snacks.picker.lsp_definitions(opts)
   end
-  if not require("util").css.goto_definition(vim.tbl_extend("force", get_config(), { fallback = lsp })) then
+  if not require("util").css.goto_definition(vim.tbl_extend("force", opts, { fallback = lsp })) then
     lsp()
   end
 end
@@ -859,13 +861,6 @@ return {
         { "<leader>slT",      function() type_hierarchy("supertypes", 5, get_config_vert()) end,                    desc = "LSP Supertypes (tree)" },
         { "<leader>sls",      function() Snacks.picker.lsp_symbols(config_get_symbols()) end,                       desc = "LSP Symbols" },
         { "<leader>slS",      function() Snacks.picker.lsp_workspace_symbols(config_get_symbols()) end,             desc = "LSP Symbols WS" },
-        { "gd",               goto_definition,                                                                      desc = "Goto Definition" },
-        { "gD",               function() Snacks.picker.lsp_declarations(get_config()) end,                          desc = "Goto Declaration" },
-        { "gr",               function() Snacks.picker.lsp_references(get_config()) end,             nowait = true, desc = "References" },
-        { "gI",               function() Snacks.picker.lsp_implementations(get_config()) end,                       desc = "Goto Implementation" },
-        { "gy",               function() Snacks.picker.lsp_type_definitions(get_config()) end,                      desc = "Goto T[y]pe Definition" },
-        { "ghs",              function() type_hierarchy("subtypes", 1, get_config()) end,                           desc = "Sub types (who extends this)" },
-        { "ghS",              function() type_hierarchy("supertypes", 1, get_config()) end,                         desc = "Super types" },
       }
 
       return keys
@@ -907,14 +902,16 @@ return {
         ["*"] = {
           -- stylua: ignore
           keys = {
-            { "gd",  goto_definition,                                                 desc = "Goto Definition",       has = "definition" },
-            { "gr",  function() Snacks.picker.lsp_references(get_config()) end,       nowait = true,                  desc = "References" },
-            { "gI",  function() Snacks.picker.lsp_implementations(get_config()) end,  desc = "Goto Implementation" },
-            { "gy",  function() Snacks.picker.lsp_type_definitions(get_config()) end, desc = "Goto T[y]pe Definition" },
-            { "gai", function() Snacks.picker.lsp_incoming_calls(get_config()) end,   desc = "C[a]lls Incoming",      has = "callHierarchy/incomingCalls" },
-            { "gao", function() Snacks.picker.lsp_outgoing_calls(get_config()) end,   desc = "C[a]lls Outgoing",      has = "callHierarchy/outgoingCalls" },
-            { "ghs", function() type_hierarchy("subtypes", 1, get_config()) end,      desc = "Sub types",             has = "prepareTypeHierarchy" },
-            { "ghS", function() type_hierarchy("supertypes", 1, get_config()) end,    desc = "Super types",           has = "prepareTypeHierarchy" },
+            { "gd",  goto_definition,                                                    desc = "Goto Definition",        has = "definition" },
+            { "gV",  function() goto_definition({ confirm = "vsplit" }) end,             desc = "Goto Definition (split)", has = "definition" },
+            { "gD",  function() Snacks.picker.lsp_declarations(get_config()) end,        desc = "Goto Declaration",       has = "declaration" },
+            { "gr",  function() Snacks.picker.lsp_references(get_config()) end,          nowait = true,                   desc = "References" },
+            { "gI",  function() Snacks.picker.lsp_implementations(get_config()) end,     desc = "Goto Implementation" },
+            { "gy",  function() Snacks.picker.lsp_type_definitions(get_config()) end,    desc = "Goto T[y]pe Definition" },
+            { "gai", function() Snacks.picker.lsp_incoming_calls(get_config()) end,      desc = "C[a]lls Incoming",       has = "callHierarchy/incomingCalls" },
+            { "gao", function() Snacks.picker.lsp_outgoing_calls(get_config()) end,      desc = "C[a]lls Outgoing",       has = "callHierarchy/outgoingCalls" },
+            { "ghs", function() type_hierarchy("subtypes", 1, get_config()) end,         desc = "Sub types",              has = "prepareTypeHierarchy" },
+            { "ghS", function() type_hierarchy("supertypes", 1, get_config()) end,       desc = "Super types",            has = "prepareTypeHierarchy" },
             { "]]",  function() Snacks.words.jump(vim.v.count1) end,                  desc = "Next Reference",        mode = { "n", "t" }, },
             { "[[",  function() Snacks.words.jump(-vim.v.count1) end,                 desc = "Prev Reference",        mode = { "n", "t" }, },
           },

@@ -305,15 +305,24 @@ end
 -- go to definition
 --------------------------------------------------------------------------------
 
+-- Snacks confirm actions that open a new window, mapped to the `:` command that
+-- makes one. The single-hit path below jumps by hand, so it can't reuse the
+-- picker's confirm action and has to split itself.
+local split_cmd = { split = "split", vsplit = "vsplit", edit_split = "split", edit_vsplit = "vsplit" }
+
 ---@param class string
 ---@param item snacks.picker.finder.Item
-local function jump(class, item)
-  local win = vim.api.nvim_get_current_win()
+---@param cmd? string window command to run before the jump, e.g. "vsplit"
+local function jump(class, item, cmd)
   local from = { vim.api.nvim_get_current_buf(), unpack(vim.api.nvim_win_get_cursor(0)) }
   from[3] = from[3] + 1 -- settagstack wants a 1-based column
-  vim.fn.settagstack(win, { items = { { tagname = class, from = from } } }, "t")
+  vim.fn.settagstack(vim.api.nvim_get_current_win(), { items = { { tagname = class, from = from } } }, "t")
 
   vim.cmd("normal! m'") -- jumplist, so <C-o> works too
+  if cmd then
+    vim.cmd(cmd)
+  end
+  local win = vim.api.nvim_get_current_win() -- after the split, so we land in the new window
   vim.cmd.edit(vim.fn.fnameescape(item.file))
   pcall(vim.api.nvim_win_set_cursor, win, item.pos)
   vim.cmd("normal! zz")
@@ -326,6 +335,8 @@ end
 ---runs `opts.fallback` itself if no stylesheet declares the class -- that path
 ---matters for `[ngClass]="{ hide: loading }"`, where `loading` looks class-shaped
 ---but is a component property only the LSP can resolve.
+---`opts.confirm` picks the window the jump lands in, so `confirm = "vsplit"` opens
+---a split for one hit and for a hit picked out of the picker.
 ---@param opts? snacks.picker.Config|{fallback?: fun()} picker config for multiple hits
 ---@return boolean handled
 function M.goto_definition(opts)
@@ -340,12 +351,13 @@ function M.goto_definition(opts)
   opts = vim.deepcopy(opts or {})
   local fallback = opts.fallback or vim.lsp.buf.definition
   opts.fallback = nil
+  local cmd = split_cmd[opts.confirm]
 
   find(class, function(items)
     if #items == 0 then
       return fallback()
     elseif #items == 1 then
-      return jump(class, items[1])
+      return jump(class, items[1], cmd)
     end
     Snacks.picker(vim.tbl_deep_extend("force", opts, {
       items = items,

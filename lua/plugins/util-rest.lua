@@ -78,6 +78,7 @@ return {
       { "<leader>rs", function() require("kulala").run() end,         desc = "Send the request",         ft = "http" },
       { "<leader>rS", function() require("kulala").show_stats() end,  desc = "Show stats",               ft = "http" },
       { "<leader>rt", function() require("kulala").toggle_view() end, desc = "Toggle headers/body",      ft = "http" },
+      { "<leader>ro", function() require("kulala").open_openapi_explorer() end, desc = "Toggle headers/body",      ft = "http" },
       -- stylua: ignore end
     },
     opts = {
