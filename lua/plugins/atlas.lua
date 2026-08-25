@@ -12,14 +12,14 @@ return {
     {
       "<leader>Ai",
       function()
-        vim.cmd("AtlasIssues")
+        vim.cmd("Atlas issues")
       end,
       desc = "Atlas Issues",
     },
     {
       "<leader>Ap",
       function()
-        vim.cmd("AtlasPulls")
+        vim.cmd("Atlas pulls")
       end,
       desc = "Atlas Pulls",
     },

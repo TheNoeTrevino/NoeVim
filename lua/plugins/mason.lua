@@ -2,6 +2,15 @@
 return {
   "mason-org/mason.nvim",
   cmd = "Mason",
+  -- `cmd = "Mason"` alone means setup() -- which prepends mason's bin/ to
+  -- vim.env.PATH -- doesn't run until you open the Mason UI or something
+  -- else pulls this in as a hard dependency (conform.nvim does, but only on
+  -- the FIRST BufWritePre). A tool resolved by bare name over PATH (gopher.nvim's
+  -- `:GoImpl`, `:GoTagAdd`, `:GoIfErr` all default to this) can lose that race:
+  -- ft=go loads gopher.nvim the moment you open a .go file, before any save has
+  -- happened, so the bin isn't found yet even if it's installed. VeryLazy runs
+  -- setup() a beat after startup regardless, closing the gap.
+  event = "VeryLazy",
   keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
   build = ":MasonUpdate",
   -- roslyn.nvim resolves its server binary via $MASON (see roslyn/utils.lua

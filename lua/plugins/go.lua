@@ -47,6 +47,14 @@ return {
             },
           },
         },
+        -- Replaces nvim-lint's golangcilint: this one resolves go.mod by
+        -- walking up from the SAVED FILE's own path (handler.go, not this
+        -- editor's cwd or root_dir) and lints that file's package
+        -- directory rather than the single file -- the scope a
+        -- depguard/typecheck-style finding actually needs. Default
+        -- init_options already targets golangci-lint v2's JSON flags and
+        -- falls back to v1 on its own; no override needed here.
+        golangci_lint_ls = {},
       },
       setup = {
         gopls = function(_, opts)
@@ -78,47 +86,26 @@ return {
   -- Ensure Go tools are installed
   {
     "mason-org/mason.nvim",
-    opts = { ensure_installed = { "goimports", "gofumpt" } },
-  },
-  {
-    "nvimtools/none-ls.nvim",
-    optional = true,
-    dependencies = {
-      {
-        "mason-org/mason.nvim",
-        opts = { ensure_installed = { "gomodifytags", "impl" } },
-      },
-    },
-    opts = function(_, opts)
-      local nls = require("null-ls")
-      opts.sources = vim.list_extend(opts.sources or {}, {
-        nls.builtins.code_actions.gomodifytags,
-        nls.builtins.code_actions.impl,
-        nls.builtins.formatting.goimports,
-        nls.builtins.formatting.gofumpt,
-      })
-    end,
-  },
-  -- Add linting
-  {
-    "mfussenegger/nvim-lint",
-    optional = true,
-    dependencies = {
-      {
-        "mason-org/mason.nvim",
-        opts = { ensure_installed = { "golangci-lint" } },
-      },
-    },
-    opts = {
-      linters_by_ft = {
-        go = { "golangcilint" },
-      },
-    },
+    opts = { ensure_installed = { "goimports", "gofumpt", "gomodifytags", "impl" } },
   },
   {
     "stevearc/conform.nvim",
     optional = true,
     opts = {
+      formatters = {
+        -- conform's builtin gofumpt sets no `cwd`, so it runs from
+        -- vim.fn.getcwd() -- the monorepo root in a repo like tremolo,
+        -- which has no go.mod of its own. Without a go.mod to read,
+        -- gofumpt can't tell "sight-reading/..." from a stdlib import and
+        -- COLLAPSES the import groups instead of splitting them: the
+        -- opposite of running it from inside core-api/, and the opposite
+        -- of what the repo's own tooling does. Point it at the nearest
+        -- go.mod instead, same as goimports' `-srcdir $DIRNAME` already
+        -- does for itself via its builtin args.
+        gofumpt = {
+          cwd = require("conform.util").root_file({ "go.mod" }),
+        },
+      },
       formatters_by_ft = {
         go = { "goimports", "gofumpt" },
       },
@@ -186,22 +173,27 @@ return {
     ---@type gopher.Config
     opts = {},
 
-    -- config = function()
-    --   local map = Util.safe_keymap_set
-    --   -- Tags
-    --   map("n", "<leader>glj", "<cmd>GoTagAdd json<cr>", { desc = "Add JSON Tag" })
-    --   map("n", "<leader>glJ", "<cmd>GoTagRm json<cr>", { desc = "Rm JSON Tag" })
-    --   map("n", "<leader>gld", "<cmd>GoTagAdd db<cr>", { desc = "Add DB Tag" })
-    --   map("n", "<leader>glD", "<cmd>GoTagRm db<cr>", { desc = "Rm DB Tag" })
-    --   map("n", "<leader>glv", "<cmd>GoTagAdd validate<cr>", { desc = "Add Validate Tag" })
-    --   map("n", "<leader>glV", "<cmd>GoTagRm validate<cr>", { desc = "Rm Validate Tag" })
-    --   -- Other
-    --   map("n", "<leader>glta", "<cmd>GoTestAdd<cr>", { desc = "Add Test for Function" })
-    --   map("n", "<leader>gltA", "<cmd>GoTestsAll<cr>", { desc = "Generate All Tests" })
-    --   map("n", "<leader>glg", ":GoGet", { desc = "Get Package" })
-    --   map("n", "<leader>glT", "<cmd>GoMod tidy<cr>", { desc = "Go Tidy" })
-    --   map("n", "<leader>gls", "<cmd>GoWork sync<cr>", { desc = "Go Sync" })
-    --   map("n", "<leader>gle", "<cmd>GoIfErr<cr>", { desc = "Handle Err" })
-    -- end,
+    config = function(_, opts)
+      require("gopher").setup(opts)
+      local map = Util.safe_keymap_set
+      -- Tags (fatih/gomodifytags)
+      map("n", "<leader>glj", "<cmd>GoTagAdd json<cr>", { desc = "Add JSON Tag" })
+      map("n", "<leader>glJ", "<cmd>GoTagRm json<cr>", { desc = "Rm JSON Tag" })
+      map("n", "<leader>gld", "<cmd>GoTagAdd db<cr>", { desc = "Add DB Tag" })
+      map("n", "<leader>glD", "<cmd>GoTagRm db<cr>", { desc = "Rm DB Tag" })
+      map("n", "<leader>glv", "<cmd>GoTagAdd validate<cr>", { desc = "Add Validate Tag" })
+      map("n", "<leader>glV", "<cmd>GoTagRm validate<cr>", { desc = "Rm Validate Tag" })
+      -- Interface stubs (josharian/impl) -- cursor on the struct, then the
+      -- interface to implement; see gopher.nvim's :help gopher.nvim-impl
+      -- for the receiver-and-struct-name explicit form.
+      map("n", "<leader>gli", ":GoImpl ", { desc = "Implement Interface" })
+      -- Other
+      map("n", "<leader>glta", "<cmd>GoTestAdd<cr>", { desc = "Add Test for Function" })
+      map("n", "<leader>gltA", "<cmd>GoTestsAll<cr>", { desc = "Generate All Tests" })
+      map("n", "<leader>glg", ":GoGet", { desc = "Get Package" })
+      map("n", "<leader>glT", "<cmd>GoMod tidy<cr>", { desc = "Go Tidy" })
+      map("n", "<leader>gls", "<cmd>GoWork sync<cr>", { desc = "Go Sync" })
+      map("n", "<leader>gle", "<cmd>GoIfErr<cr>", { desc = "Handle Err" })
+    end,
   },
 }

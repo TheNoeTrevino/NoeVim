@@ -13,8 +13,8 @@
 ---@field prepend_args? string[]
 ---@field condition? fun(ctx: {filename: string, dirname: string}): boolean
 
--- Entries here are partial overrides merged into an existing builtin (sqlfluff,
--- golangcilint), so lint.Linter's required `name`/`cmd`/`parser` don't apply --
+-- Entries here are partial overrides merged into an existing builtin
+-- (sqlfluff), so lint.Linter's required `name`/`cmd`/`parser` don't apply --
 -- this does NOT extend lint.Linter, every field is optional on purpose.
 ---@class MyLintLinterOverride: MyLintDynamicFields
 ---@field name? string
@@ -46,23 +46,6 @@ local linter_overrides = {
       vim.list_extend(args, require("util").sql.flags(buf))
       table.insert(args, "-")
       return args
-    end,
-  },
-  -- golangci-lint has no `cwd` option of its own in nvim-lint's builtin linter
-  -- (its `cwd` field must be a plain string, fixed at plugin-setup time), and
-  -- nvim-lint falls back to `vim.fn.getcwd()` when nothing overrides it. In a
-  -- multi-module repo (e.g. a Go service nested under a monorepo root with no
-  -- go.mod of its own) that's wrong the moment the editor's cwd isn't the Go
-  -- module's directory: golangci-lint then can't resolve the module and every
-  -- internal import fails to typecheck. Walk up from the buffer to the nearest
-  -- go.mod and run there instead.
-  golangcilint = {
-    ---@param buf number
-    dynamic_cwd = function(buf)
-      local bufname = vim.api.nvim_buf_get_name(buf)
-      local found = vim.fs.find("go.mod", { upward = true, path = vim.fn.fnamemodify(bufname, ":h") })
-      local go_mod = found[1]
-      return go_mod and vim.fn.fnamemodify(go_mod, ":h") or vim.fn.getcwd()
     end,
   },
   -- squawk = {
@@ -222,7 +205,7 @@ return {
       if #names > 0 then
         lint.try_lint(names, {
           -- Let a linter build its whole argv per run via `dynamic_args`, or its run
-          -- directory via `dynamic_cwd` (see sqlfluff and golangcilint above).
+          -- directory via `dynamic_cwd` (see sqlfluff above).
           -- nvim-lint evaluates native `args` element-by-element, one string each,
           -- so the list length is fixed at config time, and its `cwd` must be a
           -- plain string set at plugin-setup time -- neither can react to which

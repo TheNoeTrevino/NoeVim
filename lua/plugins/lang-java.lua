@@ -56,7 +56,11 @@ return {
     opts = {
       -- make sure mason installs the server
       servers = {
-        jdtls = {},
+        jdtls = {
+          signatureHelp = {
+            enabled = true,
+          },
+        },
       },
       setup = {
         jdtls = function()
@@ -268,7 +272,60 @@ return {
       "rcasia/neotest-java",
     },
     opts = function(_, opts)
-      local adapter = require("neotest-java")
+      -- neotest-java sends the java/buildWorkspace param as a table. jdtls types that param
+      -- Either<Boolean, boolean[]>, the only such signature in the distribution, so lsp4j throws
+      -- Unexpected token BEGIN_OBJECT, drops the whole message and never replies. compile() still
+      -- logs "compilation complete!", so the tests then run against stale class files. The reply
+      -- is also a BuildWorkspaceStatus enum, a number and not a table, so upstream's
+      -- next(result.modulepaths) errors once the first bug is fixed. The two are a package.
+      -- Both live here rather than in the plugin tree, where a lazy update reverts them silently.
+      local lsp_compiler = {
+        compile = function(args)
+          -- Required here, not at opts time: neotest-java.logger pulls neotest.config, which is
+          -- not loaded yet while lazy is still resolving this spec's opts.
+          local compilers = require("neotest-java.core.spec_builder.compiler")
+          local logger = require("neotest-java.logger")
+
+          local client = compilers.client_provider(args.base_dir)
+          if not client or not client.initialized then
+            return
+          end
+          vim.schedule(function()
+            client:request("java/buildWorkspace", args.compile_mode == "full", function(err, result)
+              if err then
+                logger.error("compilation failed: " .. vim.inspect(err))
+              end
+              if type(result) == "table" and next(result.modulepaths or {}) ~= nil then
+                logger.error(
+                  "Java Platform Module System not supported. Temporarily remove "
+                    .. "module-info.java for the test duration. modulepath="
+                    .. vim.inspect(result.modulepaths)
+                )
+              end
+            end)
+          end)
+        end,
+      }
+
+      -- neotest-java hands the JVM -Dspring.config.additional-location listing bin/main's
+      -- application.properties before bin/test's, and bin/main also precedes bin/test on the
+      -- classpath, so plain classpath:/application.properties resolves to the main one. Keys the
+      -- test file overrides are fine; keys that exist ONLY in main leak into the test context --
+      -- here hibernate.default_schema=icris and the Postgis dialect, against an in-memory H2 with
+      -- no icris schema. Gradle never loads main's file at all, so the same tests pass there and
+      -- fail under neotest. spring.config.location replaces the classpath default outright, and
+      -- the empty additional-location cancels neotest's list. Both are appended after
+      -- neotest-java's own -D args, so they win. Verified on main: 0/4 before, 4/4 after.
+      -- The relative path assumes this repo's gradle + eclipse layout (bin/test, not target/).
+      local jvm_args = {
+        "-Dspring.config.location=optional:file:./bin/test/application.properties",
+        "-Dspring.config.additional-location=",
+      }
+
+      -- __call rebuilds the adapter with this config and these deps. test-core's loader sees a
+      -- numeric key and uses this object as it is, so it never calls __call again and cannot
+      -- drop the overrides.
+      local adapter = require("neotest-java")({ jvm_args = jvm_args }, { lsp_compiler = lsp_compiler })
 
       -- neotest-java's root_finder wants .git and a build file in the same directory, else the
       -- nearest build file searching *upward*, else .git alone. This repo has gradle under
