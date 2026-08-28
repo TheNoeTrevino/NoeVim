@@ -40,6 +40,21 @@ opt.autowrite = true -- Enable auto write
 -- only set clipboard if not in ssh, to make sure the OSC 52
 -- integration works automatically.
 opt.clipboard = vim.env.SSH_CONNECTION and "" or "unnamedplus" -- Sync with system clipboard
+
+-- Name the clipboard provider explicitly on WSL. Without this, the first thing
+-- that touches a register (yanky's init_history) triggers Neovim's provider
+-- auto-detection, which probes every candidate tool over the WSL interop layer
+-- and cost ~1460ms on this machine. Declaring g:clipboard skips the probe
+-- entirely (~0.3ms). Only the actual read/write still spawns win32yank.
+-- Guarded on has("wsl") so the Arch laptop sharing this repo keeps wl-copy.
+if not vim.env.SSH_CONNECTION and vim.fn.has("wsl") == 1 and vim.fn.executable("win32yank.exe") == 1 then
+  vim.g.clipboard = {
+    name = "win32yank-wsl",
+    copy = { ["+"] = "win32yank.exe -i --crlf", ["*"] = "win32yank.exe -i --crlf" },
+    paste = { ["+"] = "win32yank.exe -o --lf", ["*"] = "win32yank.exe -o --lf" },
+    cache_enabled = 0, -- 0 keeps paste semantics identical to auto-detection; the win is skipping the probe
+  }
+end
 opt.completeopt = "menu,menuone,noselect"
 opt.conceallevel = 2 -- Hide * markup for bold and italic, but not markers with substitutions
 opt.confirm = true -- Confirm to save changes before exiting modified buffer
