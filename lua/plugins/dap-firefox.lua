@@ -57,7 +57,9 @@ return {
   {
     "mfussenegger/nvim-dap",
     optional = true,
-    event = "VeryLazy",
+    -- No `event`: this spec only registers the firefox adapter, which is needed
+    -- when nvim-dap loads, not before. An event here would drag nvim-dap in at
+    -- startup and undo the lazy-loading in lua/plugins/dap.lua.
     opts = function()
       local dap = require("dap")
 

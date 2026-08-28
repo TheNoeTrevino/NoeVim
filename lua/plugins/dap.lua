@@ -47,7 +47,7 @@ return {
       { "<leader>di", function() require("dap").step_into() end, desc = "Step Into" },
       { "<leader>dj", function() require("dap").down() end, desc = "Down" },
       { "<leader>dk", function() require("dap").up() end, desc = "Up" },
-      { "<leader>dl", function() dap.up() end, desc = "Up", },
+      { "<leader>dl", function() require("dap").up() end, desc = "Up", },
       { "<leader>dL", function() require("dap").run_last() end, desc = "Run Last" },
       { "<leader>do", function() require("dap").step_out() end, desc = "Step Out" },
       { "<leader>dO", function() require("dap").step_over() end, desc = "Step Over" },
@@ -136,7 +136,10 @@ return {
   -- Personal overrides: java launch configs + extended keymaps.
   {
     "mfussenegger/nvim-dap",
-    event = "VeryLazy",
+    -- No `event` on purpose. nvim-dap plus nvim-dap-ui cost ~220ms to load, and
+    -- VeryLazy paid that on every launch even in sessions that never debug. The
+    -- `keys` below cover every entry point, so the first <leader>d press loads
+    -- it instead. Adding an event here puts the 220ms back.
     recommended = true,
     opts = function()
       local dap = require("dap")
@@ -156,27 +159,33 @@ return {
         },
       }
     end,
+    -- NOTE: every callback below requires("dap") *inside* itself, on purpose.
+    -- lazy.nvim resolves function-valued `keys`/`cmd`/`ft`/`event` during
+    -- Handler.setup(), which runs before `did_handlers` is set. A require() at
+    -- the top of this function therefore does not load nvim-dap right away, but
+    -- it does mark `_.rtp_loaded = true`. get_start_plugins() then treats any
+    -- rtp_loaded plugin as a start plugin, so nvim-dap loaded eagerly during
+    -- startup and `event = "VeryLazy"` above was silently ignored.
+    -- stylua: ignore
     keys = function()
-      local dap = require("dap")
       return {
-        -- stylua: ignore start
         { "<leader>d", group = "  Debug" },
-        { "<leader>dB", function() dap.set_breakpoint(vim.fn.input("Breakpoint condition: ")) end, desc = "Breakpoint Condition", },
-        { "<leader>db", function() dap.toggle_breakpoint() end, desc = "Toggle Breakpoint", },
-        { "<leader>dc", function() dap.continue() end, desc = "Continue", },
-        { "<leader>da", function() dap.continue({ before = get_args }) end, desc = "Run with Args", },
-        { "<leader>dC", function() dap.run_to_cursor() end, desc = "Run to Cursor", },
-        { "<leader>dg", function() dap.goto_() end, desc = "Go to Line (No Execute)", },
-        { "<leader>di", function() dap.step_into() end, desc = "Step Into", },
-        { "<leader>dk", function() dap.down() end, desc = "Down", },
-        { "<leader>dl", function() dap.up() end, desc = "Up", },
-        { "<leader>dL", function() dap.run_last() end, desc = "Run Last", },
-        { "<leader>dO", function() dap.step_out() end, desc = "Step Out", },
-        { "<leader>do", function() dap.step_over() end, desc = "Step Over", },
-        { "<leader>dp", function() dap.pause() end, desc = "Pause", },
-        { "<leader>dr", function() dap.repl.toggle() end, desc = "Toggle REPL", },
-        { "<leader>ds", function() dap.session() end, desc = "Session", },
-        { "<leader>dt", function() dap.terminate() end, desc = "Terminate", },
+        { "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: ")) end, desc = "Breakpoint Condition", },
+        { "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint", },
+        { "<leader>dc", function() require("dap").continue() end, desc = "Continue", },
+        { "<leader>da", function() require("dap").continue({ before = get_args }) end, desc = "Run with Args", },
+        { "<leader>dC", function() require("dap").run_to_cursor() end, desc = "Run to Cursor", },
+        { "<leader>dg", function() require("dap").goto_() end, desc = "Go to Line (No Execute)", },
+        { "<leader>di", function() require("dap").step_into() end, desc = "Step Into", },
+        { "<leader>dk", function() require("dap").down() end, desc = "Down", },
+        { "<leader>dl", function() require("dap").up() end, desc = "Up", },
+        { "<leader>dL", function() require("dap").run_last() end, desc = "Run Last", },
+        { "<leader>dO", function() require("dap").step_out() end, desc = "Step Out", },
+        { "<leader>do", function() require("dap").step_over() end, desc = "Step Over", },
+        { "<leader>dp", function() require("dap").pause() end, desc = "Pause", },
+        { "<leader>dr", function() require("dap").repl.toggle() end, desc = "Toggle REPL", },
+        { "<leader>ds", function() require("dap").session() end, desc = "Session", },
+        { "<leader>dt", function() require("dap").terminate() end, desc = "Terminate", },
         { "<leader>dw", function() require("dap.ui.widgets").hover() end, desc = "Widgets", },
         { "<leader>dPt", function() require("dap-python").test_method() end, desc = "Debug Method", ft = "python", },
         { "<leader>dPc", function() require("dap-python").test_class() end, desc = "Debug Class", ft = "python", },
@@ -187,7 +196,8 @@ return {
   -- Personal dap-ui layout + float view.
   {
     "rcarriga/nvim-dap-ui",
-    event = "VeryLazy",
+    -- No `event`: see the nvim-dap spec above. dap-ui pulls nvim-dap in with it,
+    -- so an event here would re-add the same ~220ms to every launch.
     dependencies = { "nvim-neotest/nvim-nio" },
     keys = function()
       return {
