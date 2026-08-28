@@ -1,7 +1,7 @@
 return {
-  "TheNoeTrevino/haunt.nvim",
-  branch = "nightly",
-  -- dir = "~/projects/haunt/haunt.nvim/",
+  -- "TheNoeTrevino/haunt.nvim",
+  -- branch = "nightly",
+  dir = "~/projects/haunt.nvim/",
   ---@class HauntConfig
   ---
   ---
@@ -17,7 +17,7 @@ return {
     virt_text_hl = "HauntAnnotation",
     annotation_prefix = " 󰆉 ",
     line_hl = nil,
-    virt_text_pos = "eol",
+    virt_text_pos = "above",
     data_dir = "~/.haunt",
     picker_keys = {
       delete = { key = "d", mode = { "n" } },
@@ -52,11 +52,11 @@ return {
 
     map("n", prefix .. "q", function()
       require("haunt.api").to_quickfix({ current_buffer = true })
-    end, { desc = "Delete all bookmarks" })
+    end, { desc = "To Quickfix (buffer)" })
 
     map("n", prefix .. "Q", function()
       require("haunt.api").to_quickfix({ current_buffer = false })
-    end, { desc = "Delete all bookmarks" })
+    end, { desc = "To Quickfix (all)" })
 
     -- move
     map("n", prefix .. "p", function()
