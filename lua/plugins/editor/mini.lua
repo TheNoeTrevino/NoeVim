@@ -158,4 +158,6 @@ return {
       end
     end,
   },
+
+  { "nvim-mini/mini.doc", version = "*", opts = {}, lazy = true },
 }

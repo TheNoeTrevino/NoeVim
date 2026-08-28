@@ -114,21 +114,24 @@ return {
     "jay-babu/mason-nvim-dap.nvim",
     dependencies = "mason.nvim",
     cmd = { "DapInstall", "DapUninstall" },
-    opts = {
-      -- Makes a best effort to setup the various debuggers with
-      -- reasonable debug configurations
-      automatic_installation = true,
-
+    opts = function(_, opts)
       -- You can provide additional configuration to the handlers,
       -- see mason-nvim-dap README for more information
-      handlers = {},
+      opts.handlers = opts.handlers or {}
 
       -- You'll need to check that you have the required things installed
       -- online, please don't ask me how to install them :)
-      ensure_installed = {
-        -- Update this to ensure that you have the debuggers for the langs you want
-      },
-    },
+      -- Update this to ensure that you have the debuggers for the langs you want
+      opts.ensure_installed = opts.ensure_installed or {}
+
+      -- Makes a best effort to setup the various debuggers with reasonable debug
+      -- configurations. Set only when no language file has already given it a value:
+      -- lang/lang-typescript.lua sets `{ exclude = { "chrome" } }`, and a plain `true`
+      -- here would replace that table and pull the deprecated chrome adapter back in.
+      if opts.automatic_installation == nil then
+        opts.automatic_installation = true
+      end
+    end,
     -- mason-nvim-dap is loaded when nvim-dap loads
     config = function() end,
   },

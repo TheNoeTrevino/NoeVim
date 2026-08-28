@@ -37,9 +37,25 @@ require("lazy").setup({
     -- (table.insert), which now alphabetically precedes mason.lua. Seed an empty list so
     -- those inserts always find a table. opts_extend in mason.lua concatenates the rest.
     { "mason-org/mason.nvim", opts = { ensure_installed = {} } },
-    -- Everything else is a flat file under lua/plugins/ (one file per plugin/topic),
-    -- auto-discovered by this single import (lazy.nvim does not recurse into subdirs).
-    { import = "plugins" },
+    -- Everything else lives in lua/plugins/<category>/. lazy.nvim does not recurse
+    -- into subdirs, so each category needs its own import line.
+    --
+    -- Order matters. Do not reorder these lines without re-checking the merged opts.
+    --
+    -- lazy.nvim applies specs in import order, then alphabetically within an import.
+    -- Two merge rules bite here:
+    --   * a later table-valued opts REPLACES an earlier list (anything with a [1]),
+    --   * a later opts function receives whatever the tables merged to.
+    -- So specs that append with table.insert (neotest adapters in lang/lang-java.lua
+    -- and tools/test-karma.lua) must run AFTER every spec that sets the same key as
+    -- a table. lang/ before tools/ is the order that satisfies that; swapping the
+    -- two silently drops the neotest-karma adapter.
+    { import = "plugins.lsp" }, --    lspconfig, mason, code actions, rename, trouble
+    { import = "plugins.coding" }, -- completion, snippets, treesitter, format, lint
+    { import = "plugins.lang" }, --   one file per language, extends lsp/ and coding/
+    { import = "plugins.editor" }, -- motions, text objects, picker, files, sessions
+    { import = "plugins.ui" }, --     colorscheme, statusline, tabs, notifications
+    { import = "plugins.tools" }, --  debug, tests, git, db, tasks, AI, custom plugins
   },
   defaults = {
     lazy = true,
