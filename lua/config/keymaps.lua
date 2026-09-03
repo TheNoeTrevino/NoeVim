@@ -128,13 +128,13 @@ map("n", "<C-.>", "<cmd>bn<cr>", { noremap = true, silent = true, desc = "Next B
 
 -- Highlights
 for i = 1, 9 do
-  map("v", "h" .. i, ":<c-u>HSHighlight " .. i .. "<CR>", {
+  map("x", "<leader>H" .. i, ":<c-u>HSHighlight " .. i .. "<CR>", {
     noremap = true,
     desc = "Highlight " .. i,
   })
 end
 
-map("v", "h0", ":<c-u>HSRmHighlight<CR>", {
+map("x", "<leader>H0", ":<c-u>HSRmHighlight<CR>", {
   noremap = true,
   desc = "No Highlight",
 })
