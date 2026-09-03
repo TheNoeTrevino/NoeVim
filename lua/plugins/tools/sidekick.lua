@@ -7,7 +7,11 @@ local win_width = math.floor(total_width * 0.33)
 local haunt = require("haunt.sidekick")
 
 return {
-  "folke/sidekick.nvim",
+  -- Pinned to the open herdr-support PR, folke/sidekick.nvim#333, which adds
+  -- `herdr` as a cli.mux.backend. Upstream ships only tmux and zellij.
+  -- Switch back to "folke/sidekick.nvim" (and drop `branch`) once it merges.
+  "rmarganti/sidekick.nvim",
+  branch = "herdr",
   cmd = "Sidekick",
   ---@class sidekick.Config
   opts = {
@@ -57,12 +61,15 @@ return {
       },
       ---@class sidekick.cli.Mux
       mux = {
-        backend = "tmux",
+        -- PR #333 auto-detects herdr from HERDR_ENV, but be explicit.
+        -- NOTE from that PR: herdr maps `window` to a tab, and `split.size`
+        -- must stay fractional (0-1). The 0.3 below already is.
+        backend = "herdr", ---@type "tmux"|"zellij"|"herdr"
         enabled = true,
         -- terminal: new sessions will be created for each CLI tool and shown in a Neovim terminal
         -- window: when run inside a terminal multiplexer, new sessions will be created in a new tab
         -- split: when run inside a terminal multiplexer, new sessions will be created in a new split
-        create = "terminal", ---@type "terminal"|"window"|"split"
+        create = "split", ---@type "terminal"|"window"|"split"
         split = {
           vertical = true, -- vertical or horizontal split
           size = 0.3, -- size of the split (0-1 for percentage)
