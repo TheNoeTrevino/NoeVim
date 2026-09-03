@@ -121,7 +121,22 @@ return {
       },
       {
         "leoluz/nvim-dap-go",
-        opts = {},
+        opts = {
+          -- Attach to a headless delve instance you start yourself, the
+          -- Go analog of `--debug-jvm`: run `dlv debug --headless
+          -- --listen=:2345 --api-version=2 --accept-multiclient .` from
+          -- core-api/, then pick "Attach remote" from the <leader>dc menu.
+          dap_configurations = {
+            {
+              type = "go",
+              name = "Attach remote",
+              mode = "remote",
+              request = "attach",
+              host = "127.0.0.1",
+              port = 2345,
+            },
+          },
+        },
       },
     },
   },
