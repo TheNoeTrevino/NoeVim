@@ -16,8 +16,9 @@ map({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = tru
 
 -- Move to window using the <ctrl> hjkl keys: owned by herdr-navigator.nvim
 -- (plugins/tools/herdr-navigator.lua), which moves the split AND falls through
--- to the surrounding herdr pane at a window edge. Plain <C-w>hjkl maps here
--- would shadow it, so they are intentionally absent.
+-- to the surrounding herdr pane at a window edge. Outside herdr that same spec
+-- maps plain <C-w>hjkl instead. Duplicating the maps here would shadow both, so
+-- they are intentionally absent.
 
 -- Resize window using <ctrl> arrow keys
 map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
