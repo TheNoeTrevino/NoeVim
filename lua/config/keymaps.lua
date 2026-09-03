@@ -50,43 +50,18 @@ map("n", "_F", function()
 end, { desc = "Swap with Next Func" })
 
 -------------------------------------------------------------------------------
---                           Shift Navigation Section
+--                           Navigation Section
 -------------------------------------------------------------------------------
 
--- better up/down
-map({ "n", "x" }, "k", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
-map({ "n", "x" }, "l", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
-
--- Remap j; for navigation/o-pending
-map({ "n", "x", "o" }, "j", "<Left>", { desc = "Right", silent = true })
-map("o", "k", "<Down>", { desc = "Down", silent = true })
-map("o", "l", "<Up>", { desc = "Up", silent = true })
-map({ "n", "x", "o" }, ";", "<Right>", { desc = "Left", silent = true })
-
 -- Move Lines
-map("n", "<C-S-l>", "<cmd>m .-2<cr>==", { desc = "Move Up" })
-map("i", "<C-S-l>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move Up" })
-map("n", "<C-S-k>", "<cmd>m .+1<cr>==", { desc = "Move Down" })
-map("i", "<C-S-k>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move Down" })
-map("v", "<C-S-l>", ":m '<-2<cr>gv=gv", { desc = "Move Up" })
-map("v", "<C-S-k>", ":m '>+1<cr>gv=gv", { desc = "Move Down" })
+map("n", "<C-S-k>", "<cmd>m .-2<cr>==", { desc = "Move Up" })
+map("i", "<C-S-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move Up" })
+map("n", "<C-S-j>", "<cmd>m .+1<cr>==", { desc = "Move Down" })
+map("i", "<C-S-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move Down" })
+map("v", "<C-S-k>", ":m '<-2<cr>gv=gv", { desc = "Move Up" })
+map("v", "<C-S-j>", ":m '>+1<cr>gv=gv", { desc = "Move Down" })
 
--- Windows
-map("n", "<c-j>", "<c-w>h", { desc = "Move Left" })
-map("n", "<c-k>", "<c-w>j", { desc = "Move Down" })
-map("n", "<c-l>", "<c-w>k", { desc = "Move Up" })
-map("n", "<c-;>", "<c-w>l", { desc = "Move Right" })
-
--- -- Terminal Mappings
--- map("i", "<C-j>", function()
---   vim.cmd.stopinsert()
---   vim.cmd("wincmd h")
--- end, { desc = "Go to Left Window" })
---
--- map("t", "<C-j>", "<cmd>wincmd h<cr>", { desc = "Go to Left Window" })
--- map("t", "<C-k>", "<cmd>wincmd j<cr>", { desc = "Go to Lower Window" })
--- map("t", "<C-l>", "<cmd>wincmd k<cr>", { desc = "Go to Upper Window" })
--- map("t", "<C-;>", "<cmd>wincmd l<cr>", { desc = "Go to Right Window" })
+-- Windows: <C-h/j/k/l> come from config/defaults/keymaps.lua.
 
 -- TMUX
 map("n", "<c-_>", function()
@@ -110,8 +85,8 @@ map({ "i", "n", "s" }, "<esc>", function()
   return "<esc>"
 end, { expr = true, desc = "Escape and Clear hlsearch" })
 
-map("n", "zj", "5zh", { desc = "Scroll Left" })
-map("n", "z;", "5zl", { desc = "Scroll right" })
+map("n", "zh", "5zh", { desc = "Scroll Left" })
+map("n", "zl", "5zl", { desc = "Scroll right" })
 
 -------------------------------------------------------------------------------
 --                           Buffers Sectiokeyn
@@ -193,16 +168,9 @@ map({ "n", "x", "v" }, "L", "<C-^>")
 -- Easier case switching
 map("n", "U", "~<Left>")
 
-map(
-  { "n", "x", "o" },
-  "g.",
-  "g;",
-  { noremap = true, silent = true, desc = "Go to [count] older position in the change list" }
-)
-
 -- Better end and beginning
-map({ "n", "x", "o" }, "gj", "zH^", { noremap = true, silent = true, desc = "Go to Beginnning" })
-map({ "n", "x", "o" }, "g;", "$", { noremap = true, silent = true, desc = "Go to End" })
+map({ "n", "x", "o" }, "gh", "zH^", { noremap = true, silent = true, desc = "Go to Beginnning" })
+map({ "n", "x", "o" }, "gl", "$", { noremap = true, silent = true, desc = "Go to End" })
 
 -------------------------------------------------------------------------------
 --                           Diagnostics Section
@@ -239,10 +207,10 @@ map("n", "<Right>", "<cmd>vertical resize +3<cr>", { desc = "Increase Window Wid
 map("n", "<Left>", "<cmd>vertical resize -3<cr>", { desc = "Increase Window Width" })
 
 -- Window arrangement
-map("n", "<leader>wj", "<C-w>H", { desc = "Move Left" })
-map("n", "<leader>wk", "<C-w>J", { desc = "Move Bottom" })
-map("n", "<leader>wl", "<C-w>K", { desc = "Move Top" })
-map("n", "<leader>w;", "<C-w>L", { desc = "Move Right" })
+map("n", "<leader>wh", "<C-w>H", { desc = "Move Left" })
+map("n", "<leader>wj", "<C-w>J", { desc = "Move Bottom" })
+map("n", "<leader>wk", "<C-w>K", { desc = "Move Top" })
+map("n", "<leader>wl", "<C-w>L", { desc = "Move Right" })
 map("n", "<leader>we", "<C-w>=", { desc = "Equalize" })
 map("n", "<leader>wT", "<C-w>T", { desc = "Split Into Tab" })
 

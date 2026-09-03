@@ -48,7 +48,6 @@ return {
     resolve_timeout = 100, -- Timeout in milliseconds to resolve code actions
 
     keymaps = {
-      select = { "<CR>", ";" },
       close = { "<esc>" },
     },
 

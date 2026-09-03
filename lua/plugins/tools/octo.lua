@@ -273,8 +273,6 @@ return {
       file_panel = {
         submit_review = { lhs = "<localleader>vs", desc = "submit review" },
         discard_review = { lhs = "<localleader>vd", desc = "discard review" },
-        next_entry = { lhs = "k", desc = "move to next changed file" },
-        prev_entry = { lhs = "l", desc = "move to previous changed file" },
         select_entry = { lhs = "<cr>", desc = "show selected changed file diffs" },
         refresh_files = { lhs = "R", desc = "refresh changed files panel" },
         focus_files = { lhs = "<localleader>e", desc = "move focus to changed file panel" },

@@ -129,7 +129,6 @@ return {
               ["<c-q>"] = { "qflist", mode = { "i", "n" } },
               ["<c-n>"] = { "history_forward", mode = { "i", "n" } },
               ["<c-p>"] = { "history_back", mode = { "i", "n" } },
-              [";"] = { "confirm", mode = { "n" } },
               ["S"] = { "flash" },
               ["<c-s>"] = { "flash", mode = { "i" } },
               ["?"] = "toggle_help_input",
@@ -137,10 +136,6 @@ return {
               ["v"] = { "edit_vsplit", mode = { "n" } },
               ["G"] = "list_bottom",
               ["gg"] = "list_top",
-              ["k"] = "list_down",
-              ["l"] = "list_up",
-              ["<c-k>"] = { "list_down", mode = { "i", "n" } },
-              ["<c-l>"] = { "list_up", mode = { "i", "n" } },
               ["q"] = "close",
               ["d"] = "bufdelete",
             },
@@ -165,7 +160,6 @@ return {
       local keys = {
         -- Top Pickers & Explorer
         -- stylua: ignore start
-        -- { "<leader>,", function() Snacks.picker.buffers({on_show = function()vim.cmd.stopinsert()end,}) end, desc = "Buffers" },
         { "<leader>.",        function() Snacks.scratch() end,                                                      desc = "Toggle Scratch Buffer" },
         { "<leader>s.",       function() Snacks.scratch.select() end,                                               desc = "Select Scratch Buffer" },
         { "<leader>dps",      function() Snacks.profiler.scratch() end,                                             desc = "Profiler Scratch Buffer" },
@@ -200,7 +194,7 @@ return {
         { "<leader>sB",       function() Snacks.picker.grep_buffers(get_config()) end,                              desc = "Buffers" },
         { "<leader>sT",       function() Snacks.picker.todo_comments(get_config())end,                              desc = "Todo Comments" },
         { "<leader>st",       tagstack_picker,                                                                      desc = "Tag Stack (history)" },
-        { "h",                function() Snacks.picker.buffers(get_config_nm()) end,                                desc = "Buffers" },
+        { "<leader>,",        function() Snacks.picker.buffers(get_config_nm()) end,                                desc = "Buffers" },
         -- potential mappings to move to f
         { "<leader>sM",       function() Snacks.picker.man(get_config()) end,                                       desc = "Man Pages" },
         { "<leader>sh",       function() Snacks.picker.help(get_config()) end,                                      desc = "Help Pages" },

@@ -28,8 +28,6 @@ return {
   opts = {
     keymaps = {
       ui = {
-        next_item = "k",
-        previous_item = "l",
         first_item = "gg",
         last_item = "G",
         submit = "<C-s>",
@@ -67,13 +65,13 @@ return {
         edit_title = "T",
         edit_description = "D",
         review = {
-          open_file = { ";", "<CR>" },
+          open_file = { "l", "<CR>" },
           toggle_approval = "Ga",
           request_changes = "Gr",
           submit_review = "Gs",
           explorer = {
             focus_file = "<CR>",
-            open_file = ";",
+            open_file = "l",
             next_file = { "]f", "<Tab>" },
             previous_file = { "[f", "<S-Tab>" },
             next_unreviewed_file = "]u",

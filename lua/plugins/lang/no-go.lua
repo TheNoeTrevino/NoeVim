@@ -5,10 +5,6 @@ return {
     fold_imports = true,
     enabled = false,
     reveal_on_cursor = true,
-    keys = {
-      down = "k",
-      up = "l",
-    },
     import_virtual_text = { -- e.g. ' 2  '
       prefix = " ",
       suffix = "   ",
