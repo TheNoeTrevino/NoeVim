@@ -126,7 +126,7 @@ map("n", "<leader>dM", ":%s/\\r//")
 map("n", "<S-CR>", "<cmd>w<cr>")
 
 -- No right ctrl on the macbook :(
-map("n", "Q", "<C-Z>", { noremap = true, silent = true })
+-- map("n", "Q", "<C-Z>", { noremap = true, silent = true })
 
 -- Paste without putting into clipboard
 map("x", "<leader>p", [["_dP]])
