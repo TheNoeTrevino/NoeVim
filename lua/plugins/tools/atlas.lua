@@ -1,8 +1,6 @@
-return {
-  -- "emrearmagan/atlas.nvim"
-  -- -- "TheNoeTrevino/atlas.nvim",
-  -- -- branch = "feature-57/lsp-attached-pull-requests",
-  dir = "~/projects/atlas.nvim/",
+-- Upstream is "emrearmagan/atlas.nvim"; the fork below is what ~/projects tracks.
+-- Add `branch = "feature-57/lsp-attached-pull-requests"` below to pin the remote fallback.
+return Util.local_plugin("TheNoeTrevino/atlas.nvim", "~/projects/atlas.nvim", {
   dependencies = {
     "MeanderingProgrammer/render-markdown.nvim", -- optional but recommended
     "esmuellert/codediff.nvim", -- optional (PullRequest diff)
@@ -272,4 +270,4 @@ return {
       },
     },
   },
-}
+})

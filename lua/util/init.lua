@@ -38,6 +38,30 @@ function M.opts(name)
   return require("lazy.core.plugin").values(plugin, "opts", false)
 end
 
+-- Source a plugin from a local checkout when that checkout exists, else from its remote.
+--
+-- lazy.nvim gives a `dir` plugin no fallback: a missing path is a hard health failure and
+-- the spec never loads. The checkouts under ~/projects are gitignored, and sync-remote.sh
+-- only mirrors ~/.config, so any host other than this laptop has the spec but not the repo.
+--
+-- The resolved name matches either way (dir basename == repo basename), so specs that
+-- depend on these by name keep working on both sides.
+---@param repo string  "owner/name", used when the local dir is absent
+---@param dir string   local checkout path, `~` allowed
+---@param spec table   the rest of the lazy spec
+---@return table spec
+function M.local_plugin(repo, dir, spec)
+  spec = spec or {}
+  local path = vim.fs.normalize(dir)
+  local stat = vim.uv.fs_stat(path)
+  if stat and stat.type == "directory" then
+    spec.dir = path
+  else
+    spec[1] = repo
+  end
+  return spec
+end
+
 -- Dedup a list, preserving order.
 function M.dedup(list)
   local ret, seen = {}, {}

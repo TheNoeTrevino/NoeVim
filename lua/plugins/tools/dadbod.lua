@@ -3,10 +3,9 @@
 -- Values shown are the plugin defaults unless a trailing comment says otherwise
 -- (a few are set to your preferences, with the default noted).
 local prefix = "<localleader>d"
-return {
-  -- "thenoetrevino/dadbod-ui.nvim",
-  -- branch = "bugfix/splitting-when-opening-buffer-same-conn",
-  dir = "~/projects/dadbod-ui.nvim/",
+-- Add `branch = "bugfix/splitting-when-opening-buffer-same-conn"` below to pin the
+-- remote fallback; without it the fork's default branch is used.
+return Util.local_plugin("TheNoeTrevino/dadbod-ui.nvim", "~/projects/dadbod-ui.nvim", {
   lazy = false,
   dependencies = "tpope/vim-dadbod",
   keys = {
@@ -193,4 +192,4 @@ return {
       },
     },
   },
-}
+})
