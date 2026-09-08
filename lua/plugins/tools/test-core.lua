@@ -154,11 +154,11 @@ return {
       -- emits "parameterized" for xunit [Theory] / nunit [TestCase] groups -- which raises
       -- "E155: Unknown sign: neotest_parameterized" and then nil-indexes the virtual-text
       -- icon table. Relabel unknown types as namespaces, which is what they behave like.
-      -- rawget, not adapter.discover_positions: the karma adapter is a lazy proxy whose __index
-      -- requires neotest-karma on first touch, and doing that here -- while neotest's own opts
-      -- are still being built -- reintroduces the "loop or previous error loading module" this
-      -- config works around. Adapters that keep the method behind a metatable are simply left
-      -- alone, which is fine, since the ones that invent position types set it directly.
+      -- rawget, not adapter.discover_positions: the karma adapter is a thin table whose
+      -- unset fields come from upstream through __index, so a plain index would copy the
+      -- upstream method onto the wrapper and hide later upstream changes. Adapters that keep
+      -- the method behind a metatable are simply left alone, which is fine, since the ones
+      -- that invent position types set it directly.
       for _, adapter in ipairs(opts.adapters or {}) do
         local discover_positions = rawget(adapter, "discover_positions")
         if discover_positions and not positions_wrapped[adapter] then

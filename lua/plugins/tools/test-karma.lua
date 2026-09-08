@@ -14,21 +14,39 @@ return {
     optional = true,
     dependencies = { "Zhunio/neotest-karma" },
     opts = function(_, opts)
-      -- neotest-karma requires neotest.lib at module level, so requiring it here -- while
-      -- neotest's own opts are still being evaluated -- can re-enter and fail with "loop or
-      -- previous error loading module". Everything not overridden below is fetched on first
-      -- touch instead, by which point neotest has finished loading.
-      local karma
-      local function upstream()
-        karma = karma or require("neotest-karma")({})
-        return karma
+      -- Load upstream here, on the main loop, and not on first touch. neotest-karma calls
+      -- `vim.tbl_flatten` (deprecated, so nvim echoes a warning) and `vim.fn.getcwd()` while
+      -- its modules load, and neither call is legal in a fast event context. Neotest first
+      -- touches an adapter field from inside an nio task (client/init.lua:277, filter_dir), so
+      -- a deferred load dies there with "E5560: nvim_echo must not be called in a fast event
+      -- context". Lua leaves the half-loaded module marked in package.loaded, so every later
+      -- require reports "loop or previous error loading module 'neotest-karma'" until nvim
+      -- restarts. This spec is imported after plugins.lang, and lazy.nvim loads the
+      -- Zhunio/neotest-karma dependency before it evaluates these opts, so the require is safe.
+      local karma = require("neotest-karma")({})
+
+      -- Upstream hands neotest the string 'require("neotest-karma").build_position', and a
+      -- string build_position tells neotest to parse the file in its child nvim
+      -- (neotest/lib/treesitter/init.lua:180). The child then loads neotest-karma inside an
+      -- async remote call, and the deprecated `vim.tbl_flatten` in neotest-karma/util.lua:158
+      -- echoes a warning there. That echo never returns in the child, so the reply never
+      -- arrives and the parse blocks forever: karma files appear in the summary with zero
+      -- tests, and a run reports no per-test results. Passing the function keeps the parse in
+      -- this process, which neotest supports for exactly this case. The guard leaves every
+      -- other adapter's parse untouched, so the wrapper is installed once and never removed.
+      local treesitter = require("neotest.lib").treesitter
+      if not treesitter.karma_parses_in_process then
+        treesitter.karma_parses_in_process = true
+        local parse_positions = treesitter.parse_positions
+        treesitter.parse_positions = function(file_path, query, options)
+          if options and options.build_position == 'require("neotest-karma").build_position' then
+            options = vim.tbl_extend("force", options, { build_position = karma.build_position })
+          end
+          return parse_positions(file_path, query, options)
+        end
       end
 
-      local adapter = setmetatable({ name = "neotest-karma" }, {
-        __index = function(_, key)
-          return upstream()[key]
-        end,
-      })
+      local adapter = setmetatable({ name = "neotest-karma" }, { __index = karma })
 
       adapter.root = project_root
 
@@ -39,7 +57,7 @@ return {
       end
 
       adapter.build_spec = function(args)
-        local spec = upstream().build_spec(args)
+        local spec = karma.build_spec(args)
         if not spec then
           return
         end
