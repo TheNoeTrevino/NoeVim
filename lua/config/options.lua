@@ -43,6 +43,17 @@ vim.o.cmdheight = 0
 -- vim.cmd([[ autocmd RecordingEnter * set cmdheight=1 ]])
 -- vim.cmd([[ autocmd RecordingLeave * set cmdheight=0 ]])
 
+-- Neovim's built-in cmdline/message UI, the replacement for noice.nvim. It keeps the cmdline at
+-- the bottom and highlights it with treesitter: `:lua ...` gets the vim grammar's lua injection,
+-- which is the one noice feature worth keeping. It also takes over message rendering, since it
+-- attaches with ext_messages = true -- there is no cmdline-only mode. `g<` opens the pager.
+-- Experimental and on a private path, so a nightly rename will error loudly here.
+
+-- Messages stay on the cmdline (the default target). ui2 collapses anything longer than
+-- 'cmdheight' behind a `[+x]` spill indicator rather than a hit-enter prompt, so cmdheight = 0
+-- costs no "Press ENTER" interruptions. `g<` opens the pager to read a collapsed message.
+require("vim._core.ui2").enable({})
+
 vim.o.winborder = "single"
 
 vim.highlight.priorities.semantic_tokens = 95 -- default is 125

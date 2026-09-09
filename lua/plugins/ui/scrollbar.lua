@@ -11,7 +11,6 @@ return {
       "dbui",
       "cmp_docs",
       "cmp_menu",
-      "noice",
       "prompt",
       "TelescopePrompt",
       -- extras

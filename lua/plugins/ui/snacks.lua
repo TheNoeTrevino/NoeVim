@@ -10,17 +10,8 @@ end
 
 return {
   "folke/snacks.nvim",
-  -- Loaded at startup with priority 1000; restores vim.notify for noice.
   priority = 1000,
   lazy = false,
-  config = function(_, opts)
-    local notify = vim.notify
-    require("snacks").setup(opts)
-    -- HACK: restore vim.notify after snacks setup and let noice.nvim take over
-    if require("util").has("noice.nvim") then
-      vim.notify = notify
-    end
-  end,
   ---@type snacks.Config
   opts = {
     bigfile = { enabled = true },
@@ -77,13 +68,9 @@ return {
       end,
     },
   },
-  config = function(_, opts)
-    local notify = vim.notify
-    require("snacks").setup(opts)
-    -- HACK: restore vim.notify after snacks setup and let noice.nvim take over
-    -- this is needed to have early notifications show up in noice history
-    if require("util").has("noice.nvim") then
-      vim.notify = notify
-    end
-  end,
+  -- stylua: ignore
+  keys = {
+    { "<leader>nh", function() Snacks.notifier.show_history() end, desc = "Notification History" },
+    { "<leader>nd", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications" },
+  },
 }

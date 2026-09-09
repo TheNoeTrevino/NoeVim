@@ -1,6 +1,6 @@
 -- Everything rename-related lives here: both the symbol rename (<leader>cr, inc-rename with
--- cmdline preview) and the file rename (<leader>cR, Snacks.rename, which notifies the LSP via
--- workspace/willRenameFiles). Neo-tree wires Snacks.rename.on_rename_file separately, as an
+-- a Snacks input float) and the file rename (<leader>cR, Snacks.rename, which notifies the LSP
+-- via workspace/willRenameFiles). Neo-tree wires Snacks.rename.on_rename_file separately, as an
 -- event handler rather than a keymap -- see neotree.lua.
 return {
 
@@ -9,7 +9,11 @@ return {
   {
     "smjonas/inc-rename.nvim",
     cmd = "IncRename",
-    opts = {},
+    opts = {
+      -- Routes the input through Snacks.input instead of the cmdline. inc-rename builds the
+      -- input buffer inside its command-preview callback, so the float appears on the first
+      -- keystroke after <leader>cr, not on <CR>.
+    },
   },
 
   -- LSP Keymaps
@@ -41,24 +45,6 @@ return {
               has = { "workspace/didRenameFiles", "workspace/willRenameFiles" },
             },
           },
-        },
-      },
-    },
-  },
-
-  --- Noice integration
-  {
-    "folke/noice.nvim",
-    optional = true,
-    opts = {
-      presets = { inc_rename = true },
-      cmdline = {
-        format = {
-          -- The preset positions this float at the cursor (relative = "cursor"), but every
-          -- cmdline format inherits `cmdline.view`, which noice.lua sets to the bottom
-          -- "cmdline" view -- that view ignores the position/size opts, so the preset ends
-          -- up looking exactly like a plain cmdline. Pin it back to the popup view.
-          IncRename = { view = "cmdline_popup", title = " Rename " },
         },
       },
     },
