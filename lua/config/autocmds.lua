@@ -79,8 +79,30 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- AUtocmd to boost certain LSP semantic token highlight priority
--- readonly is boosted so show constants
+-- Autocmd to boost certain LSP semantic token highlight priorities.
+--
+-- Neovim ranks treesitter at 100 and semantic tokens at 95 (options.lua), so a
+-- treesitter capture hides every gopls token underneath it. Two gopls tokens
+-- carry information treesitter cannot derive, so they are re-highlighted ABOVE
+-- treesitter here:
+--   namespace          -> @lsp.type.namespace           (#7AA89F)
+--   variable + static  -> @lsp.typemod.variable.static  -> Constant (#FFA066)
+-- `static` is gopls' word for "declared at package level". That is why
+-- `var fileBytes []byte` now reads as a Constant while a local of the same
+-- name does not. `namespace` also lands on the `go:embed` directive name
+-- inside its own comment and on the package name inside an import path
+-- string. Both are wanted, so there is deliberately no comment/string guard.
+--
+-- Skipped on purpose: @lsp.type.variable, @lsp.mod.slice, @lsp.mod.static and
+-- @lsp.typemod.variable.slice all resolve to an EMPTY highlight, so boosting
+-- them paints nothing.
+--
+-- NOTE: LspTokenUpdate is fired with `buffer` and no pattern, so an autocmd
+-- `pattern` matches the FILENAME, not the filetype (the same trap the razor
+-- block below documents). Match on `ft` inside the callback instead. The old
+-- `pattern = { "go", "typescript" }` here matched a file literally named `go`,
+-- so this never ran.
+
 ---@class SemanticTokenModifiers
 ---@field declaration boolean?
 ---@field documentation boolean?
@@ -94,60 +116,94 @@ vim.api.nvim_create_autocmd("FileType", {
 ---@field type string
 ---@field modifiers SemanticTokenModifiers
 
+---One rule per highlight group to raise. `ft` is required. Set `type`,
+---`modifier`, both, or `treesitter`; see boost_group for the group each shape
+---paints.
+---@class BoostRule
+---@field ft string[] filetypes the rule applies to
+---@field type string? semantic token type, e.g. "namespace"
+---@field modifier string? semantic token modifier, e.g. "static"
+---@field treesitter string? treesitter capture name, without the leading "@"
+---@field priority number? extmark priority; must exceed 100 to beat treesitter
+
+local BOOST_PRIORITY = 127 -- above treesitter (100), below diagnostics (150)
+
+---@type BoostRule[]
 local boost = {
-  -- { type = "namespace" },
-  -- { type = "variable" },
-  --
-  -- { modifier = "global" },
-  -- { modifier = "format" },
-  { modifier = "readonly", priority = 110 },
-  --
-  -- { treesitter = "constant.builtin", priority = 106 },
-  -- { treesitter = "namespace.builtin", priority = 106 },
-  -- { treesitter = "boolean", priority = 107 },
+  -- Package names: the package clause, every import path, each qualifier at a
+  -- use site (`fmt` in `fmt.Print`, where treesitter only sees @variable) and
+  -- the `go:embed` directive name.
+  { ft = { "go" }, type = "namespace" },
+  -- Package-level vars.
+  { ft = { "go" }, type = "variable", modifier = "static" },
+
+  -- The other two rule shapes, kept as reference:
+  -- { ft = { "go" }, modifier = "readonly" },   -- -> @lsp.mod.readonly
+  -- { ft = { "go" }, treesitter = "boolean" },  -- -> @boolean
 }
 
--- update certain tokens to use a highlight of a higher priority
+---The highlight group a rule paints, following the semantic token naming in
+---`:h lsp-semantic-highlight`.
+---@param rule BoostRule
+---@return string?
+local function boost_group(rule)
+  if rule.treesitter then
+    return "@" .. rule.treesitter
+  elseif rule.type and rule.modifier then
+    return "@lsp.typemod." .. rule.type .. "." .. rule.modifier
+  elseif rule.type then
+    return "@lsp.type." .. rule.type
+  elseif rule.modifier then
+    return "@lsp.mod." .. rule.modifier
+  end
+end
+
+---@param rule BoostRule
+---@param token SemanticToken
+---@param captures table[] result of vim.treesitter.get_captures_at_pos
+---@return boolean
+local function boost_matches(rule, token, captures)
+  if rule.type and token.type ~= rule.type then
+    return false
+  end
+  if rule.modifier and not token.modifiers[rule.modifier] then
+    return false
+  end
+  if rule.treesitter then
+    for _, capture in pairs(captures) do
+      if capture.capture == rule.treesitter then
+        return true
+      end
+    end
+    return false
+  end
+  -- A rule with none of the three fields would paint a nil group; refuse it.
+  return rule.type ~= nil or rule.modifier ~= nil
+end
+
 vim.api.nvim_create_autocmd("LspTokenUpdate", {
-  pattern = { "go", "typescript" },
+  desc = "Boost selected LSP semantic tokens above treesitter",
   callback = function(args)
+    local ft = vim.bo[args.buf].filetype
     --- @type SemanticToken
     local token = args.data.token
-    local captures = vim.treesitter.get_captures_at_pos(args.buf, token.line, token.start_col)
+    local captures = nil ---@type table[]?
 
-    for _, t in pairs(boost) do
-      local priority = t.priority or 105
-      if t.type and token.type == t.type then
-        vim.lsp.semantic_tokens.highlight_token(
-          token,
-          args.buf,
-          args.data.client_id,
-          "@lsp.type." .. t.type,
-          { priority = priority }
-        )
-      end
-
-      if t.modifier and token.modifiers[t.modifier] then
-        vim.lsp.semantic_tokens.highlight_token(
-          token,
-          args.buf,
-          args.data.client_id,
-          "@lsp.mod." .. t.modifier,
-          { priority = priority }
-        )
-      end
-
-      if t.treesitter then
-        for _, capture in pairs(captures) do
-          if capture.capture == t.treesitter then
-            vim.lsp.semantic_tokens.highlight_token(
-              token,
-              args.buf,
-              args.data.client_id,
-              "@" .. t.treesitter,
-              { priority = priority }
-            )
-          end
+    for _, rule in ipairs(boost) do
+      if vim.tbl_contains(rule.ft or {}, ft) then
+        -- Only a `treesitter` rule needs the captures, and the lookup is not
+        -- free, so resolve it lazily and at most once per token.
+        if rule.treesitter and not captures then
+          captures = vim.treesitter.get_captures_at_pos(args.buf, token.line, token.start_col)
+        end
+        if boost_matches(rule, token, captures or {}) then
+          vim.lsp.semantic_tokens.highlight_token(
+            token,
+            args.buf,
+            args.data.client_id,
+            boost_group(rule),
+            { priority = rule.priority or BOOST_PRIORITY }
+          )
         end
       end
     end
