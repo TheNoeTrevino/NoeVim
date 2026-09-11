@@ -63,7 +63,7 @@ return {
       -- Be aware that you also will need to properly configure your LSP server to
       -- provide the code lenses.
       codelens = {
-        enabled = true,
+        enabled = false,
       },
       -- Enable this to enable the builtin LSP folding on Neovim.
       -- Be aware that you also will need to properly configure your LSP server to
@@ -100,12 +100,31 @@ return {
                 { "gI", vim.lsp.buf.implementation, desc = "Goto Implementation" },
                 { "gy", vim.lsp.buf.type_definition, desc = "Goto T[y]pe Definition" },
                 { "gD", vim.lsp.buf.declaration, desc = "Goto Declaration" },
-                { "K", function() return vim.lsp.buf.hover() end, desc = "Hover" },
+                -- Native hover caps its width to the CURRENT WINDOW (see
+                -- vim.lsp.util._make_floating_popup_size: screen_width falls back to
+                -- api.nvim_win_get_width(0) unless relative == "editor"), so it can clip
+                -- text even with empty columns free elsewhere on screen. relative =
+                -- "editor" measures against vim.o.columns instead, and the offset_x/
+                -- offset_y below re-anchor it back at the cursor (editor-relative
+                -- positioning otherwise pins col/row to the screen's top-left corner).
+                { "K", function()
+                  local pos = vim.fn.screenpos(0, vim.fn.line("."), vim.fn.col("."))
+                  return vim.lsp.buf.hover({
+                    border = "single",
+                    relative = "editor",
+                    offset_x = pos.col - 1,
+                    offset_y = pos.row - 1,
+                    max_width = math.floor(vim.o.columns * 0.9),
+                    max_height = math.floor(vim.o.lines * 0.6),
+                    title = "Hover Docs",
+                    title_pos = "left",
+                  })
+                end, desc = "Hover" },
                 { "gK", function() return vim.lsp.buf.signature_help() end, desc = "Signature Help", has = "signatureHelp" },
                 { "<c-k>", function() return vim.lsp.buf.signature_help() end, mode = "i", desc = "Signature Help", has = "signatureHelp" },
                 { "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "x" }, has = "codeAction" },
                 { "<leader>cc", vim.lsp.codelens.run, desc = "Run Codelens", mode = { "n", "x" }, has = "codeLens" },
-                { "<leader>cC", vim.lsp.codelens.refresh, desc = "Refresh & Display Codelens", mode = { "n" }, has = "codeLens" },
+                { "<leader>cC", function() vim.lsp.codelens.enable(not vim.lsp.codelens.is_enabled()) end, desc = "Toggle Codelens", mode = { "n" }, has = "codeLens" },
                 -- Rename lives in lsp-rename.lua: <leader>cr (symbol) and <leader>cR (file).
                 { "<leader>cA", Util.lsp.action.source, desc = "Source Action", has = "codeAction" },
                 { "]]", function() Snacks.words.jump(vim.v.count1) end, has = "documentHighlight",
@@ -213,17 +232,6 @@ return {
         end)
       end
 
-      -- code lens
-      if opts.codelens.enabled and vim.lsp.codelens then
-        Snacks.util.lsp.on({ method = "textDocument/codeLens" }, function(buffer)
-          vim.lsp.codelens.refresh()
-          vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
-            buffer = buffer,
-            callback = vim.lsp.codelens.refresh,
-          })
-        end)
-      end
-
       -- diagnostics
       if type(opts.diagnostics.virtual_text) == "table" and opts.diagnostics.virtual_text.prefix == "icons" then
         opts.diagnostics.virtual_text.prefix = function(diagnostic)
@@ -308,7 +316,6 @@ return {
             { "gI", false, mode = "n" },
             { "gY", false, mode = "n" },
             { "<leader>ca", false, mode = "v" },
-            { "K", false, mode = "n" },
             {
               "<leader>ca",
               function()
