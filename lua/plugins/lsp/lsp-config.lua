@@ -124,6 +124,9 @@ return {
                 { "<c-k>", function() return vim.lsp.buf.signature_help() end, mode = "i", desc = "Signature Help", has = "signatureHelp" },
                 { "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "x" }, has = "codeAction" },
                 { "<leader>cc", vim.lsp.codelens.run, desc = "Run Codelens", mode = { "n", "x" }, has = "codeLens" },
+                -- codelens.refresh is deprecated in 0.13; Neovim refreshes on its own now (the
+                -- Provider implements on_change/on_win), so a manual refresh has no meaning.
+                -- Toggle instead, using the idiom documented on vim.lsp.codelens.enable.
                 { "<leader>cC", function() vim.lsp.codelens.enable(not vim.lsp.codelens.is_enabled()) end, desc = "Toggle Codelens", mode = { "n" }, has = "codeLens" },
                 -- Rename lives in lsp-rename.lua: <leader>cr (symbol) and <leader>cR (file).
                 { "<leader>cA", Util.lsp.action.source, desc = "Source Action", has = "codeAction" },
@@ -229,6 +232,17 @@ return {
           if Util.set_default("foldmethod", "expr") then
             Util.set_default("foldexpr", "v:lua.vim.lsp.foldexpr()")
           end
+        end)
+      end
+
+      -- code lens
+      -- vim.lsp.codelens.refresh() is deprecated in 0.13 in favour of enable(). The capability
+      -- Provider now implements on_change and on_win, so Neovim re-requests lenses on document
+      -- change and redraws them itself. The old BufEnter/CursorHold/InsertLeave autocmds that
+      -- drove the refresh by hand are redundant, so they are gone.
+      if opts.codelens.enabled and vim.lsp.codelens then
+        Snacks.util.lsp.on({ method = "textDocument/codeLens" }, function(buffer)
+          vim.lsp.codelens.enable(true, { bufnr = buffer })
         end)
       end
 
