@@ -61,10 +61,20 @@ return {
     end)
 
     mr.refresh(function()
+      -- opts_extend concatenates every lang spec's list onto the base one, so the
+      -- merged table repeats any tool named in two places (black, csharpier,
+      -- gofumpt, goimports, prettier all appear twice). Package:install() is async
+      -- and asserts `not self:is_installing()`, so a second pass over the same name
+      -- -- is_installed() still false, install still in flight -- throws
+      -- "Package is already installing." and aborts the whole config. Dedupe first.
+      local seen = {} ---@type table<string, true>
       for _, tool in ipairs(opts.ensure_installed) do
-        local p = mr.get_package(tool)
-        if not p:is_installed() then
-          p:install()
+        if not seen[tool] then
+          seen[tool] = true
+          local p = mr.get_package(tool)
+          if not p:is_installed() and not p:is_installing() then
+            p:install()
+          end
         end
       end
     end)
