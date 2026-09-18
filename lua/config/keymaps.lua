@@ -168,9 +168,16 @@ map({ "n", "x", "v" }, "L", "<C-^>")
 -- Easier case switching
 map("n", "U", "~<Left>")
 
--- Better end and beginning
-map({ "n", "x", "o" }, "gh", "zH^", { noremap = true, silent = true, desc = "Go to Beginnning" })
-map({ "n", "x", "o" }, "gl", "$", { noremap = true, silent = true, desc = "Go to End" })
+map({ "n", "x", "o" }, "gh", function()
+  vim.notify("use ^ instead")
+end, { noremap = true, silent = true, desc = "Go to Beginnning" })
+
+map({ "n", "x", "o" }, "gl", function()
+  vim.notify("use $ instead")
+end, { noremap = true, silent = true, desc = "Go to End" })
+
+-- Better begnnning
+map({ "n", "x", "o" }, "^", "zH^", { noremap = true, silent = true, desc = "Go to Beginnning" })
 
 -------------------------------------------------------------------------------
 --                           Diagnostics Section
