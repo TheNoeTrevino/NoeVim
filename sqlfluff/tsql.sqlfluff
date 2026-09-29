@@ -11,7 +11,15 @@ max_line_length = 120
 # importantly, a view's output column names take the case written in the query,
 # and the published ArcGIS feature layers key off those exact field names --
 # letting a linter lowercase them would silently break the GIS viewer.
-exclude_rules = capitalisation.identifiers
+#
+# layout.indent (LT02) is off for the same kind of reason. Every nmcris migration wraps
+# its body in SET XACT_ABORT ON / BEGIN TRANSACTION / COMMIT TRANSACTION and indents that
+# body two spaces, which is the shape the repo's own migration skill documents. sqlfluff
+# has no concept of a transaction block, so it calls every indented line wrong: 68 of the
+# 90 warnings across that repo's migrations were this one rule. There is no setting for
+# it either, since the [sqlfluff:indentation] keys only cover CTEs, joins, USING/ON, THEN
+# and implicit indents.
+exclude_rules = capitalisation.identifiers, layout.indent
 
 [sqlfluff:rules:capitalisation.keywords]
 capitalisation_policy = upper

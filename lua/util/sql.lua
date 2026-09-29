@@ -50,6 +50,7 @@ M.ft_dialects = { mysql = "mysql", plsql = "oracle" }
 M.path_dialects = {
   nmcris = "tsql",
   careview = "tsql",
+  icris = "postgres", -- Postgres, not SQL Server. Its only dialect marker is a .sqruff file.
 }
 
 M.default = "ansi"
