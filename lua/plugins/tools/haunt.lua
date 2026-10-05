@@ -1,6 +1,6 @@
 -- Add `branch = "nightly"` below to pin the remote fallback; without it the
 -- repo's default branch is used.
-return Util.local_plugin("TheNoeTrevino/haunt.nvim", "~/projects/haunt/haunt.nvim", {
+return Util.local_plugin("https://git.thenoetrevino.com/noe.trevino/haunt.nvim", "~/projects/haunt/haunt.nvim", {
   ---@class HauntConfig
   ---
   ---

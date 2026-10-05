@@ -22,6 +22,41 @@ local search_file_directory = sources.search_file_directory
 local tagstack_picker = sources.tagstack_picker
 local type_hierarchy = sources.type_hierarchy
 
+-- Search git status. When gitsigns has a global base set (change_base), list
+-- the files that differ from that base instead, so the picker follows the signs.
+local function git_status_picker()
+  local base = require("gitsigns.config").config.base
+  if not base then
+    return Snacks.picker.git_status(get_config_nm())
+  end
+  Snacks.picker.pick(vim.tbl_deep_extend("force", get_config_nm(), {
+    source = "git_status",
+    title = "Git Status (vs " .. base:sub(1, 8) .. ")",
+    preview = "file",
+    finder = function(opts, ctx)
+      local cwd = ctx:git_root()
+      return require("snacks.picker.source.proc").proc(
+        ctx:opts({
+          cwd = cwd,
+          cmd = "git",
+          args = { "--no-pager", "diff", "--name-status", "--no-color", "--no-ext-diff", "--merge-base", base },
+          ---@param item snacks.picker.finder.Item
+          transform = function(item)
+            local status, old, new = item.text:match("^(%a)%d*\t([^\t]+)\t?([^\t]*)$")
+            if not status then
+              return false
+            end
+            item.cwd = cwd
+            item.status = " " .. status
+            item.file = new ~= "" and new or old
+          end,
+        }),
+        ctx
+      )
+    end,
+  }))
+end
+
 return {
   {
     "folke/snacks.nvim",
@@ -169,8 +204,8 @@ return {
         { "<leader>gb",       function() Snacks.picker.git_branches(get_config()) end,                              desc = "Search Git Branches" },
         { "<leader>gl",       function() Snacks.picker.git_log(get_config()) end,                                   desc = "Search Git Log" },
         { "<leader>gL",       function() Snacks.picker.git_log_line(get_config()) end,                              desc = "Search Git Log Line" },
-        { "<leader>gs",       function() Snacks.picker.git_status(get_config_nm()) end,                             desc = "Search Git Status" },
-        { "H",                function() Snacks.picker.git_status(get_config_nm()) end,                             desc = "Search Git Status" },
+        { "<leader>gs",       git_status_picker,                                                                    desc = "Search Git Status" },
+        { "H",                git_status_picker,                                                                    desc = "Search Git Status" },
         { "<leader>gS",       function() Snacks.picker.git_stash(get_config_nm()) end,                              desc = "Search Git Stash" },
         { "<leader>gd",       function() Snacks.picker.git_diff() end,                                              desc = "Git Diff (Hunks)" },
         { "<leader>gf",       function() Snacks.picker.git_log_file() end,                                          desc = "Git Log File" },
