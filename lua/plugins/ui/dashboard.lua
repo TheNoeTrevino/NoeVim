@@ -8,24 +8,6 @@ local get_config_vert = function()
   }
 end
 
-local function browse_saved_requests()
-  local path = vim.fn.expand("~/.local/share/kulala")
-  vim.fn.mkdir(path, "p")
-
-  vim.cmd("tabnew")
-  vim.cmd("TabRename kulala")
-  -- Scope this tab's cwd to the store so git and cwd-relative tools work here
-  -- without touching the cwd of any other tab.
-  vim.cmd.tcd(vim.fn.fnameescape(path))
-  require("neo-tree.command").execute({
-    action = "show",
-    source = "filesystem",
-    position = "left",
-    dir = path,
-    reveal_force_cwd = true,
-  })
-end
-
 local function open_dadbod()
   vim.cmd("tabnew")
   vim.cmd("TabRename dadbod")
@@ -72,7 +54,6 @@ return {
           { icon = " ", key = "r", desc = "Reload Last Session", action = function() require("persistence").load() end },
           { icon = " ", key = "p", desc = "Projects", action =  function() Snacks.picker.projects(get_config_vert()) end },
           { icon = "󰆼 ", key = "d", desc = "Dadbod", action = function() open_dadbod() end, },
-          { icon = "󱣻 ", key = "R", desc = "Kulala", action = function() browse_saved_requests() end, },
           { icon = " ", key = "s", desc = "Select Session", action = 'require("persistence").select()', },
           { icon = " ", key = "c", desc = "Config", action =  function() Snacks.picker.config() end },
           { icon = " ", key = "I", desc = "Atlas Issues", action = function() vim.cmd("Atlas issues") end },

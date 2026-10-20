@@ -40,7 +40,6 @@ return {
       "markdown-toc",
       "prettier",
       "roslyn-language-server",
-      "kulala-fmt",
       "stylua",
       "shfmt",
       "vtsls",

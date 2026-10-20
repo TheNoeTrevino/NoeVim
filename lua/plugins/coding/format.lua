@@ -292,7 +292,6 @@ return {
       ["sql"] = { "sqlfluff" },
       ["markdown"] = { "markdown-toc" },
       ["markdown.mdx"] = { "markdown-toc" },
-      ["http"] = { "kulala-fmt" },
     },
     formatters = {
       -- base

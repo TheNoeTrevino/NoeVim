@@ -75,3 +75,5 @@ vim.filetype.add({
     mustache = "html",
   },
 })
+
+vim.g.scrollbar_v2_notice = false
